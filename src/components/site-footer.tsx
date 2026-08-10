@@ -7,7 +7,7 @@ export function SiteFooter({
   locale,
   portfolioUrl,
   blogUrl,
-  email = "hello@example.invalid",
+  email = "mahadiindra2@gmail.com",
   linkedinUrl = "https://www.linkedin.com/in/mahadiindra182/",
 }: SharedSiteProps) {
   const year = new Date().getFullYear();

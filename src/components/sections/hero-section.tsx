@@ -15,7 +15,7 @@ export function HeroSection({
   writingLabel: string;
 }) {
   return (
-    <section className="content-shell grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-end lg:gap-20 lg:py-36">
+    <section className="content-shell grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20 lg:py-36">
       <div className="animate-editorial-enter">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{profile.role} · Indonesia</p>
         <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] sm:text-7xl lg:text-[clamp(4.5rem,7vw,7rem)]">
@@ -46,15 +46,15 @@ export function HeroSection({
           {profile.location}
         </p>
       </div>
-      <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:ml-auto">
+      <div className="relative mx-auto mt-0 w-full max-w-md lg:mx-0 lg:ml-auto lg:mt-10 lg:max-w-[22rem]">
         <div className="absolute -right-3 -top-3 h-full w-full border border-accent/40" aria-hidden="true" />
-        <div className="relative aspect-[4/5] overflow-hidden bg-surface">
+        <div className="relative aspect-[1116/1409] overflow-hidden bg-surface">
           <Image
             src={profile.imageSrc}
             alt={profile.imageAlt}
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 32rem"
+            sizes="(max-width: 1024px) 100vw, 22rem"
             className="object-cover object-center grayscale-[15%]"
           />
         </div>

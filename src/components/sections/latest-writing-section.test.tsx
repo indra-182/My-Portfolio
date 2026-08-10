@@ -53,7 +53,7 @@ describe("LatestWritingSection", () => {
 
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
       "href",
-      "https://blog.example/id/resilient-client-state",
+      "https://blog.example/id/blog/resilient-client-state",
     );
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();

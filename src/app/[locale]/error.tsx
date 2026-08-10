@@ -34,7 +34,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
           {copy.retry}
         </button>
         <Link
-          href={`${process.env.NEXT_PUBLIC_BLOG_URL ?? "http://localhost:3001"}/${locale}`}
+          href={`${process.env.NEXT_PUBLIC_BLOG_URL ?? "https://blog-indra.vercel.app"}/${locale}`}
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.blog}

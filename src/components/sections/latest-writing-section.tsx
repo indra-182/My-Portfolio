@@ -49,7 +49,7 @@ export function LatestWritingSection({
                 </div>
                 <h3 className="mt-8 text-xl font-semibold tracking-tight">
                   <Link
-                    href={`${blogUrl}/${locale}/${post.slug}`}
+                    href={`${blogUrl}/${locale}/blog/${post.slug}`}
                     className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
                   >
                     {post.title}

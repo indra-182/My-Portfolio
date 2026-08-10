@@ -15,7 +15,7 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   );
   await expect(page.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
     "href",
-    "http://localhost:3001/id",
+    "https://blog-indra.vercel.app/id",
   );
 
   await page.getByRole("button", { name: /switch to dark mode/i }).click();
@@ -28,6 +28,17 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   await page.getByRole("banner").getByRole("link", { name: /switch language to english/i }).click();
   await expect(page).toHaveURL(/\/en$/);
   await expect(page.getByRole("heading", { name: /Building product interfaces/i })).toBeVisible();
+});
+
+test("renders the latest post from the blog API", async ({ page }) => {
+  await page.goto("/id");
+
+  const article = page.getByRole("article").filter({ hasText: "Optimistic UI Tanpa Library Form" });
+  await expect(article).toBeVisible();
+  await expect(article.getByRole("link", { name: "Optimistic UI Tanpa Library Form" })).toHaveAttribute(
+    "href",
+    "https://blog-indra.vercel.app/id/blog/optimistic-ui-server-actions",
+  );
 });
 
 test("uses the operating-system theme on first visit without a system menu item", async ({ browser }) => {
@@ -63,4 +74,20 @@ test("does not overflow at supported viewport widths", async ({ page }) => {
       await page.evaluate(() => document.documentElement.clientWidth),
     );
   }
+});
+
+test("keeps the hero photo fully visible on the initial desktop viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/id");
+
+  const image = page.locator("main section img").first();
+  await expect(image).toBeVisible();
+  const imageBox = await image.boundingBox();
+  const headingBox = await page.locator("main section h1").boundingBox();
+
+  expect(imageBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(Math.abs((imageBox?.y ?? 0) - (headingBox?.y ?? 0))).toBeLessThanOrEqual(2);
+  expect(imageBox?.y).toBeGreaterThanOrEqual(0);
+  expect((imageBox?.y ?? 0) + (imageBox?.height ?? 0)).toBeLessThanOrEqual(720);
 });
