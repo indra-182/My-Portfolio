@@ -29,6 +29,7 @@
 ### Task 1: Scaffold the Portfolio and Test Harness
 
 **Files:**
+
 - Create: `package.json`
 - Create: `package-lock.json`
 - Create: `next.config.ts`
@@ -43,6 +44,7 @@
 - Modify: `.gitignore`
 
 **Interfaces:**
+
 - Produces npm scripts `dev`, `build`, `lint`, `typecheck`, `test`, `test:watch`, and `test:e2e` for all later tasks.
 - Produces the `@/*` alias mapped to `src/*`.
 
@@ -96,40 +98,44 @@ npm pkg set scripts.test:e2e="playwright test"
 Create `vitest.config.ts`:
 
 ```ts
-import react from '@vitejs/plugin-react'
-import {defineConfig} from 'vitest/config'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vitest/config";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
-    coverage: {provider: 'v8', reporter: ['text', 'html']}
-  }
-})
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
+    coverage: { provider: "v8", reporter: ["text", "html"] },
+  },
+});
 ```
 
 Create `src/test/setup.ts`:
 
 ```ts
-import '@testing-library/jest-dom/vitest'
+import "@testing-library/jest-dom/vitest";
 ```
 
 Create `playwright.config.ts`:
 
 ```ts
-import {defineConfig, devices} from '@playwright/test'
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './e2e',
-  use: {baseURL: 'http://127.0.0.1:3000', trace: 'retain-on-failure'},
+  testDir: "./e2e",
+  use: { baseURL: "http://127.0.0.1:3000", trace: "retain-on-failure" },
   projects: [
-    {name: 'chromium', use: {...devices['Desktop Chrome']}},
-    {name: 'mobile', use: {...devices['Pixel 5']}}
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "mobile", use: { ...devices["Pixel 5"] } },
   ],
-  webServer: {command: 'npm run dev', url: 'http://127.0.0.1:3000', reuseExistingServer: !process.env.CI}
-})
+  webServer: {
+    command: "npm run dev",
+    url: "http://127.0.0.1:3000",
+    reuseExistingServer: !process.env.CI,
+  },
+});
 ```
 
 - [ ] **Step 5: Verify the baseline**
@@ -156,6 +162,7 @@ git commit -m "test: configure portfolio quality harness"
 ### Task 2: Establish Canonical Tokens, Fonts, and Theme Behavior
 
 **Files:**
+
 - Create: `src/styles/design-tokens.css`
 - Create: `src/components/theme-provider.tsx`
 - Create: `src/components/theme-toggle.tsx`
@@ -164,6 +171,7 @@ git commit -m "test: configure portfolio quality harness"
 - Modify: `src/app/layout.tsx`
 
 **Interfaces:**
+
 - Produces `ThemeProvider({children}: {children: React.ReactNode})`.
 - Produces `ThemeToggle()` with Light and Dark selections while retaining System as the internal first-visit default.
 - Produces semantic variables used by every later component.
@@ -173,24 +181,24 @@ git commit -m "test: configure portfolio quality harness"
 Create `src/components/theme-toggle.test.tsx`:
 
 ```tsx
-import {render, screen} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import {vi} from 'vitest'
-import {ThemeToggle} from './theme-toggle'
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
+import { ThemeToggle } from "./theme-toggle";
 
-const setTheme = vi.fn()
+const setTheme = vi.fn();
 
-vi.mock('next-themes', () => ({
-  useTheme: () => ({theme: 'system', resolvedTheme: 'dark', setTheme})
-}))
+vi.mock("next-themes", () => ({
+  useTheme: () => ({ theme: "system", resolvedTheme: "dark", setTheme }),
+}));
 
-test('offers only light and dark theme choices', async () => {
-  render(<ThemeToggle />)
-  await userEvent.click(screen.getByRole('button', {name: /theme/i}))
-  expect(screen.getByRole('menuitem', {name: /light/i})).toBeVisible()
-  expect(screen.getByRole('menuitem', {name: /dark/i})).toBeVisible()
-  expect(screen.queryByRole('menuitem', {name: /system/i})).not.toBeInTheDocument()
-})
+test("offers only light and dark theme choices", async () => {
+  render(<ThemeToggle />);
+  await userEvent.click(screen.getByRole("button", { name: /theme/i }));
+  expect(screen.getByRole("menuitem", { name: /light/i })).toBeVisible();
+  expect(screen.getByRole("menuitem", { name: /dark/i })).toBeVisible();
+  expect(screen.queryByRole("menuitem", { name: /system/i })).not.toBeInTheDocument();
+});
 ```
 
 - [ ] **Step 2: Run the test and confirm the missing component failure**
@@ -240,7 +248,10 @@ Create `src/styles/design-tokens.css` with these exact public variables:
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --motion-fast: 0ms; --motion-enter: 0ms; }
+  :root {
+    --motion-fast: 0ms;
+    --motion-enter: 0ms;
+  }
 }
 ```
 
@@ -251,16 +262,21 @@ Import it as the first local import in `src/app/globals.css` and map shadcn vari
 Create `src/components/theme-provider.tsx`:
 
 ```tsx
-'use client'
+"use client";
 
-import {ThemeProvider as NextThemesProvider} from 'next-themes'
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-export function ThemeProvider({children}: {children: React.ReactNode}) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       {children}
     </NextThemesProvider>
-  )
+  );
 }
 ```
 
@@ -294,6 +310,7 @@ git commit -m "feat: establish portfolio design foundation"
 ### Task 3: Add Locale Routing and the Shared Site Shell
 
 **Files:**
+
 - Create: `src/i18n/config.ts`
 - Create: `src/i18n/dictionaries.ts`
 - Create: `src/i18n/messages/id.json`
@@ -308,6 +325,7 @@ git commit -m "feat: establish portfolio design foundation"
 - Modify: `src/app/page.tsx`
 
 **Interfaces:**
+
 - Produces `locales`, `defaultLocale`, `Locale`, and `isLocale(value)` from `src/i18n/config.ts`.
 - Produces `getDictionary(locale: Locale): Promise<Dictionary>`.
 - Produces shared `SiteHeader`, `SiteFooter`, and `LocaleSwitcher` components later copied byte-for-byte to the blog.
@@ -317,16 +335,28 @@ git commit -m "feat: establish portfolio design foundation"
 Create `src/components/site-shell.test.tsx` covering these assertions:
 
 ```tsx
-import {render, screen} from '@testing-library/react'
-import {SiteFooter} from './site-footer'
+import { render, screen } from "@testing-library/react";
+import { SiteFooter } from "./site-footer";
 
-test('renders identity, cross-site links, and current copyright', () => {
-  render(<SiteFooter locale="id" portfolioUrl="https://portfolio.example" blogUrl="https://blog.example" />)
-  expect(screen.getByText('INDRA.DEV')).toBeVisible()
-  expect(screen.getByRole('link', {name: /portfolio/i})).toHaveAttribute('href', 'https://portfolio.example/id')
-  expect(screen.getByRole('link', {name: /blog/i})).toHaveAttribute('href', 'https://blog.example/id')
-  expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible()
-})
+test("renders identity, cross-site links, and current copyright", () => {
+  render(
+    <SiteFooter
+      locale="id"
+      portfolioUrl="https://portfolio.example"
+      blogUrl="https://blog.example"
+    />,
+  );
+  expect(screen.getByText("INDRA.DEV")).toBeVisible();
+  expect(screen.getByRole("link", { name: /portfolio/i })).toHaveAttribute(
+    "href",
+    "https://portfolio.example/id",
+  );
+  expect(screen.getByRole("link", { name: /blog/i })).toHaveAttribute(
+    "href",
+    "https://blog.example/id",
+  );
+  expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();
+});
 ```
 
 Add unit assertions that `isLocale('id')` and `isLocale('en')` are true while `isLocale('fr')` is false.
@@ -346,12 +376,12 @@ Expected: FAIL because the locale and shell modules do not exist.
 Create `src/i18n/config.ts`:
 
 ```ts
-export const locales = ['id', 'en'] as const
-export const defaultLocale = 'id' as const
-export type Locale = (typeof locales)[number]
+export const locales = ["id", "en"] as const;
+export const defaultLocale = "id" as const;
+export type Locale = (typeof locales)[number];
 
 export function isLocale(value: string): value is Locale {
-  return locales.includes(value as Locale)
+  return locales.includes(value as Locale);
 }
 ```
 
@@ -367,20 +397,22 @@ Use these exact component contracts:
 
 ```ts
 type SharedSiteProps = {
-  locale: Locale
-  portfolioUrl: string
-  blogUrl: string
-}
+  locale: Locale;
+  portfolioUrl: string;
+  blogUrl: string;
+};
 
-type SiteNavItem = {label: string; href: string; active?: boolean}
-type PrimaryAction = {label: string; href: string; download?: boolean}
+type SiteNavItem = { label: string; href: string; active?: boolean };
+type PrimaryAction = { label: string; href: string; download?: boolean };
 
-export function SiteHeader(props: SharedSiteProps & {
-  navItems: SiteNavItem[]
-  primaryAction?: PrimaryAction
-}): React.ReactElement
-export function SiteFooter(props: SharedSiteProps): React.ReactElement
-export function LocaleSwitcher(props: {locale: Locale; targetPath?: string}): React.ReactElement
+export function SiteHeader(
+  props: SharedSiteProps & {
+    navItems: SiteNavItem[];
+    primaryAction?: PrimaryAction;
+  },
+): React.ReactElement;
+export function SiteFooter(props: SharedSiteProps): React.ReactElement;
+export function LocaleSwitcher(props: { locale: Locale; targetPath?: string }): React.ReactElement;
 ```
 
 The header includes a skip link, wordmark, the supplied nav items, optional primary action, locale control, theme control, and a shadcn Sheet mobile menu. The portfolio layout supplies About, Experience, and Writing nav items plus Download CV as the primary action. The blog layout later supplies blog-specific nav items through the same component contract. The footer includes the wordmark, Portfolio, Blog, LinkedIn, email, language control, and current-year copyright. Read public URLs from configuration passed by the locale layout, not from component constants.
@@ -409,12 +441,14 @@ git commit -m "feat: add localized portfolio shell"
 ### Task 4: Model and Validate CV-Derived Portfolio Content
 
 **Files:**
+
 - Create: `src/content/portfolio-schema.ts`
 - Create: `src/content/portfolio.ts`
 - Create: `src/content/portfolio.test.ts`
 - Create: `src/lib/get-portfolio.ts`
 
 **Interfaces:**
+
 - Produces `PortfolioContent`, `Experience`, `Project`, and `Testimonial` types.
 - Produces `getPortfolio(locale: Locale): PortfolioContent`.
 - Every project includes `problem`, `ownership`, `delivery`, `outcome`, and `technologies` fields; unsupported metrics remain absent.
@@ -424,27 +458,27 @@ git commit -m "feat: add localized portfolio shell"
 Create `src/content/portfolio.test.ts` with these cases:
 
 ```ts
-import {describe, expect, test} from 'vitest'
-import {portfolioByLocale} from './portfolio'
-import {PortfolioContentSchema} from './portfolio-schema'
+import { describe, expect, test } from "vitest";
+import { portfolioByLocale } from "./portfolio";
+import { PortfolioContentSchema } from "./portfolio-schema";
 
-describe('portfolio content', () => {
-  test.each(['id', 'en'] as const)('%s content satisfies the public schema', (locale) => {
-    expect(() => PortfolioContentSchema.parse(portfolioByLocale[locale])).not.toThrow()
-  })
+describe("portfolio content", () => {
+  test.each(["id", "en"] as const)("%s content satisfies the public schema", (locale) => {
+    expect(() => PortfolioContentSchema.parse(portfolioByLocale[locale])).not.toThrow();
+  });
 
-  test('does not publish unapproved testimonials', () => {
+  test("does not publish unapproved testimonials", () => {
     for (const content of Object.values(portfolioByLocale)) {
-      expect(content.testimonials.every((item) => item.approved)).toBe(true)
+      expect(content.testimonials.every((item) => item.approved)).toBe(true);
     }
-  })
+  });
 
-  test('puts technologies inside projects', () => {
+  test("puts technologies inside projects", () => {
     for (const experience of portfolioByLocale.id.experiences) {
-      expect(experience.projects.every((project) => project.technologies.length > 0)).toBe(true)
+      expect(experience.projects.every((project) => project.technologies.length > 0)).toBe(true);
     }
-  })
-})
+  });
+});
 ```
 
 - [ ] **Step 2: Confirm the schema test fails**
@@ -503,6 +537,7 @@ git commit -m "feat: model localized portfolio content"
 ### Task 5: Build the Recruiter-Focused Homepage
 
 **Files:**
+
 - Create: `src/components/sections/hero-section.tsx`
 - Create: `src/components/sections/about-section.tsx`
 - Create: `src/components/sections/experience-section.tsx`
@@ -514,6 +549,7 @@ git commit -m "feat: model localized portfolio content"
 - Modify: `src/app/[locale]/page.tsx`
 
 **Interfaces:**
+
 - Produces `LatestPostSummary` and `LatestFeedResult` for the cross-site plan.
 - Consumes only validated `PortfolioContent` from Task 4.
 - `LatestWritingSection({locale, result, blogUrl})` renders posts or the direct-link fallback.
@@ -523,21 +559,20 @@ git commit -m "feat: model localized portfolio content"
 Create `src/types/latest-post.ts`:
 
 ```ts
-import type {Locale} from '@/i18n/config'
+import type { Locale } from "@/i18n/config";
 
 export type LatestPostSummary = {
-  title: string
-  slug: string
-  description: string
-  locale: Locale
-  publishedAt: string
-  topics: string[]
-  readingTimeMinutes: number
-}
+  title: string;
+  slug: string;
+  description: string;
+  locale: Locale;
+  publishedAt: string;
+  topics: string[];
+  readingTimeMinutes: number;
+};
 
 export type LatestFeedResult =
-  | {status: 'ready'; posts: LatestPostSummary[]}
-  | {status: 'unavailable'}
+  { status: "ready"; posts: LatestPostSummary[] } | { status: "unavailable" };
 ```
 
 Test that `ready` renders up to three article links and `unavailable` renders one direct Blog link without an empty grid.
@@ -588,6 +623,7 @@ git commit -m "feat: build recruiter-focused portfolio homepage"
 ### Task 6: Add Public Assets, Metadata, SEO, and Error States
 
 **Files:**
+
 - Create: `public/images/mahadi-indra.png`
 - Create: `public/documents/mahadi-indra-cv.pdf`
 - Create: `src/app/icon.svg`
@@ -601,6 +637,7 @@ git commit -m "feat: build recruiter-focused portfolio homepage"
 - Modify: `src/app/[locale]/layout.tsx`
 
 **Interfaces:**
+
 - Produces `siteConfig` containing `portfolioUrl`, `blogUrl`, `email`, `linkedinUrl`, and `cvHref`.
 - Produces locale-aware canonical, alternate, Open Graph, robots, and sitemap metadata.
 
@@ -674,11 +711,13 @@ git commit -m "feat: add portfolio assets and metadata"
 ### Task 7: Verify Recruiter, Theme, Locale, and Responsive Flows
 
 **Files:**
+
 - Create: `e2e/portfolio.spec.ts`
 - Create: `e2e/accessibility.spec.ts`
 - Modify: `README.md`
 
 **Interfaces:**
+
 - Produces the portfolio MVP acceptance suite.
 
 - [ ] **Step 1: Write the failing recruiter flow**

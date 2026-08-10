@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { LuFileText, LuMail } from "react-icons/lu";
 import type { SharedSiteProps } from "./site-header";
 
 export function SiteFooter({
   locale,
-  portfolioUrl,
   blogUrl,
   email = "mahadiindra2@gmail.com",
   linkedinUrl = "https://www.linkedin.com/in/mahadiindra182/",
@@ -23,18 +23,42 @@ export function SiteFooter({
               Senior Frontend Engineer building clear, dependable product experiences.
             </p>
           </div>
-          <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm">
-            <Link className="transition-colors hover:text-accent" href={`${portfolioUrl}/${locale}`}>
-              Portfolio
+          <nav aria-label="Footer navigation" className="flex items-center gap-6">
+            <Link
+              className="transition-colors hover:text-accent"
+              href={`${blogUrl}/${locale}`}
+              aria-label="Blog"
+              title="Blog"
+            >
+              <LuFileText className="size-5" aria-hidden="true" />
             </Link>
-            <Link className="transition-colors hover:text-accent" href={`${blogUrl}/${locale}`}>
-              Blog
-            </Link>
-            <a className="inline-flex items-center gap-1 transition-colors hover:text-accent" href={linkedinUrl} target="_blank" rel="noreferrer">
-              LinkedIn <ArrowUpRight aria-hidden="true" className="size-3" />
+            <a
+              className="transition-colors hover:text-accent"
+              href="https://github.com/indra-182"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Github"
+              title="Github"
+            >
+              <FaGithub className="size-5" />
             </a>
-            <a className="transition-colors hover:text-accent" href={`mailto:${email}`}>
-              Email
+            <a
+              className="transition-colors hover:text-accent"
+              href={linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <FaLinkedin className="size-5" />
+            </a>
+            <a
+              className="transition-colors hover:text-accent"
+              href={`mailto:${email}`}
+              aria-label="Email"
+              title="Email"
+            >
+              <LuMail className="size-5" aria-hidden="true" />
             </a>
           </nav>
         </div>

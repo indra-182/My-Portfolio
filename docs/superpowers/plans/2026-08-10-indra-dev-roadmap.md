@@ -66,21 +66,21 @@ The website program is ready for release only when:
 
 ## Design-Spec Coverage
 
-| Approved requirement | Implementation location |
-|---|---|
-| Authority Editorial tokens, typography, icons, and subtle motion | Portfolio Tasks 2 and 5; Blog Task 2; Integration Task 1 |
-| Light, Dark, System, persistence, and reduced motion | Portfolio Tasks 2 and 7; Blog Tasks 2 and 8 |
-| Identical accessible header and footer | Portfolio Task 3; Blog Task 2; Integration Task 1 |
-| Recruiter hero, About, experience, nested projects, contextual technologies, testimonials rule | Portfolio Tasks 4 and 5 |
-| Profile photo, CV, wordmark, monogram favicon | Portfolio Task 6 |
-| Indonesian and English routes and missing-translation recovery | Portfolio Task 3; Blog Tasks 2 and 7 |
-| MDX schema, series, search, topics, load more | Blog Tasks 3 and 4 |
-| TOC, highlighted code, copy code, breadcrumbs, related posts, series navigation, sharing | Blog Task 5 |
-| RSS, sitemap, robots, Open Graph, canonical, alternate links, structured data | Portfolio Task 6; Blog Tasks 5 and 6 |
-| Latest Writing blog-to-portfolio feed and failure fallback | Blog Task 6; Integration Tasks 2 and 3 |
-| Responsive, loading, empty, error, keyboard, accessibility, and performance checks | Portfolio Tasks 6 and 7; Blog Tasks 7 and 8; Integration Task 5 |
-| Separate Vercel projects and external-action approval boundary | Integration Task 4 |
-| Hermes at 20:00 Asia/Jakarta | Roadmap Phase 4, after Hermes execution context is supplied |
+| Approved requirement                                                                           | Implementation location                                         |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Authority Editorial tokens, typography, icons, and subtle motion                               | Portfolio Tasks 2 and 5; Blog Task 2; Integration Task 1        |
+| Light, Dark, System, persistence, and reduced motion                                           | Portfolio Tasks 2 and 7; Blog Tasks 2 and 8                     |
+| Identical accessible header and footer                                                         | Portfolio Task 3; Blog Task 2; Integration Task 1               |
+| Recruiter hero, About, experience, nested projects, contextual technologies, testimonials rule | Portfolio Tasks 4 and 5                                         |
+| Profile photo, CV, wordmark, monogram favicon                                                  | Portfolio Task 6                                                |
+| Indonesian and English routes and missing-translation recovery                                 | Portfolio Task 3; Blog Tasks 2 and 7                            |
+| MDX schema, series, search, topics, load more                                                  | Blog Tasks 3 and 4                                              |
+| TOC, highlighted code, copy code, breadcrumbs, related posts, series navigation, sharing       | Blog Task 5                                                     |
+| RSS, sitemap, robots, Open Graph, canonical, alternate links, structured data                  | Portfolio Task 6; Blog Tasks 5 and 6                            |
+| Latest Writing blog-to-portfolio feed and failure fallback                                     | Blog Task 6; Integration Tasks 2 and 3                          |
+| Responsive, loading, empty, error, keyboard, accessibility, and performance checks             | Portfolio Tasks 6 and 7; Blog Tasks 7 and 8; Integration Task 5 |
+| Separate Vercel projects and external-action approval boundary                                 | Integration Task 4                                              |
+| Hermes at 20:00 Asia/Jakarta                                                                   | Roadmap Phase 4, after Hermes execution context is supplied     |
 
 ## Primary References
 

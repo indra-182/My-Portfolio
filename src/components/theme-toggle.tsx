@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { LuMoon, LuSun } from "react-icons/lu";
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -15,7 +15,7 @@ export function ThemeToggle() {
   const isDark = mounted && resolvedTheme === "dark";
   const targetTheme = isDark ? "light" : "dark";
   const label = isDark ? "Switch to light mode" : "Switch to dark mode";
-  const Icon = isDark ? Sun : Moon;
+  const Icon = isDark ? LuSun : LuMoon;
 
   return (
     <Tooltip>

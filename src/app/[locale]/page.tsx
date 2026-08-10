@@ -11,7 +11,11 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale: value } = await params;
   if (!isLocale(value)) return {};
   const portfolio = getPortfolio(value);
@@ -42,7 +46,10 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <HeroSection
         profile={portfolio.profile}
         downloadLabel={dictionary.navigation.downloadCv}

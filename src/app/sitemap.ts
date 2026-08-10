@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: 1,
     alternates: {
-      languages: Object.fromEntries(locales.map((item) => [item, `${siteConfig.portfolioUrl}/${item}`])),
+      languages: Object.fromEntries(
+        locales.map((item) => [item, `${siteConfig.portfolioUrl}/${item}`]),
+      ),
     },
   }));
 }

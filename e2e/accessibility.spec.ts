@@ -5,7 +5,9 @@ for (const locale of ["id", "en"]) {
   test(`${locale} has no serious or critical accessibility violations`, async ({ page }) => {
     await page.goto(`/${locale}`);
     const results = await new AxeBuilder({ page }).analyze();
-    expect(results.violations.filter((item) => ["serious", "critical"].includes(item.impact ?? ""))).toEqual([]);
+    expect(
+      results.violations.filter((item) => ["serious", "critical"].includes(item.impact ?? "")),
+    ).toEqual([]);
   });
 }
 

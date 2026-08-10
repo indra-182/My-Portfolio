@@ -14,10 +14,7 @@ export type SharedSiteProps = {
 
 export type SiteNavItem = { label: string; href: string; active?: boolean };
 
-export function SiteHeader({
-  locale,
-  navItems,
-}: SharedSiteProps & { navItems: SiteNavItem[] }) {
+export function SiteHeader({ locale, navItems }: SharedSiteProps & { navItems: SiteNavItem[] }) {
   return (
     <header className="border-b border-border/80 bg-background/95 supports-[backdrop-filter]:backdrop-blur-sm">
       <a
@@ -45,10 +42,7 @@ export function SiteHeader({
         <div className="flex items-center gap-1">
           <LocaleSwitcher locale={locale} targetPath={`/${locale}`} />
           <ThemeToggle />
-          <MobileNavigation
-            items={navItems as MobileNavigationItem[]}
-            locale={locale}
-          />
+          <MobileNavigation items={navItems as MobileNavigationItem[]} locale={locale} />
         </div>
       </div>
     </header>
