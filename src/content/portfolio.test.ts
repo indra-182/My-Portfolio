@@ -3,12 +3,9 @@ import { portfolioByLocale } from "./portfolio";
 import { PortfolioContentSchema } from "./portfolio-schema";
 
 describe("portfolio content", () => {
-  test.each(["id", "en"] as const)(
-    "%s content satisfies the public schema",
-    (locale) => {
-      expect(() => PortfolioContentSchema.parse(portfolioByLocale[locale])).not.toThrow();
-    },
-  );
+  test.each(["id", "en"] as const)("%s content satisfies the public schema", (locale) => {
+    expect(() => PortfolioContentSchema.parse(portfolioByLocale[locale])).not.toThrow();
+  });
 
   test("does not publish unapproved testimonials", () => {
     for (const content of Object.values(portfolioByLocale)) {

@@ -11,5 +11,4 @@ export type LatestPostSummary = {
 };
 
 export type LatestFeedResult =
-  | { status: "ready"; posts: LatestPostSummary[] }
-  | { status: "unavailable" };
+  { status: "ready"; posts: LatestPostSummary[] } | { status: "unavailable" };

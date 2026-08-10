@@ -26,6 +26,7 @@
 ### Task 1: Enforce Shared Design and Shell Parity
 
 **Files:**
+
 - Create: `portfolio/scripts/check-design-parity.mjs`
 - Create: `portfolio/scripts/check-design-parity.test.mjs`
 - Modify: `portfolio/package.json`
@@ -33,6 +34,7 @@
 - Modify: `portfolio/README.md`
 
 **Interfaces:**
+
 - Produces `npm run design:parity` from the portfolio repository.
 - Compares canonical sibling files by SHA-256 and exits nonzero on drift.
 
@@ -110,6 +112,7 @@ git commit -m "docs: document shared design workflow"
 ### Task 2: Implement the Portfolio Feed Client and Safe Fallback
 
 **Files:**
+
 - Create: `portfolio/src/lib/blog-feed-schema.ts`
 - Create: `portfolio/src/lib/blog-feed.ts`
 - Create: `portfolio/src/lib/blog-feed.test.ts`
@@ -117,6 +120,7 @@ git commit -m "docs: document shared design workflow"
 - Modify: `portfolio/.env.example`
 
 **Interfaces:**
+
 - Consumes blog endpoint `GET <BLOG_URL>/api/posts/latest?locale=<locale>&limit=3`.
 - Produces `fetchLatestPosts(locale): Promise<LatestPostSummary[]>` and `safeGetLatestPosts(locale): Promise<LatestFeedResult>`.
 - Validates feed version 1 before rendering.
@@ -151,8 +155,8 @@ Mirror the blog's `LatestPostFeedV1` with a Zod literal `version: 1`, supported 
 Use these signatures:
 
 ```ts
-export async function fetchLatestPosts(locale: Locale): Promise<LatestPostSummary[]>
-export async function safeGetLatestPosts(locale: Locale): Promise<LatestFeedResult>
+export async function fetchLatestPosts(locale: Locale): Promise<LatestPostSummary[]>;
+export async function safeGetLatestPosts(locale: Locale): Promise<LatestFeedResult>;
 ```
 
 `fetchLatestPosts` builds the URL from `siteConfig.blogUrl`, requests limit 3 with `next: {revalidate: 3600, tags: ['latest-blog-posts']}`, throws on non-2xx responses, validates JSON, and returns posts. `safeGetLatestPosts` catches and returns `{status: 'unavailable'}` without exposing response data. Successful empty feeds return `{status: 'ready', posts: []}` so the section can show the direct Blog link intentionally.
@@ -186,11 +190,13 @@ git commit -m "feat: connect latest blog writing"
 ### Task 3: Verify Two-Site Navigation and Live Content Locally
 
 **Files:**
+
 - Create: `portfolio/e2e/cross-site.spec.ts`
 - Modify: `portfolio/playwright.config.ts`
 - Modify: `blog/playwright.config.ts`
 
 **Interfaces:**
+
 - Produces a Playwright two-server acceptance test using portfolio port 3000 and blog port 3001.
 - Uses fixture-backed blog content only during the cross-site test process.
 
@@ -201,17 +207,17 @@ Update portfolio Playwright `webServer` to an array:
 ```ts
 webServer: [
   {
-    command: 'NEXT_PUBLIC_BLOG_URL=http://127.0.0.1:3001 npm run dev -- --port 3000',
-    url: 'http://127.0.0.1:3000',
-    reuseExistingServer: !process.env.CI
+    command: "NEXT_PUBLIC_BLOG_URL=http://127.0.0.1:3001 npm run dev -- --port 3000",
+    url: "http://127.0.0.1:3000",
+    reuseExistingServer: !process.env.CI,
   },
   {
-    command: 'npm --prefix ../blog run dev -- --port 3001',
-    url: 'http://127.0.0.1:3001',
+    command: "npm --prefix ../blog run dev -- --port 3001",
+    url: "http://127.0.0.1:3001",
     reuseExistingServer: !process.env.CI,
-    env: {CONTENT_ROOT: 'src/test/fixtures/posts'}
-  }
-]
+    env: { CONTENT_ROOT: "src/test/fixtures/posts" },
+  },
+];
 ```
 
 Keep the portfolio test base URL at port 3000.
@@ -260,6 +266,7 @@ git commit -m "test: support cross-site fixture server"
 ### Task 4: Prepare Release Configuration Without Deploying
 
 **Files:**
+
 - Create: `portfolio/docs/deployment.md`
 - Create: `blog/docs/deployment.md`
 - Create: `portfolio/docs/release-checklist.md`
@@ -270,6 +277,7 @@ git commit -m "test: support cross-site fixture server"
 - Modify: `blog/README.md`
 
 **Interfaces:**
+
 - Produces explicit environment and Vercel project setup instructions.
 - Does not create projects, domains, remotes, or deployments.
 
@@ -324,10 +332,12 @@ git commit -m "docs: prepare blog release workflow"
 ### Task 5: Run the Full Local Release Gate
 
 **Files:**
+
 - Create: `portfolio/docs/verification/initial-local-release.md`
 - Create: `blog/docs/verification/initial-local-release.md`
 
 **Interfaces:**
+
 - Produces evidence logs listing commands, exit codes, browser scenarios, viewport/theme/locale combinations, and remaining production inputs.
 
 - [ ] **Step 1: Run all portfolio checks**

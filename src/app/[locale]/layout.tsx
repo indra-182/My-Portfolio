@@ -12,7 +12,11 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<LocaleParams> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<LocaleParams>;
+}): Promise<Metadata> {
   const { locale: value } = await params;
   const locale: Locale = isLocale(value) ? value : defaultLocale;
   const dictionary = await getDictionary(locale);

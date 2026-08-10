@@ -30,18 +30,28 @@ describe("getLatestPosts", () => {
     const result = await getLatestPosts("id", "https://blog.example");
 
     expect(result).toEqual({ status: "ready", posts: feed.posts });
-    expect(fetchMock).toHaveBeenCalledWith("https://blog.example/api/posts/latest?locale=id&limit=3", {
-      next: { revalidate: 3600 },
-    });
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://blog.example/api/posts/latest?locale=id&limit=3",
+      {
+        next: { revalidate: 3600 },
+      },
+    );
   });
 
   test("returns the unavailable fallback when the blog API fails or returns invalid data", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, json: async () => ({}) }));
 
-    await expect(getLatestPosts("id", "https://blog.example")).resolves.toEqual({ status: "unavailable" });
+    await expect(getLatestPosts("id", "https://blog.example")).resolves.toEqual({
+      status: "unavailable",
+    });
 
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ version: 1 }) }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: true, json: async () => ({ version: 1 }) }),
+    );
 
-    await expect(getLatestPosts("id", "https://blog.example")).resolves.toEqual({ status: "unavailable" });
+    await expect(getLatestPosts("id", "https://blog.example")).resolves.toEqual({
+      status: "unavailable",
+    });
   });
 });

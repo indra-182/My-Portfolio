@@ -71,47 +71,68 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
         projects: [
           {
             title: "Petron Philippines Corporate Dashboard",
-            summary: "Dashboard korporat untuk registrasi, autentikasi, dan perpindahan dana antar perusahaan.",
-            problem: "Pengguna korporat membutuhkan satu alur yang konsisten untuk mengelola akses dan transaksi dengan beberapa langkah penting.",
-            ownership: "Memimpin implementasi frontend untuk registrasi, PIN setup, authentication, inter-company transfer, serta upload transaksi bulk melalui CSV dan Excel.",
-            delivery: "Memecah workflow menjadi state UI yang jelas dan menghubungkan validasi input dengan feedback yang dapat ditindaklanjuti.",
-            outcome: "Workflow operasional tersusun sebagai pengalaman dashboard yang lebih terarah dan mudah diuji.",
+            summary:
+              "Dashboard korporat untuk registrasi, autentikasi, dan perpindahan dana antar perusahaan.",
+            problem:
+              "Pengguna korporat membutuhkan satu alur yang konsisten untuk mengelola akses dan transaksi dengan beberapa langkah penting.",
+            ownership:
+              "Memimpin implementasi frontend untuk registrasi, PIN setup, authentication, inter-company transfer, serta upload transaksi bulk melalui CSV dan Excel.",
+            delivery:
+              "Memecah workflow menjadi state UI yang jelas dan menghubungkan validasi input dengan feedback yang dapat ditindaklanjuti.",
+            outcome:
+              "Workflow operasional tersusun sebagai pengalaman dashboard yang lebih terarah dan mudah diuji.",
             technologies: ["React", "Next.js", "TypeScript", "State management", "Data fetching"],
           },
           {
             title: "Maybank Unit Trust",
             summary: "Alur produk unit trust dengan coverage regresi berbasis browser.",
-            problem: "Workflow investasi perlu konsisten di berbagai state dan tetap aman ketika mengalami perubahan fitur.",
-            ownership: "Mengembangkan UI untuk alur unit trust dan menulis coverage regresi dengan Playwright.",
-            delivery: "Menyusun komponen dan skenario pengujian yang mengikuti perjalanan pengguna dari input hingga konfirmasi.",
-            outcome: "Perubahan pada alur utama dapat diverifikasi dengan lebih terstruktur sebelum dirilis.",
+            problem:
+              "Workflow investasi perlu konsisten di berbagai state dan tetap aman ketika mengalami perubahan fitur.",
+            ownership:
+              "Mengembangkan UI untuk alur unit trust dan menulis coverage regresi dengan Playwright.",
+            delivery:
+              "Menyusun komponen dan skenario pengujian yang mengikuti perjalanan pengguna dari input hingga konfirmasi.",
+            outcome:
+              "Perubahan pada alur utama dapat diverifikasi dengan lebih terstruktur sebelum dirilis.",
             technologies: ["React", "TypeScript", "Playwright", "Tailwind CSS"],
           },
           {
             title: "BCA Fixed Income",
             summary: "Pengalaman frontend untuk workflow produk fixed income.",
-            problem: "Informasi dan langkah transaksi perlu disajikan secara bertahap agar pengguna dapat mengambil keputusan dengan konteks yang cukup.",
-            ownership: "Mengerjakan bagian frontend dari workflow fixed-income dan menyelaraskan state antar tahap transaksi.",
-            delivery: "Menerjemahkan kebutuhan produk menjadi layout dan interaksi yang konsisten dengan sistem desain yang digunakan tim.",
-            outcome: "Workflow fixed-income memiliki struktur antarmuka yang lebih mudah dipahami dan dipelihara.",
+            problem:
+              "Informasi dan langkah transaksi perlu disajikan secara bertahap agar pengguna dapat mengambil keputusan dengan konteks yang cukup.",
+            ownership:
+              "Mengerjakan bagian frontend dari workflow fixed-income dan menyelaraskan state antar tahap transaksi.",
+            delivery:
+              "Menerjemahkan kebutuhan produk menjadi layout dan interaksi yang konsisten dengan sistem desain yang digunakan tim.",
+            outcome:
+              "Workflow fixed-income memiliki struktur antarmuka yang lebih mudah dipahami dan dipelihara.",
             technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
           },
           {
             title: "Pegadaian Asuransi",
             summary: "Pengajuan dan pelacakan klaim asuransi.",
-            problem: "Pengguna membutuhkan visibilitas yang jelas terhadap pengajuan klaim dan tahap prosesnya.",
-            ownership: "Mengimplementasikan tampilan pengajuan klaim dan tracking status untuk pengalaman asuransi.",
-            delivery: "Menyusun form, status presentation, dan empty/error states agar setiap langkah memiliki feedback yang jelas.",
-            outcome: "Pengguna dapat memahami posisi klaimnya tanpa harus menebak langkah berikutnya.",
+            problem:
+              "Pengguna membutuhkan visibilitas yang jelas terhadap pengajuan klaim dan tahap prosesnya.",
+            ownership:
+              "Mengimplementasikan tampilan pengajuan klaim dan tracking status untuk pengalaman asuransi.",
+            delivery:
+              "Menyusun form, status presentation, dan empty/error states agar setiap langkah memiliki feedback yang jelas.",
+            outcome:
+              "Pengguna dapat memahami posisi klaimnya tanpa harus menebak langkah berikutnya.",
             technologies: ["React", "TypeScript", "State management", "Data fetching"],
           },
           {
             title: "Bank Danamon Mutual Fund",
             summary: "Workflow subscription, redemption, dan switching reksa dana.",
-            problem: "Beberapa jenis transaksi reksa dana perlu terasa sebagai satu pengalaman yang kohesif.",
-            ownership: "Membangun UI untuk subscription, redemption, dan switching dengan perhatian pada state dan validasi.",
-            delivery: "Menggunakan pola komponen dan data flow yang konsisten untuk membedakan kebutuhan setiap transaksi.",
-            outcome: "Serangkaian workflow reksa dana disajikan dengan pola interaksi yang lebih konsisten.",
+            problem:
+              "Beberapa jenis transaksi reksa dana perlu terasa sebagai satu pengalaman yang kohesif.",
+            ownership:
+              "Membangun UI untuk subscription, redemption, dan switching dengan perhatian pada state dan validasi.",
+            delivery:
+              "Menggunakan pola komponen dan data flow yang konsisten untuk membedakan kebutuhan setiap transaksi.",
+            outcome:
+              "Serangkaian workflow reksa dana disajikan dengan pola interaksi yang lebih konsisten.",
             technologies: ["React", "Next.js", "TypeScript", "shadcn/ui"],
           },
         ],
@@ -147,47 +168,66 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
         projects: [
           {
             title: "Petron Philippines Corporate Dashboard",
-            summary: "A corporate dashboard for registration, authentication, and inter-company transfers.",
-            problem: "Corporate users needed a consistent flow for managing access and transactions across several important steps.",
-            ownership: "Led frontend implementation for registration, PIN setup, authentication, inter-company transfer, and bulk CSV and Excel transaction uploads.",
-            delivery: "Structured the workflow into clear UI states and connected input validation with actionable feedback.",
-            outcome: "Operational workflows were shaped into a more directed and testable dashboard experience.",
+            summary:
+              "A corporate dashboard for registration, authentication, and inter-company transfers.",
+            problem:
+              "Corporate users needed a consistent flow for managing access and transactions across several important steps.",
+            ownership:
+              "Led frontend implementation for registration, PIN setup, authentication, inter-company transfer, and bulk CSV and Excel transaction uploads.",
+            delivery:
+              "Structured the workflow into clear UI states and connected input validation with actionable feedback.",
+            outcome:
+              "Operational workflows were shaped into a more directed and testable dashboard experience.",
             technologies: ["React", "Next.js", "TypeScript", "State management", "Data fetching"],
           },
           {
             title: "Maybank Unit Trust",
             summary: "Unit trust product flows with browser-based regression coverage.",
-            problem: "Investment workflows needed to stay consistent across states and safe as features changed.",
-            ownership: "Developed unit trust UI flows and added regression coverage with Playwright.",
-            delivery: "Built components and test scenarios around the user journey from input through confirmation.",
+            problem:
+              "Investment workflows needed to stay consistent across states and safe as features changed.",
+            ownership:
+              "Developed unit trust UI flows and added regression coverage with Playwright.",
+            delivery:
+              "Built components and test scenarios around the user journey from input through confirmation.",
             outcome: "Changes to core flows could be verified more systematically before release.",
             technologies: ["React", "TypeScript", "Playwright", "Tailwind CSS"],
           },
           {
             title: "BCA Fixed Income",
             summary: "Frontend experience for fixed-income product workflows.",
-            problem: "Information and transaction steps needed to be presented progressively so users had enough context to decide.",
-            ownership: "Worked on the frontend of fixed-income workflows and aligned state across transaction stages.",
-            delivery: "Translated product requirements into layouts and interactions consistent with the team design system.",
+            problem:
+              "Information and transaction steps needed to be presented progressively so users had enough context to decide.",
+            ownership:
+              "Worked on the frontend of fixed-income workflows and aligned state across transaction stages.",
+            delivery:
+              "Translated product requirements into layouts and interactions consistent with the team design system.",
             outcome: "The fixed-income workflow became easier to understand and maintain.",
             technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
           },
           {
             title: "Pegadaian Asuransi",
             summary: "Insurance claim submission and tracking.",
-            problem: "Users needed clear visibility into claim submission and its current processing stage.",
-            ownership: "Implemented claim submission and status tracking views for the insurance experience.",
-            delivery: "Built forms, status presentation, and empty/error states so every step provided clear feedback.",
-            outcome: "Users could understand the position of a claim without guessing the next step.",
+            problem:
+              "Users needed clear visibility into claim submission and its current processing stage.",
+            ownership:
+              "Implemented claim submission and status tracking views for the insurance experience.",
+            delivery:
+              "Built forms, status presentation, and empty/error states so every step provided clear feedback.",
+            outcome:
+              "Users could understand the position of a claim without guessing the next step.",
             technologies: ["React", "TypeScript", "State management", "Data fetching"],
           },
           {
             title: "Bank Danamon Mutual Fund",
             summary: "Mutual fund subscription, redemption, and switching workflows.",
-            problem: "Several mutual fund transaction types needed to feel like one cohesive experience.",
-            ownership: "Built UI for subscription, redemption, and switching with attention to state and validation.",
-            delivery: "Applied consistent component and data-flow patterns while accounting for each transaction type.",
-            outcome: "A set of mutual fund workflows was presented with a more consistent interaction model.",
+            problem:
+              "Several mutual fund transaction types needed to feel like one cohesive experience.",
+            ownership:
+              "Built UI for subscription, redemption, and switching with attention to state and validation.",
+            delivery:
+              "Applied consistent component and data-flow patterns while accounting for each transaction type.",
+            outcome:
+              "A set of mutual fund workflows was presented with a more consistent interaction model.",
             technologies: ["React", "Next.js", "TypeScript", "shadcn/ui"],
           },
         ],

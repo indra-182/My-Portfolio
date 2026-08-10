@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { LuMenu } from "react-icons/lu";
 import { useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { Button } from "@/components/ui/button";
@@ -30,14 +30,18 @@ export function MobileNavigation({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        render={<Button variant="outline" size="icon-lg" aria-label={openLabel} className="md:hidden" />}
+        render={
+          <Button variant="outline" size="icon-lg" aria-label={openLabel} className="md:hidden" />
+        }
       >
-        <Menu aria-hidden="true" />
+        <LuMenu aria-hidden="true" />
       </SheetTrigger>
       <SheetContent side="right" className="w-[min(22rem,calc(100%-2rem))]">
         <SheetHeader className="border-b border-border pb-5">
           <SheetTitle className="font-mono text-sm tracking-[0.18em]">INDRA.DEV</SheetTitle>
-          <SheetDescription>{locale === "id" ? "Navigasi portfolio" : "Portfolio navigation"}</SheetDescription>
+          <SheetDescription>
+            {locale === "id" ? "Navigasi portfolio" : "Portfolio navigation"}
+          </SheetDescription>
         </SheetHeader>
         <nav aria-label="Mobile navigation" className="flex flex-col gap-2 px-4 py-3">
           {items.map((item) => (

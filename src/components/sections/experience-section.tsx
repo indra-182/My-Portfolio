@@ -15,11 +15,18 @@ export function ExperienceSection({
   periodLabel: string;
 }) {
   return (
-    <section id="experience" className="content-shell py-20 sm:py-28" aria-labelledby="experience-title">
+    <section
+      id="experience"
+      className="content-shell py-20 sm:py-28"
+      aria-labelledby="experience-title"
+    >
       <div className="flex flex-col gap-5 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{eyebrow}</p>
-          <h2 id="experience-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
+          <h2
+            id="experience-title"
+            className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl"
+          >
             Ownership across complex workflows.
           </h2>
         </div>
@@ -34,7 +41,8 @@ export function ExperienceSection({
               <div>
                 <h3 className="text-2xl font-semibold tracking-tight">{experience.company}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">{roleLabel}:</span> {experience.role}
+                  <span className="font-medium text-foreground">{roleLabel}:</span>{" "}
+                  {experience.role}
                 </p>
               </div>
               <p className="font-mono text-xs text-muted-foreground">
@@ -48,7 +56,11 @@ export function ExperienceSection({
               ))}
             </ul>
             {experience.projects.map((project) => (
-              <ExperienceRow key={project.title} project={project} technologiesLabel={technologiesLabel} />
+              <ExperienceRow
+                key={project.title}
+                project={project}
+                technologiesLabel={technologiesLabel}
+              />
             ))}
           </div>
         ))}

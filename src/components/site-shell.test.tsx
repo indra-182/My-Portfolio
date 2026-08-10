@@ -24,9 +24,7 @@ describe("site shell", () => {
       "href",
       "https://blog.example/id",
     );
-    expect(
-      screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`),
-    ).toBeVisible();
+    expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();
     expect(screen.queryByRole("link", { name: /switch language/i })).not.toBeInTheDocument();
     expect(screen.getByText("Asia/Jakarta")).toBeVisible();
   });
