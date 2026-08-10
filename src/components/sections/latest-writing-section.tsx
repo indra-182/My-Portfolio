@@ -42,7 +42,7 @@ export function LatestWritingSection({
         {result.status === "ready" && result.posts.length > 0 ? (
           <div className="mt-10 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
             {result.posts.slice(0, 3).map((post) => (
-              <article key={post.slug} className="group flex min-h-64 flex-col bg-background p-6 transition-colors hover:bg-surface">
+              <article key={post.slug} className="group relative flex min-h-64 flex-col bg-background p-6 transition-colors hover:bg-surface">
                 <div className="flex items-center justify-between gap-4 text-xs font-medium text-muted-foreground">
                   <span>{post.topics[0]}</span>
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
