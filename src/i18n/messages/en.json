@@ -1,0 +1,45 @@
+{
+  "navigation": {
+    "about": "About",
+    "experience": "Experience",
+    "writing": "Writing",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "downloadCv": "Download CV"
+  },
+  "theme": {
+    "label": "Choose theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "portfolio": {
+    "heroEyebrow": "Senior Frontend Engineer · Indonesia",
+    "aboutEyebrow": "How I work",
+    "experienceEyebrow": "Selected experience",
+    "writingEyebrow": "Technical notes",
+    "visitBlog": "Visit blog",
+    "unavailableWriting": "Latest writing is available on the technical blog.",
+    "viewProject": "View project details",
+    "location": "Jakarta, Indonesia",
+    "technologies": "Technologies",
+    "role": "Role",
+    "period": "Period"
+  },
+  "footer": {
+    "linkedin": "LinkedIn",
+    "email": "Email",
+    "language": "Language",
+    "rights": "All rights reserved."
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for is unavailable or has moved.",
+    "retry": "Try again"
+  },
+  "actions": {
+    "backHome": "Back home",
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  }
+}

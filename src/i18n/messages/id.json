@@ -1,0 +1,45 @@
+{
+  "navigation": {
+    "about": "Tentang",
+    "experience": "Pengalaman",
+    "writing": "Tulisan",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "downloadCv": "Unduh CV"
+  },
+  "theme": {
+    "label": "Pilih tema",
+    "light": "Terang",
+    "dark": "Gelap"
+  },
+  "portfolio": {
+    "heroEyebrow": "Senior Frontend Engineer · Indonesia",
+    "aboutEyebrow": "Cara saya bekerja",
+    "experienceEyebrow": "Pengalaman terpilih",
+    "writingEyebrow": "Catatan teknis",
+    "visitBlog": "Kunjungi blog",
+    "unavailableWriting": "Tulisan terbaru tersedia di blog teknis.",
+    "viewProject": "Lihat detail proyek",
+    "location": "Jakarta, Indonesia",
+    "technologies": "Teknologi",
+    "role": "Peran",
+    "period": "Periode"
+  },
+  "footer": {
+    "linkedin": "LinkedIn",
+    "email": "Email",
+    "language": "Bahasa",
+    "rights": "Hak cipta dilindungi."
+  },
+  "errors": {
+    "notFoundTitle": "Halaman tidak ditemukan",
+    "notFoundDescription": "Halaman yang Anda cari tidak tersedia atau sudah dipindahkan.",
+    "retry": "Coba lagi"
+  },
+  "actions": {
+    "backHome": "Kembali ke beranda",
+    "skipToContent": "Lewati ke konten utama",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
+  }
+}

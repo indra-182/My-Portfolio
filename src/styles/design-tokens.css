@@ -1,0 +1,37 @@
+:root {
+  --background: #fafafa;
+  --foreground: #101114;
+  --surface: #f1f3f6;
+  --muted-foreground: #5d626b;
+  --border: #d8dadd;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --focus-ring: #2563eb;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-pill: 999px;
+  --motion-fast: 180ms;
+  --motion-enter: 360ms;
+  --content-max: 75rem;
+  --prose-max: 70ch;
+}
+
+.dark {
+  --background: #0b0d10;
+  --foreground: #f5f7fa;
+  --surface: #15181d;
+  --muted-foreground: #a6adb8;
+  --border: #2c3139;
+  --accent: #60a5fa;
+  --accent-foreground: #07111f;
+  --destructive: #f87171;
+  --focus-ring: #60a5fa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-enter: 0ms;
+  }
+}
