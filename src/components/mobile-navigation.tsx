@@ -19,12 +19,10 @@ export type MobileNavigationItem = { label: string; href: string; active?: boole
 export function MobileNavigation({
   items,
   locale,
-  primaryAction,
   openLabel = "Open menu",
 }: {
   items: MobileNavigationItem[];
   locale: Locale;
-  primaryAction?: { label: string; href: string; download?: boolean };
   openLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -54,16 +52,6 @@ export function MobileNavigation({
               </span>
             </Link>
           ))}
-          {primaryAction ? (
-            <Link
-              href={primaryAction.href}
-              download={primaryAction.download}
-              onClick={() => setOpen(false)}
-              className="mt-3 inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 font-semibold text-accent-foreground"
-            >
-              {primaryAction.label}
-            </Link>
-          ) : null}
         </nav>
       </SheetContent>
     </Sheet>

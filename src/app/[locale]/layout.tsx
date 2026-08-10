@@ -69,7 +69,6 @@ export default async function LocaleLayout({
         email={siteConfig.email}
         linkedinUrl={siteConfig.linkedinUrl}
         navItems={navItems}
-        primaryAction={{ label: dictionary.navigation.downloadCv, href: siteConfig.cvHref, download: true }}
       />
       <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         {children}

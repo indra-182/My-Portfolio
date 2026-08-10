@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { LocaleSwitcher } from "@/components/locale-switcher";
 import type { SharedSiteProps } from "./site-header";
 
 export function SiteFooter({
@@ -41,7 +40,7 @@ export function SiteFooter({
         </div>
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Mahadi Indra Manurung</p>
-          <LocaleSwitcher locale={locale} />
+          <span>Asia/Jakarta</span>
         </div>
       </div>
     </footer>
