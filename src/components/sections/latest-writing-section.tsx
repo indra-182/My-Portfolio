@@ -19,6 +19,10 @@ export function LatestWritingSection({
   result: LatestFeedResult;
   blogUrl: string;
 }) {
+  const visiblePosts = result.status === "ready" ? result.posts.slice(0, 3) : [];
+  const layout =
+    visiblePosts.length === 1 ? "featured" : visiblePosts.length === 2 ? "double" : "grid";
+
   return (
     <section
       id="writing"
@@ -48,18 +52,33 @@ export function LatestWritingSection({
           ) : null}
         </div>
 
-        {result.status === "ready" && result.posts.length > 0 ? (
-          <div className="mt-10 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
-            {result.posts.slice(0, 3).map((post) => (
+        {visiblePosts.length > 0 ? (
+          <div
+            data-layout={layout}
+            className={`mt-10 grid gap-4 ${
+              visiblePosts.length === 1
+                ? "md:grid-cols-[minmax(0,1.55fr)_minmax(18rem,0.85fr)]"
+                : visiblePosts.length === 2
+                  ? "md:grid-cols-2"
+                  : "md:grid-cols-3"
+            }`}
+          >
+            {visiblePosts.map((post) => (
               <article
                 key={post.slug}
-                className="group relative flex min-h-64 flex-col bg-background p-6 transition-colors hover:bg-surface"
+                className={`group relative flex min-h-64 flex-col border border-border bg-background p-6 transition-colors duration-[var(--motion-fast)] hover:bg-surface ${
+                  visiblePosts.length === 1 ? "sm:p-8" : ""
+                }`}
               >
                 <div className="flex items-center justify-between gap-4 text-xs font-medium text-muted-foreground">
                   <span>{post.topics[0]}</span>
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
                 </div>
-                <h3 className="mt-8 text-xl font-semibold tracking-tight">
+                <h3
+                  className={`mt-8 font-semibold tracking-tight ${
+                    visiblePosts.length === 1 ? "text-2xl sm:text-3xl" : "text-xl"
+                  }`}
+                >
                   <Link
                     href={`${blogUrl}/${locale}/blog/${post.slug}`}
                     className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
@@ -70,11 +89,44 @@ export function LatestWritingSection({
                 <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
                   {post.description}
                 </p>
-                <p className="relative mt-auto pt-6 font-mono text-xs text-muted-foreground">
-                  {post.readingTimeMinutes} min read
-                </p>
+                <div className="relative mt-auto flex items-end justify-between gap-4 pt-6">
+                  <p className="font-mono text-xs text-muted-foreground">
+                    {post.readingTimeMinutes} min read
+                  </p>
+                  <LuArrowUpRight
+                    aria-hidden="true"
+                    className="size-5 transition-transform duration-[var(--motion-fast)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </div>
               </article>
             ))}
+            {visiblePosts.length === 1 ? (
+              <aside
+                aria-labelledby="writing-aside-title"
+                className="relative flex min-h-64 flex-col justify-between overflow-hidden border border-border bg-surface p-6 sm:p-8"
+              >
+                <div className="relative z-10">
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+                    Writing in public
+                  </p>
+                  <h3
+                    id="writing-aside-title"
+                    className="mt-4 max-w-[12ch] text-2xl font-semibold tracking-tight"
+                  >
+                    Notes from the build loop.
+                  </h3>
+                </div>
+                <p className="relative z-10 max-w-sm text-sm leading-6 text-muted-foreground">
+                  Short notes on frontend systems, product workflows, and shipping with confidence.
+                </p>
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-4 -bottom-12 font-mono text-[10rem] leading-none text-foreground/5"
+                >
+                  01
+                </span>
+              </aside>
+            ) : null}
           </div>
         ) : (
           <div className="mt-10 border border-border bg-surface p-7 sm:p-10">

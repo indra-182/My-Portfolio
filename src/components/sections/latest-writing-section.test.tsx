@@ -41,9 +41,12 @@ const posts = [
   },
 ];
 
+const onePost = posts.slice(0, 1);
+const twoPosts = posts.slice(0, 2);
+
 describe("LatestWritingSection", () => {
   test("renders at most three article links when the feed is ready", () => {
-    render(
+    const { container } = render(
       <LatestWritingSection
         locale="id"
         blogUrl="https://blog.example"
@@ -51,6 +54,7 @@ describe("LatestWritingSection", () => {
       />,
     );
 
+    expect(container.querySelector('[data-layout="grid"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
       "href",
       "https://blog.example/id/blog/resilient-client-state",
@@ -58,6 +62,36 @@ describe("LatestWritingSection", () => {
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getAllByRole("article")[0]).toHaveClass("relative");
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
+  });
+
+  test("uses a featured layout and editorial aside for one post", () => {
+    const { container } = render(
+      <LatestWritingSection
+        locale="id"
+        blogUrl="https://blog.example"
+        result={{ status: "ready", posts: onePost }}
+      />,
+    );
+
+    expect(container.querySelector('[data-layout="featured"]')).toBeInTheDocument();
+    expect(screen.getAllByRole("article")).toHaveLength(1);
+    expect(
+      screen.getByRole("complementary", { name: /notes from the build loop/i }),
+    ).toBeInTheDocument();
+  });
+
+  test("uses an even layout for two posts without an editorial aside", () => {
+    const { container } = render(
+      <LatestWritingSection
+        locale="id"
+        blogUrl="https://blog.example"
+        result={{ status: "ready", posts: twoPosts }}
+      />,
+    );
+
+    expect(container.querySelector('[data-layout="double"]')).toBeInTheDocument();
+    expect(screen.getAllByRole("article")).toHaveLength(2);
+    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });
 
   test("renders a direct blog link instead of an empty grid when unavailable", () => {
