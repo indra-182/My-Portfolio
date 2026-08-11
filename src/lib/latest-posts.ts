@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { locales, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
 
 const latestPostSchema = z.object({

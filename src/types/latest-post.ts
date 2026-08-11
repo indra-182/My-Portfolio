@@ -1,5 +1,3 @@
-import type { Locale } from "@/i18n/config";
-
 export type LatestPostSummary = {
   title: string;
   slug: string;
