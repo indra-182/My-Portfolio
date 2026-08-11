@@ -19,7 +19,7 @@ describe("site shell", () => {
     expect(screen.getByRole("link", { name: "INDRA.DEV" })).toHaveAttribute("href", "/id");
     expect(screen.getByRole("link", { name: /blog/i })).toHaveAttribute(
       "href",
-      "https://blog.example/id",
+      "https://blog.example/blog",
     );
     expect(screen.queryByRole("link", { name: /portfolio/i })).not.toBeInTheDocument();
     expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();

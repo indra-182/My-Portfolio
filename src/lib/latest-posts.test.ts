@@ -3,14 +3,12 @@ import { getLatestPosts } from "./latest-posts";
 
 const feed = {
   version: 1,
-  locale: "id",
   generatedAt: "2026-08-10T15:04:01.766Z",
   posts: [
     {
       title: "Optimistic UI Tanpa Library Form",
       slug: "optimistic-ui-server-actions",
       description: "Pola useOptimistic dengan Server Actions untuk antarmuka yang terasa instan.",
-      locale: "id",
       publishedAt: "2026-08-10T20:00:00+07:00",
       topics: ["React", "Next.js"],
       readingTimeMinutes: 3,
@@ -31,7 +29,7 @@ describe("getLatestPosts", () => {
 
     expect(result).toEqual({ status: "ready", posts: feed.posts });
     expect(fetchMock).toHaveBeenCalledWith(
-      "https://blog.example/api/posts/latest?locale=id&limit=3",
+      "https://blog.example/api/posts/latest?limit=3",
       {
         next: { revalidate: 3600 },
       },

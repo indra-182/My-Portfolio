@@ -4,7 +4,6 @@ export type LatestPostSummary = {
   title: string;
   slug: string;
   description: string;
-  locale: Locale;
   publishedAt: string;
   topics: string[];
   readingTimeMinutes: number;

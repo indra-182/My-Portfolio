@@ -7,7 +7,6 @@ const posts = [
     title: "Designing resilient client state",
     slug: "resilient-client-state",
     description: "A practical guide to predictable UI state.",
-    locale: "id" as const,
     publishedAt: "2026-08-01T10:00:00.000Z",
     topics: ["React"],
     readingTimeMinutes: 6,
@@ -16,7 +15,6 @@ const posts = [
     title: "Type-safe boundaries",
     slug: "type-safe-boundaries",
     description: "How to keep data contracts explicit.",
-    locale: "id" as const,
     publishedAt: "2026-07-20T10:00:00.000Z",
     topics: ["TypeScript"],
     readingTimeMinutes: 4,
@@ -25,7 +23,6 @@ const posts = [
     title: "Shipping with confidence",
     slug: "shipping-with-confidence",
     description: "A small testing loop for frontend teams.",
-    locale: "id" as const,
     publishedAt: "2026-07-10T10:00:00.000Z",
     topics: ["Testing"],
     readingTimeMinutes: 5,
@@ -34,7 +31,6 @@ const posts = [
     title: "Fourth post",
     slug: "fourth-post",
     description: "This should not be rendered.",
-    locale: "id" as const,
     publishedAt: "2026-07-01T10:00:00.000Z",
     topics: ["React"],
     readingTimeMinutes: 3,
@@ -57,7 +53,7 @@ describe("LatestWritingSection", () => {
     expect(container.querySelector('[data-layout="grid"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
       "href",
-      "https://blog.example/id/blog/resilient-client-state",
+      "https://blog.example/blog/resilient-client-state",
     );
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getAllByRole("article")[0]).toHaveClass("relative");
@@ -105,7 +101,7 @@ describe("LatestWritingSection", () => {
 
     expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
       "href",
-      "https://blog.example/en",
+      "https://blog.example/blog",
     );
     expect(screen.queryAllByRole("article")).toHaveLength(0);
   });
