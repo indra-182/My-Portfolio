@@ -37,7 +37,9 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
 test("renders the latest post from the blog API", async ({ page }) => {
   await page.goto("/id");
 
-  const article = page.getByRole("article").filter({ hasText: "React Compiler: Memo Otomatis Tanpa useMemo" });
+  const article = page
+    .getByRole("article")
+    .filter({ hasText: "React Compiler: Memo Otomatis Tanpa useMemo" });
   await expect(article).toBeVisible();
   await expect(
     article.getByRole("link", { name: "React Compiler: Memo Otomatis Tanpa useMemo" }),

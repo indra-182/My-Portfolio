@@ -28,12 +28,9 @@ describe("getLatestPosts", () => {
     const result = await getLatestPosts("id", "https://blog.example");
 
     expect(result).toEqual({ status: "ready", posts: feed.posts });
-    expect(fetchMock).toHaveBeenCalledWith(
-      "https://blog.example/api/posts/latest?limit=3",
-      {
-        next: { revalidate: 3600 },
-      },
-    );
+    expect(fetchMock).toHaveBeenCalledWith("https://blog.example/api/posts/latest?limit=3", {
+      next: { revalidate: 3600 },
+    });
   });
 
   test("returns the unavailable fallback when the blog API fails or returns invalid data", async () => {
