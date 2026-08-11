@@ -26,7 +26,7 @@ describe("site shell", () => {
     );
     expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();
     expect(screen.queryByRole("link", { name: /switch language/i })).not.toBeInTheDocument();
-    expect(screen.getByText("Asia/Jakarta")).toBeVisible();
+    expect(screen.getByText("Bogor/Indonesia")).toBeVisible();
   });
 
   test("does not render the CV action in the navbar", () => {

@@ -64,7 +64,7 @@ export function SiteFooter({
         </div>
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Mahadi Indra Manurung</p>
-          <span>Asia/Jakarta</span>
+          <span>Bogor/Indonesia</span>
         </div>
       </div>
     </footer>

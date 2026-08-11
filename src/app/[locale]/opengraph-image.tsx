@@ -47,7 +47,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
         </div>
       </div>
       <div style={{ color: "#60A5FA", display: "flex", fontSize: 22 }}>
-        {locale.toUpperCase()} · Jakarta, Indonesia
+        {locale.toUpperCase()} · Bogor, Indonesia
       </div>
     </div>,
     size,

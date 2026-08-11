@@ -3,7 +3,7 @@ import type { PortfolioContent } from "./portfolio-schema";
 const sharedProfile = {
   name: "Mahadi Indra Manurung",
   role: "Senior Frontend Engineer",
-  location: "Jakarta, Indonesia",
+  location: "Bogor, Indonesia",
   imageSrc: "/images/mahadi-indra.png",
 };
 
