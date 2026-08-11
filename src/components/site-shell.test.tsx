@@ -6,7 +6,7 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 describe("site shell", () => {
-  test("renders identity, cross-site links, and current copyright", () => {
+  test("renders identity, blog link, and current copyright", () => {
     render(
       <SiteFooter
         locale="id"
@@ -16,14 +16,12 @@ describe("site shell", () => {
     );
 
     expect(screen.getByText("INDRA.DEV")).toBeVisible();
-    expect(screen.getByRole("link", { name: /portfolio/i })).toHaveAttribute(
-      "href",
-      "https://portfolio.example/id",
-    );
+    expect(screen.getByRole("link", { name: "INDRA.DEV" })).toHaveAttribute("href", "/id");
     expect(screen.getByRole("link", { name: /blog/i })).toHaveAttribute(
       "href",
       "https://blog.example/id",
     );
+    expect(screen.queryByRole("link", { name: /portfolio/i })).not.toBeInTheDocument();
     expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();
     expect(screen.queryByRole("link", { name: /switch language/i })).not.toBeInTheDocument();
     expect(screen.getByText("Bogor/Indonesia")).toBeVisible();
