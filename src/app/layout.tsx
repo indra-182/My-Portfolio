@@ -22,9 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="id" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className={`${inter.variable} ${geistMono.variable} min-h-screen`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
