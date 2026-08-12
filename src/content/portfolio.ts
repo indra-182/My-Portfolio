@@ -4,7 +4,7 @@ const sharedProfile = {
   name: "Mahadi Indra Manurung",
   role: "Senior Frontend Engineer",
   location: "Bogor, Indonesia",
-  imageSrc: "/images/mahadi-indra.png",
+  imageSrc: "/images/mahadi-indra.webp",
 };
 
 const approvedTestimonials: PortfolioContent["testimonials"] = [

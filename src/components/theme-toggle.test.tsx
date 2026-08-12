@@ -13,6 +13,7 @@ test("renders an accessible icon and switches directly to dark mode", async () =
   render(<ThemeToggle />);
   const toggle = screen.getByRole("button", { name: /switch to dark mode/i });
   expect(toggle.querySelector('svg[aria-hidden="true"]')).toBeInTheDocument();
+  expect(toggle).toHaveAttribute("title", "Switch to dark mode");
   expect(toggle.className).toContain("hover:bg-muted");
   await userEvent.click(toggle);
   expect(setTheme).toHaveBeenCalledWith("dark");

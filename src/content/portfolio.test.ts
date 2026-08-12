@@ -27,4 +27,9 @@ describe("portfolio content", () => {
       expect(experience.projects.every((project) => project.technologies.length > 0)).toBe(true);
     }
   });
+
+  test("uses the optimized profile image asset", () => {
+    expect(portfolioByLocale.id.profile.imageSrc).toBe("/images/mahadi-indra.webp");
+    expect(portfolioByLocale.en.profile.imageSrc).toBe("/images/mahadi-indra.webp");
+  });
 });

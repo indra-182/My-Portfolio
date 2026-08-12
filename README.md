@@ -26,7 +26,7 @@ npm run test:e2e
 
 - Localized portfolio content: `src/content/portfolio.ts`
 - Content schema: `src/content/portfolio-schema.ts`
-- Profile image: `public/images/mahadi-indra.png`
+- Profile image: `public/images/mahadi-indra.webp`
 - CV download: `public/documents/mahadi-indra-cv.pdf`
 - Theme tokens: `src/styles/design-tokens.css`
 

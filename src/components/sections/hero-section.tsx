@@ -27,14 +27,14 @@ export function HeroSection({
           {profile.valueProposition}
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-3">
-          <Link
+          <a
             href={cvHref}
             download
             className="inline-flex min-h-12 items-center gap-2 rounded-md bg-accent px-5 font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           >
             <LuArrowDownToLine aria-hidden="true" className="size-4" />
             {downloadLabel}
-          </Link>
+          </a>
           <Link
             href="#writing"
             className="inline-flex min-h-12 items-center gap-2 rounded-md border border-border px-5 font-semibold transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
@@ -48,7 +48,7 @@ export function HeroSection({
           {profile.location}
         </p>
       </div>
-      <div className="relative mx-auto mt-0 w-full max-w-md lg:mx-0 lg:ml-auto lg:mt-10 lg:max-w-[22rem]">
+      <div className="relative mx-auto mt-8 w-full max-w-md lg:mx-0 lg:ml-auto lg:mt-10 lg:max-w-[22rem]">
         <div
           className="absolute -right-3 -top-3 h-full w-full border border-accent/40"
           aria-hidden="true"
@@ -58,8 +58,9 @@ export function HeroSection({
             src={profile.imageSrc}
             alt={profile.imageAlt}
             fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 22rem"
+            loading="lazy"
+            sizes="22rem"
+            unoptimized
             className="object-cover object-center grayscale-[15%]"
           />
         </div>
