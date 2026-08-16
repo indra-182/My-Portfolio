@@ -16,7 +16,7 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   ).toHaveAttribute("href", "/documents/mahadi-indra-cv.pdf");
   await expect(page.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
     "href",
-    "https://blog-indra.vercel.app/blog",
+    "https://blog-indra.vercel.app",
   );
 
   await page.getByRole("button", { name: /switch to dark mode/i }).click();
