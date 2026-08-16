@@ -44,7 +44,7 @@ export function LatestWritingSection({
           </div>
           {result.status === "ready" ? (
             <Link
-              href={`${blogUrl}/blog`}
+              href={blogUrl}
               className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />
@@ -134,7 +134,7 @@ export function LatestWritingSection({
               Latest writing is available on the technical blog.
             </p>
             <Link
-              href={`${blogUrl}/blog`}
+              href={blogUrl}
               className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />

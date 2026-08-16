@@ -26,7 +26,7 @@ export function SiteFooter({
           <nav aria-label="Footer navigation" className="flex items-center gap-6">
             <Link
               className="transition-colors hover:text-accent"
-              href={`${blogUrl}/blog`}
+              href={blogUrl}
               aria-label="Blog"
               title="Blog"
             >

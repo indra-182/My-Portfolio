@@ -55,6 +55,10 @@ describe("LatestWritingSection", () => {
       "href",
       "https://blog.example/blog/resilient-client-state",
     );
+    expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
+      "href",
+      "https://blog.example",
+    );
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getAllByRole("article")[0]).toHaveClass("relative");
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
@@ -101,7 +105,7 @@ describe("LatestWritingSection", () => {
 
     expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
       "href",
-      "https://blog.example/blog",
+      "https://blog.example",
     );
     expect(screen.queryAllByRole("article")).toHaveLength(0);
   });
