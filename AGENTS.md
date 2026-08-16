@@ -34,12 +34,7 @@
 Run the narrowest relevant checks, then the full set for shared or route-level changes:
 
 ```text
-npm run format:check
-npm run lint
-npm run typecheck
-npm test
-npm run build
-npm run test:e2e
+npm run verify
 ```
 
 Review the diff and run `git diff --check` before handoff. For UI changes, verify keyboard behavior, both themes, both locales, reduced motion, and the affected Playwright flow.
