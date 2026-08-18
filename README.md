@@ -5,9 +5,9 @@ Localized recruiter portfolio for Mahadi Indra Manurung, built with Next.js App 
 ## Local development
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env.local
-npm run dev
+pnpm run dev
 ```
 
 Open `http://localhost:3000/id` or `http://localhost:3000/en`. The root route redirects to `/id`.
@@ -15,11 +15,11 @@ Open `http://localhost:3000/id` or `http://localhost:3000/en`. The root route re
 Quality checks:
 
 ```bash
-npm test
-npm run lint
-npm run typecheck
-npm run build
-npm run test:e2e
+pnpm test
+pnpm run lint
+pnpm run typecheck
+pnpm run build
+pnpm run test:e2e
 ```
 
 ## Content and assets
