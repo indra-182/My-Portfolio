@@ -24,7 +24,11 @@ export function SiteHeader({ locale, navItems }: SharedSiteProps & { navItems: S
         Skip to main content
       </a>
       <div className="content-shell flex min-h-18 items-center justify-between gap-6">
-        <Link href={`/${locale}`} className="shrink-0 font-mono text-sm font-bold tracking-[0.2em]">
+        <Link
+          href={`/${locale}`}
+          prefetch={false}
+          className="shrink-0 font-mono text-sm font-bold tracking-[0.2em]"
+        >
           INDRA<span className="text-accent">.</span>DEV
         </Link>
         <nav aria-label="Primary navigation" className="hidden items-center gap-7 md:flex">
