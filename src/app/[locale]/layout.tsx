@@ -20,7 +20,7 @@ export async function generateMetadata({
   const { locale: value } = await params;
   const locale: Locale = isLocale(value) ? value : defaultLocale;
   const dictionary = await getDictionary(locale);
-  const title = `INDRA.DEV — Mahadi Indra Manurung`;
+  const title = "INDRA.DEV: Mahadi Indra Manurung";
   const description =
     locale === "id"
       ? "Portfolio Mahadi Indra Manurung, Senior Frontend Engineer dari Indonesia."

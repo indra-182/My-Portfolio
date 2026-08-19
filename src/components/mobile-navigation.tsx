@@ -1,18 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { LuMenu } from "react-icons/lu";
-import { useState } from "react";
+import { LuMenu, LuX } from "react-icons/lu";
+import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 export type MobileNavigationItem = { label: string; href: string; active?: boolean };
 
@@ -26,38 +17,77 @@ export function MobileNavigation({
   openLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (open && !dialog.open) dialog.showModal();
+    if (!open && dialog.open) dialog.close();
+  }, [open]);
+
+  const closeMenu = () => {
+    dialogRef.current?.close();
+    setOpen(false);
+  };
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger
-        render={
-          <Button variant="outline" size="icon-lg" aria-label={openLabel} className="md:hidden" />
-        }
+    <>
+      <button
+        ref={menuButtonRef}
+        type="button"
+        aria-label={openLabel}
+        aria-expanded={open}
+        onClick={() => setOpen(true)}
+        className="inline-flex size-11 cursor-pointer items-center justify-center rounded-md border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:hidden"
       >
         <LuMenu aria-hidden="true" />
-      </SheetTrigger>
-      <SheetContent side="right" className="w-[min(22rem,calc(100%-2rem))]">
-        <SheetHeader className="border-b border-border pb-5">
-          <SheetTitle className="font-mono text-sm tracking-[0.18em]">INDRA.DEV</SheetTitle>
-          <SheetDescription>
-            {locale === "id" ? "Navigasi portfolio" : "Portfolio navigation"}
-          </SheetDescription>
-        </SheetHeader>
-        <nav aria-label="Mobile navigation" className="flex flex-col gap-2 px-4 py-3">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={item.active ? "page" : undefined}
-              onClick={() => setOpen(false)}
-            >
-              <span className="flex min-h-11 items-center border-b border-border/70 text-base font-medium">
-                {item.label}
-              </span>
-            </Link>
-          ))}
-        </nav>
-      </SheetContent>
-    </Sheet>
+      </button>
+      {open ? (
+        <dialog
+          ref={dialogRef}
+          aria-labelledby="mobile-navigation-title"
+          onCancel={() => setOpen(false)}
+          onClose={() => {
+            setOpen(false);
+            menuButtonRef.current?.focus();
+          }}
+          className="fixed inset-y-0 right-0 m-0 flex h-full w-[min(22rem,calc(100%-2rem))] max-w-full flex-col gap-4 border-l border-border bg-background p-0 text-sm text-foreground shadow-lg backdrop:bg-black/10"
+        >
+          <div className="flex flex-col gap-0.5 border-b border-border p-4 pb-5">
+            <div id="mobile-navigation-title" className="font-mono text-sm tracking-[0.18em]">
+              INDRA.DEV
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {locale === "id" ? "Navigasi portfolio" : "Portfolio navigation"}
+            </p>
+          </div>
+          <button
+            type="button"
+            aria-label={locale === "id" ? "Tutup menu" : "Close menu"}
+            title={locale === "id" ? "Tutup menu" : "Close menu"}
+            onClick={closeMenu}
+            className="absolute top-3 right-3 inline-flex size-11 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          >
+            <LuX aria-hidden="true" />
+          </button>
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-2 px-4 py-3">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={item.active ? "page" : undefined}
+                onClick={closeMenu}
+              >
+                <span className="flex min-h-11 items-center border-b border-border/70 text-base font-medium">
+                  {item.label}
+                </span>
+              </Link>
+            ))}
+          </nav>
+        </dialog>
+      ) : null}
+    </>
   );
 }
