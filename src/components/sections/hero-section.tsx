@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { LuArrowDownToLine, LuArrowUpRight, LuMapPin } from "react-icons/lu";
 import type { PortfolioContent } from "@/content/portfolio-schema";
 
@@ -35,13 +34,13 @@ export function HeroSection({
             <LuArrowDownToLine aria-hidden="true" className="size-4" />
             {downloadLabel}
           </a>
-          <Link
+          <a
             href="#writing"
             className="inline-flex min-h-12 items-center gap-2 rounded-md border border-border px-5 font-semibold transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           >
             {writingLabel}
             <LuArrowUpRight aria-hidden="true" className="size-4" />
-          </Link>
+          </a>
         </div>
         <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted-foreground">
           <LuMapPin aria-hidden="true" className="size-4 text-accent" />

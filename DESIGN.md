@@ -9,8 +9,9 @@ Use `src/styles/design-tokens.css` as the source of truth for color, spacing, ra
 ## Brand and type
 
 - Wordmark: `INDRA.DEV` in uppercase. The dot is the repeatable blue accent detail.
-- Interface and editorial type: Inter Variable from `next/font/google`.
-- Technical metadata and labels: Geist Mono.
+- Interface and editorial type: the native Arial/Helvetica sans-serif stack to avoid a
+  render-blocking font request.
+- Technical metadata and labels: the native system monospace stack.
 - Body text starts at 16px with approximately 1.6 to 1.75 line height.
 - Keep prose near the existing `--prose-max` measure. Create hierarchy with scale, weight, spacing, and alignment rather than decorative effects.
 

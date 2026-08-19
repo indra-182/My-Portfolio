@@ -30,7 +30,7 @@ pnpm run test:e2e
 - CV download: `public/documents/mahadi-indra-cv.pdf`
 - Theme tokens: `src/styles/design-tokens.css`
 
-The site supports Indonesian and English routes, plus Light and Dark theme choices. On first visit, the theme follows the operating-system preference internally. Testimonials remain omitted until approved quotations are supplied. Public project copy is limited to supplied CV facts.
+The site supports Indonesian and English routes, plus Light and Dark theme choices. The first visit defaults to Dark, and the selected theme persists locally. Testimonials remain omitted until approved quotations are supplied. Public project copy is limited to supplied CV facts.
 
 ## Environment
 

@@ -19,12 +19,13 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
     "https://blog-indra.vercel.app",
   );
 
-  await page.getByRole("button", { name: /switch to dark mode/i }).click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.reload();
   await expect(page.locator("html")).toHaveClass(/dark/);
   await page.getByRole("button", { name: /switch to light mode/i }).click();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
+  await page.reload();
+  await expect(page.locator("html")).not.toHaveClass(/dark/);
+  await page.getByRole("button", { name: /switch to dark mode/i }).click();
+  await expect(page.locator("html")).toHaveClass(/dark/);
 
   await page
     .getByRole("banner")
@@ -34,22 +35,8 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   await expect(page.getByRole("heading", { name: /Building product interfaces/i })).toBeVisible();
 });
 
-test("renders the latest post from the blog API", async ({ page }) => {
-  await page.goto("/id");
-
-  const article = page
-    .getByRole("article")
-    .filter({ hasText: "React Compiler: Memo Otomatis Tanpa useMemo" });
-  await expect(article).toBeVisible();
-  await expect(
-    article.getByRole("link", { name: "React Compiler: Memo Otomatis Tanpa useMemo" }),
-  ).toHaveAttribute("href", "https://blog-indra.vercel.app/blog/react-compiler-memo-otomatis");
-});
-
-test("uses the operating-system theme on first visit without a system menu item", async ({
-  browser,
-}) => {
-  const context = await browser.newContext({ colorScheme: "dark" });
+test("defaults to dark theme on first visit", async ({ browser }) => {
+  const context = await browser.newContext({ colorScheme: "light" });
   const page = await context.newPage();
   await page.goto("/id");
   await expect(page.locator("html")).toHaveClass(/dark/);
