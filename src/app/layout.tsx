@@ -6,15 +6,17 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "optional",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: "INDRA.DEV — Mahadi Indra Manurung",
+  title: "INDRA.DEV: Mahadi Indra Manurung",
   description: "Senior Frontend Engineer portfolio of Mahadi Indra Manurung.",
 };
 

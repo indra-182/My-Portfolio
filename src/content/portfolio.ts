@@ -49,7 +49,7 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
       ...sharedProfile,
       headline: "Membangun antarmuka produk yang jelas, tangguh, dan siap dipakai.",
       valueProposition:
-        "Saya membantu tim produk mengubah workflow yang kompleks menjadi pengalaman frontend yang mudah dipahami—dari dashboard korporat sampai alur transaksi finansial.",
+        "Saya membantu tim produk mengubah workflow yang kompleks menjadi pengalaman frontend yang mudah dipahami, dari dashboard korporat sampai alur transaksi finansial.",
       imageAlt: "Mahadi Indra Manurung, Senior Frontend Engineer",
     },
     about: {
@@ -63,7 +63,7 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
       {
         company: "Indivara Group",
         role: "Senior Frontend Engineer",
-        period: "Agustus 2021 — Sekarang",
+        period: "Agustus 2021 - Sekarang",
         responsibilities: [
           "Mengembangkan pengalaman frontend untuk produk finansial dan operasional dengan fokus pada maintainability.",
           "Berkolaborasi dengan product, design, backend, dan QA untuk menyelesaikan workflow end-to-end.",
@@ -146,7 +146,7 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
       ...sharedProfile,
       headline: "Building product interfaces that are clear, resilient, and ready to use.",
       valueProposition:
-        "I help product teams turn complex workflows into understandable frontend experiences—from corporate dashboards to financial transaction journeys.",
+        "I help product teams turn complex workflows into understandable frontend experiences, from corporate dashboards to financial transaction journeys.",
       imageAlt: "Mahadi Indra Manurung, Senior Frontend Engineer",
     },
     about: {
@@ -160,7 +160,7 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
       {
         company: "Indivara Group",
         role: "Senior Frontend Engineer",
-        period: "August 2021 — Present",
+        period: "August 2021 - Present",
         responsibilities: [
           "Develop frontend experiences for financial and operational products with a focus on maintainability.",
           "Collaborate with product, design, backend, and QA to deliver end-to-end workflows.",

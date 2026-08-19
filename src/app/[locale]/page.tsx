@@ -35,7 +35,7 @@ export async function generateMetadata({
   const portfolio = getPortfolio(value);
 
   return {
-    title: `${portfolio.profile.role} — ${portfolio.profile.name}`,
+    title: `${portfolio.profile.role}: ${portfolio.profile.name}`,
     description: portfolio.profile.valueProposition,
   };
 }

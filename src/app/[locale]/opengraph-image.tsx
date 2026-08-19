@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getPortfolio } from "@/lib/get-portfolio";
 import { isLocale } from "@/i18n/config";
 
-export const alt = "INDRA.DEV — Mahadi Indra Manurung";
+export const alt = "INDRA.DEV: Mahadi Indra Manurung";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
