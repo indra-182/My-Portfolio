@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { LuLanguages } from "react-icons/lu";
 import { getOtherLocale, type Locale } from "@/i18n/config";
 
@@ -18,14 +17,13 @@ export function LocaleSwitcher({
   const label = targetLocale === "id" ? "Bahasa Indonesia" : "English";
 
   return (
-    <Link
+    <a
       href={`/${targetLocale}${target}`}
-      prefetch={false}
       aria-label={`Switch language to ${label}`}
       className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
     >
       <LuLanguages aria-hidden="true" className="size-4" />
       <span>{targetLocale.toUpperCase()}</span>
-    </Link>
+    </a>
   );
 }

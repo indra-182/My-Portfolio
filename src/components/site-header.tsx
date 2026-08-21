@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation, type MobileNavigationItem } from "@/components/mobile-navigation";
@@ -24,23 +23,19 @@ export function SiteHeader({ locale, navItems }: SharedSiteProps & { navItems: S
         Skip to main content
       </a>
       <div className="content-shell flex min-h-18 items-center justify-between gap-6">
-        <Link
-          href={`/${locale}`}
-          prefetch={false}
-          className="shrink-0 font-mono text-sm font-bold tracking-[0.2em]"
-        >
+        <a href={`/${locale}`} className="shrink-0 font-mono text-sm font-bold tracking-[0.2em]">
           INDRA<span className="text-accent">.</span>DEV
-        </Link>
+        </a>
         <nav aria-label="Primary navigation" className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
               aria-current={item.active ? "page" : undefined}
               className={`border-b-2 py-6 text-sm transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] ${item.active ? "border-accent font-semibold" : "border-transparent text-muted-foreground"}`}
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
         <div className="flex items-center gap-1">

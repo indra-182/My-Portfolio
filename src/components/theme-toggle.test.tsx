@@ -1,20 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { expect, test, vi } from "vitest";
+import { expect, test } from "vitest";
 import { ThemeToggle } from "./theme-toggle";
 
-const setTheme = vi.fn();
-
-vi.mock("next-themes", () => ({
-  useTheme: () => ({ theme: "system", resolvedTheme: "light", setTheme }),
-}));
-
-test("renders an accessible icon and switches directly to dark mode", async () => {
+test("renders an accessible theme control without a React client boundary", () => {
   render(<ThemeToggle />);
-  const toggle = screen.getByRole("button", { name: /switch to dark mode/i });
-  expect(toggle.querySelector('svg[aria-hidden="true"]')).toBeInTheDocument();
-  expect(toggle).toHaveAttribute("title", "Switch to dark mode");
+  const toggle = screen.getByRole("button", { name: /toggle color theme/i });
+
+  expect(toggle).toHaveAttribute("title", "Toggle color theme");
+  expect(toggle).toHaveAttribute("data-theme-toggle");
+  expect(toggle.querySelectorAll('svg[aria-hidden="true"]')).toHaveLength(2);
   expect(toggle.className).toContain("hover:bg-muted");
-  await userEvent.click(toggle);
-  expect(setTheme).toHaveBeenCalledWith("dark");
 });

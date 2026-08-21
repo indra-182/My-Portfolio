@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element -- The pre-optimized 8 KiB portrait avoids hydrating next/image on this static route. */
 import { LuArrowDownToLine, LuArrowUpRight, LuMapPin } from "react-icons/lu";
 import type { PortfolioContent } from "@/content/portfolio-schema";
 
@@ -53,14 +53,14 @@ export function HeroSection({
           aria-hidden="true"
         />
         <div className="relative aspect-[1116/1409] overflow-hidden bg-surface">
-          <Image
+          <img
             src={profile.imageSrc}
             alt={profile.imageAlt}
-            fill
+            width={380}
+            height={480}
             loading="lazy"
-            sizes="22rem"
-            unoptimized
-            className="object-cover object-center grayscale-[15%]"
+            decoding="async"
+            className="h-full w-full object-cover object-center grayscale-[15%]"
           />
         </div>
       </div>

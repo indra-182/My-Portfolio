@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Error({
@@ -42,12 +41,12 @@ export default function Error({
         >
           {copy.retry}
         </button>
-        <Link
+        <a
           href={`${process.env.NEXT_PUBLIC_BLOG_URL ?? "https://blog-indra.vercel.app"}/${locale}`}
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.blog}
-        </Link>
+        </a>
       </div>
     </section>
   );
