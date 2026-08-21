@@ -2,9 +2,9 @@
 
 ## Outcome
 
-The deployed production route reached Performance 100 in three consecutive clean-browser mobile Lighthouse runs without a product change. The supplied report is retained by reference only: `/mnt/c/Users/mahad/Downloads/portfolio mobile test.json`.
+The deployed production route reached Performance 100 in three consecutive clean-browser mobile Lighthouse runs without a product change. The supplied report remains external and is not committed; it is retained by reference at `/mnt/c/Users/mahad/Downloads/portfolio mobile test.json`.
 
-The final evidence uses the same deployed target, `https://portfolio-indradev.vercel.app/id`, locale, Lighthouse version, mobile emulation, throttling, user agent, browser flags, and empty browser-profile condition for every run. It establishes that the supplied 99 was a transient measurement, not a demonstrated portfolio-code defect. No behavior or design was changed.
+The final evidence uses the same deployed target, `https://portfolio-indradev.vercel.app/id`, locale, Lighthouse version, mobile emulation, throttling, user agent, browser flags, and empty browser-profile condition for every run. It establishes a repeatable fast path in the worker's Linux environment, but the supplied report used a different Lighthouse version, operating system, screen emulation, and user agent. The supplied 99 may be environment-sensitive variance, not a demonstrated portfolio-code defect, but these runs do not establish its cause. No behavior or design was changed.
 
 ## Diagnosis
 
@@ -26,17 +26,19 @@ Values are milliseconds except CLS. All final artifacts are raw Lighthouse JSON 
 
 ### Hypotheses and disconfirming evidence
 
-1. **Hypothesis:** the portfolio's delayed interaction initialization caused the 83 ms document task. The smallest counterfactual removed `SiteInteractions` entirely. `counterfactual-no-interactions.json` had TBT 130 ms and still scored 99. This disproved the hypothesis.
+1. **Hypothesis:** the portfolio's delayed interaction initialization contributed to the supplied report's blocking time. A temporary clean build removed the `SiteInteractions` import and render entirely. `counterfactual-no-interactions.json` contains no 1,601-byte interaction script and recorded TBT 50 ms, LCP 2,141 ms, and Performance 99. The unchanged local runs recorded TBT 67-97 ms, LCP 2,152-2,163 ms, and Performance 98. This single counterfactual is consistent with lower blocking time, but it does not isolate causation or demonstrate a score improvement.
 2. **Hypothesis:** replacing individual listeners with event delegation would preserve behavior and remove the task. Temporary variants lowered TBT in some runs but raised LCP to approximately 2.15 seconds and never reached 100. They were reverted. The artifacts remain as an audit trail and are not final evidence.
 3. **Proven fast path:** the unchanged Vercel deployment produced three consecutive 100s. It uses the same route and Lighthouse configuration as the final evidence, so a code or asset change would not be justified.
 
-The demonstrated source of the supplied trace's remaining work is Next.js runtime output and trace-level timing variation, not a page-level client component. The repository history was inspected at `ab635b3` and its performance predecessors. The route already has no page-level React client boundary in the initial render.
+The available evidence does not isolate the source of the supplied trace's additional blocking time. The repository history was inspected at `ab635b3` and its performance predecessors. The route already has no page-level React client boundary in the initial render.
 
 ### Local production comparison
 
 `unchanged-1.json` through `unchanged-3.json` are clean builds of the unmodified source served by `pnpm start` at `http://127.0.0.1:3000/id`. They scored 98, 98, and 98, with LCP approximately 2.15 seconds and TBT 67-97 ms. Their audit attribution identified the same Next.js chunks, while document latency was 10 ms and the LCP element was the hero `h1`. Local HTTP/1.1 and the Linux-headless benchmark are not a comparable substitute for the deployed Vercel HTTP/2 route, so these runs are diagnostic only and were not counted as final evidence.
 
 The earlier `local-baseline.json`, `final-*.json`, and `candidate-*.json` artifacts are retained because each is a distinct Lighthouse result. `final-*` and `candidate-*` exercised a reverted temporary interaction variant, so they are excluded from the unchanged comparison and final streak.
+
+The counterfactual used the same local production mode and mobile Lighthouse configuration as the unchanged runs, but an isolated `http://127.0.0.1:3100/id` server and fresh browser profile. It was built after temporarily removing `SiteInteractions`, then the product source was restored. The report is diagnostic only and is not part of the final streak.
 
 ## Repeatable final configuration
 
