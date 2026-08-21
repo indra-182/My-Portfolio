@@ -5,4 +5,3 @@ build
 coverage
 test-results
 public/documents
-docs/evidence/lighthouse/**/*.json
