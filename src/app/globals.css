@@ -1,7 +1,5 @@
 @import "../styles/design-tokens.css";
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,6 +44,18 @@
 
   a {
     @apply underline-offset-4;
+  }
+
+  [data-theme-icon="dark"] {
+    display: none;
+  }
+
+  .dark [data-theme-icon="light"] {
+    display: none;
+  }
+
+  .dark [data-theme-icon="dark"] {
+    display: block;
   }
 
   ::selection {

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuFileText, LuMail } from "react-icons/lu";
 import type { SharedSiteProps } from "./site-header";
@@ -16,22 +15,22 @@ export function SiteFooter({
       <div className="content-shell py-10">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
-            <Link href={`/${locale}`} className="font-mono text-sm font-bold tracking-[0.2em]">
+            <a href={`/${locale}`} className="font-mono text-sm font-bold tracking-[0.2em]">
               INDRA.DEV
-            </Link>
+            </a>
             <p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">
               Senior Frontend Engineer building clear, dependable product experiences.
             </p>
           </div>
           <nav aria-label="Footer navigation" className="flex items-center gap-6">
-            <Link
+            <a
               className="transition-colors hover:text-accent"
               href={blogUrl}
               aria-label="Blog"
               title="Blog"
             >
               <LuFileText className="size-5" aria-hidden="true" />
-            </Link>
+            </a>
             <a
               className="transition-colors hover:text-accent"
               href="https://github.com/indra-182"

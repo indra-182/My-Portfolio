@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale } from "@/i18n/config";
 
@@ -16,12 +15,12 @@ export default async function NotFound({ params }: { params?: Promise<{ locale?:
       <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
         {dictionary.errors.notFoundDescription}
       </p>
-      <Link
+      <a
         href={`/${locale}`}
         className="mt-8 inline-flex min-h-11 w-fit items-center rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
       >
         {dictionary.actions.backHome}
-      </Link>
+      </a>
     </section>
   );
 }

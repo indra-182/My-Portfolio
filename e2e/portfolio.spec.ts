@@ -20,11 +20,11 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   );
 
   await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.getByRole("button", { name: /switch to light mode/i }).click();
+  await page.getByRole("button", { name: /toggle color theme/i }).click();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
   await page.reload();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
-  await page.getByRole("button", { name: /switch to dark mode/i }).click();
+  await page.getByRole("button", { name: /toggle color theme/i }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
 
   await page
@@ -40,7 +40,7 @@ test("defaults to dark theme on first visit", async ({ browser }) => {
   const page = await context.newPage();
   await page.goto("/id");
   await expect(page.locator("html")).toHaveClass(/dark/);
-  await expect(page.getByRole("button", { name: /switch to light mode/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /toggle color theme/i })).toBeVisible();
   await context.close();
 });
 

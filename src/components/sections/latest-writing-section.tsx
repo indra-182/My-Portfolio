@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { LuArrowUpRight } from "react-icons/lu";
 import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
@@ -43,12 +42,12 @@ export function LatestWritingSection({
             </h2>
           </div>
           {result.status === "ready" ? (
-            <Link
+            <a
               href={blogUrl}
               className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />
-            </Link>
+            </a>
           ) : null}
         </div>
 
@@ -79,12 +78,12 @@ export function LatestWritingSection({
                     visiblePosts.length === 1 ? "text-2xl sm:text-3xl" : "text-xl"
                   }`}
                 >
-                  <Link
+                  <a
                     href={`${blogUrl}/blog/${post.slug}`}
                     className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
                   >
                     {post.title}
-                  </Link>
+                  </a>
                 </h3>
                 <p className="relative mt-3 text-sm leading-6 text-muted-foreground">
                   {post.description}
@@ -133,12 +132,12 @@ export function LatestWritingSection({
             <p className="max-w-xl text-lg leading-8 text-muted-foreground">
               Latest writing is available on the technical blog.
             </p>
-            <Link
+            <a
               href={blogUrl}
               className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />
-            </Link>
+            </a>
           </div>
         )}
       </div>
