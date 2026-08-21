@@ -5,3 +5,5 @@ build
 coverage
 test-results
 public/documents
+CLAUDE.md
+docs/evidence/lighthouse/**/*.json
