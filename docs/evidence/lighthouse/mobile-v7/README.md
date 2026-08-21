@@ -20,7 +20,7 @@ The final evidence uses the same deployed target, `https://portfolio-indradev.ve
 Values are milliseconds except CLS. All final artifacts are raw Lighthouse JSON reports.
 
 - **Visible symptom:** the supplied report scored 99. FCP, LCP, CLS, and Speed Index were already perfect or near-perfect. TBT, at 132 ms, was the limiting scored metric.
-- **Initiating trigger in that trace:** the supplied report records three long tasks, including an 85 ms task in a Next.js chunk and an 83 ms document task. Its `unused-javascript` audit attributes 23 KiB to a Next.js runtime chunk, and `legacy-javascript-insight` attributes 14 KiB to that same chunk.
+- **Initiating trigger:** Lighthouse navigated to the deployed `/id` route under simulated mobile throttling. The supplied trace records three long tasks after that navigation, including an 85 ms task in a Next.js chunk and an 83 ms document task. Its `unused-javascript` audit attributes 23 KiB to a Next.js runtime chunk, and `legacy-javascript-insight` attributes 14 KiB to that same chunk.
 - **Masking and environmental conditions:** the supplied run used Chrome on Windows with a benchmark index of 3,973. The clean final runs used headless Chrome on Linux and benchmark indices of 3,250, 3,229, and 3,311. Lighthouse simulated timing and framework-runtime task scheduling varied even with a clean browser profile. The final runs are against the same Vercel document and have fast server responses.
 - **Audits that changed:** final TBT is 57-67 ms rather than 132 ms, and LCP is 1,106-1,213 ms rather than 1,373 ms. `unused-javascript` and `legacy-javascript-insight` remain, with 55 KiB and 14 KiB estimated savings respectively. They are advisory audits and did not prevent the three 100 scores.
 
@@ -53,7 +53,7 @@ The counterfactual used the same local production mode and mobile Lighthouse con
 - User agent: Android 11 moto g power (2022), Chrome 151
 - Throttling: Lighthouse simulated mobile throttling (`--throttling-method=simulate`)
 
-For each run, use a distinct port and browser profile:
+For each run, use a distinct port and browser profile. Start Chrome in one terminal, then run Lighthouse in another:
 
 ```sh
 /opt/google/chrome/chrome --headless=new --disable-gpu --no-sandbox \
