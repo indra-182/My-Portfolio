@@ -17,6 +17,7 @@ const feed = {
 };
 
 afterEach(() => {
+  vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
 
@@ -30,6 +31,7 @@ describe("getLatestPosts", () => {
     expect(result).toEqual({ status: "ready", posts: feed.posts });
     expect(fetchMock).toHaveBeenCalledWith("https://blog.example/api/posts/latest?limit=3", {
       next: { revalidate: 3600 },
+      signal: expect.any(AbortSignal),
     });
   });
 
@@ -48,5 +50,24 @@ describe("getLatestPosts", () => {
     await expect(getLatestPosts("id", "https://blog.example")).resolves.toEqual({
       status: "unavailable",
     });
+  });
+
+  test("returns the unavailable fallback when the blog API exceeds its deadline", async () => {
+    const controller = new AbortController();
+    const timeoutSpy = vi.spyOn(AbortSignal, "timeout").mockReturnValue(controller.signal);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockImplementation((_url: string, init: RequestInit) => {
+        return new Promise((_resolve, reject) => {
+          init.signal?.addEventListener("abort", () => reject(init.signal?.reason), { once: true });
+        });
+      }),
+    );
+
+    const result = getLatestPosts("id", "https://blog.example");
+    controller.abort();
+
+    await expect(result).resolves.toEqual({ status: "unavailable" });
+    expect(timeoutSpy).toHaveBeenCalledWith(2000);
   });
 });

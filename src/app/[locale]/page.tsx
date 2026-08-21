@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { AboutSection } from "@/components/sections/about-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
@@ -11,19 +10,6 @@ import { getLatestPosts } from "@/lib/latest-posts";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
-import type { LatestFeedResult } from "@/types/latest-post";
-
-async function LatestWritingContent({
-  locale,
-  result,
-  blogUrl,
-}: {
-  locale: Locale;
-  result: Promise<LatestFeedResult>;
-  blogUrl: string;
-}) {
-  return <LatestWritingSection locale={locale} result={await result} blogUrl={blogUrl} />;
-}
 
 export async function generateMetadata({
   params,
@@ -46,7 +32,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const locale: Locale = value;
   const portfolio = getPortfolio(locale);
   const dictionary = await getDictionary(locale);
-  const latestWriting = getLatestPosts(locale, siteConfig.blogUrl);
+  const latestWriting = await getLatestPosts(locale, siteConfig.blogUrl);
 
   const personJsonLd = {
     "@context": "https://schema.org",
@@ -79,17 +65,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         periodLabel={dictionary.portfolio.period}
       />
       <TestimonialsSection testimonials={portfolio.testimonials} />
-      <Suspense
-        fallback={
-          <LatestWritingSection
-            locale={locale}
-            result={{ status: "unavailable" }}
-            blogUrl={siteConfig.blogUrl}
-          />
-        }
-      >
-        <LatestWritingContent locale={locale} result={latestWriting} blogUrl={siteConfig.blogUrl} />
-      </Suspense>
+      <LatestWritingSection locale={locale} result={latestWriting} blogUrl={siteConfig.blogUrl} />
     </>
   );
 }

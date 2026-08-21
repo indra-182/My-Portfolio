@@ -19,6 +19,7 @@ const latestPostFeedSchema = z.object({
 
 const latestPostsLimit = 3;
 const latestPostsRevalidateSeconds = 3600;
+const latestPostsTimeoutMs = 2000;
 
 export async function getLatestPosts(locale: Locale, blogUrl: string): Promise<LatestFeedResult> {
   const endpoint = new URL("/api/posts/latest", `${blogUrl}/`);
@@ -27,6 +28,7 @@ export async function getLatestPosts(locale: Locale, blogUrl: string): Promise<L
   try {
     const response = await fetch(endpoint.toString(), {
       next: { revalidate: latestPostsRevalidateSeconds },
+      signal: AbortSignal.timeout(latestPostsTimeoutMs),
     });
     if (!response.ok) return { status: "unavailable" };
 
