@@ -3,43 +3,72 @@
     "about": "About",
     "experience": "Experience",
     "writing": "Writing",
+    "primaryLabel": "Primary navigation",
     "portfolio": "Portfolio",
-    "blog": "Blog",
     "downloadCv": "Download CV"
   },
+  "actions": {
+    "backHome": "Back home",
+    "skipToContent": "Skip to main content",
+    "switchLanguage": "Switch language to {language}",
+    "languageNames": {
+      "id": "Indonesian",
+      "en": "English"
+    }
+  },
   "theme": {
-    "label": "Choose theme",
-    "light": "Light",
-    "dark": "Dark"
+    "label": "Toggle color theme"
+  },
+  "mobileNavigation": {
+    "description": "Portfolio navigation",
+    "navLabel": "Mobile navigation",
+    "open": "Open menu",
+    "close": "Close menu"
   },
   "portfolio": {
     "heroEyebrow": "Senior Frontend Engineer · Indonesia",
     "aboutEyebrow": "How I work",
     "experienceEyebrow": "Selected experience",
-    "writingEyebrow": "Technical notes",
-    "visitBlog": "Visit blog",
-    "unavailableWriting": "Latest writing is available on the technical blog.",
-    "viewProject": "View project details",
-    "location": "Bogor, Indonesia",
+    "experienceHeading": "Ownership across complex workflows.",
+    "experienceDescription": "Projects are grouped by engagement so technology stays connected to the work it enabled.",
+    "problemLabel": "Problem",
+    "ownershipLabel": "Ownership",
+    "deliveryLabel": "Delivery",
+    "outcomeLabel": "Outcome",
     "technologies": "Technologies",
     "role": "Role",
     "period": "Period"
   },
+  "writing": {
+    "eyebrow": "Latest writing",
+    "heading": "Technical notes for real product work.",
+    "visitBlog": "Visit blog",
+    "unavailable": "Latest writing is available on the technical blog.",
+    "asideEyebrow": "Writing in public",
+    "asideHeading": "Notes from the build loop.",
+    "asideDescription": "Short notes on frontend systems, product workflows, and shipping with confidence.",
+    "readingTime": "{minutes} min read"
+  },
+  "testimonials": {
+    "heading": "What collaborators say"
+  },
   "footer": {
+    "navigationLabel": "Footer navigation",
+    "description": "Senior Frontend Engineer building clear, dependable product experiences.",
+    "blog": "Blog",
+    "github": "Github",
     "linkedin": "LinkedIn",
     "email": "Email",
-    "language": "Language",
+    "location": "Bogor/Indonesia",
     "rights": "All rights reserved."
   },
   "errors": {
     "notFoundTitle": "Page not found",
     "notFoundDescription": "The page you are looking for is unavailable or has moved.",
-    "retry": "Try again"
-  },
-  "actions": {
-    "backHome": "Back home",
-    "skipToContent": "Skip to main content",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "retry": "Try again",
+    "eyebrow": "Error",
+    "title": "Something went wrong",
+    "description": "The portfolio could not be loaded. You can retry or continue to the technical blog.",
+    "blog": "Open blog"
   }
 }

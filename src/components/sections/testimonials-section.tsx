@@ -1,6 +1,12 @@
 import type { Testimonial } from "@/content/portfolio-schema";
 
-export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+export function TestimonialsSection({
+  testimonials,
+  heading,
+}: {
+  testimonials: Testimonial[];
+  heading: string;
+}) {
   if (testimonials.length === 0) return null;
 
   return (
@@ -9,7 +15,7 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
       aria-labelledby="testimonials-title"
     >
       <h2 id="testimonials-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-        What collaborators say
+        {heading}
       </h2>
       <div className="mt-10 grid gap-px border border-border bg-border md:grid-cols-2">
         {testimonials.map((testimonial) => (

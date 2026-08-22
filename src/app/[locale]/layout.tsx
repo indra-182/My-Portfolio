@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getDictionary } from "@/i18n/dictionaries";
-import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
-import { siteConfig } from "@/lib/site-config";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SiteInteractions } from "@/components/site-interactions";
+import { getDictionary } from "@/i18n/dictionaries";
+import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
+import { getPortfolio } from "@/lib/get-portfolio";
+import { siteConfig } from "@/lib/site-config";
+import "../globals.css";
 
 type LocaleParams = { locale: string };
 
@@ -20,11 +23,9 @@ export async function generateMetadata({
   const { locale: value } = await params;
   const locale: Locale = isLocale(value) ? value : defaultLocale;
   const dictionary = await getDictionary(locale);
-  const title = "INDRA.DEV: Mahadi Indra Manurung";
-  const description =
-    locale === "id"
-      ? "Portfolio Mahadi Indra Manurung, Senior Frontend Engineer dari Indonesia."
-      : "The portfolio of Mahadi Indra Manurung, a Senior Frontend Engineer from Indonesia.";
+  const portfolio = getPortfolio(locale);
+  const title = `${portfolio.profile.role}: ${portfolio.profile.name}`;
+  const description = portfolio.profile.valueProposition;
 
   return {
     metadataBase: new URL(siteConfig.portfolioUrl),
@@ -65,25 +66,49 @@ export default async function LocaleLayout({
   ];
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader
-        locale={locale}
-        portfolioUrl={siteConfig.portfolioUrl}
-        blogUrl={siteConfig.blogUrl}
-        email={siteConfig.email}
-        linkedinUrl={siteConfig.linkedinUrl}
-        navItems={navItems}
-      />
-      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
-        {children}
-      </main>
-      <SiteFooter
-        locale={locale}
-        portfolioUrl={siteConfig.portfolioUrl}
-        blogUrl={siteConfig.blogUrl}
-        email={siteConfig.email}
-        linkedinUrl={siteConfig.linkedinUrl}
-      />
-    </div>
+    <html lang={locale} className="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <SiteInteractions />
+      </head>
+      <body className="min-h-screen">
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader
+            locale={locale}
+            navItems={navItems}
+            labels={{
+              skipToContent: dictionary.actions.skipToContent,
+              primaryNav: dictionary.navigation.primaryLabel,
+              themeToggle: dictionary.theme.label,
+              switchLanguage: dictionary.actions.switchLanguage,
+              languageNames: dictionary.actions.languageNames,
+              mobileNavDescription: dictionary.mobileNavigation.description,
+              mobileNavLabel: dictionary.mobileNavigation.navLabel,
+              openMenu: dictionary.mobileNavigation.open,
+              closeMenu: dictionary.mobileNavigation.close,
+            }}
+          />
+          <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+            {children}
+          </main>
+          <SiteFooter
+            locale={locale}
+            blogUrl={siteConfig.blogUrl}
+            githubUrl={siteConfig.githubUrl}
+            email={siteConfig.email}
+            linkedinUrl={siteConfig.linkedinUrl}
+            labels={{
+              navigationLabel: dictionary.footer.navigationLabel,
+              description: dictionary.footer.description,
+              blog: dictionary.footer.blog,
+              github: dictionary.footer.github,
+              linkedin: dictionary.footer.linkedin,
+              email: dictionary.footer.email,
+              location: dictionary.footer.location,
+              rights: dictionary.footer.rights,
+            }}
+          />
+        </div>
+      </body>
+    </html>
   );
 }

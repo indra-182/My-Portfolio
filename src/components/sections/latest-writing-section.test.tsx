@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
+import { getDictionary } from "@/i18n/dictionaries";
 import { LatestWritingSection } from "./latest-writing-section";
 
 const posts = [
@@ -41,12 +42,14 @@ const onePost = posts.slice(0, 1);
 const twoPosts = posts.slice(0, 2);
 
 describe("LatestWritingSection", () => {
-  test("renders at most three article links when the feed is ready", () => {
+  test("renders at most three article links when the feed is ready", async () => {
+    const dictionary = await getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
         blogUrl="https://blog.example"
         result={{ status: "ready", posts }}
+        copy={dictionary.writing}
       />,
     );
 
@@ -55,37 +58,42 @@ describe("LatestWritingSection", () => {
       "href",
       "https://blog.example/blog/resilient-client-state",
     );
-    expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: dictionary.writing.visitBlog })).toHaveAttribute(
       "href",
       "https://blog.example",
     );
+    expect(screen.getByText("6 menit baca")).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getAllByRole("article")[0]).toHaveClass("relative");
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
   });
 
-  test("uses a featured layout and editorial aside for one post", () => {
+  test("uses a featured layout and editorial aside for one post", async () => {
+    const dictionary = await getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
         blogUrl="https://blog.example"
         result={{ status: "ready", posts: onePost }}
+        copy={dictionary.writing}
       />,
     );
 
     expect(container.querySelector('[data-layout="featured"]')).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(1);
     expect(
-      screen.getByRole("complementary", { name: /notes from the build loop/i }),
+      screen.getByRole("complementary", { name: dictionary.writing.asideHeading }),
     ).toBeInTheDocument();
   });
 
-  test("uses an even layout for two posts without an editorial aside", () => {
+  test("uses an even layout for two posts without an editorial aside", async () => {
+    const dictionary = await getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
         blogUrl="https://blog.example"
         result={{ status: "ready", posts: twoPosts }}
+        copy={dictionary.writing}
       />,
     );
 
@@ -94,12 +102,14 @@ describe("LatestWritingSection", () => {
     expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });
 
-  test("renders a direct blog link instead of an empty grid when unavailable", () => {
+  test("renders a direct blog link instead of an empty grid when unavailable", async () => {
+    const dictionary = await getDictionary("en");
     render(
       <LatestWritingSection
         locale="en"
         blogUrl="https://blog.example"
         result={{ status: "unavailable" }}
+        copy={dictionary.writing}
       />,
     );
 
@@ -107,6 +117,7 @@ describe("LatestWritingSection", () => {
       "href",
       "https://blog.example",
     );
+    expect(screen.getByText(dictionary.writing.unavailable)).toBeInTheDocument();
     expect(screen.queryAllByRole("article")).toHaveLength(0);
   });
 });

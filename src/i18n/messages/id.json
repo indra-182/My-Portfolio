@@ -3,43 +3,72 @@
     "about": "Tentang",
     "experience": "Pengalaman",
     "writing": "Tulisan",
+    "primaryLabel": "Navigasi utama",
     "portfolio": "Portfolio",
-    "blog": "Blog",
     "downloadCv": "Unduh CV"
   },
+  "actions": {
+    "backHome": "Kembali ke beranda",
+    "skipToContent": "Lewati ke konten utama",
+    "switchLanguage": "Ganti bahasa ke {language}",
+    "languageNames": {
+      "id": "Bahasa Indonesia",
+      "en": "English"
+    }
+  },
   "theme": {
-    "label": "Pilih tema",
-    "light": "Terang",
-    "dark": "Gelap"
+    "label": "Ganti tema warna"
+  },
+  "mobileNavigation": {
+    "description": "Navigasi portfolio",
+    "navLabel": "Navigasi seluler",
+    "open": "Buka menu",
+    "close": "Tutup menu"
   },
   "portfolio": {
     "heroEyebrow": "Senior Frontend Engineer · Indonesia",
     "aboutEyebrow": "Cara saya bekerja",
     "experienceEyebrow": "Pengalaman terpilih",
-    "writingEyebrow": "Catatan teknis",
-    "visitBlog": "Kunjungi blog",
-    "unavailableWriting": "Tulisan terbaru tersedia di blog teknis.",
-    "viewProject": "Lihat detail proyek",
-    "location": "Bogor, Indonesia",
+    "experienceHeading": "Kepemilikan penuh atas alur kerja yang kompleks.",
+    "experienceDescription": "Proyek dikelompokkan per keterlibatan agar teknologi tetap terhubung dengan pekerjaan yang didukungnya.",
+    "problemLabel": "Masalah",
+    "ownershipLabel": "Kepemilikan",
+    "deliveryLabel": "Pelaksanaan",
+    "outcomeLabel": "Hasil",
     "technologies": "Teknologi",
     "role": "Peran",
     "period": "Periode"
   },
+  "writing": {
+    "eyebrow": "Tulisan terbaru",
+    "heading": "Catatan teknis untuk pekerjaan produk nyata.",
+    "visitBlog": "Kunjungi blog",
+    "unavailable": "Tulisan terbaru tersedia di blog teknis.",
+    "asideEyebrow": "Menulis secara terbuka",
+    "asideHeading": "Catatan dari proses membangun.",
+    "asideDescription": "Catatan singkat tentang sistem frontend, alur kerja produk, dan perilisan dengan percaya diri.",
+    "readingTime": "{minutes} menit baca"
+  },
+  "testimonials": {
+    "heading": "Apa kata kolaborator"
+  },
   "footer": {
+    "navigationLabel": "Navigasi footer",
+    "description": "Senior Frontend Engineer yang membangun pengalaman produk yang jelas dan andal.",
+    "blog": "Blog",
+    "github": "Github",
     "linkedin": "LinkedIn",
     "email": "Email",
-    "language": "Bahasa",
+    "location": "Bogor/Indonesia",
     "rights": "Hak cipta dilindungi."
   },
   "errors": {
     "notFoundTitle": "Halaman tidak ditemukan",
     "notFoundDescription": "Halaman yang Anda cari tidak tersedia atau sudah dipindahkan.",
-    "retry": "Coba lagi"
-  },
-  "actions": {
-    "backHome": "Kembali ke beranda",
-    "skipToContent": "Lewati ke konten utama",
-    "openMenu": "Buka menu",
-    "closeMenu": "Tutup menu"
+    "retry": "Coba lagi",
+    "eyebrow": "Kesalahan",
+    "title": "Terjadi kesalahan",
+    "description": "Portfolio tidak dapat dimuat. Anda dapat mencoba lagi atau melanjutkan ke blog teknis.",
+    "blog": "Buka blog"
   }
 }

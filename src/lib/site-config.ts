@@ -7,6 +7,7 @@ const siteConfigSchema = z.object({
   blogUrl: z.string().url().transform(noTrailingSlash),
   email: z.string().email(),
   linkedinUrl: z.string().url().transform(noTrailingSlash),
+  githubUrl: z.string().url().transform(noTrailingSlash),
   cvHref: z.string().startsWith("/"),
 });
 
@@ -16,6 +17,7 @@ export const siteConfig = siteConfigSchema.parse({
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "mahadiindra2@gmail.com",
   linkedinUrl:
     process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/in/mahadiindra182/",
+  githubUrl: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/indra-182",
   cvHref: "/documents/mahadi-indra-cv.pdf",
 });
 

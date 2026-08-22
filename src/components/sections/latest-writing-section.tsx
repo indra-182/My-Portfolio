@@ -2,6 +2,17 @@ import { LuArrowUpRight } from "react-icons/lu";
 import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
 
+export type LatestWritingCopy = {
+  eyebrow: string;
+  heading: string;
+  visitBlog: string;
+  unavailable: string;
+  asideEyebrow: string;
+  asideHeading: string;
+  asideDescription: string;
+  readingTime: string;
+};
+
 function formatDate(value: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-US", {
     dateStyle: "medium",
@@ -13,10 +24,12 @@ export function LatestWritingSection({
   locale,
   result,
   blogUrl,
+  copy,
 }: {
   locale: Locale;
   result: LatestFeedResult;
   blogUrl: string;
+  copy: LatestWritingCopy;
 }) {
   const visiblePosts = result.status === "ready" ? result.posts.slice(0, 3) : [];
   const layout =
@@ -32,13 +45,13 @@ export function LatestWritingSection({
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Latest writing
+              {copy.eyebrow}
             </p>
             <h2
               id="writing-title"
               className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl"
             >
-              Technical notes for real product work.
+              {copy.heading}
             </h2>
           </div>
           {result.status === "ready" ? (
@@ -46,7 +59,7 @@ export function LatestWritingSection({
               href={blogUrl}
               className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
-              Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />
+              {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           ) : null}
         </div>
@@ -90,7 +103,7 @@ export function LatestWritingSection({
                 </p>
                 <div className="relative mt-auto flex items-end justify-between gap-4 pt-6">
                   <p className="font-mono text-xs text-muted-foreground">
-                    {post.readingTimeMinutes} min read
+                    {copy.readingTime.replace("{minutes}", String(post.readingTimeMinutes))}
                   </p>
                   <LuArrowUpRight
                     aria-hidden="true"
@@ -106,17 +119,17 @@ export function LatestWritingSection({
               >
                 <div className="relative z-10">
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-                    Writing in public
+                    {copy.asideEyebrow}
                   </p>
                   <h3
                     id="writing-aside-title"
                     className="mt-4 max-w-[12ch] text-2xl font-semibold tracking-tight"
                   >
-                    Notes from the build loop.
+                    {copy.asideHeading}
                   </h3>
                 </div>
                 <p className="relative z-10 max-w-sm text-sm leading-6 text-muted-foreground">
-                  Short notes on frontend systems, product workflows, and shipping with confidence.
+                  {copy.asideDescription}
                 </p>
                 <span
                   aria-hidden="true"
@@ -129,14 +142,12 @@ export function LatestWritingSection({
           </div>
         ) : (
           <div className="mt-10 border border-border bg-surface p-7 sm:p-10">
-            <p className="max-w-xl text-lg leading-8 text-muted-foreground">
-              Latest writing is available on the technical blog.
-            </p>
+            <p className="max-w-xl text-lg leading-8 text-muted-foreground">{copy.unavailable}</p>
             <a
               href={blogUrl}
               className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
-              Visit blog <LuArrowUpRight aria-hidden="true" className="size-4" />
+              {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
         )}

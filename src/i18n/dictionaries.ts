@@ -1,43 +1,18 @@
 import type { Locale } from "./config";
+import enJson from "./messages/en.json";
+import idJson from "./messages/id.json";
 
-export type Dictionary = {
-  navigation: {
-    about: string;
-    experience: string;
-    writing: string;
-    portfolio: string;
-    blog: string;
-    downloadCv: string;
-  };
-  theme: { label: string; light: string; dark: string };
-  portfolio: {
-    heroEyebrow: string;
-    aboutEyebrow: string;
-    experienceEyebrow: string;
-    writingEyebrow: string;
-    visitBlog: string;
-    unavailableWriting: string;
-    viewProject: string;
-    location: string;
-    technologies: string;
-    role: string;
-    period: string;
-  };
-  footer: {
-    linkedin: string;
-    email: string;
-    language: string;
-    rights: string;
-  };
-  errors: { notFoundTitle: string; notFoundDescription: string; retry: string };
-  actions: { backHome: string; skipToContent: string; openMenu: string; closeMenu: string };
-};
+type Widen<T> = T extends string ? string : { [K in keyof T]: Widen<T[K]> };
 
-const loaders: Record<Locale, () => Promise<{ default: Dictionary }>> = {
-  id: () => import("./messages/id.json"),
-  en: () => import("./messages/en.json"),
-};
+/**
+ * Derived from the English messages. The `dictionaries` assignment below
+ * typechecks Indonesian key parity against this shape at compile time.
+ */
+export type Dictionary = Widen<typeof enJson>;
 
-export async function getDictionary(locale: Locale): Promise<Dictionary> {
-  return (await loaders[locale]()).default;
+const dictionaries: Record<Locale, Dictionary> = { id: idJson, en: enJson };
+
+/** Synchronous access; both catalogs are small static JSON modules. */
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale];
 }

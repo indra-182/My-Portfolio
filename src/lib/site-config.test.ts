@@ -7,6 +7,7 @@ describe("site configuration", () => {
     expect(siteConfig.blogUrl).toBe("https://blog-indra.vercel.app");
     expect(siteConfig.email).toBe("mahadiindra2@gmail.com");
     expect(siteConfig.linkedinUrl).toBe("https://www.linkedin.com/in/mahadiindra182");
+    expect(siteConfig.githubUrl).toBe("https://github.com/indra-182");
     expect(siteConfig.cvHref).toBe("/documents/mahadi-indra-cv.pdf");
   });
 

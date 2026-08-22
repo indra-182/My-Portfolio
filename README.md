@@ -34,6 +34,6 @@ The site supports Indonesian and English routes, plus Light and Dark theme choic
 
 ## Environment
 
-Use `.env.example` as the public configuration contract. Replace the local origins and placeholder email before production. No credentials belong in this repository.
+Use `.env.example` as the public configuration contract. It covers `NEXT_PUBLIC_PORTFOLIO_URL`, `NEXT_PUBLIC_BLOG_URL`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_LINKEDIN_URL`, and `NEXT_PUBLIC_GITHUB_URL`; each has a safe default in `src/lib/site-config.ts` when unset. Replace the values as needed before production. No credentials belong in this repository.
 
 External GitHub, Vercel, domain, and deployment actions require separate explicit approval.

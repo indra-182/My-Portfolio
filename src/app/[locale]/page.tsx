@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { AboutSection } from "@/components/sections/about-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -8,23 +6,9 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { getPortfolio } from "@/lib/get-portfolio";
 import { getLatestPosts } from "@/lib/latest-posts";
 import { getDictionary } from "@/i18n/dictionaries";
+import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/i18n/config";
 import { siteConfig } from "@/lib/site-config";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale: value } = await params;
-  if (!isLocale(value)) return {};
-  const portfolio = getPortfolio(value);
-
-  return {
-    title: `${portfolio.profile.role}: ${portfolio.profile.name}`,
-    description: portfolio.profile.valueProposition,
-  };
-}
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;
@@ -52,6 +36,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       />
       <HeroSection
         profile={portfolio.profile}
+        eyebrow={dictionary.portfolio.heroEyebrow}
         downloadLabel={dictionary.navigation.downloadCv}
         cvHref={siteConfig.cvHref}
         writingLabel={dictionary.navigation.writing}
@@ -60,12 +45,28 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       <ExperienceSection
         experiences={portfolio.experiences}
         eyebrow={dictionary.portfolio.experienceEyebrow}
+        heading={dictionary.portfolio.experienceHeading}
+        description={dictionary.portfolio.experienceDescription}
+        projectLabels={{
+          problem: dictionary.portfolio.problemLabel,
+          ownership: dictionary.portfolio.ownershipLabel,
+          delivery: dictionary.portfolio.deliveryLabel,
+          outcome: dictionary.portfolio.outcomeLabel,
+        }}
         technologiesLabel={dictionary.portfolio.technologies}
         roleLabel={dictionary.portfolio.role}
         periodLabel={dictionary.portfolio.period}
       />
-      <TestimonialsSection testimonials={portfolio.testimonials} />
-      <LatestWritingSection locale={locale} result={latestWriting} blogUrl={siteConfig.blogUrl} />
+      <TestimonialsSection
+        testimonials={portfolio.testimonials}
+        heading={dictionary.testimonials.heading}
+      />
+      <LatestWritingSection
+        locale={locale}
+        result={latestWriting}
+        blogUrl={siteConfig.blogUrl}
+        copy={dictionary.writing}
+      />
     </>
   );
 }
