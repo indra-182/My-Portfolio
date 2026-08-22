@@ -1,6 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { getDictionary } from "@/i18n/dictionaries";
+import { isLocale } from "@/i18n/config";
+import { siteConfig } from "@/lib/site-config";
 
 export default function Error({
   reset,
@@ -8,27 +11,15 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const locale = usePathname().split("/")[1] === "en" ? "en" : "id";
-  const copy =
-    locale === "en"
-      ? {
-          title: "Something went wrong",
-          description:
-            "The portfolio could not be loaded. You can retry or continue to the technical blog.",
-          retry: "Try again",
-          blog: "Open blog",
-        }
-      : {
-          title: "Terjadi kesalahan",
-          description:
-            "Portfolio tidak dapat dimuat. Anda dapat mencoba lagi atau melanjutkan ke blog teknis.",
-          retry: "Coba lagi",
-          blog: "Buka blog",
-        };
+  const segment = usePathname().split("/")[1];
+  const locale = isLocale(segment) ? segment : "id";
+  const copy = getDictionary(locale).errors;
 
   return (
     <section className="content-shell flex min-h-[50vh] flex-col justify-center py-20">
-      <p className="font-mono text-sm uppercase tracking-[0.18em] text-destructive">Error</p>
+      <p className="font-mono text-sm uppercase tracking-[0.18em] text-destructive">
+        {copy.eyebrow}
+      </p>
       <h1 className="mt-5 max-w-xl text-4xl font-semibold tracking-tight sm:text-6xl">
         {copy.title}
       </h1>
@@ -42,7 +33,7 @@ export default function Error({
           {copy.retry}
         </button>
         <a
-          href={`${process.env.NEXT_PUBLIC_BLOG_URL ?? "https://blog-indra.vercel.app"}/${locale}`}
+          href={`${siteConfig.blogUrl}/${locale}`}
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.blog}

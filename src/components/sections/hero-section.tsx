@@ -4,11 +4,13 @@ import type { PortfolioContent } from "@/content/portfolio-schema";
 
 export function HeroSection({
   profile,
+  eyebrow,
   downloadLabel,
   cvHref,
   writingLabel,
 }: {
   profile: PortfolioContent["profile"];
+  eyebrow: string;
   downloadLabel: string;
   cvHref: string;
   writingLabel: string;
@@ -16,9 +18,7 @@ export function HeroSection({
   return (
     <section className="content-shell grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20 lg:py-36">
       <div className="animate-editorial-enter">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-          {profile.role} · Indonesia
-        </p>
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{eyebrow}</p>
         <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] sm:text-7xl lg:text-[clamp(4.5rem,7vw,7rem)]">
           {profile.headline}
         </h1>

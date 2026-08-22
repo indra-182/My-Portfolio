@@ -1,13 +1,33 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuFileText, LuMail } from "react-icons/lu";
-import type { SharedSiteProps } from "./site-header";
+import type { Locale } from "@/i18n/config";
+
+export type SiteFooterLabels = {
+  navigationLabel: string;
+  description: string;
+  blog: string;
+  github: string;
+  linkedin: string;
+  email: string;
+  location: string;
+  rights: string;
+};
 
 export function SiteFooter({
   locale,
   blogUrl,
-  email = "mahadiindra2@gmail.com",
-  linkedinUrl = "https://www.linkedin.com/in/mahadiindra182/",
-}: SharedSiteProps) {
+  githubUrl,
+  email,
+  linkedinUrl,
+  labels,
+}: {
+  locale: Locale;
+  blogUrl: string;
+  githubUrl: string;
+  email: string;
+  linkedinUrl: string;
+  labels: SiteFooterLabels;
+}) {
   const year = new Date().getFullYear();
 
   return (
@@ -19,25 +39,25 @@ export function SiteFooter({
               INDRA.DEV
             </a>
             <p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">
-              Senior Frontend Engineer building clear, dependable product experiences.
+              {labels.description}
             </p>
           </div>
-          <nav aria-label="Footer navigation" className="flex items-center gap-6">
+          <nav aria-label={labels.navigationLabel} className="flex items-center gap-6">
             <a
               className="transition-colors hover:text-accent"
               href={blogUrl}
-              aria-label="Blog"
-              title="Blog"
+              aria-label={labels.blog}
+              title={labels.blog}
             >
               <LuFileText className="size-5" aria-hidden="true" />
             </a>
             <a
               className="transition-colors hover:text-accent"
-              href="https://github.com/indra-182"
+              href={githubUrl}
               target="_blank"
               rel="noreferrer"
-              aria-label="Github"
-              title="Github"
+              aria-label={labels.github}
+              title={labels.github}
             >
               <FaGithub className="size-5" />
             </a>
@@ -46,24 +66,26 @@ export function SiteFooter({
               href={linkedinUrl}
               target="_blank"
               rel="noreferrer"
-              aria-label="LinkedIn"
-              title="LinkedIn"
+              aria-label={labels.linkedin}
+              title={labels.linkedin}
             >
               <FaLinkedin className="size-5" />
             </a>
             <a
               className="transition-colors hover:text-accent"
               href={`mailto:${email}`}
-              aria-label="Email"
-              title="Email"
+              aria-label={labels.email}
+              title={labels.email}
             >
               <LuMail className="size-5" aria-hidden="true" />
             </a>
           </nav>
         </div>
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} Mahadi Indra Manurung</p>
-          <span>Bogor/Indonesia</span>
+          <p>
+            © {year} Mahadi Indra Manurung. {labels.rights}
+          </p>
+          <span>{labels.location}</span>
         </div>
       </div>
     </footer>

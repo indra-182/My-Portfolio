@@ -17,6 +17,7 @@ describe("HeroSection", () => {
     render(
       <HeroSection
         profile={profile}
+        eyebrow="Senior Frontend Engineer · Indonesia"
         downloadLabel="Download CV"
         cvHref="/documents/mahadi-indra-cv.pdf"
         writingLabel="Latest writing"
@@ -34,6 +35,7 @@ describe("HeroSection", () => {
     render(
       <HeroSection
         profile={profile}
+        eyebrow="Senior Frontend Engineer · Indonesia"
         downloadLabel="Download CV"
         cvHref="/documents/mahadi-indra-cv.pdf"
         writingLabel="Latest writing"

@@ -2,11 +2,18 @@ import { expect, test } from "@playwright/test";
 
 test("supports the recruiter path, CV, locale, theme, and safe writing fallback", async ({
   page,
-}) => {
+}, testInfo) => {
+  const expectDesktopPrimaryNavigation = async (name: string) => {
+    if (testInfo.project.name !== "chromium") return;
+    await expect(page.getByRole("navigation", { name, exact: true })).toBeVisible();
+  };
+
   await page.goto("/id");
+  await expect(page.locator("html")).toHaveAttribute("lang", "id");
+  await expectDesktopPrimaryNavigation("Navigasi utama");
 
   await expect(page.getByRole("heading", { name: /Membangun antarmuka produk/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /What collaborators say/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Apa kata kolaborator/i })).toBeVisible();
   await expect(page.getByText("Frisko Mayufid")).toBeVisible();
   await expect(page.getByText("Wahyu Aziz")).toBeVisible();
   await expect(page.getByText("Rehan Zibran")).toBeVisible();
@@ -14,25 +21,27 @@ test("supports the recruiter path, CV, locale, theme, and safe writing fallback"
   await expect(
     page.locator("main#main-content").getByRole("link", { name: /Unduh CV/i }),
   ).toHaveAttribute("href", "/documents/mahadi-indra-cv.pdf");
-  await expect(page.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /kunjungi blog/i })).toHaveAttribute(
     "href",
     "https://blog-indra.vercel.app",
   );
 
   await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.getByRole("button", { name: /toggle color theme/i }).click();
+  await page.getByRole("button", { name: "Ganti tema warna" }).click();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
   await page.reload();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
-  await page.getByRole("button", { name: /toggle color theme/i }).click();
+  await page.getByRole("button", { name: "Ganti tema warna" }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
 
   await page
     .getByRole("banner")
-    .getByRole("link", { name: /switch language to english/i })
+    .getByRole("link", { name: /ganti bahasa ke english/i })
     .click();
   await expect(page).toHaveURL(/\/en$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: /Building product interfaces/i })).toBeVisible();
+  await expectDesktopPrimaryNavigation("Primary navigation");
 });
 
 test("defaults to dark theme on first visit", async ({ browser }) => {
@@ -40,8 +49,14 @@ test("defaults to dark theme on first visit", async ({ browser }) => {
   const page = await context.newPage();
   await page.goto("/id");
   await expect(page.locator("html")).toHaveClass(/dark/);
-  await expect(page.getByRole("button", { name: /toggle color theme/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Ganti tema warna" })).toBeVisible();
   await context.close();
+});
+
+test("redirects the root route to the default locale", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/id$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "id");
 });
 
 test("opens and closes the mobile navigation with keyboard escape", async ({ page }, testInfo) => {
@@ -50,7 +65,7 @@ test("opens and closes the mobile navigation with keyboard escape", async ({ pag
     "Mobile navigation is covered by the mobile project.",
   );
   await page.goto("/id");
-  await page.getByRole("button", { name: /open menu/i }).click();
+  await page.getByRole("button", { name: /buka menu/i }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page.getByRole("dialog").getByRole("link", { name: "Tentang" })).toBeVisible();
   await page.keyboard.press("Escape");

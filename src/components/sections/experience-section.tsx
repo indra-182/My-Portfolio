@@ -1,15 +1,21 @@
 import type { PortfolioContent } from "@/content/portfolio-schema";
-import { ExperienceRow } from "./experience-row";
+import { ExperienceRow, type ProjectFieldLabels } from "./experience-row";
 
 export function ExperienceSection({
   experiences,
   eyebrow,
+  heading,
+  description,
+  projectLabels,
   technologiesLabel,
   roleLabel,
   periodLabel,
 }: {
   experiences: PortfolioContent["experiences"];
   eyebrow: string;
+  heading: string;
+  description: string;
+  projectLabels: ProjectFieldLabels;
   technologiesLabel: string;
   roleLabel: string;
   periodLabel: string;
@@ -27,12 +33,10 @@ export function ExperienceSection({
             id="experience-title"
             className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl"
           >
-            Ownership across complex workflows.
+            {heading}
           </h2>
         </div>
-        <p className="max-w-xs text-sm leading-6 text-muted-foreground">
-          Projects are grouped by engagement so technology stays connected to the work it enabled.
-        </p>
+        <p className="max-w-xs text-sm leading-6 text-muted-foreground">{description}</p>
       </div>
       <div className="mt-8">
         {experiences.map((experience) => (
@@ -59,6 +63,7 @@ export function ExperienceSection({
               <ExperienceRow
                 key={project.title}
                 project={project}
+                labels={projectLabels}
                 technologiesLabel={technologiesLabel}
               />
             ))}

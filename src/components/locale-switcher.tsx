@@ -8,18 +8,22 @@ function normalizePath(path: string) {
 export function LocaleSwitcher({
   locale,
   targetPath = "/",
+  labelTemplate,
+  languageNames,
 }: {
   locale: Locale;
   targetPath?: string;
+  labelTemplate: string;
+  languageNames: Record<Locale, string>;
 }) {
   const targetLocale = getOtherLocale(locale);
   const target = normalizePath(targetPath).replace(/^\/(id|en)(?=\/|$)/, "");
-  const label = targetLocale === "id" ? "Bahasa Indonesia" : "English";
+  const label = labelTemplate.replace("{language}", languageNames[targetLocale]);
 
   return (
     <a
       href={`/${targetLocale}${target}`}
-      aria-label={`Switch language to ${label}`}
+      aria-label={label}
       className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
     >
       <LuLanguages aria-hidden="true" className="size-4" />

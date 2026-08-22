@@ -1,10 +1,26 @@
 import type { Project } from "@/content/portfolio-schema";
 
+export type ProjectFieldLabels = {
+  problem: string;
+  ownership: string;
+  delivery: string;
+  outcome: string;
+};
+
+const fields = [
+  { key: "problem", labelKey: "problem" },
+  { key: "ownership", labelKey: "ownership" },
+  { key: "delivery", labelKey: "delivery" },
+  { key: "outcome", labelKey: "outcome" },
+] as const;
+
 export function ExperienceRow({
   project,
+  labels,
   technologiesLabel,
 }: {
   project: Project;
+  labels: ProjectFieldLabels;
   technologiesLabel: string;
 }) {
   return (
@@ -23,30 +39,14 @@ export function ExperienceRow({
           <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.summary}</p>
         </div>
         <div className="grid gap-7 sm:grid-cols-2">
-          <div>
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-accent">
-              Problem
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.problem}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-accent">
-              Ownership
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.ownership}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-accent">
-              Delivery
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.delivery}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-accent">
-              Outcome
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.outcome}</p>
-          </div>
+          {fields.map(({ key, labelKey }) => (
+            <div key={key}>
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-accent">
+                {labels[labelKey]}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{project[key]}</p>
+            </div>
+          ))}
         </div>
       </div>
       <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-border/70 pt-5">

@@ -1,17 +1,31 @@
-import type { ComponentProps } from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 describe("site shell", () => {
-  test("renders identity, blog link, and current copyright", () => {
+  test("renders identity, blog link, and current copyright", async () => {
+    const dictionary = await getDictionary("id");
+
     render(
       <SiteFooter
         locale="id"
-        portfolioUrl="https://portfolio.example"
         blogUrl="https://blog.example"
+        githubUrl="https://github.example"
+        email="hello@example.com"
+        linkedinUrl="https://linkedin.example"
+        labels={{
+          navigationLabel: dictionary.footer.navigationLabel,
+          description: dictionary.footer.description,
+          blog: dictionary.footer.blog,
+          github: dictionary.footer.github,
+          linkedin: dictionary.footer.linkedin,
+          email: dictionary.footer.email,
+          location: dictionary.footer.location,
+          rights: dictionary.footer.rights,
+        }}
       />,
     );
 
@@ -21,24 +35,67 @@ describe("site shell", () => {
       "href",
       "https://blog.example",
     );
+    expect(screen.getByRole("link", { name: /github/i })).toHaveAttribute(
+      "href",
+      "https://github.example",
+    );
     expect(screen.queryByRole("link", { name: /portfolio/i })).not.toBeInTheDocument();
-    expect(screen.getByText(`© ${new Date().getFullYear()} Mahadi Indra Manurung`)).toBeVisible();
+    expect(
+      screen.getByText(
+        `© ${new Date().getFullYear()} Mahadi Indra Manurung. Hak cipta dilindungi.`,
+      ),
+    ).toBeVisible();
     expect(screen.queryByRole("link", { name: /switch language/i })).not.toBeInTheDocument();
     expect(screen.getByText("Bogor/Indonesia")).toBeVisible();
   });
 
-  test("does not render the CV action in the navbar", () => {
-    const props = {
-      locale: "id" as const,
-      portfolioUrl: "https://portfolio.example",
-      blogUrl: "https://blog.example",
-      navItems: [{ label: "About", href: "/id#about" }],
-      primaryAction: { label: "Unduh CV", href: "/cv.pdf", download: true },
-    };
-
-    render(<SiteHeader {...(props as ComponentProps<typeof SiteHeader>)} />);
+  test("does not render the CV action in the navbar", async () => {
+    const dictionary = await getDictionary("id");
+    render(
+      <SiteHeader
+        locale="id"
+        navItems={[{ label: "About", href: "/id#about" }]}
+        labels={{
+          skipToContent: dictionary.actions.skipToContent,
+          primaryNav: dictionary.navigation.primaryLabel,
+          themeToggle: dictionary.theme.label,
+          switchLanguage: dictionary.actions.switchLanguage,
+          languageNames: dictionary.actions.languageNames,
+          mobileNavDescription: dictionary.mobileNavigation.description,
+          mobileNavLabel: dictionary.mobileNavigation.navLabel,
+          openMenu: dictionary.mobileNavigation.open,
+          closeMenu: dictionary.mobileNavigation.close,
+        }}
+      />,
+    );
 
     expect(screen.queryByRole("link", { name: /unduh cv/i })).not.toBeInTheDocument();
+  });
+
+  test.each(["id", "en"] as const)("labels the primary navigation in %s", async (locale) => {
+    const dictionary = await getDictionary(locale);
+
+    render(
+      <SiteHeader
+        locale={locale}
+        navItems={[{ label: dictionary.navigation.about, href: `/${locale}#about` }]}
+        labels={{
+          skipToContent: dictionary.actions.skipToContent,
+          primaryNav: dictionary.navigation.primaryLabel,
+          themeToggle: dictionary.theme.label,
+          switchLanguage: dictionary.actions.switchLanguage,
+          languageNames: dictionary.actions.languageNames,
+          mobileNavDescription: dictionary.mobileNavigation.description,
+          mobileNavLabel: dictionary.mobileNavigation.navLabel,
+          openMenu: dictionary.mobileNavigation.open,
+          closeMenu: dictionary.mobileNavigation.close,
+        }}
+      />,
+    );
+
+    expect(
+      screen.getByRole("navigation", { name: dictionary.navigation.primaryLabel }),
+    ).toBeVisible();
   });
 
   test("accepts only the supported locales", () => {
