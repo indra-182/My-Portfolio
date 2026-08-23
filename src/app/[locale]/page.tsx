@@ -17,7 +17,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const locale: Locale = value;
   const portfolio = getPortfolio(locale);
   const dictionary = await getDictionary(locale);
-  const latestWriting = await getLatestPosts(locale, siteConfig.blogUrl);
+  const latestWriting = await getLatestPosts(siteConfig.blogUrl);
 
   const personJsonLd = {
     "@context": "https://schema.org",

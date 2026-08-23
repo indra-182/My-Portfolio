@@ -14,10 +14,7 @@ const siteInteractions = String.raw`
 
   applyTheme(storedTheme === "light" ? "light" : "dark");
 
-  let started = false;
   const start = () => {
-    if (started) return;
-    started = true;
 
     const scrollToTopButton = document.querySelector("[data-scroll-to-top]");
     const navLinks = [...document.querySelectorAll(".site-nav-link[href*='#']")].map((link) => {
