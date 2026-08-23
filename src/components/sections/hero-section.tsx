@@ -18,7 +18,7 @@ export function HeroSection({
   writingLabel: string;
 }) {
   return (
-    <section className="content-shell grid gap-12 border-b border-border py-16 sm:py-24 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:gap-16 lg:py-28">
+    <section className="content-shell grid gap-12 border-b border-border py-16 sm:py-24 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start lg:gap-16 lg:py-28">
       <div className="animate-editorial-enter">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{eyebrow}</p>
         <h1 className="mt-5 max-w-5xl text-[clamp(3.4rem,8vw,7.5rem)] font-semibold leading-[0.9] tracking-[-0.07em]">

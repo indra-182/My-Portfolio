@@ -60,7 +60,7 @@ export function MobileNavigation({
               key={item.href}
               href={item.href}
               aria-current={item.active ? "page" : undefined}
-              className="border-b border-border/70 text-base font-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="cursor-pointer border-b border-border/70 text-base font-medium transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <span className="flex min-h-11 items-center">{item.label}</span>
             </a>

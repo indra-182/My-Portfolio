@@ -46,7 +46,15 @@
   }
 
   a {
-    @apply underline-offset-4;
+    @apply cursor-pointer underline-offset-4;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed;
   }
 
   [data-theme-icon="dark"] {

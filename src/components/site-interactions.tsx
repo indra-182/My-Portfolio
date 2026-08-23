@@ -9,18 +9,23 @@ const siteInteractions = String.raw`
 
   root.classList.toggle("dark", storedTheme !== "light");
 
+  let started = false;
   const start = () => {
-    const themeToggle = document.querySelector("[data-theme-toggle]");
+    if (started) return;
+    started = true;
 
-    if (themeToggle instanceof HTMLButtonElement) {
-      themeToggle.addEventListener("click", () => {
-        const nextTheme = root.classList.contains("dark") ? "light" : "dark";
-        root.classList.toggle("dark", nextTheme === "dark");
-        try {
-          localStorage.setItem("theme", nextTheme);
-        } catch {}
-      });
-    }
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const themeToggle = target.closest("[data-theme-toggle]");
+      if (!(themeToggle instanceof HTMLButtonElement)) return;
+
+      const nextTheme = root.classList.contains("dark") ? "light" : "dark";
+      root.classList.toggle("dark", nextTheme === "dark");
+      try {
+        localStorage.setItem("theme", nextTheme);
+      } catch {}
+    });
 
     document.querySelectorAll("[data-mobile-navigation]").forEach((navigation) => {
       const dialog = navigation.querySelector("dialog");
