@@ -26,7 +26,7 @@ export function ExperienceRow({
 }) {
   return (
     <article
-      className="group border-t border-border py-8 transition-colors hover:bg-surface sm:py-10"
+      className="group border-t border-border py-8 transition-colors hover:bg-muted sm:py-10"
       aria-labelledby={`${project.title}-title`}
     >
       <div className="grid gap-7 lg:grid-cols-[minmax(11rem,0.65fr)_minmax(0,1.35fr)] lg:gap-14">

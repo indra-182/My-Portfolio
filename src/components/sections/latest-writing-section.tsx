@@ -80,7 +80,7 @@ export function LatestWritingSection({
             {visiblePosts.map((post, index) => (
               <article
                 key={post.slug}
-                className={`group relative flex min-h-64 flex-col bg-background p-6 transition-colors duration-[var(--motion-fast)] hover:bg-surface ${
+                className={`group relative flex min-h-64 flex-col bg-background p-6 transition-colors duration-[var(--motion-fast)] hover:bg-muted ${
                   visiblePosts.length === 1 ? "sm:p-8" : ""
                 }`}
               >

@@ -55,9 +55,7 @@ export function SiteHeader({
               className={cn(
                 buttonVariants({ variant: "ghost" }),
                 "rounded-none border-b-2 border-transparent px-3 py-6 text-sm",
-                item.active
-                  ? "border-accent text-foreground"
-                  : "text-muted-foreground hover:border-border",
+                item.active ? "border-accent text-foreground" : "text-muted-foreground",
               )}
             >
               {item.label}
