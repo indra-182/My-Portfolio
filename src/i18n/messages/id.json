@@ -11,6 +11,7 @@
   "actions": {
     "backHome": "Kembali ke beranda",
     "skipToContent": "Lewati ke konten utama",
+    "scrollToTop": "Kembali ke atas",
     "switchLanguage": "Ganti bahasa ke {language}",
     "languageNames": {
       "id": "Bahasa Indonesia",

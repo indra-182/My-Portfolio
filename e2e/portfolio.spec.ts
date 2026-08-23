@@ -31,6 +31,39 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   };
 
   await expectRemovedCueChrome("Urutan workflow Petron");
+  const scrollToTop = page.getByRole("button", { name: /kembali ke atas/i });
+  await expect(scrollToTop).toBeHidden();
+  await page.evaluate(() => window.scrollTo(0, 240));
+  await expect(scrollToTop).toBeHidden();
+  await page.evaluate(() => {
+    const section = document.querySelector("#capabilities");
+    if (!(section instanceof HTMLElement)) throw new Error("Capabilities section not found");
+    window.scrollTo(0, section.offsetTop);
+  });
+  await expect(scrollToTop).toBeVisible();
+  if (testInfo.project.name === "chromium") {
+    await expect(
+      page
+        .getByRole("navigation", { name: "Navigasi utama", exact: true })
+        .getByRole("link", { name: "Kapabilitas", exact: true }),
+    ).toHaveAttribute("aria-current", "location");
+  }
+  await page.evaluate(() => {
+    const section = document.querySelector("#case-studies");
+    if (!(section instanceof HTMLElement)) throw new Error("Case studies section not found");
+    window.scrollTo(0, section.offsetTop);
+  });
+  await expect(scrollToTop).toBeVisible();
+  if (testInfo.project.name === "chromium") {
+    await expect(
+      page
+        .getByRole("navigation", { name: "Navigasi utama", exact: true })
+        .getByRole("link", { name: "PROJECTS", exact: true }),
+    ).toHaveAttribute("aria-current", "location");
+  }
+  await scrollToTop.click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(10);
+  await expect(scrollToTop).toBeHidden();
 
   await expect(page.getByRole("heading", { name: /Saya merancang frontend/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Bukti dari orang/i })).toBeVisible();

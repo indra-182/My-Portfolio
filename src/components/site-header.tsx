@@ -1,4 +1,6 @@
+import { LuArrowUp } from "react-icons/lu";
 import type { Locale } from "@/i18n/config";
+import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -10,6 +12,7 @@ export type SiteHeaderLabels = {
   primaryNav: string;
   themeToggle: string;
   switchLanguage: string;
+  scrollToTop: string;
   languageNames: Record<Locale, string>;
   mobileNavDescription: string;
   mobileNavLabel: string;
@@ -64,6 +67,18 @@ export function SiteHeader({
             closeLabel={labels.closeMenu}
           />
         </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label={labels.scrollToTop}
+          title={labels.scrollToTop}
+          data-scroll-to-top
+          className="scroll-to-top"
+          suppressHydrationWarning
+        >
+          <LuArrowUp aria-hidden="true" className="size-4" />
+        </Button>
       </div>
     </header>
   );

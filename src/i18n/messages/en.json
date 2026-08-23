@@ -11,6 +11,7 @@
   "actions": {
     "backHome": "Back home",
     "skipToContent": "Skip to main content",
+    "scrollToTop": "Back to top",
     "switchLanguage": "Switch language to {language}",
     "languageNames": {
       "id": "Indonesian",
