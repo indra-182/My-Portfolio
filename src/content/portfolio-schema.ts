@@ -27,6 +27,10 @@ const TestimonialSchema = z.object({
   quote: z.string().min(1),
   approved: z.literal(true),
 });
+const CapabilitySchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+});
 
 export const PortfolioContentSchema = z.object({
   locale: LocaleSchema,
@@ -39,10 +43,7 @@ export const PortfolioContentSchema = z.object({
     imageSrc: z.string().min(1),
     imageAlt: z.string().min(1),
   }),
-  about: z.object({
-    heading: z.string().min(1),
-    paragraphs: z.array(z.string().min(1)).min(1),
-  }),
+  capabilities: z.array(CapabilitySchema).length(3),
   experiences: z.array(ExperienceSchema).min(1),
   testimonials: z.array(TestimonialSchema),
 });

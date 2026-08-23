@@ -29,7 +29,7 @@ describe("site shell", () => {
       />,
     );
 
-    expect(screen.getByText("INDRA.DEV")).toBeVisible();
+    expect(screen.getByRole("link", { name: "INDRA.DEV" })).toBeVisible();
     expect(screen.getByRole("link", { name: "INDRA.DEV" })).toHaveAttribute("href", "/id");
     expect(screen.getByRole("link", { name: /blog/i })).toHaveAttribute(
       "href",
@@ -54,7 +54,7 @@ describe("site shell", () => {
     render(
       <SiteHeader
         locale="id"
-        navItems={[{ label: "About", href: "/id#about" }]}
+        navItems={[{ label: "Capabilities", href: "/id#capabilities" }]}
         labels={{
           skipToContent: dictionary.actions.skipToContent,
           primaryNav: dictionary.navigation.primaryLabel,
@@ -78,7 +78,10 @@ describe("site shell", () => {
     render(
       <SiteHeader
         locale={locale}
-        navItems={[{ label: dictionary.navigation.about, href: `/${locale}#about` }]}
+        navItems={[
+          { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
+          { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
+        ]}
         labels={{
           skipToContent: dictionary.actions.skipToContent,
           primaryNav: dictionary.navigation.primaryLabel,
@@ -96,6 +99,12 @@ describe("site shell", () => {
     expect(
       screen.getByRole("navigation", { name: dictionary.navigation.primaryLabel }),
     ).toBeVisible();
+    expect(screen.getByRole("link", { name: /switch language|ganti bahasa/i })).toHaveClass(
+      "site-control",
+    );
+    expect(screen.getByRole("button", { name: dictionary.theme.label })).toHaveClass(
+      "site-control",
+    );
   });
 
   test("accepts only the supported locales", () => {

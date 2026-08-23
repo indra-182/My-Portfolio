@@ -1,11 +1,12 @@
 {
   "navigation": {
-    "about": "Tentang",
-    "experience": "Pengalaman",
-    "writing": "Tulisan",
+    "capabilities": "Kapabilitas",
+    "caseStudies": "PROJECTS",
+    "contact": "Kontak",
     "primaryLabel": "Navigasi utama",
     "portfolio": "Portfolio",
-    "downloadCv": "Unduh CV"
+    "downloadCv": "Unduh CV",
+    "email": "Kirim email"
   },
   "actions": {
     "backHome": "Kembali ke beranda",
@@ -26,22 +27,23 @@
     "close": "Tutup menu"
   },
   "portfolio": {
-    "heroEyebrow": "Senior Frontend Engineer · Indonesia",
-    "aboutEyebrow": "Cara saya bekerja",
-    "experienceEyebrow": "Pengalaman terpilih",
-    "experienceHeading": "Kepemilikan penuh atas alur kerja yang kompleks.",
-    "experienceDescription": "Proyek dikelompokkan per keterlibatan agar teknologi tetap terhubung dengan pekerjaan yang didukungnya.",
+    "capabilitiesHeading": "Membuat workflow penting terasa jelas.",
+    "caseStudiesHeading": "Pengalaman terpilih di alur produk kompleks.",
+    "caseStudiesDescription": "Saya menghubungkan masalah produk, keputusan frontend, dan bukti validasi yang tersedia.",
+    "featuredLabel": "Workflow unggulan",
+    "secondaryLabel": "Workflow lain",
     "problemLabel": "Masalah",
     "ownershipLabel": "Kepemilikan",
     "deliveryLabel": "Pelaksanaan",
     "outcomeLabel": "Hasil",
     "technologies": "Teknologi",
     "role": "Peran",
-    "period": "Periode"
+    "period": "Periode",
+    "openDetails": "Buka detail project",
+    "closeDetails": "Tutup detail project"
   },
   "writing": {
-    "eyebrow": "Tulisan terbaru",
-    "heading": "Catatan teknis untuk pekerjaan produk nyata.",
+    "heading": "Catatan teknis untuk sistem frontend.",
     "visitBlog": "Kunjungi blog",
     "unavailable": "Tulisan terbaru tersedia di blog teknis.",
     "asideEyebrow": "Menulis secara terbuka",
@@ -50,11 +52,20 @@
     "readingTime": "{minutes} menit baca"
   },
   "testimonials": {
-    "heading": "Apa kata kolaborator"
+    "heading": "Bukti dari orang yang pernah bekerja bersama saya",
+    "collaboratorLabel": "Kolaborator di Indivara Group",
+    "mentoringLabel": "Mentoring dan pengajaran"
+  },
+  "contact": {
+    "heading": "Butuh frontend engineer untuk workflow yang kompleks?",
+    "description": "Ceritakan role, produk, atau tantangan frontend yang sedang Anda bangun.",
+    "email": "Kirim email",
+    "linkedin": "Buka LinkedIn",
+    "cv": "Unduh CV"
   },
   "footer": {
     "navigationLabel": "Navigasi footer",
-    "description": "Senior Frontend Engineer yang membangun pengalaman produk yang jelas dan andal.",
+    "description": "Senior Frontend Engineer yang membuat workflow produk kompleks terasa jelas dan dapat diuji.",
     "blog": "Blog",
     "github": "Github",
     "linkedin": "LinkedIn",

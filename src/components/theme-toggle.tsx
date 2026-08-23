@@ -10,7 +10,7 @@ export function ThemeToggle({ label }: { label: string }) {
       aria-label={label}
       title={label}
       data-theme-toggle
-      className="text-muted-foreground hover:text-foreground"
+      className="site-control"
     >
       <LuSun aria-hidden="true" data-theme-icon="light" className="size-4" />
       <LuMoon aria-hidden="true" data-theme-icon="dark" className="size-4" />

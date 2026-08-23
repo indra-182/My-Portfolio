@@ -60,9 +60,9 @@ export default async function LocaleLayout({
   const locale = value;
   const dictionary = await getDictionary(locale);
   const navItems = [
-    { label: dictionary.navigation.about, href: `/${locale}#about` },
-    { label: dictionary.navigation.experience, href: `/${locale}#experience` },
-    { label: dictionary.navigation.writing, href: `/${locale}#writing` },
+    { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
+    { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
+    { label: dictionary.navigation.contact, href: `/${locale}#contact` },
   ];
 
   return (
@@ -71,6 +71,20 @@ export default async function LocaleLayout({
         <SiteInteractions />
       </head>
       <body className="min-h-screen">
+        <script
+          id="impeccable-direction-contract"
+          type="text/plain"
+          dangerouslySetInnerHTML={{
+            __html: `<!--
+THESIS: Cue Horizon stages complex workflow ownership as visible cues, refusing generic developer-template chrome and cosmetic editorial polish.
+OWN-WORLD: Near-black cyclorama, cobalt horizon, rose transition, white-day focus, cue tape, matte stage floor, tabular cue labels, and controlled luminance.
+STORY: Recruiters understand the workflow specialist claim, compare supplied project evidence, review collaborator proof and technical writing, and email Mahadi.
+FIRST VIEWPORT: Night field into a cobalt horizon; headline and email action left; formal portrait under side-light right; clear breathing room into the proof sequence.
+FORM: Stagecraft cyclorama dawn, assigned direction, seed 6dea048c, code-led.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->`,
+          }}
+        />
         <div className="flex min-h-screen flex-col">
           <SiteHeader
             locale={locale}

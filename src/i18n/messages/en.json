@@ -1,11 +1,12 @@
 {
   "navigation": {
-    "about": "About",
-    "experience": "Experience",
-    "writing": "Writing",
+    "capabilities": "Capabilities",
+    "caseStudies": "PROJECTS",
+    "contact": "Contact",
     "primaryLabel": "Primary navigation",
     "portfolio": "Portfolio",
-    "downloadCv": "Download CV"
+    "downloadCv": "Download CV",
+    "email": "Email me"
   },
   "actions": {
     "backHome": "Back home",
@@ -26,22 +27,23 @@
     "close": "Close menu"
   },
   "portfolio": {
-    "heroEyebrow": "Senior Frontend Engineer · Indonesia",
-    "aboutEyebrow": "How I work",
-    "experienceEyebrow": "Selected experience",
-    "experienceHeading": "Ownership across complex workflows.",
-    "experienceDescription": "Projects are grouped by engagement so technology stays connected to the work it enabled.",
+    "capabilitiesHeading": "Clarity for workflows that matter.",
+    "caseStudiesHeading": "Selected experience across complex product flows.",
+    "caseStudiesDescription": "I connect product problems, frontend decisions, and the verification evidence available for each project.",
+    "featuredLabel": "Featured workflow",
+    "secondaryLabel": "More workflows",
     "problemLabel": "Problem",
     "ownershipLabel": "Ownership",
     "deliveryLabel": "Delivery",
     "outcomeLabel": "Outcome",
     "technologies": "Technologies",
     "role": "Role",
-    "period": "Period"
+    "period": "Period",
+    "openDetails": "Open project details",
+    "closeDetails": "Close project details"
   },
   "writing": {
-    "eyebrow": "Latest writing",
-    "heading": "Technical notes for real product work.",
+    "heading": "Technical notes for frontend systems.",
     "visitBlog": "Visit blog",
     "unavailable": "Latest writing is available on the technical blog.",
     "asideEyebrow": "Writing in public",
@@ -50,11 +52,20 @@
     "readingTime": "{minutes} min read"
   },
   "testimonials": {
-    "heading": "What collaborators say"
+    "heading": "Evidence from people I have worked with",
+    "collaboratorLabel": "Collaborators at Indivara Group",
+    "mentoringLabel": "Mentoring and teaching"
+  },
+  "contact": {
+    "heading": "Need a frontend engineer for a complex workflow?",
+    "description": "Tell me about the role, product, or frontend challenge you are building.",
+    "email": "Email me",
+    "linkedin": "Open LinkedIn",
+    "cv": "Download CV"
   },
   "footer": {
     "navigationLabel": "Footer navigation",
-    "description": "Senior Frontend Engineer building clear, dependable product experiences.",
+    "description": "Senior Frontend Engineer making complex product workflows clear and testable.",
     "blog": "Blog",
     "github": "Github",
     "linkedin": "LinkedIn",

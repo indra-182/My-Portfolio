@@ -53,7 +53,7 @@ describe("LatestWritingSection", () => {
       />,
     );
 
-    expect(container.querySelector('[data-layout="grid"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-count="3"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
       "href",
       "https://blog.example/blog/resilient-client-state",
@@ -64,7 +64,7 @@ describe("LatestWritingSection", () => {
     );
     expect(screen.getByText("6 menit baca")).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(3);
-    expect(screen.getAllByRole("article")[0]).toHaveClass("relative");
+    expect(screen.getAllByRole("article")[0]).toHaveClass("writing-card");
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
   });
 
@@ -79,7 +79,7 @@ describe("LatestWritingSection", () => {
       />,
     );
 
-    expect(container.querySelector('[data-layout="featured"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-count="1"]')).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(1);
     expect(
       screen.getByRole("complementary", { name: dictionary.writing.asideHeading }),
@@ -97,7 +97,7 @@ describe("LatestWritingSection", () => {
       />,
     );
 
-    expect(container.querySelector('[data-layout="double"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-count="2"]')).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(2);
     expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });

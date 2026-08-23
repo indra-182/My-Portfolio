@@ -12,6 +12,17 @@ describe("portfolio content", () => {
       expect(content.testimonials.every((item) => item.approved)).toBe(true);
     }
   });
+  test("keeps three capabilities in both localized catalogs", () => {
+    expect(portfolioByLocale.id.capabilities).toHaveLength(3);
+    expect(portfolioByLocale.en.capabilities).toHaveLength(3);
+  });
+
+  test("rejects an unapproved testimonial at the schema boundary", () => {
+    const content = structuredClone(portfolioByLocale.en);
+    content.testimonials[0].approved = false as never;
+
+    expect(() => PortfolioContentSchema.parse(content)).toThrow();
+  });
 
   test("includes the four approved collaborator testimonials", () => {
     expect(portfolioByLocale.en.testimonials.map((item) => item.author)).toEqual([

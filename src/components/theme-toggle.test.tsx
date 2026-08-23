@@ -11,5 +11,5 @@ test("renders an accessible theme control without a React client boundary", asyn
   expect(toggle).toHaveAttribute("title", dictionary.theme.label);
   expect(toggle).toHaveAttribute("data-theme-toggle");
   expect(toggle.querySelectorAll('svg[aria-hidden="true"]')).toHaveLength(2);
-  expect(toggle.className).toContain("hover:bg-muted");
+  expect(toggle.className).toContain("site-control");
 });
