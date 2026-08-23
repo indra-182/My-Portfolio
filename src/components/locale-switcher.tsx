@@ -25,10 +25,7 @@ export function LocaleSwitcher({
     <a
       href={`/${targetLocale}${target}`}
       aria-label={label}
-      className={cn(
-        buttonVariants({ variant: "ghost" }),
-        "gap-2 rounded-none px-3 font-mono text-xs font-medium tracking-[0.1em] text-muted-foreground uppercase",
-      )}
+      className={cn(buttonVariants({ variant: "ghost" }), "site-control gap-2")}
     >
       <LuLanguages aria-hidden="true" className="size-4" />
       <span>{targetLocale.toUpperCase()}</span>

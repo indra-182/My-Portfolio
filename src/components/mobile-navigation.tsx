@@ -19,7 +19,7 @@ export function MobileNavigation({
   closeLabel: string;
 }) {
   return (
-    <div data-mobile-navigation>
+    <div data-mobile-navigation className="mobile-navigation">
       <Button
         type="button"
         variant="outline"
@@ -28,20 +28,16 @@ export function MobileNavigation({
         aria-haspopup="dialog"
         aria-controls={id}
         data-mobile-navigation-open
-        className="md:hidden"
+        className="mobile-navigation-open md:hidden"
       >
         <LuMenu aria-hidden="true" />
       </Button>
-      <dialog
-        id={id}
-        aria-labelledby={`${id}-title`}
-        className="fixed inset-y-0 right-0 m-0 h-full w-[min(22rem,calc(100%-2rem))] max-w-full flex-col gap-4 border-l border-border bg-background p-0 text-sm text-foreground shadow-lg backdrop:bg-black/10 open:flex"
-      >
-        <div className="flex flex-col gap-0.5 border-b border-border p-4 pb-5">
-          <div id={`${id}-title`} className="font-mono text-sm tracking-[0.18em]">
-            INDRA.DEV
+      <dialog id={id} aria-labelledby={`${id}-title`} className="mobile-navigation-dialog">
+        <div className="mobile-navigation-heading">
+          <div id={`${id}-title`} className="site-wordmark">
+            INDRA<span>.</span>DEV
           </div>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p>{description}</p>
         </div>
         <Button
           type="button"
@@ -50,19 +46,14 @@ export function MobileNavigation({
           aria-label={closeLabel}
           title={closeLabel}
           data-mobile-navigation-close
-          className="absolute top-3 right-3 text-muted-foreground hover:text-foreground"
+          className="mobile-navigation-close"
         >
           <LuX aria-hidden="true" />
         </Button>
-        <nav aria-label={navLabel} className="flex flex-col gap-2 px-4 py-3">
+        <nav aria-label={navLabel} className="mobile-navigation-links">
           {items.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              aria-current={item.active ? "page" : undefined}
-              className="cursor-pointer border-b border-border/70 text-base font-medium transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <span className="flex min-h-11 items-center">{item.label}</span>
+            <a key={item.href} href={item.href} aria-current={item.active ? "page" : undefined}>
+              <span>{item.label}</span>
             </a>
           ))}
         </nav>

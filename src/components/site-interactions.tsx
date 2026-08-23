@@ -7,7 +7,12 @@ const siteInteractions = String.raw`
     storedTheme = localStorage.getItem("theme");
   } catch {}
 
-  root.classList.toggle("dark", storedTheme !== "light");
+  const applyTheme = (theme) => {
+    root.classList.toggle("dark", theme === "dark");
+    root.classList.toggle("light", theme === "light");
+  };
+
+  applyTheme(storedTheme === "light" ? "light" : "dark");
 
   let started = false;
   const start = () => {
@@ -21,7 +26,7 @@ const siteInteractions = String.raw`
       if (!(themeToggle instanceof HTMLButtonElement)) return;
 
       const nextTheme = root.classList.contains("dark") ? "light" : "dark";
-      root.classList.toggle("dark", nextTheme === "dark");
+      applyTheme(nextTheme);
       try {
         localStorage.setItem("theme", nextTheme);
       } catch {}

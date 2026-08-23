@@ -1,6 +1,4 @@
 import type { Locale } from "@/i18n/config";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -29,40 +27,27 @@ export function SiteHeader({
   labels: SiteHeaderLabels;
 }) {
   return (
-    <header className="border-b border-border bg-background">
-      <a
-        href="#main-content"
-        className="sr-only fixed left-4 top-4 z-50 rounded-md bg-accent px-4 py-3 font-medium text-accent-foreground focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-ring"
-      >
+    <header className="site-header">
+      <a href="#main-content" className="skip-link">
         {labels.skipToContent}
       </a>
-      <div className="content-shell flex min-h-18 items-center justify-between gap-4">
-        <a
-          href={`/${locale}`}
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "shrink-0 rounded-none px-0 font-mono text-sm font-bold tracking-[0.2em]",
-          )}
-        >
-          INDRA<span className="text-accent">.</span>DEV
+      <div className="content-shell site-header-inner">
+        <a href={`/${locale}`} className="site-wordmark">
+          INDRA<span>.</span>DEV
         </a>
-        <nav aria-label={labels.primaryNav} className="hidden items-center gap-1 md:flex">
+        <nav aria-label={labels.primaryNav} className="site-nav">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               aria-current={item.active ? "page" : undefined}
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "rounded-none border-b-2 border-transparent px-3 py-6 text-sm",
-                item.active ? "border-accent text-foreground" : "text-muted-foreground",
-              )}
+              className="site-nav-link"
             >
               {item.label}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-1">
+        <div className="site-controls">
           <LocaleSwitcher
             locale={locale}
             targetPath={`/${locale}`}

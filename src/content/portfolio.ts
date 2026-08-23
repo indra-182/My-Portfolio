@@ -47,18 +47,29 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
     locale: "id",
     profile: {
       ...sharedProfile,
-      headline: "Membangun antarmuka produk yang jelas, tangguh, dan siap dipakai.",
+      headline:
+        "Saya merancang frontend untuk workflow finansial yang tidak boleh membingungkan pengguna.",
       valueProposition:
-        "Saya membantu tim produk mengubah workflow yang kompleks menjadi pengalaman frontend yang mudah dipahami, dari dashboard korporat sampai alur transaksi finansial.",
+        "Dari registrasi korporat sampai transaksi investasi, saya mengubah state, validasi, dan keputusan yang rumit menjadi alur yang jelas, tangguh, dan dapat diuji.",
       imageAlt: "Mahadi Indra Manurung, Senior Frontend Engineer",
     },
-    about: {
-      heading: "Frontend yang menghubungkan detail teknis dengan kebutuhan produk.",
-      paragraphs: [
-        "Saya bekerja di persimpangan antara UI yang rapi, state yang dapat diprediksi, dan kebutuhan bisnis yang nyata. Fokus saya adalah membuat alur penting terasa sederhana tanpa mengorbankan kualitas engineering.",
-        "Dalam kolaborasi, saya senang memperjelas masalah lebih dulu, membangun batas data yang eksplisit, lalu memvalidasi hasil melalui testing dan feedback lintas fungsi.",
-      ],
-    },
+    capabilities: [
+      {
+        title: "Menjernihkan alur yang rumit",
+        description:
+          "Saya memecah workflow multi-langkah menjadi state, keputusan, dan feedback yang dapat dipahami pengguna.",
+      },
+      {
+        title: "Menjaga batas data tetap eksplisit",
+        description:
+          "Saya menyusun komponen dan data flow agar validasi, perubahan state, dan tanggung jawab setiap bagian tetap dapat diprediksi.",
+      },
+      {
+        title: "Memvalidasi perjalanan end-to-end",
+        description:
+          "Saya menghubungkan implementasi dengan pengujian browser dan feedback lintas fungsi sebelum perubahan dirilis.",
+      },
+    ],
     experiences: [
       {
         company: "Indivara Group",
@@ -144,18 +155,29 @@ export const portfolioByLocale: Record<"id" | "en", PortfolioContent> = {
     locale: "en",
     profile: {
       ...sharedProfile,
-      headline: "Building product interfaces that are clear, resilient, and ready to use.",
+      headline:
+        "I design frontend systems for financial workflows that cannot afford to confuse users.",
       valueProposition:
-        "I help product teams turn complex workflows into understandable frontend experiences, from corporate dashboards to financial transaction journeys.",
+        "From corporate onboarding to investment transactions, I turn complex states, validation, and decisions into clear, resilient, testable flows.",
       imageAlt: "Mahadi Indra Manurung, Senior Frontend Engineer",
     },
-    about: {
-      heading: "Frontend work that connects technical detail with product needs.",
-      paragraphs: [
-        "I work at the intersection of thoughtful UI, predictable state, and real business needs. My focus is making important workflows feel simple without compromising engineering quality.",
-        "In collaboration, I like to clarify the problem first, build explicit data boundaries, and validate the result through testing and cross-functional feedback.",
-      ],
-    },
+    capabilities: [
+      {
+        title: "Clarify complex flows",
+        description:
+          "I break multi-step workflows into states, decisions, and feedback that users can understand.",
+      },
+      {
+        title: "Keep data boundaries explicit",
+        description:
+          "I structure components and data flow so validation, state changes, and ownership remain predictable.",
+      },
+      {
+        title: "Verify the journey end to end",
+        description:
+          "I connect implementation with browser testing and cross-functional feedback before changes ship.",
+      },
+    ],
     experiences: [
       {
         company: "Indivara Group",
