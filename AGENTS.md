@@ -75,7 +75,7 @@ pnpm run verify
 - Keep domain data and user-facing copy separate: portfolio facts belong in `src/content/portfolio.ts`, schemas and types in `src/content/portfolio-schema.ts`, and UI strings in both `src/i18n/messages/en.json` and `src/i18n/messages/id.json`. Every content or message change must preserve Indonesian and English structure and key parity.
 - Validate data once at ingress with Zod. Reuse narrow schema-derived types such as `PortfolioContent["profile"]`. Model recoverable async failures as discriminated result states, following `LatestFeedResult`, rather than leaking unvalidated data or throwing optional-feed failures through the page.
 - Pass dependencies and data explicitly through server composition and props. No DI container or global client state is used. Keep async work at route and server boundaries; components remain pure and server-compatible unless browser state is required.
-- Use semantic design tokens and classes from `src/styles/design-tokens.css`, existing shadcn/ui primitives, `react-icons/lu` or `react-icons/fa` patterns, and the `content-shell` and `prose-measure` layout utilities. See `DESIGN.md` for the complete Authority Editorial, responsive, motion, state, localization, and accessibility contract.
+- Use semantic design tokens and classes from `src/styles/design-tokens.css`, existing shadcn/ui primitives, `react-icons/lu` or `react-icons/fa` patterns, and the `content-shell` layout utility. See `DESIGN.md` for the complete Cue Horizon, responsive, motion, state, localization, and accessibility contract.
 - Preserve semantic landmarks, heading order, skip navigation, visible focus, useful alternative text, keyboard access, 44px targets, reduced-motion behavior, light and dark themes, and no horizontal overflow. Do not use em dash punctuation.
 - GitHub Issues are canonical for issues and specs. `docs/agents/issue-tracker.md` contains exact `gh` operations, and `docs/agents/triage-labels.md` defines `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`.
 
@@ -90,8 +90,8 @@ pnpm run verify
 
 # This is NOT the Next.js you know
 
-This version has breaking changes: APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-This block is written and re-added by `next dev`: verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
