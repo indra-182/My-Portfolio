@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { LuMenu, LuX } from "react-icons/lu";
 
 export type MobileNavigationItem = { label: string; href: string; active?: boolean };
@@ -19,16 +20,18 @@ export function MobileNavigation({
 }) {
   return (
     <div data-mobile-navigation>
-      <button
+      <Button
         type="button"
+        variant="outline"
+        size="icon"
         aria-label={openLabel}
         aria-haspopup="dialog"
         aria-controls={id}
         data-mobile-navigation-open
-        className="inline-flex size-11 cursor-pointer items-center justify-center rounded-md border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:hidden"
+        className="md:hidden"
       >
         <LuMenu aria-hidden="true" />
-      </button>
+      </Button>
       <dialog
         id={id}
         aria-labelledby={`${id}-title`}
@@ -40,21 +43,26 @@ export function MobileNavigation({
           </div>
           <p className="text-sm text-muted-foreground">{description}</p>
         </div>
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           aria-label={closeLabel}
           title={closeLabel}
           data-mobile-navigation-close
-          className="absolute top-3 right-3 inline-flex size-11 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          className="absolute top-3 right-3 text-muted-foreground hover:text-foreground"
         >
           <LuX aria-hidden="true" />
-        </button>
+        </Button>
         <nav aria-label={navLabel} className="flex flex-col gap-2 px-4 py-3">
           {items.map((item) => (
-            <a key={item.href} href={item.href} aria-current={item.active ? "page" : undefined}>
-              <span className="flex min-h-11 items-center border-b border-border/70 text-base font-medium">
-                {item.label}
-              </span>
+            <a
+              key={item.href}
+              href={item.href}
+              aria-current={item.active ? "page" : undefined}
+              className="border-b border-border/70 text-base font-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <span className="flex min-h-11 items-center">{item.label}</span>
             </a>
           ))}
         </nav>

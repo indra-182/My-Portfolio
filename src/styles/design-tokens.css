@@ -8,6 +8,17 @@
   --accent-foreground: #07111f;
   --destructive: #f87171;
   --focus-ring: #60a5fa;
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface);
+  --input: var(--border);
+  --ring: var(--focus-ring);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-pill: 999px;
@@ -27,6 +38,17 @@
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --focus-ring: #2563eb;
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface);
+  --input: var(--border);
+  --ring: var(--focus-ring);
 }
 
 @media (prefers-reduced-motion: reduce) {

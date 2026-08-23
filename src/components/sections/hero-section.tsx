@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element -- The pre-optimized 8 KiB portrait avoids hydrating next/image on this static route. */
 import { LuArrowDownToLine, LuArrowUpRight, LuMapPin } from "react-icons/lu";
-import type { PortfolioContent } from "@/content/portfolio-schema";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
+import type { PortfolioContent } from "@/content/portfolio-schema";
 export function HeroSection({
   profile,
   eyebrow,
@@ -16,27 +18,23 @@ export function HeroSection({
   writingLabel: string;
 }) {
   return (
-    <section className="content-shell grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-start lg:gap-20 lg:py-36">
+    <section className="content-shell grid gap-12 border-b border-border py-16 sm:py-24 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:gap-16 lg:py-28">
       <div className="animate-editorial-enter">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">{eyebrow}</p>
-        <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] sm:text-7xl lg:text-[clamp(4.5rem,7vw,7rem)]">
+        <h1 className="mt-5 max-w-5xl text-[clamp(3.4rem,8vw,7.5rem)] font-semibold leading-[0.9] tracking-[-0.07em]">
           {profile.headline}
         </h1>
-        <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+        <p className="prose-measure mt-8 text-lg leading-8 text-muted-foreground sm:text-xl">
           {profile.valueProposition}
         </p>
-        <div className="mt-9 flex flex-wrap items-center gap-3">
-          <a
-            href={cvHref}
-            download
-            className="inline-flex min-h-12 items-center gap-2 rounded-md bg-accent px-5 font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
-          >
+        <div className="mt-9 flex flex-wrap gap-3">
+          <a href={cvHref} download className={cn(buttonVariants({ size: "lg" }), "gap-2")}>
             <LuArrowDownToLine aria-hidden="true" className="size-4" />
             {downloadLabel}
           </a>
           <a
             href="#writing"
-            className="inline-flex min-h-12 items-center gap-2 rounded-md border border-border px-5 font-semibold transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+            className={cn(buttonVariants({ variant: "outline", size: "lg" }), "gap-2")}
           >
             {writingLabel}
             <LuArrowUpRight aria-hidden="true" className="size-4" />
@@ -47,9 +45,9 @@ export function HeroSection({
           {profile.location}
         </p>
       </div>
-      <div className="relative mx-auto mt-8 w-full max-w-md lg:mx-0 lg:ml-auto lg:mt-10 lg:max-w-[22rem]">
+      <div className="relative mx-auto mt-4 w-full max-w-[19rem] border-l border-border pl-5 sm:pl-8 lg:mx-0 lg:ml-auto lg:mt-9">
         <div
-          className="absolute -right-3 -top-3 h-full w-full border border-accent/40"
+          className="absolute -right-3 -top-3 h-full w-full border border-accent/50"
           aria-hidden="true"
         />
         <div className="relative aspect-[1116/1409] overflow-hidden bg-surface">
@@ -58,7 +56,7 @@ export function HeroSection({
             alt={profile.imageAlt}
             width={380}
             height={480}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             className="h-full w-full object-cover object-center grayscale-[15%]"
           />

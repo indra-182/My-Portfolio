@@ -1,7 +1,8 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuFileText, LuMail } from "react-icons/lu";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
-
 export type SiteFooterLabels = {
   navigationLabel: string;
   description: string;
@@ -31,20 +32,26 @@ export function SiteFooter({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-border">
-      <div className="content-shell py-10">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <footer className="mt-20 border-t border-border sm:mt-24">
+      <div className="content-shell py-10 sm:py-12">
+        <div className="flex flex-col gap-8 border-b border-border pb-8 md:flex-row md:items-start md:justify-between">
           <div>
-            <a href={`/${locale}`} className="font-mono text-sm font-bold tracking-[0.2em]">
+            <a
+              href={`/${locale}`}
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "rounded-none px-0 font-mono text-sm font-bold tracking-[0.2em]",
+              )}
+            >
               INDRA.DEV
             </a>
             <p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">
               {labels.description}
             </p>
           </div>
-          <nav aria-label={labels.navigationLabel} className="flex items-center gap-6">
+          <nav aria-label={labels.navigationLabel} className="flex items-center gap-1">
             <a
-              className="transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
               href={blogUrl}
               aria-label={labels.blog}
               title={labels.blog}
@@ -52,7 +59,7 @@ export function SiteFooter({
               <LuFileText className="size-5" aria-hidden="true" />
             </a>
             <a
-              className="transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
               href={githubUrl}
               target="_blank"
               rel="noreferrer"
@@ -62,7 +69,7 @@ export function SiteFooter({
               <FaGithub className="size-5" />
             </a>
             <a
-              className="transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
               href={linkedinUrl}
               target="_blank"
               rel="noreferrer"
@@ -72,7 +79,7 @@ export function SiteFooter({
               <FaLinkedin className="size-5" />
             </a>
             <a
-              className="transition-colors hover:text-accent"
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
               href={`mailto:${email}`}
               aria-label={labels.email}
               title={labels.email}
@@ -81,7 +88,7 @@ export function SiteFooter({
             </a>
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} Mahadi Indra Manurung. {labels.rights}
           </p>

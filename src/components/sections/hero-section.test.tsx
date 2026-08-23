@@ -31,7 +31,7 @@ describe("HeroSection", () => {
     expect(downloadLink).not.toHaveAttribute("data-next-link");
   });
 
-  test("defers the below-the-fold mobile hero image", () => {
+  test("loads the portrait eagerly for first-viewport visibility", () => {
     render(
       <HeroSection
         profile={profile}
@@ -43,8 +43,8 @@ describe("HeroSection", () => {
     );
 
     const image = screen.getByRole("img");
-    expect(image.closest("div.relative.mx-auto")).toHaveClass("mt-8");
-    expect(image).toHaveAttribute("loading", "lazy");
+
+    expect(image).toHaveAttribute("loading", "eager");
     expect(image).toHaveAttribute("decoding", "async");
     expect(image).toHaveAttribute("width", "380");
     expect(image).toHaveAttribute("height", "480");
