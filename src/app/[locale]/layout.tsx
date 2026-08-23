@@ -93,6 +93,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
               skipToContent: dictionary.actions.skipToContent,
               primaryNav: dictionary.navigation.primaryLabel,
               themeToggle: dictionary.theme.label,
+              scrollToTop: dictionary.actions.scrollToTop,
               switchLanguage: dictionary.actions.switchLanguage,
               languageNames: dictionary.actions.languageNames,
               mobileNavDescription: dictionary.mobileNavigation.description,

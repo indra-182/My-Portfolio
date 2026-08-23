@@ -164,7 +164,9 @@
   }
 
   .site-nav-link:hover,
-  .site-nav-link:focus-visible {
+  .site-nav-link:focus-visible,
+  .site-nav-link.is-active,
+  .site-nav-link[aria-current="location"] {
     border-color: var(--cue-rose);
     color: var(--foreground);
   }
@@ -197,6 +199,27 @@
     border-bottom-color: var(--cue-rose);
     background: transparent;
     color: var(--foreground);
+  }
+  .scroll-to-top {
+    position: fixed;
+    right: max(1rem, calc((100vw - var(--content-max)) / 2));
+    bottom: 1rem;
+    z-index: 25;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(0.75rem);
+    transition:
+      opacity var(--motion-fast) ease,
+      visibility var(--motion-fast) ease,
+      transform var(--motion-fast) ease;
+  }
+
+  .scroll-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .skip-link {
