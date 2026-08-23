@@ -31,6 +31,8 @@ Maintain WCAG AA contrast for text and controls. Use the existing destructive an
 ## Layout and components
 
 - Use the existing `content-shell`, which is capped by `--content-max` and widens its side gutters at desktop sizes.
+- Use semantic token roles for surfaces and controls: `card` for bounded content surfaces, `popover` for overlays, `primary` for the blue action, `secondary` for quiet controls, `muted` for low-emphasis surfaces, `input` for control borders, and `ring` for focus indication. These roles map to the existing palette in `src/styles/design-tokens.css`; they do not introduce new hues.
+- Use the editable shadcn-compatible `Button` and `Badge` primitives in `src/components/ui` for repeated controls and technology or topic labels. They are native, server-safe elements with `data-slot` attributes, `class-variance-authority` variants, and no `asChild`, render-prop, Base UI, Radix, or client-provider dependency.
 - Keep the page mobile-first and test at 375, 768, 1024, and 1440px. Never introduce horizontal overflow.
 - Prefer editorial sections separated by borders and intentional whitespace. Existing content cards are mostly rectangular with small control radii, not a wall of floating rounded cards.
 - Keep header and footer behavior consistent: wordmark, locale switcher, theme toggle, navigation, skip link, and direct contact or blog actions.

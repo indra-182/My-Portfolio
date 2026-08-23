@@ -1,7 +1,9 @@
 import { LuArrowUpRight } from "react-icons/lu";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
-
 export type LatestWritingCopy = {
   eyebrow: string;
   heading: string;
@@ -38,14 +40,14 @@ export function LatestWritingSection({
   return (
     <section
       id="writing"
-      className="border-t border-border py-20 sm:py-28"
+      className="border-b border-border py-16 sm:py-24"
       aria-labelledby="writing-title"
     >
       <div className="content-shell">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-5 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              {copy.eyebrow}
+              04 / {copy.eyebrow}
             </p>
             <h2
               id="writing-title"
@@ -57,7 +59,7 @@ export function LatestWritingSection({
           {result.status === "ready" ? (
             <a
               href={blogUrl}
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+              className={cn(buttonVariants({ variant: "ghost" }), "gap-2 px-3 text-sm")}
             >
               {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
@@ -67,7 +69,7 @@ export function LatestWritingSection({
         {visiblePosts.length > 0 ? (
           <div
             data-layout={layout}
-            className={`mt-10 grid gap-4 ${
+            className={`mt-8 grid gap-px border border-border bg-border ${
               visiblePosts.length === 1
                 ? "md:grid-cols-[minmax(0,1.55fr)_minmax(18rem,0.85fr)]"
                 : visiblePosts.length === 2
@@ -75,25 +77,28 @@ export function LatestWritingSection({
                   : "md:grid-cols-3"
             }`}
           >
-            {visiblePosts.map((post) => (
+            {visiblePosts.map((post, index) => (
               <article
                 key={post.slug}
-                className={`group relative flex min-h-64 flex-col border border-border bg-background p-6 transition-colors duration-[var(--motion-fast)] hover:bg-surface ${
+                className={`group relative flex min-h-64 flex-col bg-background p-6 transition-colors duration-[var(--motion-fast)] hover:bg-surface ${
                   visiblePosts.length === 1 ? "sm:p-8" : ""
                 }`}
               >
-                <div className="flex items-center justify-between gap-4 text-xs font-medium text-muted-foreground">
-                  <span>{post.topics[0]}</span>
+                <div className="flex items-center justify-between gap-4 text-xs text-muted-foreground">
+                  <Badge variant="outline">{post.topics[0]}</Badge>
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
                 </div>
+                <p className="mt-8 font-mono text-[0.65rem] text-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
                 <h3
-                  className={`mt-8 font-semibold tracking-tight ${
+                  className={`mt-2 font-semibold tracking-tight ${
                     visiblePosts.length === 1 ? "text-2xl sm:text-3xl" : "text-xl"
                   }`}
                 >
                   <a
                     href={`${blogUrl}/blog/${post.slug}`}
-                    className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+                    className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     {post.title}
                   </a>
@@ -115,7 +120,7 @@ export function LatestWritingSection({
             {visiblePosts.length === 1 ? (
               <aside
                 aria-labelledby="writing-aside-title"
-                className="relative flex min-h-64 flex-col justify-between overflow-hidden border border-border bg-surface p-6 sm:p-8"
+                className="relative flex min-h-64 flex-col justify-between overflow-hidden bg-surface p-6 sm:p-8"
               >
                 <div className="relative z-10">
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
@@ -141,12 +146,9 @@ export function LatestWritingSection({
             ) : null}
           </div>
         ) : (
-          <div className="mt-10 border border-border bg-surface p-7 sm:p-10">
+          <div className="mt-8 border border-border bg-surface p-7 sm:p-10">
             <p className="max-w-xl text-lg leading-8 text-muted-foreground">{copy.unavailable}</p>
-            <a
-              href={blogUrl}
-              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
-            >
+            <a href={blogUrl} className={cn(buttonVariants({ size: "lg" }), "mt-6 gap-2")}>
               {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
