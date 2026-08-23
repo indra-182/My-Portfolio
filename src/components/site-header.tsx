@@ -5,7 +5,7 @@ import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-export type SiteNavItem = { label: string; href: string; active?: boolean };
+export type SiteNavItem = { label: string; href: string };
 
 export type SiteHeaderLabels = {
   skipToContent: string;
@@ -40,12 +40,7 @@ export function SiteHeader({
         </a>
         <nav aria-label={labels.primaryNav} className="site-nav">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              aria-current={item.active ? "page" : undefined}
-              className="site-nav-link"
-            >
+            <a key={item.href} href={item.href} className="site-nav-link">
               {item.label}
             </a>
           ))}
@@ -53,7 +48,6 @@ export function SiteHeader({
         <div className="site-controls">
           <LocaleSwitcher
             locale={locale}
-            targetPath={`/${locale}`}
             labelTemplate={labels.switchLanguage}
             languageNames={labels.languageNames}
           />

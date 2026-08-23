@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { LuMenu, LuX } from "react-icons/lu";
 
-export type MobileNavigationItem = { label: string; href: string; active?: boolean };
+export type MobileNavigationItem = { label: string; href: string };
 
 export function MobileNavigation({
   items,
@@ -52,7 +52,7 @@ export function MobileNavigation({
         </Button>
         <nav aria-label={navLabel} className="mobile-navigation-links">
           {items.map((item) => (
-            <a key={item.href} href={item.href} aria-current={item.active ? "page" : undefined}>
+            <a key={item.href} href={item.href}>
               <span>{item.label}</span>
             </a>
           ))}

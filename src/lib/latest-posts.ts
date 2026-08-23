@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
 
 const latestPostSchema = z.object({
@@ -21,7 +20,7 @@ const latestPostsLimit = 3;
 const latestPostsRevalidateSeconds = 3600;
 const latestPostsTimeoutMs = 2000;
 
-export async function getLatestPosts(locale: Locale, blogUrl: string): Promise<LatestFeedResult> {
+export async function getLatestPosts(blogUrl: string): Promise<LatestFeedResult> {
   const endpoint = new URL("/api/posts/latest", `${blogUrl}/`);
   endpoint.searchParams.set("limit", String(latestPostsLimit));
 

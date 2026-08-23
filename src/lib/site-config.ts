@@ -20,5 +20,3 @@ export const siteConfig = siteConfigSchema.parse({
   githubUrl: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/indra-182",
   cvHref: "/documents/mahadi-indra-cv.pdf",
 });
-
-export type SiteConfig = typeof siteConfig;

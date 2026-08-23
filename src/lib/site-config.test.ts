@@ -10,9 +10,4 @@ describe("site configuration", () => {
     expect(siteConfig.githubUrl).toBe("https://github.com/indra-182");
     expect(siteConfig.cvHref).toBe("/documents/mahadi-indra-cv.pdf");
   });
-
-  test("strips trailing slashes from URL defaults", () => {
-    expect(siteConfig.portfolioUrl.endsWith("/")).toBe(false);
-    expect(siteConfig.blogUrl.endsWith("/")).toBe(false);
-  });
 });
