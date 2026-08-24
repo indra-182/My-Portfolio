@@ -1,4 +1,4 @@
-const siteInteractions = String.raw`
+const siteInteractions = `
 (() => {
   const root = document.documentElement;
   let storedTheme = null;

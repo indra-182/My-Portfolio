@@ -129,11 +129,8 @@ test("redirects the root route to the default locale", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
 });
 
-test("opens and closes the mobile navigation with keyboard escape", async ({ page }, testInfo) => {
-  test.skip(
-    testInfo.project.name !== "mobile",
-    "Mobile navigation is covered by the mobile project.",
-  );
+test("opens and closes the mobile navigation with keyboard escape", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/id");
   await page.getByRole("button", { name: /buka menu/i }).click();
   await expect(page.getByRole("dialog")).toBeVisible();

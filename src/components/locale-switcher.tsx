@@ -1,7 +1,7 @@
 import { LuLanguages } from "react-icons/lu";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getOtherLocale, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
 export function LocaleSwitcher({
   locale,
@@ -12,7 +12,7 @@ export function LocaleSwitcher({
   labelTemplate: string;
   languageNames: Record<Locale, string>;
 }) {
-  const targetLocale = getOtherLocale(locale);
+  const targetLocale = locale === "id" ? "en" : "id";
   const label = labelTemplate.replace("{language}", languageNames[targetLocale]);
 
   return (

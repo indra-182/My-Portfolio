@@ -16,7 +16,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   if (!isLocale(value)) notFound();
   const locale: Locale = value;
   const portfolio = getPortfolio(locale);
-  const dictionary = await getDictionary(locale);
+  const dictionary = getDictionary(locale);
   const latestWriting = await getLatestPosts(siteConfig.blogUrl);
 
   const personJsonLd = {
