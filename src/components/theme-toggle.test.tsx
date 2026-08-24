@@ -3,8 +3,8 @@ import { expect, test } from "vitest";
 import { getDictionary } from "@/i18n/dictionaries";
 import { ThemeToggle } from "./theme-toggle";
 
-test("renders an accessible theme control without a React client boundary", async () => {
-  const dictionary = await getDictionary("en");
+test("renders an accessible theme control without a React client boundary", () => {
+  const dictionary = getDictionary("en");
   render(<ThemeToggle label={dictionary.theme.label} />);
   const toggle = screen.getByRole("button", { name: dictionary.theme.label });
 

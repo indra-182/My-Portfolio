@@ -42,8 +42,8 @@ const onePost = posts.slice(0, 1);
 const twoPosts = posts.slice(0, 2);
 
 describe("LatestWritingSection", () => {
-  test("renders at most three article links when the feed is ready", async () => {
-    const dictionary = await getDictionary("id");
+  test("renders at most three article links when the feed is ready", () => {
+    const dictionary = getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
@@ -68,8 +68,8 @@ describe("LatestWritingSection", () => {
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
   });
 
-  test("uses a featured layout and editorial aside for one post", async () => {
-    const dictionary = await getDictionary("id");
+  test("uses a featured layout and editorial aside for one post", () => {
+    const dictionary = getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
@@ -86,8 +86,8 @@ describe("LatestWritingSection", () => {
     ).toBeInTheDocument();
   });
 
-  test("uses an even layout for two posts without an editorial aside", async () => {
-    const dictionary = await getDictionary("id");
+  test("uses an even layout for two posts without an editorial aside", () => {
+    const dictionary = getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
@@ -102,8 +102,8 @@ describe("LatestWritingSection", () => {
     expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });
 
-  test("renders a direct blog link instead of an empty grid when unavailable", async () => {
-    const dictionary = await getDictionary("en");
+  test("renders a direct blog link instead of an empty grid when unavailable", () => {
+    const dictionary = getDictionary("en");
     render(
       <LatestWritingSection
         locale="en"

@@ -6,8 +6,8 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 describe("site shell", () => {
-  test("renders identity, blog link, and current copyright", async () => {
-    const dictionary = await getDictionary("id");
+  test("renders identity, blog link, and current copyright", () => {
+    const dictionary = getDictionary("id");
 
     render(
       <SiteFooter
@@ -49,8 +49,8 @@ describe("site shell", () => {
     expect(screen.getByText("Bogor/Indonesia")).toBeVisible();
   });
 
-  test("does not render the CV action in the navbar", async () => {
-    const dictionary = await getDictionary("id");
+  test("does not render the CV action in the navbar", () => {
+    const dictionary = getDictionary("id");
     render(
       <SiteHeader
         locale="id"
@@ -73,8 +73,8 @@ describe("site shell", () => {
     expect(screen.queryByRole("link", { name: /unduh cv/i })).not.toBeInTheDocument();
   });
 
-  test.each(["id", "en"] as const)("labels the primary navigation in %s", async (locale) => {
-    const dictionary = await getDictionary(locale);
+  test.each(["id", "en"] as const)("labels the primary navigation in %s", (locale) => {
+    const dictionary = getDictionary(locale);
 
     render(
       <SiteHeader

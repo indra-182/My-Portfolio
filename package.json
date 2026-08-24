@@ -15,7 +15,6 @@
     "test:e2e": "playwright test",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "prepare": "husky",
     "verify": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run build && pnpm run test:e2e"
   },
   "dependencies": {
@@ -42,10 +41,8 @@
     "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
-    "husky": "^9.1.7",
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
-    "shadcn": "^4.16.2",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"

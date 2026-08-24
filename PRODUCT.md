@@ -43,7 +43,7 @@ Recruiters scan the portfolio across desktop and mobile, in Indonesian or Englis
 
 - `src/content/portfolio.ts` contains localized profile, role, location, headline, value proposition, capabilities source material, Indivara Group experience, and these supplied projects: Petron Philippines Corporate Dashboard, Maybank Unit Trust, BCA Fixed Income, Pegadaian Asuransi, and Bank Danamon Mutual Fund. It also contains four approved testimonials.
 - `src/lib/latest-posts.ts` provides an optional validated technical-writing feed with an unavailable fallback.
-- `public/images/mahadi-indra.webp` and `public/images/mahadi-indra.png` provide the formal portrait assets.
+- `public/images/mahadi-indra.webp` provides the formal portrait asset.
 - `public/documents/mahadi-indra-cv.pdf` provides the CV download.
 - `src/lib/site-config.ts` provides the portfolio, blog, email, LinkedIn, GitHub, and CV configuration boundaries.
 

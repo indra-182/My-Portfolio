@@ -4,7 +4,7 @@ import { defaultLocale, isLocale } from "@/i18n/config";
 export default async function NotFound({ params }: { params?: Promise<{ locale?: string }> }) {
   const value = (await params)?.locale;
   const locale = value !== undefined && isLocale(value) ? value : defaultLocale;
-  const dictionary = await getDictionary(locale);
+  const dictionary = getDictionary(locale);
 
   return (
     <section className="content-shell flex min-h-[50vh] flex-col justify-center py-20">

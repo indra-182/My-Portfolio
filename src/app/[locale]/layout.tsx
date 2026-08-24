@@ -22,7 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: value } = await params;
   const locale: Locale = isLocale(value) ? value : defaultLocale;
-  const dictionary = await getDictionary(locale);
+  const dictionary = getDictionary(locale);
   const portfolio = getPortfolio(locale);
   const title = `${portfolio.profile.role}: ${portfolio.profile.name}`;
   const description = portfolio.profile.valueProposition;
@@ -58,7 +58,7 @@ export default async function LocaleLayout({
   const { locale: value } = await params;
   if (!isLocale(value)) notFound();
   const locale = value;
-  const dictionary = await getDictionary(locale);
+  const dictionary = getDictionary(locale);
   const navItems = [
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
     { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
