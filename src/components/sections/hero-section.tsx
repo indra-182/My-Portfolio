@@ -56,6 +56,7 @@ export function HeroSection({
                 width={380}
                 height={480}
                 loading="eager"
+                fetchPriority="high"
                 decoding="async"
                 className="cue-portrait"
               />

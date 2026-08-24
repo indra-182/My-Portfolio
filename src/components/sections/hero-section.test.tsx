@@ -39,6 +39,7 @@ describe("HeroSection", () => {
     const image = screen.getByRole("img");
 
     expect(image).toHaveAttribute("loading", "eager");
+    expect(image).toHaveAttribute("fetchpriority", "high");
     expect(image).toHaveAttribute("decoding", "async");
     expect(image).toHaveAttribute("width", "380");
     expect(image).toHaveAttribute("height", "480");
