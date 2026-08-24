@@ -446,7 +446,7 @@
   }
 
   .cue-hero-stage {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
@@ -1065,6 +1065,7 @@
   }
 
   .cue-hero-stage {
+    display: flex;
     margin-right: 1rem;
     padding-top: 2rem;
   }
@@ -1086,17 +1087,16 @@
 }
 
 @media (max-width: 639px) {
+  .cue-hero {
+    min-height: 100svh;
+    padding-bottom: 3rem;
+  }
+
   .cue-hero-copy h1 {
     max-width: none;
     font-size: clamp(2.3rem, 10vw, 3rem);
     overflow-wrap: normal;
     word-break: normal;
-  }
-
-  .cue-hero-stage {
-    width: 100%;
-    max-width: none;
-    min-width: 0;
   }
 
   .experience-context {
