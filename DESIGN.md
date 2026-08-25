@@ -220,7 +220,7 @@ The proof sequence remains Hero -> Capabilities -> Projects -> Testimonials -> W
 
 Cue Horizon uses tonal layering more than elevation. Depth comes from the hero gradients, the fixed cobalt horizon, the rose lower wash, thin structural borders, and surface changes between the background, stage surface, and strong stage surface. Shadows are reserved for the portrait frame and featured case study so the stage remains flat elsewhere.
 
-Motion uses `--motion-fast: 180ms` for control and link state transitions and `--motion-enter: 480ms` for the single hero-copy rise. The entrance uses opacity with a `0.75rem` upward offset and a decelerating `cubic-bezier(0.22, 1, 0.36, 1)`. Under `prefers-reduced-motion: reduce`, both motion tokens become `0ms`, smooth scrolling becomes automatic, and `.animate-cue-rise` has no animation so content is immediately present.
+Motion uses `--motion-fast: 180ms` for control and link state transitions and `--motion-enter: 480ms` for the hero-copy rise. The authored focal moment is the featured Petron workflow cue: its four segments draw from left to right as the featured case enters the viewport, moving through rose, rose-cobalt, cobalt, and white-day. A native CSS view timeline drives the sequence without JavaScript or an observer; unsupported browsers keep the complete static cue. Secondary disclosure borders and action labels transition on open, writing cards transition color and move their outbound arrow by at most `0.25rem`, and contact buttons retain their existing control transitions. Under `prefers-reduced-motion: reduce`, both motion tokens become `0ms`, smooth scrolling becomes automatic, spatial animation is removed, and all content and state remain immediately legible.
 
 ### Shadow Vocabulary
 
@@ -283,10 +283,10 @@ Navigation labels, disclosure state, testimonial hierarchy, and writing fallback
 
 ### Cards / Containers
 
-- **Featured case:** The first project is a strong stage surface with `clamp(1.35rem, 3vw, 2.5rem)` internal padding, a thin border, a four-part non-numeric cue line, all four evidence fields, and technologies. Its visible heading is Petron Philippines Corporate Dashboard.
-- **Disclosure rows:** The remaining four projects are native `<details>` elements. Summaries expose title, one-line summary, and localized open or close text. Details are closed initially and reveal Problem, Ownership, Delivery, Outcome, and Technologies when opened.
+- **Featured case:** The first project is a strong stage surface with `clamp(1.35rem, 3vw, 2.5rem)` internal padding, a thin border, a four-part non-numeric cue line, all four evidence fields, and technologies. Its visible heading is Petron Philippines Corporate Dashboard. The cue line is the single authored focal moment: its four segments draw sequentially during viewport entry and remain complete at rest.
+- **Disclosure rows:** The remaining four projects are native `<details>` elements. Summaries expose title, one-line summary, and localized open or close text. Details are closed initially and reveal Problem, Ownership, Delivery, Outcome, and Technologies when opened. Border and action-label color transitions acknowledge the native state change without animating the disclosed content.
 - **Testimonials:** Collaborator and mentoring quotes sit in a one-pixel separated grid on the muted stage surface. The first two supplied testimonials are delivery proof; the remaining two are mentoring proof. An empty approved testimonial array renders no section.
-- **Writing:** A ready feed renders up to three localized posts. One post adds a cobalt aside. Writing title links and blog action links use `min-height: 2.75rem` targets. An unavailable or invalid feed renders a bordered strong-surface fallback with an actionable technical blog link and leaves the rest of the portfolio usable.
+- **Writing:** A ready feed renders up to three localized posts. One post adds a cobalt aside. Writing title links and blog action links use `min-height: 2.75rem` targets. Cards transition color and move the outbound arrow by at most `0.25rem` on hover or keyboard focus. An unavailable or invalid feed renders a bordered strong-surface fallback with an actionable technical blog link and leaves the rest of the portfolio usable.
 
 ### Navigation
 
@@ -311,7 +311,7 @@ The Contact section uses a large heading, a restrained cobalt radial field, and 
 - Secondary case studies use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
 - The writing feed is optional. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without blocking cases, testimonials, or contact.
 - All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, contact actions, and fallback copy. The two locale surfaces preserve the same proof order.
-- Reduced motion removes the hero entrance animation and smooth scrolling while leaving all content available immediately.
+- Reduced motion removes the hero and workflow-cue entrances, removes the writing-arrow displacement, and disables smooth scrolling while leaving all content and state feedback available immediately.
 
 ## Do's and Don'ts
 
