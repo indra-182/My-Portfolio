@@ -123,6 +123,27 @@ test("defaults to dark theme on first visit", async ({ browser }) => {
   await context.close();
 });
 
+test("keeps workflow evidence legible with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/id");
+
+  const cueSegment = page.locator(".workflow-cue-line span").first();
+  await expect(cueSegment).toBeVisible();
+  await expect
+    .poll(() =>
+      cueSegment.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return { animationName: style.animationName, transform: style.transform };
+      }),
+    )
+    .toEqual({ animationName: "none", transform: "none" });
+  await expect
+    .poll(() =>
+      page.locator("html").evaluate((element) => getComputedStyle(element).scrollBehavior),
+    )
+    .toBe("auto");
+});
+
 test("redirects the root route to the default locale", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/id$/);
