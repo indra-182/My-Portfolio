@@ -43,7 +43,7 @@ export function HeroSection({
             </div>
             <p className="cue-location">
               <LuMapPin aria-hidden="true" className="size-4" />
-              {profile.location}
+              {profile.location.locality}, {profile.location.countryName}
             </p>
           </div>
           <div className="cue-hero-stage">

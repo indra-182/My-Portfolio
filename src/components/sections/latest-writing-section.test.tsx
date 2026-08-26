@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { getDictionary } from "@/i18n/dictionaries";
-import { LatestWritingSection } from "./latest-writing-section";
+import { LatestWritingLoading, LatestWritingSection } from "./latest-writing-section";
 
 const posts = [
   {
@@ -47,7 +47,6 @@ describe("LatestWritingSection", () => {
     const { container } = render(
       <LatestWritingSection
         locale="id"
-        blogUrl="https://blog.example"
         result={{ status: "ready", posts }}
         copy={dictionary.writing}
       />,
@@ -56,11 +55,11 @@ describe("LatestWritingSection", () => {
     expect(container.querySelector('[data-count="3"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
       "href",
-      "https://blog.example/blog/resilient-client-state",
+      "https://blog-indra.vercel.app/blog/resilient-client-state",
     );
     expect(screen.getByRole("link", { name: dictionary.writing.visitBlog })).toHaveAttribute(
       "href",
-      "https://blog.example",
+      "https://blog-indra.vercel.app",
     );
     expect(screen.getByText("6 menit baca")).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(3);
@@ -73,7 +72,6 @@ describe("LatestWritingSection", () => {
     const { container } = render(
       <LatestWritingSection
         locale="id"
-        blogUrl="https://blog.example"
         result={{ status: "ready", posts: onePost }}
         copy={dictionary.writing}
       />,
@@ -91,7 +89,6 @@ describe("LatestWritingSection", () => {
     const { container } = render(
       <LatestWritingSection
         locale="id"
-        blogUrl="https://blog.example"
         result={{ status: "ready", posts: twoPosts }}
         copy={dictionary.writing}
       />,
@@ -107,7 +104,6 @@ describe("LatestWritingSection", () => {
     render(
       <LatestWritingSection
         locale="en"
-        blogUrl="https://blog.example"
         result={{ status: "unavailable" }}
         copy={dictionary.writing}
       />,
@@ -115,9 +111,20 @@ describe("LatestWritingSection", () => {
 
     expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
       "href",
-      "https://blog.example",
+      "https://blog-indra.vercel.app",
     );
     expect(screen.getByText(dictionary.writing.unavailable)).toBeInTheDocument();
     expect(screen.queryAllByRole("article")).toHaveLength(0);
+  });
+
+  test("renders a stable non-interactive shell while the feed streams", () => {
+    const dictionary = getDictionary("en");
+    const { container } = render(<LatestWritingLoading copy={dictionary.writing} />);
+
+    expect(screen.getByRole("heading", { name: dictionary.writing.heading })).toBeVisible();
+    expect(container.querySelector("#writing")).toHaveAttribute("aria-busy", "true");
+    expect(container.querySelector(".writing-loading")).toBeInTheDocument();
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    expect(screen.queryByRole("article")).not.toBeInTheDocument();
   });
 });

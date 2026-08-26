@@ -5,7 +5,7 @@ import { HeroSection } from "./hero-section";
 const profile = {
   name: "Mahadi Indra Manurung",
   role: "Senior Frontend Engineer",
-  location: "Bogor, Indonesia",
+  location: { locality: "Bogor", countryName: "Indonesia", countryCode: "ID" },
   headline: "Building product interfaces that are clear and resilient.",
   valueProposition: "I turn complex workflows into understandable frontend experiences.",
   imageSrc: "/images/mahadi-indra.webp",
@@ -24,6 +24,7 @@ describe("HeroSection", () => {
   test("makes direct email the primary action and keeps the CV downloadable", () => {
     render(<HeroSection {...props} />);
     expect(screen.getByRole("heading", { name: profile.headline })).toBeVisible();
+    expect(screen.getByText("Bogor, Indonesia")).toBeVisible();
     const emailLink = screen.getByRole("link", { name: /email me/i });
     const downloadLink = screen.getByRole("link", { name: /download cv/i });
 

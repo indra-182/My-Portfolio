@@ -1,29 +1,49 @@
-const siteInteractions = `
+import {
+  SITE_INTERACTION,
+  SITE_INTERACTION_ATTRIBUTE,
+  type SiteInteraction,
+} from "@/components/site-interaction-contract";
+
+const selectorFor = (interaction: SiteInteraction) =>
+  `[${SITE_INTERACTION_ATTRIBUTE}='${interaction}']`;
+
+const selectors = {
+  themeToggle: selectorFor(SITE_INTERACTION.themeToggle),
+  scrollToTop: selectorFor(SITE_INTERACTION.scrollToTop),
+  activeNavLink: selectorFor(SITE_INTERACTION.activeNavLink),
+  header: selectorFor(SITE_INTERACTION.header),
+  mobileNavigation: selectorFor(SITE_INTERACTION.mobileNavigation),
+  mobileNavigationOpen: selectorFor(SITE_INTERACTION.mobileNavigationOpen),
+  mobileNavigationClose: selectorFor(SITE_INTERACTION.mobileNavigationClose),
+};
+
+const siteInteractions = String.raw`
 (() => {
   const root = document.documentElement;
   let storedTheme = null;
-
-  try {
-    storedTheme = localStorage.getItem("theme");
-  } catch {}
 
   const applyTheme = (theme) => {
     root.classList.toggle("dark", theme === "dark");
     root.classList.toggle("light", theme === "light");
   };
 
+  try {
+    storedTheme = localStorage.getItem("theme");
+  } catch {}
+
   applyTheme(storedTheme === "light" ? "light" : "dark");
 
   const start = () => {
-
-    const scrollToTopButton = document.querySelector("[data-scroll-to-top]");
-    const navLinks = [...document.querySelectorAll(".site-nav-link[href*='#']")].map((link) => {
-      const hash = new URL(link.href, window.location.href).hash;
-      return {
-        link,
-        section: hash ? document.querySelector(hash) : null,
-      };
-    });
+    const scrollToTopButton = document.querySelector("${selectors.scrollToTop}");
+    const navLinks = [...document.querySelectorAll("${selectors.activeNavLink}[href*='#']")].map(
+      (link) => {
+        const hash = new URL(link.href, window.location.href).hash;
+        return {
+          link,
+          section: hash ? document.querySelector(hash) : null,
+        };
+      },
+    );
     const scrollThreshold = 480;
 
     const updateScrollState = () => {
@@ -32,7 +52,7 @@ const siteInteractions = `
         scrollToTopButton.classList.toggle("is-visible", isVisible);
       }
 
-      const header = document.querySelector(".site-header");
+      const header = document.querySelector("${selectors.header}");
       const activationLine = (header?.getBoundingClientRect().height ?? 0) + 64;
       let activeLink = null;
 
@@ -60,7 +80,7 @@ const siteInteractions = `
       const target = event.target;
       if (!(target instanceof Element)) return;
 
-      const scrollToTop = target.closest("[data-scroll-to-top]");
+      const scrollToTop = target.closest("${selectors.scrollToTop}");
       if (scrollToTop instanceof HTMLButtonElement) {
         const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
@@ -69,7 +89,7 @@ const siteInteractions = `
         return;
       }
 
-      const themeToggle = target.closest("[data-theme-toggle]");
+      const themeToggle = target.closest("${selectors.themeToggle}");
       if (!(themeToggle instanceof HTMLButtonElement)) return;
 
       const nextTheme = root.classList.contains("dark") ? "light" : "dark";
@@ -79,10 +99,10 @@ const siteInteractions = `
       } catch {}
     });
 
-    document.querySelectorAll("[data-mobile-navigation]").forEach((navigation) => {
+    document.querySelectorAll("${selectors.mobileNavigation}").forEach((navigation) => {
       const dialog = navigation.querySelector("dialog");
-      const openButton = navigation.querySelector("[data-mobile-navigation-open]");
-      const closeButton = navigation.querySelector("[data-mobile-navigation-close]");
+      const openButton = navigation.querySelector("${selectors.mobileNavigationOpen}");
+      const closeButton = navigation.querySelector("${selectors.mobileNavigationClose}");
 
       if (!(dialog instanceof HTMLDialogElement) || !(openButton instanceof HTMLButtonElement)) {
         return;

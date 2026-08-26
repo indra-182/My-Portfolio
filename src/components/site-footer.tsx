@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuFileText, LuMail } from "react-icons/lu";
+import type { PortfolioContent } from "@/content/portfolio-schema";
 import type { Locale } from "@/i18n/config";
 
 export type SiteFooterLabels = {
@@ -9,7 +10,6 @@ export type SiteFooterLabels = {
   github: string;
   linkedin: string;
   email: string;
-  location: string;
   rights: string;
 };
 
@@ -19,6 +19,7 @@ export function SiteFooter({
   githubUrl,
   email,
   linkedinUrl,
+  identity,
   labels,
 }: {
   locale: Locale;
@@ -26,6 +27,7 @@ export function SiteFooter({
   githubUrl: string;
   email: string;
   linkedinUrl: string;
+  identity: Pick<PortfolioContent["profile"], "name" | "location">;
   labels: SiteFooterLabels;
 }) {
   const year = new Date().getFullYear();
@@ -85,9 +87,11 @@ export function SiteFooter({
         </div>
         <div className="site-footer-meta">
           <p>
-            © {year} Mahadi Indra Manurung. {labels.rights}
+            © {year} {identity.name}. {labels.rights}
           </p>
-          <span>{labels.location}</span>
+          <span>
+            {identity.location.locality}/{identity.location.countryName}
+          </span>
         </div>
       </div>
     </footer>

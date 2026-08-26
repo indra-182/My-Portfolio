@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteInteractions } from "@/components/site-interactions";
 import { getDictionary } from "@/i18n/dictionaries";
-import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
+import { defaultLocale, locales } from "@/i18n/config";
+import { requireLocale } from "@/i18n/route-locale";
+import { blog } from "@/lib/blog";
 import { getPortfolio } from "@/lib/get-portfolio";
 import { siteConfig } from "@/lib/site-config";
 import "../globals.css";
@@ -21,7 +22,7 @@ export async function generateMetadata({
   params: Promise<LocaleParams>;
 }): Promise<Metadata> {
   const { locale: value } = await params;
-  const locale: Locale = isLocale(value) ? value : defaultLocale;
+  const locale = requireLocale(value);
   const dictionary = getDictionary(locale);
   const portfolio = getPortfolio(locale);
   const title = `${portfolio.profile.role}: ${portfolio.profile.name}`;
@@ -34,9 +35,8 @@ export async function generateMetadata({
     alternates: {
       canonical: `/${locale}`,
       languages: {
-        id: "/id",
-        en: "/en",
-        "x-default": "/id",
+        ...Object.fromEntries(locales.map((item) => [item, `/${item}`])),
+        "x-default": `/${defaultLocale}`,
       },
     },
     openGraph: {
@@ -56,9 +56,9 @@ export default async function LocaleLayout({
   params,
 }: Readonly<{ children: React.ReactNode; params: Promise<LocaleParams> }>) {
   const { locale: value } = await params;
-  if (!isLocale(value)) notFound();
-  const locale = value;
+  const locale = requireLocale(value);
   const dictionary = getDictionary(locale);
+  const portfolio = getPortfolio(locale);
   const navItems = [
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
     { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
@@ -107,10 +107,11 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </main>
           <SiteFooter
             locale={locale}
-            blogUrl={siteConfig.blogUrl}
+            blogUrl={blog.homeUrl}
             githubUrl={siteConfig.githubUrl}
             email={siteConfig.email}
             linkedinUrl={siteConfig.linkedinUrl}
+            identity={portfolio.profile}
             labels={{
               navigationLabel: dictionary.footer.navigationLabel,
               description: dictionary.footer.description,
@@ -118,7 +119,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
               github: dictionary.footer.github,
               linkedin: dictionary.footer.linkedin,
               email: dictionary.footer.email,
-              location: dictionary.footer.location,
               rights: dictionary.footer.rights,
             }}
           />

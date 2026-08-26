@@ -2,6 +2,8 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { blog } from "@/lib/blog";
+import { getLatestPosts } from "@/lib/latest-posts";
 import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
 
@@ -25,12 +27,10 @@ function formatDate(value: string, locale: Locale) {
 export function LatestWritingSection({
   locale,
   result,
-  blogUrl,
   copy,
 }: {
   locale: Locale;
   result: LatestFeedResult;
-  blogUrl: string;
   copy: LatestWritingCopy;
 }) {
   const visiblePosts = result.status === "ready" ? result.posts.slice(0, 3) : [];
@@ -44,7 +44,7 @@ export function LatestWritingSection({
               <h2 id="writing-title">{copy.heading}</h2>
               {result.status === "ready" ? (
                 <a
-                  href={blogUrl}
+                  href={blog.homeUrl}
                   className={cn(buttonVariants({ variant: "outline" }), "cue-button")}
                 >
                   {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
@@ -63,7 +63,7 @@ export function LatestWritingSection({
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
                 </div>
                 <h3>
-                  <a href={`${blogUrl}/blog/${post.slug}`}>{post.title}</a>
+                  <a href={blog.postUrl(post.slug)}>{post.title}</a>
                 </h3>
                 <p className="writing-card-description">{post.description}</p>
                 <div className="writing-card-footer">
@@ -85,11 +85,37 @@ export function LatestWritingSection({
         ) : (
           <div className="writing-fallback">
             <p>{copy.unavailable}</p>
-            <a href={blogUrl} className={cn(buttonVariants({ size: "lg" }), "cue-button")}>
+            <a href={blog.homeUrl} className={cn(buttonVariants({ size: "lg" }), "cue-button")}>
               {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
         )}
+      </div>
+    </section>
+  );
+}
+
+export async function LatestWriting({ locale, copy }: { locale: Locale; copy: LatestWritingCopy }) {
+  const result = await getLatestPosts();
+
+  return <LatestWritingSection locale={locale} result={result} copy={copy} />;
+}
+
+export function LatestWritingLoading({ copy }: { copy: LatestWritingCopy }) {
+  return (
+    <section
+      id="writing"
+      className="cue-section writing-section"
+      aria-labelledby="writing-title"
+      aria-busy="true"
+    >
+      <div className="content-shell">
+        <div className="cue-section-heading writing-heading">
+          <div className="writing-heading-row">
+            <h2 id="writing-title">{copy.heading}</h2>
+          </div>
+        </div>
+        <div className="writing-loading" aria-hidden="true" />
       </div>
     </section>
   );

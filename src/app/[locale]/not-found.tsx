@@ -1,9 +1,8 @@
 import { getDictionary } from "@/i18n/dictionaries";
-import { defaultLocale, isLocale } from "@/i18n/config";
+import { getRecoveryLocale } from "@/i18n/config";
 
 export default async function NotFound({ params }: { params?: Promise<{ locale?: string }> }) {
-  const value = (await params)?.locale;
-  const locale = value !== undefined && isLocale(value) ? value : defaultLocale;
+  const locale = getRecoveryLocale((await params)?.locale);
   const dictionary = getDictionary(locale);
 
   return (

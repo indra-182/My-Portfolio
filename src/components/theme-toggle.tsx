@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { LuMoon, LuSun } from "react-icons/lu";
+import { Button } from "@/components/ui/button";
+import { SITE_INTERACTION } from "@/components/site-interaction-contract";
 
 export function ThemeToggle({ label }: { label: string }) {
   return (
@@ -9,7 +10,7 @@ export function ThemeToggle({ label }: { label: string }) {
       size="icon"
       aria-label={label}
       title={label}
-      data-theme-toggle
+      data-site-interaction={SITE_INTERACTION.themeToggle}
       className="site-control"
     >
       <LuSun aria-hidden="true" data-theme-icon="light" className="size-4" />

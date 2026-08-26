@@ -39,9 +39,10 @@ describe("CaseStudiesSection", () => {
       const { container } = renderCaseStudies(locale);
       const portfolio = getPortfolio(locale);
       const projects = portfolio.experiences.flatMap((experience) => experience.projects);
+      const featuredProject = projects.find((project) => project.featured)!;
 
       expect(projects).toHaveLength(5);
-      expect(screen.getByRole("heading", { name: projects[0].title })).toBeVisible();
+      expect(screen.getByRole("heading", { name: featuredProject.title })).toBeVisible();
       expect(container.querySelectorAll("details")).toHaveLength(4);
     },
   );
@@ -49,7 +50,9 @@ describe("CaseStudiesSection", () => {
   test("shows the featured evidence and expands a secondary project", async () => {
     const user = userEvent.setup();
     const { container } = renderCaseStudies("en");
-    const project = getPortfolio("en").experiences[0].projects[1];
+    const project = getPortfolio("en")
+      .experiences.flatMap((experience) => experience.projects)
+      .find((candidate) => candidate.id === "maybank-unit-trust")!;
 
     expect(screen.getByText(project.summary)).toBeVisible();
     expect(screen.queryByText(project.outcome)).not.toBeVisible();
