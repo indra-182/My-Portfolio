@@ -2,29 +2,30 @@ import { CapabilitiesSection } from "@/components/sections/capabilities-section"
 import { CaseStudiesSection } from "@/components/sections/case-studies-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { HeroSection } from "@/components/sections/hero-section";
-import { LatestWritingSection } from "@/components/sections/latest-writing-section";
+import { LatestWriting, LatestWritingLoading } from "@/components/sections/latest-writing-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
-import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { getDictionary } from "@/i18n/dictionaries";
-import { isLocale, type Locale } from "@/i18n/config";
+import { requireLocale } from "@/i18n/route-locale";
 import { getPortfolio } from "@/lib/get-portfolio";
-import { getLatestPosts } from "@/lib/latest-posts";
 import { siteConfig } from "@/lib/site-config";
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;
-  if (!isLocale(value)) notFound();
-  const locale: Locale = value;
+  const locale = requireLocale(value);
   const portfolio = getPortfolio(locale);
   const dictionary = getDictionary(locale);
-  const latestWriting = await getLatestPosts(siteConfig.blogUrl);
 
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: portfolio.profile.name,
     jobTitle: portfolio.profile.role,
-    address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: portfolio.profile.location.locality,
+      addressCountry: portfolio.profile.location.countryCode,
+    },
     url: `${siteConfig.portfolioUrl}/${locale}`,
     sameAs: [siteConfig.linkedinUrl],
   };
@@ -70,12 +71,9 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         collaboratorLabel={dictionary.testimonials.collaboratorLabel}
         mentoringLabel={dictionary.testimonials.mentoringLabel}
       />
-      <LatestWritingSection
-        locale={locale}
-        result={latestWriting}
-        blogUrl={siteConfig.blogUrl}
-        copy={dictionary.writing}
-      />
+      <Suspense fallback={<LatestWritingLoading copy={dictionary.writing} />}>
+        <LatestWriting locale={locale} copy={dictionary.writing} />
+      </Suspense>
       <ContactSection
         heading={dictionary.contact.heading}
         description={dictionary.contact.description}

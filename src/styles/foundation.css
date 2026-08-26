@@ -1,0 +1,171 @@
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-heading:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-md);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth font-sans;
+    background: var(--background);
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  a {
+    @apply cursor-pointer underline-offset-4;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
+
+  [data-theme-icon="dark"] {
+    display: none;
+  }
+
+  .dark [data-theme-icon="light"] {
+    display: none;
+  }
+
+  .dark [data-theme-icon="dark"] {
+    display: block;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--cue-rose) 28%, transparent);
+  }
+}
+
+@layer utilities {
+  .content-shell {
+    width: min(calc(100% - 2rem), var(--content-max));
+    margin-inline: auto;
+  }
+
+  .cue-kicker {
+    color: var(--cue-rose);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .cue-button {
+    min-height: 2.75rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .cue-section {
+    position: relative;
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+    border-top: 1px solid var(--border);
+  }
+
+  .cue-section-muted {
+    background: var(--surface);
+  }
+
+  .cue-section-heading {
+    display: grid;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cue-section-heading h2 {
+    max-width: 16ch;
+    font-size: clamp(2.25rem, 5vw, 4.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  .cue-section-heading-wide {
+    gap: 1.5rem;
+  }
+
+  .cue-section-heading-wide > div > p {
+    max-width: 42rem;
+    margin-top: 1.25rem;
+    color: var(--muted-foreground);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .animate-cue-rise {
+    animation: cue-rise var(--motion-enter) cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes cue-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .content-shell {
+    width: min(calc(100% - 3rem), var(--content-max));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-cue-rise,
+  .workflow-cue-line span {
+    animation: none;
+  }
+}

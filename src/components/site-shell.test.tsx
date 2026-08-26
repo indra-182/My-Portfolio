@@ -1,8 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { SiteFooter } from "./site-footer";
+import { SITE_INTERACTION } from "./site-interaction-contract";
 import { SiteHeader } from "./site-header";
 
 describe("site shell", () => {
@@ -16,6 +17,10 @@ describe("site shell", () => {
         githubUrl="https://github.example"
         email="hello@example.com"
         linkedinUrl="https://linkedin.example"
+        identity={{
+          name: "Mahadi Indra Manurung",
+          location: { locality: "Bogor", countryName: "Indonesia", countryCode: "ID" },
+        }}
         labels={{
           navigationLabel: dictionary.footer.navigationLabel,
           description: dictionary.footer.description,
@@ -23,7 +28,6 @@ describe("site shell", () => {
           github: dictionary.footer.github,
           linkedin: dictionary.footer.linkedin,
           email: dictionary.footer.email,
-          location: dictionary.footer.location,
           rights: dictionary.footer.rights,
         }}
       />,
@@ -98,9 +102,32 @@ describe("site shell", () => {
       />,
     );
 
+    const primaryNavigation = screen.getByRole("navigation", {
+      name: dictionary.navigation.primaryLabel,
+    });
+    expect(screen.getByRole("banner")).toHaveAttribute(
+      "data-site-interaction",
+      SITE_INTERACTION.header,
+    );
     expect(
-      screen.getByRole("navigation", { name: dictionary.navigation.primaryLabel }),
-    ).toBeVisible();
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.capabilities }),
+    ).toHaveAttribute("data-site-interaction", SITE_INTERACTION.activeNavLink);
+    expect(screen.getByRole("button", { name: dictionary.actions.scrollToTop })).toHaveAttribute(
+      "data-site-interaction",
+      SITE_INTERACTION.scrollToTop,
+    );
+    expect(screen.getByRole("button", { name: dictionary.mobileNavigation.open })).toHaveAttribute(
+      "data-site-interaction",
+      SITE_INTERACTION.mobileNavigationOpen,
+    );
+    expect(
+      screen.getByRole("button", { name: dictionary.mobileNavigation.close, hidden: true }),
+    ).toHaveAttribute("data-site-interaction", SITE_INTERACTION.mobileNavigationClose);
+    expect(screen.getByRole("dialog", { hidden: true }).parentElement).toHaveAttribute(
+      "data-site-interaction",
+      SITE_INTERACTION.mobileNavigation,
+    );
+    expect(primaryNavigation).toBeVisible();
     expect(screen.getByRole("link", { name: /switch language|ganti bahasa/i })).toHaveClass(
       "site-control",
     );

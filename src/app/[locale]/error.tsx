@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import { getDictionary } from "@/i18n/dictionaries";
-import { isLocale } from "@/i18n/config";
-import { siteConfig } from "@/lib/site-config";
+import { getRecoveryLocale } from "@/i18n/config";
+import { blog } from "@/lib/blog";
 
 export default function Error({
   reset,
@@ -12,7 +12,7 @@ export default function Error({
   reset: () => void;
 }) {
   const segment = usePathname().split("/")[1];
-  const locale = isLocale(segment) ? segment : "id";
+  const locale = getRecoveryLocale(segment);
   const copy = getDictionary(locale).errors;
 
   return (
@@ -33,7 +33,7 @@ export default function Error({
           {copy.retry}
         </button>
         <a
-          href={`${siteConfig.blogUrl}/${locale}`}
+          href={blog.homeUrl}
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.blog}

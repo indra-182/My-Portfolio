@@ -1,0 +1,40 @@
+@layer utilities {
+  .cue-contact {
+    background:
+      radial-gradient(
+        ellipse at 74% 20%,
+        color-mix(in srgb, var(--cue-cobalt) 55%, transparent),
+        transparent 40%
+      ),
+      var(--background);
+  }
+
+  .contact-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .contact-grid h2 {
+    max-width: 15ch;
+    font-size: clamp(2.4rem, 6vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  .contact-description {
+    max-width: 38rem;
+    margin-top: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: 1.08rem;
+    line-height: 1.65;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2rem;
+  }
+}

@@ -43,8 +43,18 @@ export function TestimonialsSection({
           <h2 id="testimonials-title">{heading}</h2>
         </div>
         <div className="testimonial-groups">
-          <TestimonialGroup label={collaboratorLabel} testimonials={testimonials.slice(0, 2)} />
-          <TestimonialGroup label={mentoringLabel} testimonials={testimonials.slice(2)} />
+          <TestimonialGroup
+            label={collaboratorLabel}
+            testimonials={testimonials.filter(
+              (testimonial) => testimonial.category === "collaborator",
+            )}
+          />
+          <TestimonialGroup
+            label={mentoringLabel}
+            testimonials={testimonials.filter(
+              (testimonial) => testimonial.category === "mentoring",
+            )}
+          />
         </div>
       </div>
     </section>

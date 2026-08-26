@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { LatestFeedResult } from "@/types/latest-post";
+import { blog } from "@/lib/blog";
 
 const latestPostSchema = z.object({
   title: z.string().min(1),
@@ -20,12 +21,11 @@ const latestPostsLimit = 3;
 const latestPostsRevalidateSeconds = 3600;
 const latestPostsTimeoutMs = 2000;
 
-export async function getLatestPosts(blogUrl: string): Promise<LatestFeedResult> {
-  const endpoint = new URL("/api/posts/latest", `${blogUrl}/`);
-  endpoint.searchParams.set("limit", String(latestPostsLimit));
+export async function getLatestPosts(): Promise<LatestFeedResult> {
+  const endpoint = blog.latestPostsUrl(latestPostsLimit);
 
   try {
-    const response = await fetch(endpoint.toString(), {
+    const response = await fetch(endpoint, {
       next: { revalidate: latestPostsRevalidateSeconds },
       signal: AbortSignal.timeout(latestPostsTimeoutMs),
     });

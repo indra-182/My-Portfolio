@@ -309,7 +309,7 @@ The Contact section uses a large heading, a restrained cobalt radial field, and 
 - Shell controls keep 44px targets, focus-visible rings remain visible, and the mobile menu is a native dialog controlled by the single `SiteInteractions` boundary.
 - Theme starts dark. The interaction script reads the `theme` local-storage key, applies light only when its value is `light`, and writes the next choice when the toggle is used. Missing or invalid storage falls back to dark.
 - Secondary case studies use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
-- The writing feed is optional. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without blocking cases, testimonials, or contact.
+- The writing feed is optional and streams behind its own Suspense boundary. While pending, the localized Writing heading remains visible in an `aria-busy` section with stable reserved space and no fake article, error copy, or interactive link. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without delaying cases, testimonials, or contact.
 - All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, contact actions, and fallback copy. The two locale surfaces preserve the same proof order.
 - Reduced motion removes the hero and workflow-cue entrances, removes the writing-arrow displacement, and disables smooth scrolling while leaving all content and state feedback available immediately.
 

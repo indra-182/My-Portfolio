@@ -1,0 +1,171 @@
+@layer utilities {
+  .cue-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 9vw, 8rem) clamp(4.5rem, 9vw, 8rem);
+    background:
+      radial-gradient(
+        ellipse at 72% 58%,
+        color-mix(in srgb, var(--cue-cobalt) 60%, transparent),
+        transparent 38%
+      ),
+      linear-gradient(
+        180deg,
+        var(--cue-night) 0%,
+        var(--cue-night) 58%,
+        color-mix(in srgb, var(--cue-cobalt) 48%, var(--cue-night)) 100%
+      );
+    isolation: isolate;
+  }
+
+  .cue-hero::before {
+    position: absolute;
+    inset: auto 0 0;
+    height: 22%;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--cue-rose) 38%, transparent)
+    );
+    content: "";
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .cue-hero-grid {
+    display: grid;
+    gap: 3.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cue-hero-copy {
+    max-width: 52rem;
+  }
+
+  .cue-hero-copy h1 {
+    max-width: 14ch;
+    margin-top: 0;
+    font-size: clamp(2.75rem, 6.8vw, 5.25rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  .cue-hero-proposition {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+  }
+
+  .cue-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .cue-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cue-location svg {
+    color: var(--cue-rose);
+  }
+
+  .cue-hero-stage {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    max-width: 24rem;
+    margin-inline: auto;
+  }
+
+  .cue-stage-label {
+    align-self: stretch;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--foreground) 35%, transparent);
+    color: var(--muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-align: right;
+  }
+
+  .cue-portrait-frame {
+    position: relative;
+    width: min(100%, 19rem);
+    margin-top: 1rem;
+    margin-left: auto;
+    border: 1px solid color-mix(in srgb, var(--cue-day) 60%, transparent);
+    background: var(--surface-strong);
+    box-shadow: 0.6rem 0.6rem 1.5rem color-mix(in srgb, var(--cue-rose) 38%, transparent);
+  }
+
+  .cue-portrait-light {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      126deg,
+      color-mix(in srgb, var(--cue-day) 28%, transparent),
+      transparent 42%
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cue-portrait {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1116 / 1409;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(18%) contrast(1.05);
+  }
+}
+
+@media (min-width: 900px) {
+  .cue-hero-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.6fr);
+    align-items: start;
+    gap: 3rem;
+  }
+
+  .cue-hero-stage {
+    display: flex;
+    margin-right: 1rem;
+    padding-top: 2rem;
+  }
+
+  .cue-hero-copy h1 {
+    max-width: 16ch;
+    font-size: clamp(3rem, 4.3vw, 4.25rem);
+  }
+}
+
+@media (max-width: 639px) {
+  .cue-hero {
+    min-height: 100svh;
+    padding-bottom: 3rem;
+  }
+
+  .cue-hero-copy h1 {
+    max-width: none;
+    font-size: clamp(2.3rem, 10vw, 3rem);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+}

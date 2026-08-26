@@ -1,14 +1,15 @@
 import { ImageResponse } from "next/og";
+import { portfolioFacts } from "@/content/portfolio";
 import { getPortfolio } from "@/lib/get-portfolio";
-import { isLocale } from "@/i18n/config";
+import { requireLocale } from "@/i18n/route-locale";
 
-export const alt = "INDRA.DEV: Mahadi Indra Manurung";
+export const alt = `INDRA.DEV: ${portfolioFacts.profile.name}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpenGraphImage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;
-  const locale = isLocale(value) ? value : "id";
+  const locale = requireLocale(value);
   const portfolio = getPortfolio(locale);
 
   return new ImageResponse(
@@ -47,7 +48,8 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
         </div>
       </div>
       <div style={{ color: "#60A5FA", display: "flex", fontSize: 22 }}>
-        {locale.toUpperCase()} · Bogor, Indonesia
+        {locale.toUpperCase()} · {portfolio.profile.location.locality},{" "}
+        {portfolio.profile.location.countryName}
       </div>
     </div>,
     size,

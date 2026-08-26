@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SITE_INTERACTION } from "@/components/site-interaction-contract";
 
 export type SiteNavItem = { label: string; href: string };
 
@@ -30,7 +31,7 @@ export function SiteHeader({
   labels: SiteHeaderLabels;
 }) {
   return (
-    <header className="site-header">
+    <header className="site-header" data-site-interaction={SITE_INTERACTION.header}>
       <a href="#main-content" className="skip-link">
         {labels.skipToContent}
       </a>
@@ -40,7 +41,12 @@ export function SiteHeader({
         </a>
         <nav aria-label={labels.primaryNav} className="site-nav">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="site-nav-link">
+            <a
+              key={item.href}
+              href={item.href}
+              className="site-nav-link"
+              data-site-interaction={SITE_INTERACTION.activeNavLink}
+            >
               {item.label}
             </a>
           ))}
@@ -67,7 +73,7 @@ export function SiteHeader({
           size="icon"
           aria-label={labels.scrollToTop}
           title={labels.scrollToTop}
-          data-scroll-to-top
+          data-site-interaction={SITE_INTERACTION.scrollToTop}
           className="scroll-to-top"
           suppressHydrationWarning
         >

@@ -26,19 +26,22 @@ describe("getLatestPosts", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => feed });
     vi.stubGlobal("fetch", fetchMock);
 
-    const result = await getLatestPosts("https://blog.example");
+    const result = await getLatestPosts();
 
     expect(result).toEqual({ status: "ready", posts: feed.posts });
-    expect(fetchMock).toHaveBeenCalledWith("https://blog.example/api/posts/latest?limit=3", {
-      next: { revalidate: 3600 },
-      signal: expect.any(AbortSignal),
-    });
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://blog-indra.vercel.app/api/posts/latest?limit=3",
+      {
+        next: { revalidate: 3600 },
+        signal: expect.any(AbortSignal),
+      },
+    );
   });
 
   test("returns the unavailable fallback when the blog API fails or returns invalid data", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, json: async () => ({}) }));
 
-    await expect(getLatestPosts("https://blog.example")).resolves.toEqual({
+    await expect(getLatestPosts()).resolves.toEqual({
       status: "unavailable",
     });
 
@@ -47,7 +50,7 @@ describe("getLatestPosts", () => {
       vi.fn().mockResolvedValue({ ok: true, json: async () => ({ version: 1 }) }),
     );
 
-    await expect(getLatestPosts("https://blog.example")).resolves.toEqual({
+    await expect(getLatestPosts()).resolves.toEqual({
       status: "unavailable",
     });
   });
@@ -64,7 +67,7 @@ describe("getLatestPosts", () => {
       }),
     );
 
-    const result = getLatestPosts("https://blog.example");
+    const result = getLatestPosts();
     controller.abort();
 
     await expect(result).resolves.toEqual({ status: "unavailable" });

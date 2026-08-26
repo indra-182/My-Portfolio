@@ -31,7 +31,7 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   };
 
   await expectRemovedCueChrome("Urutan workflow Petron");
-  const scrollToTop = page.getByRole("button", { name: /kembali ke atas/i });
+  const scrollToTop = page.locator('[data-site-interaction="scroll-to-top"]');
   await expect(scrollToTop).toBeHidden();
   await page.evaluate(() => window.scrollTo(0, 240));
   await expect(scrollToTop).toBeHidden();
@@ -94,6 +94,10 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   ).toBeVisible();
 
   await expect(page.locator("html")).toHaveClass(/dark/);
+  await expect(page.getByRole("button", { name: "Ganti tema warna" })).toHaveAttribute(
+    "data-site-interaction",
+    "theme-toggle",
+  );
   await page.getByRole("button", { name: "Ganti tema warna" }).click();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
   await expect(page.locator("html")).toHaveClass(/light/);
@@ -153,9 +157,14 @@ test("redirects the root route to the default locale", async ({ page }) => {
 test("opens and closes the mobile navigation with keyboard escape", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/id");
-  await page.getByRole("button", { name: /buka menu/i }).click();
+  const openMenu = page.getByRole("button", { name: /buka menu/i });
+  await expect(openMenu).toHaveAttribute("data-site-interaction", "mobile-navigation-open");
+  await openMenu.click();
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByRole("dialog").getByRole("link", { name: "Kapabilitas" })).toBeVisible();
+  await expect(page.locator('[data-site-interaction="mobile-navigation"]')).toBeVisible();
+  await expect(
+    page.getByRole("dialog").getByRole("button", { name: /tutup menu/i }),
+  ).toHaveAttribute("data-site-interaction", "mobile-navigation-close");
   await expect(
     page.getByRole("dialog").getByRole("link", { name: "PROJECTS", exact: true }),
   ).toHaveAttribute("href", "/id#case-studies");

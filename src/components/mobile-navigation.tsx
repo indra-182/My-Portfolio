@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { LuMenu, LuX } from "react-icons/lu";
+import { Button } from "@/components/ui/button";
+import { SITE_INTERACTION } from "@/components/site-interaction-contract";
 
 export type MobileNavigationItem = { label: string; href: string };
 
@@ -19,7 +20,7 @@ export function MobileNavigation({
   closeLabel: string;
 }) {
   return (
-    <div data-mobile-navigation className="mobile-navigation">
+    <div data-site-interaction={SITE_INTERACTION.mobileNavigation} className="mobile-navigation">
       <Button
         type="button"
         variant="outline"
@@ -27,7 +28,7 @@ export function MobileNavigation({
         aria-label={openLabel}
         aria-haspopup="dialog"
         aria-controls={id}
-        data-mobile-navigation-open
+        data-site-interaction={SITE_INTERACTION.mobileNavigationOpen}
         className="mobile-navigation-open md:hidden"
       >
         <LuMenu aria-hidden="true" />
@@ -45,7 +46,7 @@ export function MobileNavigation({
           size="icon"
           aria-label={closeLabel}
           title={closeLabel}
-          data-mobile-navigation-close
+          data-site-interaction={SITE_INTERACTION.mobileNavigationClose}
           className="mobile-navigation-close"
         >
           <LuX aria-hidden="true" />

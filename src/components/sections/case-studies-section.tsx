@@ -104,10 +104,11 @@ export function CaseStudiesSection({
         </div>
 
         {experiences.map((experience) => {
-          const [featuredProject, ...secondaryProjects] = experience.projects;
+          const featuredProject = experience.projects.find((project) => project.featured)!;
+          const secondaryProjects = experience.projects.filter((project) => !project.featured);
 
           return (
-            <div key={`${experience.company}-${experience.period}`} className="experience-group">
+            <div key={experience.id} className="experience-group">
               <div className="experience-context">
                 <div>
                   <p className="cue-kicker">{experience.company}</p>
@@ -137,7 +138,7 @@ export function CaseStudiesSection({
                 <div className="secondary-case-studies">
                   <p className="cue-kicker">{secondaryLabel}</p>
                   {secondaryProjects.map((project) => (
-                    <details key={project.title} className="case-study-disclosure">
+                    <details key={project.id} className="case-study-disclosure">
                       <summary>
                         <span className="case-study-summary-copy">
                           <strong>{project.title}</strong>
