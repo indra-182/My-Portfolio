@@ -192,8 +192,7 @@ The palette is a two-theme role system. The root values are the dark scene, and 
 
 ## Typography
 
-**Display Font:** The system sans stack from `--font-heading`, with `ui-sans-serif`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, and `Segoe UI` fallbacks.
-**Body Font:** The system sans stack from `--font-sans`.
+**Display and Body Font:** The system sans stack from `--font-sans`, with `ui-sans-serif`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, and `Segoe UI` fallbacks.
 **Label/Mono Font:** The system monospace stack from `--font-mono`, with `ui-monospace`, `SFMono-Regular`, Menlo, Monaco, Consolas, and `monospace` fallbacks.
 
 **Character:** The sans stack is immediate, dense, and dependable without a render-blocking font request. Monospace labels behave like production cue readouts: compact, tabular, uppercase where the interface needs a clear signal, and never allowed to compete with the headline.
@@ -220,8 +219,6 @@ At `min-width: 640px`, the shell uses wider gutters, case evidence fields and te
 
 The review matrix covers 375, 768, 1024, and 1440px. The final native captures include desktop and mobile light and dark scenes, tablet, laptop, both locale variants, and reduced motion. All layouts remain usable in Indonesian and English without horizontal overflow.
 
-The proof sequence remains Hero -> Capabilities -> Projects -> Testimonials -> Writing, followed by the Footer. Capabilities retain semantic ordered-list structure without visible numbers. The featured Petron project keeps its non-numeric cue line, the other four projects remain native disclosures, and all proof aligns directly to the content shell.
-
 ## Elevation & Depth
 
 Cue Horizon uses tonal layering more than elevation. Depth comes from the hero gradients, the fixed cobalt horizon, the rose lower wash, thin structural borders, and surface changes between the background, stage surface, and strong stage surface. Shadows are reserved for the portrait frame and featured case study so the stage remains flat elsewhere.
@@ -242,8 +239,6 @@ Motion uses `--motion-fast: 180ms` for control and link state transitions and `-
 The form language is rectangular and precise. Small controls and bounded cue surfaces use `--radius-sm: 0.15rem`; the shared primitive also exposes `--radius-md: 0.3rem`. Badges are the only recurring pill silhouette at `999px`. Thin borders define stage edges, section divisions, field rails, disclosure rows, and overlay boundaries. The featured case, writing cards, and footer remain rectangular rather than becoming floating rounded cards.
 
 The shell wordmark, locale switcher, theme toggle, mobile trigger, site links, and skip link preserve exact 44px (`2.75rem`) interaction targets. The shared icon button is `2.75rem` square. Writing title links and blog action links use `min-height: 2.75rem` targets. The mobile navigation links use a `3.5rem` minimum row. Icons sit inside those targets and never carry interaction meaning without an accessible label.
-
-The form language is rectangular and precise. Small controls and bounded cue surfaces use `--radius-sm: 0.15rem`; the shared primitive also exposes `--radius-md: 0.3rem`. Badges are the only recurring pill silhouette at `999px`. Thin borders define stage edges, section divisions, field rails, disclosure rows, and overlay boundaries. The featured case, writing cards, and footer remain rectangular rather than becoming floating rounded cards.
 
 ### Localized Content Contract
 
@@ -305,7 +300,7 @@ The hero ends with deliberate lower padding before the proof sequence. The seque
 - Theme starts dark. The interaction script reads the `theme` local-storage key, applies light only when its value is `light`, and writes the next choice when the toggle is used. Missing or invalid storage falls back to dark.
 - Secondary case studies use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
 - The writing feed is optional and streams behind its own Suspense boundary. While pending, the localized Writing heading remains visible in an `aria-busy` section with stable reserved space and no fake article, error copy, or interactive link. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without delaying the rest of the portfolio or footer.
-- All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy. The two locale surfaces preserve the same proof order.
+- All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.
 - Reduced motion removes the hero and workflow-cue entrances, removes the writing-arrow displacement, and disables smooth scrolling while leaving all content and state feedback available immediately.
 
 ### Visual Parity Contract
@@ -320,7 +315,6 @@ The Tailwind CSS v4 migration is an implementation change, not a visual redesign
 - **Do** use the semantic tokens from `src/styles/design-tokens.css` instead of theme-specific values in application components.
 - **Do** keep the portrait eager, dimensioned, and visible in the first viewport, with its supplied alternative text.
 - **Do** keep the hero proposition and both email and CV actions visible with the headline in the first viewport. Do not add an eyebrow above the heading.
-- **Do** preserve the proof sequence: hero, capabilities, case studies, testimonials, supporting writing, then footer.
 - **Do** use native disclosure behavior for secondary case studies. Let the browser own open and close state.
 - **Do** retain the email, CV, LinkedIn, blog, GitHub, locale, and theme paths that are already supplied. The footer email link remains available after the standalone Contact section is removed.
 - **Do** keep all user-facing labels localized in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- The pre-optimized portrait avoids hydrating next/image on this static route. */
 import { LuArrowDownToLine, LuArrowUpRight, LuMapPin } from "react-icons/lu";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import type { PortfolioContent } from "@/content/portfolio-schema";
 
 export function HeroSection({
@@ -37,7 +36,7 @@ export function HeroSection({
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${email}`}
-                className={cn(buttonVariants({ size: "lg" }), "cue-button")}
+                className={`${buttonVariants({ size: "lg" })} cue-button`}
               >
                 {emailLabel}
                 <LuArrowUpRight aria-hidden="true" className="size-4" />
@@ -45,7 +44,7 @@ export function HeroSection({
               <a
                 href={cvHref}
                 download
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "cue-button")}
+                className={`${buttonVariants({ variant: "outline", size: "lg" })} cue-button`}
               >
                 <LuArrowDownToLine aria-hidden="true" className="size-4" />
                 {downloadLabel}

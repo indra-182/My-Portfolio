@@ -9,7 +9,6 @@
 ## Architecture & Data Flow
 
 - `src/app/[locale]/page.tsx` is the server composition root. It validates the route segment with `isLocale`, loads the typed dictionary and Zod-validated portfolio content, fetches optional latest posts, and passes narrow data and copy props to section components.
-- `getPortfolio` validates `portfolioByLocale` with `PortfolioContentSchema`.
 - `getDictionary` loads statically imported JSON catalogs whose locale structures and keys are parity-checked.
 - `getLatestPosts` validates the remote feed and returns the `LatestFeedResult` discriminated union, either `ready` or `unavailable`, so a feed failure leaves the portfolio usable.
 - Server components are the default. `src/components/site-interactions.tsx` is the deliberate centralized browser-interaction boundary, using `data-*` hooks and native DOM APIs. Add a client component only when an interaction cannot fit that existing pattern. Do not introduce React providers, global state, or dependency-injection abstractions unless a requested feature creates a demonstrated need.
@@ -41,7 +40,7 @@
 
 - `DESIGN.md`: visual, interaction, localization, motion, and accessibility authority
 - `package.json`: scripts, dependencies, and package-manager declaration
-- `vitest.config.mts`: unit-test discovery and coverage configuration
+- `vitest.config.mts`: unit-test discovery configuration
 - `playwright.config.ts`: browser projects and dev-server setup
 
 ## Development Commands
@@ -55,7 +54,6 @@ pnpm run dev
 pnpm run build
 pnpm test
 pnpm run test:watch
-pnpm run test:coverage
 pnpm run test:e2e
 pnpm run verify
 ```
@@ -83,7 +81,6 @@ pnpm run verify
 
 - Vitest/jsdom unit and component tests live as colocated `*.test.ts` or `*.test.tsx` files under `src/`. Use `src/test/setup.ts`, semantic Testing Library queries, table-driven `id` and `en` coverage, and isolated `fetch` stubs restored after each test.
 - Playwright specs live under `e2e/*.spec.ts` and run against the real dev server. The configured projects are Desktop Chrome and Pixel 5, with traces retained on failure. Use axe checks for both locales and cover recruiter-critical flows such as locale switching, dark-first theme persistence, mobile navigation, links, and feed fallback.
-- Coverage uses V8 text and HTML reports, has no configured thresholds, and is not part of `pnpm run verify`. Run `pnpm run test:coverage` only when coverage output is needed.
 - Run the narrowest relevant checks first and `pnpm run verify` for shared or route-level changes. For UI or layout changes, verify at 375, 768, 1024, and 1440px in both locales and themes, with keyboard behavior, reduced motion, and the affected Playwright flow. No CI workflow is configured in this repository.
 
 <!-- BEGIN:nextjs-agent-rules -->

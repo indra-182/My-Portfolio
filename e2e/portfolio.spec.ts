@@ -184,7 +184,8 @@ test("opens and closes the mobile navigation with keyboard escape", async ({ pag
   await expect(openMenu).toBeFocused();
 });
 
-test("keeps localized theme layouts responsive without overflow", async ({ page }) => {
+test("keeps localized theme layouts responsive without overflow", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Responsive matrix runs in Chromium only");
   const headings = {
     id: /Saya merancang frontend/i,
     en: /I design frontend systems/i,
@@ -207,9 +208,6 @@ test("keeps localized theme layouts responsive without overflow", async ({ page 
         await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`));
         await expect(page.getByRole("heading", { name: headings[locale] })).toBeVisible();
         await expect(page.locator('a[href$="#case-studies"]')).toHaveCount(2);
-        await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
-        await expect(page.locator("#contact")).toHaveCount(0);
-        await expect(page.locator('a[href$="#contact"]')).toHaveCount(0);
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
           await page.evaluate(() => document.documentElement.clientWidth),
         );

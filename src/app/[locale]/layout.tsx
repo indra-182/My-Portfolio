@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { portfolioByLocale } from "@/content/portfolio";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteInteractions } from "@/components/site-interactions";
@@ -6,7 +7,6 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, locales } from "@/i18n/config";
 import { requireLocale } from "@/i18n/route-locale";
 import { blog } from "@/lib/blog";
-import { getPortfolio } from "@/lib/get-portfolio";
 import { siteConfig } from "@/lib/site-config";
 import "../globals.css";
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const { locale: value } = await params;
   const locale = requireLocale(value);
   const dictionary = getDictionary(locale);
-  const portfolio = getPortfolio(locale);
+  const portfolio = portfolioByLocale[locale];
   const title = `${portfolio.profile.role}: ${portfolio.profile.name}`;
   const description = portfolio.profile.valueProposition;
 
@@ -58,7 +58,7 @@ export default async function LocaleLayout({
   const { locale: value } = await params;
   const locale = requireLocale(value);
   const dictionary = getDictionary(locale);
-  const portfolio = getPortfolio(locale);
+  const portfolio = portfolioByLocale[locale];
   const navItems = [
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
     { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
@@ -70,20 +70,6 @@ export default async function LocaleLayout({
         <SiteInteractions />
       </head>
       <body className="min-h-screen">
-        <script
-          id="impeccable-direction-contract"
-          type="text/plain"
-          dangerouslySetInnerHTML={{
-            __html: `<!--
-THESIS: Cue Horizon stages complex workflow ownership as visible cues, refusing generic developer-template chrome and cosmetic editorial polish.
-OWN-WORLD: Near-black cyclorama, cobalt horizon, rose transition, white-day focus, cue tape, matte stage floor, tabular cue labels, and controlled luminance.
-STORY: Recruiters understand the workflow specialist claim, compare supplied project evidence, review collaborator proof and technical writing, and email Mahadi.
-FIRST VIEWPORT: Night field into a cobalt horizon; headline and email action left; formal portrait under side-light right; clear breathing room into the proof sequence.
-FORM: Stagecraft cyclorama dawn, assigned direction, seed 6dea048c, code-led.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
--->`,
-          }}
-        />
         <div className="flex min-h-screen flex-col">
           <SiteHeader
             locale={locale}

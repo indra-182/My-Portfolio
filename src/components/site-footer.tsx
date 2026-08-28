@@ -2,7 +2,6 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LuFileText, LuMail } from "react-icons/lu";
 import type { PortfolioContent } from "@/content/portfolio-schema";
 import type { Locale } from "@/i18n/config";
-import { cn } from "@/lib/utils";
 
 export type SiteFooterLabels = {
   navigationLabel: string;
@@ -53,11 +52,7 @@ export function SiteFooter({
               href={blogUrl}
               aria-label={labels.blog}
               title={labels.blog}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem]",
-                "tracking-[0.06em] text-muted-foreground no-underline uppercase",
-                "hover:text-foreground focus-visible:text-foreground",
-              )}
+              className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem] tracking-[0.06em] text-muted-foreground no-underline uppercase hover:text-foreground focus-visible:text-foreground"
             >
               <LuFileText aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
               <span>{labels.blog}</span>
@@ -68,11 +63,7 @@ export function SiteFooter({
               rel="noreferrer"
               aria-label={labels.github}
               title={labels.github}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem]",
-                "tracking-[0.06em] text-muted-foreground no-underline uppercase",
-                "hover:text-foreground focus-visible:text-foreground",
-              )}
+              className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem] tracking-[0.06em] text-muted-foreground no-underline uppercase hover:text-foreground focus-visible:text-foreground"
             >
               <FaGithub aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
               <span>{labels.github}</span>
@@ -83,11 +74,7 @@ export function SiteFooter({
               rel="noreferrer"
               aria-label={labels.linkedin}
               title={labels.linkedin}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem]",
-                "tracking-[0.06em] text-muted-foreground no-underline uppercase",
-                "hover:text-foreground focus-visible:text-foreground",
-              )}
+              className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem] tracking-[0.06em] text-muted-foreground no-underline uppercase hover:text-foreground focus-visible:text-foreground"
             >
               <FaLinkedin aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
               <span>{labels.linkedin}</span>
@@ -96,11 +83,7 @@ export function SiteFooter({
               href={`mailto:${email}`}
               aria-label={labels.email}
               title={labels.email}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem]",
-                "tracking-[0.06em] text-muted-foreground no-underline uppercase",
-                "hover:text-foreground focus-visible:text-foreground",
-              )}
+              className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem] tracking-[0.06em] text-muted-foreground no-underline uppercase hover:text-foreground focus-visible:text-foreground"
             >
               <LuMail aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
               <span>{labels.email}</span>
