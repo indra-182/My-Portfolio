@@ -258,7 +258,7 @@ The three capability records remain localized and factual:
 - **English:** `Keep data boundaries explicit` with `I structure components and data flow so validation, state changes, and ownership remain predictable.`
 - **English:** `Verify the journey end to end` with `I connect implementation with browser testing and cross-functional feedback before changes ship.`
 
-The visible project-navigation label is exactly `Experiences` in both Indonesian and English. This is a copy contract only. The `navigation.caseStudies` dictionary key, `CaseStudiesSection` symbol, `#case-studies` DOM ID, and matching anchor remain stable implementation identifiers.
+The visible project-navigation labels are `Pengalaman` on Indonesian and `Experiences` on English. This is a copy contract only. The `navigation.caseStudies` dictionary key, `CaseStudiesSection` symbol, `#case-studies` DOM ID, and matching anchor remain stable implementation identifiers.
 
 Navigation labels, disclosure state, testimonial hierarchy, and writing fallback labels remain dictionary-backed in `/id` and `/en`. The supplied company, role, period, project records, technologies, testimonials, portrait, CV, and external links remain unchanged.
 
@@ -284,7 +284,7 @@ Navigation labels, disclosure state, testimonial hierarchy, and writing fallback
 
 ### Navigation
 
-- **Desktop header:** A sticky `4.75rem` header uses the wordmark on the left, section links in the center, and locale and theme controls on the right. Navigation targets `#capabilities` and `#case-studies`; the latter is visibly labeled `Experiences`.
+- **Desktop header:** A sticky `4.75rem` header uses the wordmark on the left, section links in the center, and locale and theme controls on the right. Navigation targets `#capabilities`, `#case-studies`, and `#writing`, visibly labeled `Kapabilitas` / `Capabilities`, `Pengalaman` / `Experiences`, and `Konten` / `Content` on Indonesian / English.
 - **Mobile navigation:** Below `768px`, a menu trigger opens a native modal `<dialog>` as a right-side drawer. The drawer uses `background: var(--popover)`, has its own wordmark, description, close control, and stacked links. Links close the dialog, Escape follows native dialog behavior, and the close event returns focus to the trigger.
 - **Footer:** The footer repeats the wordmark and description, then exposes blog, GitHub, LinkedIn, and email links with existing brand or Lucide icons. Its metadata row contains the supplied rights and location copy.
 
@@ -305,7 +305,7 @@ The hero ends with deliberate lower padding before the proof sequence. The seque
 
 ### Visual Parity Contract
 
-The Tailwind CSS v4 migration is an implementation change, not a visual redesign. Strict perceptual parity is required across `/id` and `/en`, dark and light themes, 375, 768, 1024, and 1440px viewports, keyboard focus, and reduced motion. Compare bounded current-worktree captures before and after implementation. The only accepted visual deltas are removal of the Contact section, the Footer moving directly after Writing, and the visible navigation label changing from `Case Studies` to `Experiences`. Subpixel text rasterization differences are not design changes.
+The Tailwind CSS v4 migration is an implementation change, not a visual redesign. Strict perceptual parity is required across `/id` and `/en`, dark and light themes, 375, 768, 1024, and 1440px viewports, keyboard focus, and reduced motion. The only accepted visual deltas are the third localized content link, `Experiences` becoming `Pengalaman` only on `/id`, and the audited Indonesian copy corrections. Layout, colors, spacing, interaction, theme, breakpoint, and accessibility expectations remain unchanged. Subpixel text rasterization differences are not design changes.
 
 ## Do's and Don'ts
 

@@ -86,6 +86,7 @@ describe("site shell", () => {
         navItems={[
           { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
           { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
+          { label: dictionary.navigation.content, href: `/${locale}#writing` },
         ]}
         labels={{
           skipToContent: dictionary.actions.skipToContent,
@@ -112,6 +113,15 @@ describe("site shell", () => {
     expect(
       within(primaryNavigation).getByRole("link", { name: dictionary.navigation.capabilities }),
     ).toHaveAttribute("data-site-interaction", SITE_INTERACTION.activeNavLink);
+    expect(
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.capabilities }),
+    ).toHaveAttribute("href", `/${locale}#capabilities`);
+    expect(
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.caseStudies }),
+    ).toHaveAttribute("href", `/${locale}#case-studies`);
+    expect(
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.content }),
+    ).toHaveAttribute("href", `/${locale}#writing`);
     expect(screen.getByRole("button", { name: dictionary.actions.scrollToTop })).toHaveAttribute(
       "data-site-interaction",
       SITE_INTERACTION.scrollToTop,

@@ -1,9 +1,10 @@
 {
   "navigation": {
     "capabilities": "Kapabilitas",
-    "caseStudies": "Experiences",
+    "caseStudies": "Pengalaman",
+    "content": "Konten",
     "primaryLabel": "Navigasi utama",
-    "portfolio": "Portfolio",
+    "portfolio": "Portofolio",
     "downloadCv": "Unduh CV",
     "email": "Kirim email"
   },
@@ -21,7 +22,7 @@
     "label": "Ganti tema warna"
   },
   "mobileNavigation": {
-    "description": "Navigasi portfolio",
+    "description": "Navigasi portofolio",
     "navLabel": "Navigasi seluler",
     "open": "Buka menu",
     "close": "Tutup menu"
@@ -39,8 +40,8 @@
     "technologies": "Teknologi",
     "role": "Peran",
     "period": "Periode",
-    "openDetails": "Buka detail project",
-    "closeDetails": "Tutup detail project"
+    "openDetails": "Buka detail proyek",
+    "closeDetails": "Tutup detail proyek"
   },
   "writing": {
     "heading": "Catatan teknis untuk sistem frontend.",

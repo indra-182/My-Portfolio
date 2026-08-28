@@ -62,6 +62,7 @@ export default async function LocaleLayout({
   const navItems = [
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
     { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
+    { label: dictionary.navigation.content, href: `/${locale}#writing` },
   ];
 
   return (

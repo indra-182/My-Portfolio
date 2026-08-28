@@ -143,7 +143,7 @@ export const portfolioTranslations = PortfolioTranslationsSchema.parse({
             problem:
               "Pengguna korporat membutuhkan satu alur yang konsisten untuk mengelola akses dan transaksi dengan beberapa langkah penting.",
             ownership:
-              "Memimpin implementasi frontend untuk registrasi, PIN setup, authentication, inter-company transfer, serta upload transaksi bulk melalui CSV dan Excel.",
+              "Memimpin implementasi frontend untuk registrasi, penyiapan PIN, autentikasi, transfer antarperusahaan, serta pengunggahan transaksi massal melalui CSV dan Excel.",
             delivery:
               "Memecah workflow menjadi state UI yang jelas dan menghubungkan validasi input dengan feedback yang dapat ditindaklanjuti.",
             outcome:
@@ -176,9 +176,9 @@ export const portfolioTranslations = PortfolioTranslationsSchema.parse({
             problem:
               "Pengguna membutuhkan visibilitas yang jelas terhadap pengajuan klaim dan tahap prosesnya.",
             ownership:
-              "Mengimplementasikan tampilan pengajuan klaim dan tracking status untuk pengalaman asuransi.",
+              "Mengimplementasikan tampilan pengajuan klaim dan pelacakan status untuk pengalaman asuransi.",
             delivery:
-              "Menyusun form, status presentation, dan empty/error states agar setiap langkah memiliki feedback yang jelas.",
+              "Menyusun form, penyajian status, serta state kosong dan error agar setiap langkah memiliki feedback yang jelas.",
             outcome:
               "Pengguna dapat memahami posisi klaimnya tanpa harus menebak langkah berikutnya.",
           },
