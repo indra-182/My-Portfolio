@@ -7,12 +7,12 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     if (testInfo.project.name !== "chromium") return;
     await expect(page.getByRole("navigation", { name, exact: true })).toBeVisible();
   };
-  const expectDesktopExperiences = async (name: string, href: string) => {
+  const expectDesktopNavigationLink = async (name: string, label: string, href: string) => {
     if (testInfo.project.name !== "chromium") return;
     await expect(
       page
         .getByRole("navigation", { name, exact: true })
-        .getByRole("link", { name: "Experiences", exact: true }),
+        .getByRole("link", { name: label, exact: true }),
     ).toHaveAttribute("href", href);
   };
   const expectedEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "mahadiindra2@gmail.com";
@@ -27,7 +27,22 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   await page.goto("/id");
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
   await expectDesktopPrimaryNavigation("Navigasi utama");
-  await expectDesktopExperiences("Navigasi utama", "/id#case-studies");
+  await expectDesktopNavigationLink("Navigasi utama", "Pengalaman", "/id#case-studies");
+  await expectDesktopNavigationLink("Navigasi utama", "Konten", "/id#writing");
+  if (testInfo.project.name === "chromium") {
+    const primaryNavigation = page.getByRole("navigation", {
+      name: "Navigasi utama",
+      exact: true,
+    });
+    await expect(
+      primaryNavigation.getByRole("link", { name: "Experiences", exact: true }),
+    ).toHaveCount(0);
+    await primaryNavigation.getByRole("link", { name: "Konten", exact: true }).click();
+    await expect(page).toHaveURL(/\/id#writing$/);
+    await expect(
+      page.getByRole("heading", { name: "Catatan teknis untuk sistem frontend.", exact: true }),
+    ).toBeVisible();
+  }
   await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
   const expectRemovedCueChrome = async (workflowLabel: string) => {
     for (const index of ["01", "02", "03", "04", "05", "01 / 05"]) {
@@ -66,7 +81,20 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     await expect(
       page
         .getByRole("navigation", { name: "Navigasi utama", exact: true })
-        .getByRole("link", { name: "Experiences", exact: true }),
+        .getByRole("link", { name: "Pengalaman", exact: true }),
+    ).toHaveAttribute("aria-current", "location");
+  }
+  await page.evaluate(() => {
+    const section = document.querySelector("#writing");
+    if (!(section instanceof HTMLElement)) throw new Error("Writing section not found");
+    window.scrollTo(0, section.offsetTop);
+  });
+  await expect(scrollToTop).toBeVisible();
+  if (testInfo.project.name === "chromium") {
+    await expect(
+      page
+        .getByRole("navigation", { name: "Navigasi utama", exact: true })
+        .getByRole("link", { name: "Konten", exact: true }),
     ).toHaveAttribute("aria-current", "location");
   }
   await scrollToTop.click();
@@ -123,7 +151,8 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: /I design frontend systems/i })).toBeVisible();
   await expectDesktopPrimaryNavigation("Primary navigation");
-  await expectDesktopExperiences("Primary navigation", "/en#case-studies");
+  await expectDesktopNavigationLink("Primary navigation", "Experiences", "/en#case-studies");
+  await expectDesktopNavigationLink("Primary navigation", "Content", "/en#writing");
   await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
   await expectContactCutover();
   await expectRemovedCueChrome("Petron workflow sequence");
@@ -176,9 +205,15 @@ test("opens and closes the mobile navigation with keyboard escape", async ({ pag
   await expect(
     page.getByRole("dialog").getByRole("button", { name: /tutup menu/i }),
   ).toHaveAttribute("data-site-interaction", "mobile-navigation-close");
-  await expect(
-    page.getByRole("dialog").getByRole("link", { name: "Experiences", exact: true }),
-  ).toHaveAttribute("href", "/id#case-studies");
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByRole("link", { name: "Pengalaman", exact: true })).toHaveAttribute(
+    "href",
+    "/id#case-studies",
+  );
+  await expect(dialog.getByRole("link", { name: "Konten", exact: true })).toHaveAttribute(
+    "href",
+    "/id#writing",
+  );
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(openMenu).toBeFocused();
@@ -208,6 +243,7 @@ test("keeps localized theme layouts responsive without overflow", async ({ page 
         await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`));
         await expect(page.getByRole("heading", { name: headings[locale] })).toBeVisible();
         await expect(page.locator('a[href$="#case-studies"]')).toHaveCount(2);
+        await expect(page.locator('a[href$="#writing"]')).toHaveCount(2);
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
           await page.evaluate(() => document.documentElement.clientWidth),
         );

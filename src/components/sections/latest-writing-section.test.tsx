@@ -51,6 +51,7 @@ describe("LatestWritingSection", () => {
         copy={dictionary.writing}
       />,
     );
+    expect(container.querySelector("#writing")).toBeInTheDocument();
 
     expect(container.querySelector('[data-count="3"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /designing resilient client state/i })).toHaveAttribute(
@@ -100,13 +101,14 @@ describe("LatestWritingSection", () => {
 
   test("renders a direct blog link instead of an empty grid when unavailable", () => {
     const dictionary = getDictionary("en");
-    render(
+    const { container } = render(
       <LatestWritingSection
         locale="en"
         result={{ status: "unavailable" }}
         copy={dictionary.writing}
       />,
     );
+    expect(container.querySelector("#writing")).toBeInTheDocument();
 
     expect(screen.getByRole("link", { name: /visit blog/i })).toHaveAttribute(
       "href",
