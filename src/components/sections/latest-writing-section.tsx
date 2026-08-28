@@ -36,12 +36,17 @@ export function LatestWritingSection({
   const visiblePosts = result.status === "ready" ? result.posts.slice(0, 3) : [];
 
   return (
-    <section id="writing" className="cue-section writing-section" aria-labelledby="writing-title">
+    <section id="writing" className="cue-section" aria-labelledby="writing-title">
       <div className="content-shell">
-        <div className="cue-section-heading writing-heading">
+        <div className="cue-section-heading">
           <div>
-            <div className="writing-heading-row">
-              <h2 id="writing-title">{copy.heading}</h2>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h2
+                id="writing-title"
+                className="max-w-[18ch] !text-[clamp(2rem,4vw,3.75rem)] leading-[1.02] font-bold tracking-[-0.028em]"
+              >
+                {copy.heading}
+              </h2>
               {result.status === "ready" ? (
                 <a
                   href={blog.homeUrl}
@@ -55,36 +60,61 @@ export function LatestWritingSection({
         </div>
 
         {visiblePosts.length > 0 ? (
-          <div className="writing-grid" data-count={visiblePosts.length}>
+          <div className="writing-grid mt-8 grid gap-px bg-border" data-count={visiblePosts.length}>
             {visiblePosts.map((post) => (
-              <article key={post.slug} className="writing-card">
-                <div className="writing-card-meta">
-                  <Badge variant="outline">{post.topics[0]}</Badge>
+              <article
+                key={post.slug}
+                className="writing-card group flex min-h-68 flex-col bg-background p-[clamp(1.25rem,3vw,2rem)] transition-colors duration-[var(--motion-fast)] ease-[ease]"
+              >
+                <div className="flex items-center justify-between gap-4 font-mono text-[0.63rem] text-muted-foreground">
+                  <Badge variant="outline" className="border-border font-mono text-[0.63rem]">
+                    {post.topics[0]}
+                  </Badge>
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
                 </div>
-                <h3>
-                  <a href={blog.postUrl(post.slug)}>{post.title}</a>
+                <h3 className="mt-[0.65rem] max-w-[23ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.05] font-[750] tracking-[-0.035em]">
+                  <a
+                    href={blog.postUrl(post.slug)}
+                    className="flex min-h-11 items-center no-underline transition-colors duration-[var(--motion-fast)] ease-[ease] [overflow-wrap:anywhere] hover:text-[var(--cue-rose)] focus-visible:text-[var(--cue-rose)]"
+                  >
+                    {post.title}
+                  </a>
                 </h3>
-                <p className="writing-card-description">{post.description}</p>
-                <div className="writing-card-footer">
+                <p className="mt-[0.85rem] text-[0.86rem] leading-[1.6] text-muted-foreground">
+                  {post.description}
+                </p>
+                <div className="mt-auto flex items-end justify-between gap-4 pt-6 font-mono text-[0.63rem] text-muted-foreground">
                   <span>
                     {copy.readingTime.replace("{minutes}", String(post.readingTimeMinutes))}
                   </span>
-                  <LuArrowUpRight aria-hidden="true" className="size-5" />
+                  <LuArrowUpRight
+                    aria-hidden="true"
+                    className="size-5 text-[var(--cue-rose)] transition-transform duration-[var(--motion-fast)] ease-[ease] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-within:translate-x-1 group-focus-within:-translate-y-1 motion-reduce:transform-none"
+                  />
                 </div>
               </article>
             ))}
             {visiblePosts.length === 1 ? (
-              <aside className="writing-aside" aria-labelledby="writing-aside-title">
+              <aside
+                className="writing-aside flex min-h-68 flex-col justify-between bg-[var(--cue-cobalt)] p-[clamp(1.25rem,3vw,2rem)] text-[var(--cue-day)]"
+                aria-labelledby="writing-aside-title"
+              >
                 <p className="cue-kicker">{copy.asideEyebrow}</p>
-                <h3 id="writing-aside-title">{copy.asideHeading}</h3>
-                <p>{copy.asideDescription}</p>
+                <h3
+                  id="writing-aside-title"
+                  className="mt-4 max-w-[12ch] text-[clamp(1.55rem,3vw,2.5rem)] leading-[0.98] font-extrabold tracking-[-0.04em]"
+                >
+                  {copy.asideHeading}
+                </h3>
+                <p className="mt-[0.85rem] text-[0.86rem] leading-[1.6]">{copy.asideDescription}</p>
               </aside>
             ) : null}
           </div>
         ) : (
-          <div className="writing-fallback">
-            <p>{copy.unavailable}</p>
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border border-border bg-surface-strong p-[clamp(1.25rem,3vw,2.5rem)]">
+            <p className="max-w-2xl text-[1.05rem] leading-[1.6] text-muted-foreground">
+              {copy.unavailable}
+            </p>
             <a href={blog.homeUrl} className={cn(buttonVariants({ size: "lg" }), "cue-button")}>
               {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
@@ -103,19 +133,19 @@ export async function LatestWriting({ locale, copy }: { locale: Locale; copy: La
 
 export function LatestWritingLoading({ copy }: { copy: LatestWritingCopy }) {
   return (
-    <section
-      id="writing"
-      className="cue-section writing-section"
-      aria-labelledby="writing-title"
-      aria-busy="true"
-    >
+    <section id="writing" className="cue-section" aria-labelledby="writing-title" aria-busy="true">
       <div className="content-shell">
-        <div className="cue-section-heading writing-heading">
-          <div className="writing-heading-row">
-            <h2 id="writing-title">{copy.heading}</h2>
+        <div className="cue-section-heading">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2
+              id="writing-title"
+              className="max-w-[18ch] !text-[clamp(2rem,4vw,3.75rem)] leading-[1.02] font-bold tracking-[-0.028em]"
+            >
+              {copy.heading}
+            </h2>
           </div>
         </div>
-        <div className="writing-loading" aria-hidden="true" />
+        <div className="mt-8 min-h-68" aria-hidden="true" />
       </div>
     </section>
   );

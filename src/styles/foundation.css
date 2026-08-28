@@ -116,24 +116,13 @@
   }
 
   .cue-section-heading h2 {
-    max-width: 16ch;
-    font-size: clamp(2.25rem, 5vw, 4.75rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
+    max-width: 18ch;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.02;
     text-wrap: balance;
-  }
-
-  .cue-section-heading-wide {
-    gap: 1.5rem;
-  }
-
-  .cue-section-heading-wide > div > p {
-    max-width: 42rem;
-    margin-top: 1.25rem;
-    color: var(--muted-foreground);
-    font-size: 1rem;
-    line-height: 1.7;
   }
 
   .animate-cue-rise {

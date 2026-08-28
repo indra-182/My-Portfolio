@@ -1,8 +1,7 @@
 {
   "navigation": {
     "capabilities": "Capabilities",
-    "caseStudies": "PROJECTS",
-    "contact": "Contact",
+    "caseStudies": "Experiences",
     "primaryLabel": "Primary navigation",
     "portfolio": "Portfolio",
     "downloadCv": "Download CV",
@@ -56,13 +55,6 @@
     "heading": "Evidence from people I have worked with",
     "collaboratorLabel": "Collaborators at Indivara Group",
     "mentoringLabel": "Mentoring and teaching"
-  },
-  "contact": {
-    "heading": "Need a frontend engineer for a complex workflow?",
-    "description": "Tell me about the role, product, or frontend challenge you are building.",
-    "email": "Email me",
-    "linkedin": "Open LinkedIn",
-    "cv": "Download CV"
   },
   "footer": {
     "navigationLabel": "Footer navigation",

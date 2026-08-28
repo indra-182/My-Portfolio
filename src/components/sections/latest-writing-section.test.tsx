@@ -63,7 +63,6 @@ describe("LatestWritingSection", () => {
     );
     expect(screen.getByText("6 menit baca")).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(3);
-    expect(screen.getAllByRole("article")[0]).toHaveClass("writing-card");
     expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
   });
 
@@ -123,7 +122,6 @@ describe("LatestWritingSection", () => {
 
     expect(screen.getByRole("heading", { name: dictionary.writing.heading })).toBeVisible();
     expect(container.querySelector("#writing")).toHaveAttribute("aria-busy", "true");
-    expect(container.querySelector(".writing-loading")).toBeInTheDocument();
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
     expect(screen.queryByRole("article")).not.toBeInTheDocument();
   });
