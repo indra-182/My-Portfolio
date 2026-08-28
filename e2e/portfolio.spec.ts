@@ -7,20 +7,28 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     if (testInfo.project.name !== "chromium") return;
     await expect(page.getByRole("navigation", { name, exact: true })).toBeVisible();
   };
-  const expectDesktopProjects = async (name: string, href: string) => {
+  const expectDesktopExperiences = async (name: string, href: string) => {
     if (testInfo.project.name !== "chromium") return;
     await expect(
       page
         .getByRole("navigation", { name, exact: true })
-        .getByRole("link", { name: "PROJECTS", exact: true }),
+        .getByRole("link", { name: "Experiences", exact: true }),
     ).toHaveAttribute("href", href);
   };
   const expectedEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "mahadiindra2@gmail.com";
+  const expectContactCutover = async () => {
+    await expect(page.locator("#contact")).toHaveCount(0);
+    await expect(page.locator('a[href$="#contact"]')).toHaveCount(0);
+    await expect(
+      page.getByRole("contentinfo").getByRole("link", { name: /email/i }),
+    ).toHaveAttribute("href", `mailto:${expectedEmail}`);
+  };
 
   await page.goto("/id");
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
   await expectDesktopPrimaryNavigation("Navigasi utama");
-  await expectDesktopProjects("Navigasi utama", "/id#case-studies");
+  await expectDesktopExperiences("Navigasi utama", "/id#case-studies");
+  await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
   const expectRemovedCueChrome = async (workflowLabel: string) => {
     for (const index of ["01", "02", "03", "04", "05", "01 / 05"]) {
       await expect(page.locator("main#main-content").getByText(index, { exact: true })).toHaveCount(
@@ -58,7 +66,7 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     await expect(
       page
         .getByRole("navigation", { name: "Navigasi utama", exact: true })
-        .getByRole("link", { name: "PROJECTS", exact: true }),
+        .getByRole("link", { name: "Experiences", exact: true }),
     ).toHaveAttribute("aria-current", "location");
   }
   await scrollToTop.click();
@@ -81,6 +89,7 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
       .getByRole("link", { name: /Unduh CV/i })
       .first(),
   ).toHaveAttribute("href", "/documents/mahadi-indra-cv.pdf");
+  await expectContactCutover();
   await expect(page.getByRole("link", { name: /kunjungi blog/i })).toHaveAttribute(
     "href",
     "https://blog-indra.vercel.app",
@@ -114,7 +123,9 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: /I design frontend systems/i })).toBeVisible();
   await expectDesktopPrimaryNavigation("Primary navigation");
-  await expectDesktopProjects("Primary navigation", "/en#case-studies");
+  await expectDesktopExperiences("Primary navigation", "/en#case-studies");
+  await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
+  await expectContactCutover();
   await expectRemovedCueChrome("Petron workflow sequence");
 });
 
@@ -166,25 +177,44 @@ test("opens and closes the mobile navigation with keyboard escape", async ({ pag
     page.getByRole("dialog").getByRole("button", { name: /tutup menu/i }),
   ).toHaveAttribute("data-site-interaction", "mobile-navigation-close");
   await expect(
-    page.getByRole("dialog").getByRole("link", { name: "PROJECTS", exact: true }),
+    page.getByRole("dialog").getByRole("link", { name: "Experiences", exact: true }),
   ).toHaveAttribute("href", "/id#case-studies");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
+  await expect(openMenu).toBeFocused();
 });
 
-test("does not overflow at supported viewport widths", async ({ page }) => {
-  await page.goto("/id");
-  for (const viewport of [
+test("keeps localized theme layouts responsive without overflow", async ({ page }) => {
+  const headings = {
+    id: /Saya merancang frontend/i,
+    en: /I design frontend systems/i,
+  };
+  const viewports = [
     { width: 375, height: 812 },
     { width: 768, height: 1024 },
     { width: 1024, height: 768 },
     { width: 1440, height: 900 },
-  ]) {
-    await page.setViewportSize(viewport);
-    await expect(page.getByRole("heading", { name: /Saya merancang frontend/i })).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
-      await page.evaluate(() => document.documentElement.clientWidth),
-    );
+  ];
+
+  for (const locale of ["id", "en"] as const) {
+    for (const theme of ["dark", "light"] as const) {
+      for (const viewport of viewports) {
+        await page.setViewportSize(viewport);
+        await page.goto(`/${locale}`);
+        await page.evaluate((value) => localStorage.setItem("theme", value), theme);
+        await page.reload();
+
+        await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`));
+        await expect(page.getByRole("heading", { name: headings[locale] })).toBeVisible();
+        await expect(page.locator('a[href$="#case-studies"]')).toHaveCount(2);
+        await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
+        await expect(page.locator("#contact")).toHaveCount(0);
+        await expect(page.locator('a[href$="#contact"]')).toHaveCount(0);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+          await page.evaluate(() => document.documentElement.clientWidth),
+        );
+      }
+    }
   }
 });
 

@@ -10,10 +10,20 @@ any Suspense boundary, loads static portfolio content and dictionary copy, then 
 sequence.
 
 The optional blog feed belongs inside the Writing Suspense boundary. A slow or unavailable blog must
-not delay Hero, Capabilities, Projects, Testimonials, or Contact. The fallback renders the localized
-Writing heading immediately, marks the section busy, reserves its final vertical space, and exposes no
-fake article or error state. Once the feed resolves, the fallback is replaced by either the ready or
-unavailable state.
+not delay Hero, Capabilities, Projects, Testimonials, or the Footer. The fallback renders the
+localized Writing heading immediately, marks the section busy, reserves its final vertical space, and
+exposes no fake article or error state. Once the feed resolves, the fallback is replaced by either the
+ready or unavailable state.
+
+## Existing-surface refinement contract
+
+The proof sequence ends with Writing and then the shared Footer. There is no standalone Contact
+section and no `#contact` navigation target. Hero keeps the direct email and CV actions; Footer keeps
+Blog, GitHub, LinkedIn, and email links. Shared values continue to come from `siteConfig`.
+
+The project navigation label is visibly `Experiences` in both locales. This copy change does not
+rename `navigation.caseStudies`, `CaseStudiesSection`, `#case-studies`, or its anchors. Stable
+implementation identifiers do not follow presentation copy unless a broken reference requires it.
 
 ## External blog seam
 
@@ -107,31 +117,52 @@ Change recipe for an interaction:
 3. Build the script selector from the shared marker.
 4. Add a narrow behavioral assertion and preserve keyboard, focus, and reduced-motion behavior.
 
-## CSS ownership
+## Tailwind CSS ownership
 
-`src/app/globals.css` is only the ordered CSS entrypoint. Ownership modules are:
+`src/app/globals.css` remains the ordered Tailwind CSS v4 entrypoint.
+`src/styles/design-tokens.css` remains the semantic token and two-theme variable contract.
+`src/styles/foundation.css` owns `@theme`, base and global browser rules, global motion, and shared
+semantic invariants that prevent repeated class strings. Existing invariants such as `content-shell`,
+`cue-kicker`, `cue-button`, and `cue-section` may remain CSS utilities while they have multiple
+callers and one stable meaning.
 
-- `src/styles/foundation.css`: theme mapping, base rules, shared utilities, and global motion
-- `src/styles/shell.css`: header, controls, mobile navigation, and footer
-- `src/styles/hero.css`: Hero and portrait stage
-- `src/styles/proof-case-studies.css`: capabilities, experience context, and case studies
-- `src/styles/testimonials.css`: testimonial groups and cards
-- `src/styles/writing.css`: Writing ready, loading, and unavailable states
-- `src/styles/contact.css`: Contact close
+Feature-specific layout, spacing, typography, responsive behavior, color, border, and ordinary state
+styling use Tailwind utilities in the owning JSX when the result is direct and readable. Do not create
+React wrappers or helpers solely to replace a CSS class.
 
-Responsive rules stay with their owner. Import order is part of the cascade contract and must remain
-foundation, shell, hero, proof, testimonials, writing, then contact. Design tokens remain in
-`src/styles/design-tokens.css`.
+An owner stylesheet may remain only for rules that would become less legible as JSX utilities:
 
-A feature should change its owning module. Shared tokens or utilities move to foundation only when at
-least two owners use the same semantic rule. Do not introduce CSS Modules, CSS-in-JS, or a styling
-dependency without a demonstrated limitation in the current cascade.
+- complex gradients and `color-mix`
+- pseudo-elements, dialog backdrops, and native marker selectors
+- keyframes, view timelines, animation ranges, and feature detection
+- relational or runtime state selectors such as `[open]`, `data-*`, `aria-current`, `.is-active`,
+  and `.is-visible`
+- the 900px Hero breakpoint where it expresses the portrait-stage contract
+- reduced-motion overrides and global browser behavior
+
+Retained owner styles stay beside their feature as `shell.css`, `hero.css`,
+`proof-case-studies.css`, `testimonials.css`, or `writing.css`. Remove any selector, import, and owner
+file left without a retained rule. `contact.css` has no owner after the Contact section is removed.
+Among retained files, import order follows the visual sequence after foundation. Do not consolidate
+unrelated exceptions into a generic stylesheet, add CSS Modules or CSS-in-JS, or add a styling
+dependency.
 
 ## Verification contract
 
-Permanent changes must use the narrowest relevant contract checks, then the canonical
-`pnpm run verify` gate. UI changes also require browser verification for both locales, light and dark
-themes, mobile and desktop widths, keyboard behavior, reduced motion, and no horizontal overflow.
+Permanent changes must use the narrowest relevant contract checks, then pass the canonical
+`pnpm run verify` gate.
+
+For existing-surface styling changes, capture the current worktree before editing and compare a
+bounded after-state at 375, 768, 1024, and 1440px for `/id` and `/en`, in dark and light themes.
+Review keyboard order, visible focus, reduced motion, and horizontal overflow. Perceptual parity is
+strict: identity, hierarchy, geometry, color, typography, and state feedback remain unchanged.
+Subpixel rasterization differences are acceptable. For this refinement, the only intended visual
+deltas are removal of the Contact section, the Footer moving directly after Writing, and the visible
+label changing from `Case Studies` to `Experiences`.
+
+Automated browser checks must assert both locale routes, both themes, all four viewport widths,
+keyboard and focus behavior, reduced-motion behavior, no `#contact` section or navigation, no
+user-visible exact `Case Studies` text, a working Footer email link, and no horizontal overflow.
 
 Writing integration changes must additionally prove that delayed feed work does not prevent critical
 portfolio content from rendering and that an unavailable feed leaves the rest of the portfolio usable.

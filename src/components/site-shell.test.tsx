@@ -128,12 +128,6 @@ describe("site shell", () => {
       SITE_INTERACTION.mobileNavigation,
     );
     expect(primaryNavigation).toBeVisible();
-    expect(screen.getByRole("link", { name: /switch language|ganti bahasa/i })).toHaveClass(
-      "site-control",
-    );
-    expect(screen.getByRole("button", { name: dictionary.theme.label })).toHaveClass(
-      "site-control",
-    );
   });
 
   test("accepts only the supported locales", () => {

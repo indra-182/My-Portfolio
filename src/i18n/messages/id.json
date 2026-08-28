@@ -1,8 +1,7 @@
 {
   "navigation": {
     "capabilities": "Kapabilitas",
-    "caseStudies": "PROJECTS",
-    "contact": "Kontak",
+    "caseStudies": "Experiences",
     "primaryLabel": "Navigasi utama",
     "portfolio": "Portfolio",
     "downloadCv": "Unduh CV",
@@ -56,13 +55,6 @@
     "heading": "Bukti dari orang yang pernah bekerja bersama saya",
     "collaboratorLabel": "Kolaborator di Indivara Group",
     "mentoringLabel": "Mentoring dan pengajaran"
-  },
-  "contact": {
-    "heading": "Butuh frontend engineer untuk workflow yang kompleks?",
-    "description": "Ceritakan role, produk, atau tantangan frontend yang sedang Anda bangun.",
-    "email": "Kirim email",
-    "linkedin": "Buka LinkedIn",
-    "cv": "Unduh CV"
   },
   "footer": {
     "navigationLabel": "Navigasi footer",

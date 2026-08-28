@@ -1,6 +1,5 @@
 import { CapabilitiesSection } from "@/components/sections/capabilities-section";
 import { CaseStudiesSection } from "@/components/sections/case-studies-section";
-import { ContactSection } from "@/components/sections/contact-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { LatestWriting, LatestWritingLoading } from "@/components/sections/latest-writing-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
@@ -74,16 +73,6 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       <Suspense fallback={<LatestWritingLoading copy={dictionary.writing} />}>
         <LatestWriting locale={locale} copy={dictionary.writing} />
       </Suspense>
-      <ContactSection
-        heading={dictionary.contact.heading}
-        description={dictionary.contact.description}
-        emailLabel={dictionary.contact.email}
-        email={siteConfig.email}
-        linkedinLabel={dictionary.contact.linkedin}
-        linkedinUrl={siteConfig.linkedinUrl}
-        cvLabel={dictionary.contact.cv}
-        cvHref={siteConfig.cvHref}
-      />
     </>
   );
 }
