@@ -5,7 +5,6 @@ import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SITE_INTERACTION } from "@/components/site-interaction-contract";
-import { cn } from "@/lib/utils";
 
 export type SiteNavItem = { label: string; href: string };
 
@@ -51,12 +50,7 @@ export function SiteHeader({
             <a
               key={item.href}
               href={item.href}
-              className={cn(
-                "site-nav-link inline-flex min-h-11 items-center border-b border-transparent px-[0.7rem] py-[0.8rem]",
-                "font-mono text-[0.66rem] tracking-[0.09em] text-muted-foreground no-underline uppercase",
-                "transition-[color,border-color] duration-[var(--motion-fast)] ease-[ease]",
-                "hover:border-[var(--cue-rose)] hover:text-foreground focus-visible:border-[var(--cue-rose)] focus-visible:text-foreground",
-              )}
+              className="site-nav-link inline-flex min-h-11 items-center border-b border-transparent px-[0.7rem] py-[0.8rem] font-mono text-[0.66rem] tracking-[0.09em] text-muted-foreground no-underline uppercase transition-[color,border-color] duration-[var(--motion-fast)] ease-[ease] hover:border-[var(--cue-rose)] hover:text-foreground focus-visible:border-[var(--cue-rose)] focus-visible:text-foreground"
               data-site-interaction={SITE_INTERACTION.activeNavLink}
             >
               {item.label}
@@ -86,11 +80,7 @@ export function SiteHeader({
           aria-label={labels.scrollToTop}
           title={labels.scrollToTop}
           data-site-interaction={SITE_INTERACTION.scrollToTop}
-          className={cn(
-            "scroll-to-top fixed right-[max(1rem,calc((100vw-var(--content-max))/2))] bottom-4 z-25",
-            "invisible pointer-events-none translate-y-3 opacity-0",
-            "transition-[opacity,visibility,transform] duration-[var(--motion-fast)] ease-[ease]",
-          )}
+          className="scroll-to-top fixed right-[max(1rem,calc((100vw-var(--content-max))/2))] bottom-4 z-25 invisible pointer-events-none translate-y-3 opacity-0 transition-[opacity,visibility,transform] duration-[var(--motion-fast)] ease-[ease]"
           suppressHydrationWarning
         >
           <LuArrowUp aria-hidden="true" className="size-4" />

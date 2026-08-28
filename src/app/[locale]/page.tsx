@@ -1,3 +1,4 @@
+import { portfolioByLocale } from "@/content/portfolio";
 import { CapabilitiesSection } from "@/components/sections/capabilities-section";
 import { CaseStudiesSection } from "@/components/sections/case-studies-section";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -6,13 +7,12 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { Suspense } from "react";
 import { getDictionary } from "@/i18n/dictionaries";
 import { requireLocale } from "@/i18n/route-locale";
-import { getPortfolio } from "@/lib/get-portfolio";
 import { siteConfig } from "@/lib/site-config";
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;
   const locale = requireLocale(value);
-  const portfolio = getPortfolio(locale);
+  const portfolio = portfolioByLocale[locale];
   const dictionary = getDictionary(locale);
 
   const personJsonLd = {

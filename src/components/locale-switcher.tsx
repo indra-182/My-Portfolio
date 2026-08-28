@@ -1,6 +1,5 @@
 import { LuLanguages } from "react-icons/lu";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 
 export function LocaleSwitcher({
@@ -19,7 +18,7 @@ export function LocaleSwitcher({
     <a
       href={`/${targetLocale}`}
       aria-label={label}
-      className={cn(buttonVariants({ variant: "ghost" }), "site-control gap-2")}
+      className={`${buttonVariants({ variant: "ghost" })} site-control gap-2`}
     >
       <LuLanguages aria-hidden="true" className="size-4" />
       <span>{targetLocale.toUpperCase()}</span>

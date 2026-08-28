@@ -18,11 +18,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-heading:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-md);
 }
 
 @layer base {
@@ -37,13 +34,6 @@
 
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
-    font-family:
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
   }
 
   a {
@@ -117,7 +107,6 @@
 
   .cue-section-heading h2 {
     max-width: 18ch;
-    font-family: var(--font-heading);
     font-size: clamp(2rem, 4vw, 4rem);
     font-weight: 700;
     letter-spacing: -0.028em;

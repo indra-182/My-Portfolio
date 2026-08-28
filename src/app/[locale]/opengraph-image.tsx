@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-import { portfolioFacts } from "@/content/portfolio";
-import { getPortfolio } from "@/lib/get-portfolio";
+import { portfolioByLocale, portfolioFacts } from "@/content/portfolio";
 import { requireLocale } from "@/i18n/route-locale";
 
 export const alt = `INDRA.DEV: ${portfolioFacts.profile.name}`;
@@ -10,7 +9,7 @@ export const contentType = "image/png";
 export default async function OpenGraphImage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;
   const locale = requireLocale(value);
-  const portfolio = getPortfolio(locale);
+  const portfolio = portfolioByLocale[locale];
 
   return new ImageResponse(
     <div

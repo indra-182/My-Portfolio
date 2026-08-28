@@ -63,7 +63,7 @@ Localized copy is keyed by stable experience and project IDs:
 
 `PortfolioFactsSchema`, `PortfolioTranslationsSchema`, and `PortfolioContentSchema` reject missing,
 unexpected, duplicated, or invalid records when the module loads. Assembly has no English fallback,
-silent omission, or positional join. `getPortfolio` returns the already validated assembled content.
+silent omission, or positional join. `portfolioByLocale` exposes the already validated assembled content.
 
 Exactly one project is explicitly featured. Every testimonial has an explicit `collaborator` or
 `mentoring` category. Presentation modules must use those fields rather than array position.

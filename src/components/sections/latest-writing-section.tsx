@@ -1,7 +1,6 @@
 import { LuArrowUpRight } from "react-icons/lu";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { blog } from "@/lib/blog";
 import { getLatestPosts } from "@/lib/latest-posts";
 import type { Locale } from "@/i18n/config";
@@ -50,7 +49,7 @@ export function LatestWritingSection({
               {result.status === "ready" ? (
                 <a
                   href={blog.homeUrl}
-                  className={cn(buttonVariants({ variant: "outline" }), "cue-button")}
+                  className={`${buttonVariants({ variant: "outline" })} cue-button`}
                 >
                   {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
                 </a>
@@ -115,7 +114,7 @@ export function LatestWritingSection({
             <p className="max-w-2xl text-[1.05rem] leading-[1.6] text-muted-foreground">
               {copy.unavailable}
             </p>
-            <a href={blog.homeUrl} className={cn(buttonVariants({ size: "lg" }), "cue-button")}>
+            <a href={blog.homeUrl} className={`${buttonVariants({ size: "lg" })} cue-button`}>
               {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
