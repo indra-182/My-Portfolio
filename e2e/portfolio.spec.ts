@@ -54,6 +54,7 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   };
 
   await expectRemovedCueChrome("Urutan workflow Petron");
+  await page.evaluate(() => window.scrollTo(0, 0));
   const scrollToTop = page.locator('[data-site-interaction="scroll-to-top"]');
   await expect(scrollToTop).toBeHidden();
   await page.evaluate(() => window.scrollTo(0, 240));
