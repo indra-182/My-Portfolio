@@ -35,6 +35,7 @@ const siteInteractions = String.raw`
 
   const start = () => {
     const scrollToTopButton = document.querySelector("${selectors.scrollToTop}");
+    const header = document.querySelector("${selectors.header}");
     const navLinks = [...document.querySelectorAll("${selectors.activeNavLink}[href*='#']")].map(
       (link) => {
         const hash = new URL(link.href, window.location.href).hash;
@@ -47,12 +48,7 @@ const siteInteractions = String.raw`
     const scrollThreshold = 480;
 
     const updateScrollState = () => {
-      if (scrollToTopButton instanceof HTMLButtonElement) {
-        const isVisible = window.scrollY >= scrollThreshold;
-        scrollToTopButton.classList.toggle("is-visible", isVisible);
-      }
-
-      const header = document.querySelector("${selectors.header}");
+      const isVisible = window.scrollY >= scrollThreshold;
       const activationLine = (header?.getBoundingClientRect().height ?? 0) + 64;
       let activeLink = null;
 
@@ -61,6 +57,10 @@ const siteInteractions = String.raw`
           activeLink = link;
         }
       });
+
+      if (scrollToTopButton instanceof HTMLButtonElement) {
+        scrollToTopButton.classList.toggle("is-visible", isVisible);
+      }
 
       navLinks.forEach(({ link }) => {
         const isActive = link === activeLink;
@@ -72,7 +72,6 @@ const siteInteractions = String.raw`
         }
       });
     };
-
     window.addEventListener("scroll", updateScrollState, { passive: true });
     window.addEventListener("resize", updateScrollState);
 

@@ -2,7 +2,6 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { blog } from "@/lib/blog";
-import { getLatestPosts } from "@/lib/latest-posts";
 import type { Locale } from "@/i18n/config";
 import type { LatestFeedResult } from "@/types/latest-post";
 
@@ -124,10 +123,16 @@ export function LatestWritingSection({
   );
 }
 
-export async function LatestWriting({ locale, copy }: { locale: Locale; copy: LatestWritingCopy }) {
-  const result = await getLatestPosts();
-
-  return <LatestWritingSection locale={locale} result={result} copy={copy} />;
+export async function LatestWriting({
+  locale,
+  copy,
+  result,
+}: {
+  locale: Locale;
+  copy: LatestWritingCopy;
+  result: Promise<LatestFeedResult>;
+}) {
+  return <LatestWritingSection locale={locale} result={await result} copy={copy} />;
 }
 
 export function LatestWritingLoading({ copy }: { copy: LatestWritingCopy }) {

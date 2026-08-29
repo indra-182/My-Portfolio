@@ -8,8 +8,10 @@ import { Suspense } from "react";
 import { getDictionary } from "@/i18n/dictionaries";
 import { requireLocale } from "@/i18n/route-locale";
 import { siteConfig } from "@/lib/site-config";
+import { getLatestPosts } from "@/lib/latest-posts";
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
+  const latestPosts = getLatestPosts();
   const { locale: value } = await params;
   const locale = requireLocale(value);
   const portfolio = portfolioByLocale[locale];
@@ -71,7 +73,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         mentoringLabel={dictionary.testimonials.mentoringLabel}
       />
       <Suspense fallback={<LatestWritingLoading copy={dictionary.writing} />}>
-        <LatestWriting locale={locale} copy={dictionary.writing} />
+        <LatestWriting locale={locale} copy={dictionary.writing} result={latestPosts} />
       </Suspense>
     </>
   );
