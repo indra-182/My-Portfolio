@@ -1,9 +1,9 @@
 "use client";
 
+import enJson from "@/i18n/messages/en.json";
+import idJson from "@/i18n/messages/id.json";
 import { usePathname } from "next/navigation";
-import { getDictionary } from "@/i18n/dictionaries";
-import { getRecoveryLocale } from "@/i18n/config";
-import { blog } from "@/lib/blog";
+import { blogUrl } from "@/lib/blog-url";
 
 export default function Error({
   reset,
@@ -11,9 +11,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const segment = usePathname().split("/")[1];
-  const locale = getRecoveryLocale(segment);
-  const copy = getDictionary(locale).errors;
+  const copy = usePathname().split("/")[1] === "en" ? enJson.errors : idJson.errors;
 
   return (
     <section className="content-shell flex min-h-[50vh] flex-col justify-center py-20">
@@ -33,8 +31,8 @@ export default function Error({
           {copy.retry}
         </button>
         <a
-          href={blog.homeUrl}
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          href={blogUrl}
         >
           {copy.blog}
         </a>
