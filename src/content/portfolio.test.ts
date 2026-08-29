@@ -1,12 +1,20 @@
 import { describe, expect, test } from "vitest";
-import { portfolioByLocale, portfolioFacts } from "./portfolio";
-import { PortfolioContentSchema } from "./portfolio-schema";
+import { portfolioByLocale, portfolioFacts, portfolioTranslations } from "./portfolio";
+import {
+  PortfolioContentSchema,
+  PortfolioFactsSchema,
+  PortfolioTranslationsSchema,
+} from "./portfolio-schema";
 
 describe("portfolio content", () => {
   test.each(["id", "en"] as const)("%s content satisfies the public schema", (locale) => {
     expect(() => PortfolioContentSchema.parse(portfolioByLocale[locale])).not.toThrow();
   });
 
+  test("source facts and translations satisfy their schemas", () => {
+    expect(() => PortfolioFactsSchema.parse(portfolioFacts)).not.toThrow();
+    expect(() => PortfolioTranslationsSchema.parse(portfolioTranslations)).not.toThrow();
+  });
   test("keeps stable project IDs and canonical ordering across locales", () => {
     const ids = (locale: "id" | "en") =>
       portfolioByLocale[locale].experiences.flatMap((experience) =>

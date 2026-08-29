@@ -1,12 +1,7 @@
 import { locales, type Locale } from "@/i18n/config";
-import {
-  PortfolioContentSchema,
-  PortfolioFactsSchema,
-  PortfolioTranslationsSchema,
-  type PortfolioContent,
-} from "./portfolio-schema";
+import type { PortfolioContent, PortfolioFacts, PortfolioTranslations } from "./portfolio-schema";
 
-export const portfolioFacts = PortfolioFactsSchema.parse({
+export const portfolioFacts: PortfolioFacts = {
   profile: {
     name: "Mahadi Indra Manurung",
     role: "Senior Frontend Engineer",
@@ -101,9 +96,9 @@ export const portfolioFacts = PortfolioFactsSchema.parse({
       category: "mentoring",
     },
   ],
-});
+};
 
-export const portfolioTranslations = PortfolioTranslationsSchema.parse({
+export const portfolioTranslations: PortfolioTranslations = {
   id: {
     profile: {
       headline:
@@ -288,7 +283,7 @@ export const portfolioTranslations = PortfolioTranslationsSchema.parse({
       },
     },
   },
-});
+};
 
 const projectsById = new Map(portfolioFacts.projects.map((project) => [project.id, project]));
 
@@ -335,13 +330,13 @@ function assemblePortfolio(locale: Locale): PortfolioContent {
     };
   });
 
-  return PortfolioContentSchema.parse({
+  return {
     locale,
     profile: { ...portfolioFacts.profile, ...copy.profile },
     capabilities: copy.capabilities,
     experiences,
     testimonials: portfolioFacts.testimonials,
-  });
+  };
 }
 
 export const portfolioByLocale = Object.fromEntries(
