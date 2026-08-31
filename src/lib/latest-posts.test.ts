@@ -13,6 +13,30 @@ const feed = {
       topics: ["React", "Next.js"],
       readingTimeMinutes: 3,
     },
+    {
+      title: "Type-safe boundaries",
+      slug: "type-safe-boundaries",
+      description: "How to keep data contracts explicit.",
+      publishedAt: "2026-07-20T10:00:00+07:00",
+      topics: ["TypeScript"],
+      readingTimeMinutes: 4,
+    },
+    {
+      title: "Shipping with confidence",
+      slug: "shipping-with-confidence",
+      description: "A small testing loop for frontend teams.",
+      publishedAt: "2026-07-10T10:00:00+07:00",
+      topics: ["Testing"],
+      readingTimeMinutes: 5,
+    },
+    {
+      title: "Fourth post",
+      slug: "fourth-post",
+      description: "This post is beyond the adapter limit.",
+      publishedAt: "2026-07-01T10:00:00+07:00",
+      topics: ["React"],
+      readingTimeMinutes: 3,
+    },
   ],
 };
 
@@ -28,7 +52,7 @@ describe("getLatestPosts", () => {
 
     const result = await getLatestPosts();
 
-    expect(result).toEqual({ status: "ready", posts: feed.posts });
+    expect(result).toEqual({ status: "ready", posts: feed.posts.slice(0, 3) });
     expect(fetchMock).toHaveBeenCalledWith(
       "https://blog-indra.vercel.app/api/posts/latest?limit=3",
       {

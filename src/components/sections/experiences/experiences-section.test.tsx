@@ -1,42 +1,23 @@
 import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
-import { getDictionary } from "@/i18n/dictionaries";
 import { portfolioByLocale } from "@/content/portfolio";
-import { CaseStudiesSection } from "./case-studies-section";
+import { getDictionary } from "@/i18n/dictionaries";
+import { ExperiencesSection } from "./experiences-section";
 
-function renderCaseStudies(locale: "id" | "en") {
+function renderExperiences(locale: "id" | "en") {
   const dictionary = getDictionary(locale);
   const portfolio = portfolioByLocale[locale];
-  const labels = {
-    problem: dictionary.portfolio.problemLabel,
-    ownership: dictionary.portfolio.ownershipLabel,
-    delivery: dictionary.portfolio.deliveryLabel,
-    outcome: dictionary.portfolio.outcomeLabel,
-  };
 
   return render(
-    <CaseStudiesSection
-      experiences={portfolio.experiences}
-      heading={dictionary.portfolio.caseStudiesHeading}
-      description={dictionary.portfolio.caseStudiesDescription}
-      labels={labels}
-      technologiesLabel={dictionary.portfolio.technologies}
-      roleLabel={dictionary.portfolio.role}
-      periodLabel={dictionary.portfolio.period}
-      featuredLabel={dictionary.portfolio.featuredLabel}
-      secondaryLabel={dictionary.portfolio.secondaryLabel}
-      openDetails={dictionary.portfolio.openDetails}
-      closeDetails={dictionary.portfolio.closeDetails}
-    />,
+    <ExperiencesSection experiences={portfolio.experiences} copy={dictionary.portfolio} />,
   );
 }
 
-describe("CaseStudiesSection", () => {
+describe("ExperiencesSection", () => {
   test.each(["id", "en"] as const)(
-    "keeps all five supplied projects in the %s case study journey",
+    "keeps all five supplied projects in the %s experience journey",
     (locale) => {
-      const { container } = renderCaseStudies(locale);
+      const { container } = renderExperiences(locale);
       const portfolio = portfolioByLocale[locale];
       const projects = portfolio.experiences.flatMap((experience) => experience.projects);
       const featuredProject = projects.find((project) => project.featured)!;
@@ -47,9 +28,8 @@ describe("CaseStudiesSection", () => {
     },
   );
 
-  test("shows the featured evidence and expands a secondary project", async () => {
-    const user = userEvent.setup();
-    const { container } = renderCaseStudies("en");
+  test("shows the featured evidence and expands a secondary project", () => {
+    const { container } = renderExperiences("en");
     const project = portfolioByLocale.en.experiences
       .flatMap((experience) => experience.projects)
       .find((candidate) => candidate.id === "maybank-unit-trust")!;
@@ -58,7 +38,7 @@ describe("CaseStudiesSection", () => {
     expect(screen.queryByText(project.outcome)).not.toBeVisible();
 
     const details = container.querySelectorAll("details")[0];
-    await user.click(within(details).getByText(project.title));
+    details.querySelector("summary")!.click();
 
     expect(within(details).getByText("Problem")).toBeVisible();
     expect(within(details).getByText("Ownership")).toBeVisible();
@@ -68,6 +48,8 @@ describe("CaseStudiesSection", () => {
     expect(within(details).getByText(project.ownership)).toBeVisible();
     expect(within(details).getByText(project.delivery)).toBeVisible();
     expect(within(details).getByText(project.outcome)).toBeVisible();
-    expect(within(details).getByText(project.technologies[0])).toBeVisible();
+    for (const technology of project.technologies) {
+      expect(within(details).getByText(technology)).toBeVisible();
+    }
   });
 });

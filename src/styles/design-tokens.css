@@ -12,8 +12,6 @@
   --popover: var(--surface-strong);
   --primary: #f4f1e9;
   --primary-foreground: #08090d;
-  --secondary: var(--surface-strong);
-  --secondary-foreground: var(--foreground);
   --muted: var(--surface);
   --ring: var(--focus-ring);
   --cue-night: #08090d;
@@ -24,6 +22,8 @@
   --radius-md: 0.3rem;
   --motion-fast: 180ms;
   --motion-enter: 480ms;
+  --motion-cue: 700ms;
+  --ease-cue: cubic-bezier(0.16, 1, 0.3, 1);
   --content-max: 76rem;
 }
 
@@ -41,8 +41,6 @@
   --popover: #fffdf8;
   --primary: #173b72;
   --primary-foreground: #f4f1e9;
-  --secondary: #ddd9d2;
-  --secondary-foreground: var(--foreground);
   --muted: var(--surface);
   --ring: var(--focus-ring);
   --cue-night: #f4f1e9;
@@ -55,5 +53,6 @@
   :root {
     --motion-fast: 0ms;
     --motion-enter: 0ms;
+    --motion-cue: 0ms;
   }
 }

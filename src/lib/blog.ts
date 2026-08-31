@@ -1,9 +1,11 @@
-import { siteConfig } from "@/lib/site-config";
-
-const baseUrl = `${siteConfig.blogUrl}/`;
+const homeUrl = (process.env.NEXT_PUBLIC_BLOG_URL ?? "https://blog-indra.vercel.app/").replace(
+  /\/$/,
+  "",
+);
+const baseUrl = `${homeUrl}/`;
 
 export const blog = {
-  homeUrl: siteConfig.blogUrl,
+  homeUrl,
   latestPostsUrl(limit: number) {
     const url = new URL("api/posts/latest", baseUrl);
     url.searchParams.set("limit", String(limit));

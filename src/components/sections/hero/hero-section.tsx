@@ -36,17 +36,23 @@ export function HeroSection({
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${email}`}
-                className={`${buttonVariants({ size: "lg" })} cue-button`}
+                className={`${buttonVariants({ size: "lg" })} cue-button group`}
               >
                 {emailLabel}
-                <LuArrowUpRight aria-hidden="true" className="size-4" />
+                <LuArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 motion-reduce:transform-none"
+                />
               </a>
               <a
                 href={cvHref}
                 download
-                className={`${buttonVariants({ variant: "outline", size: "lg" })} cue-button`}
+                className={`${buttonVariants({ variant: "outline", size: "lg" })} cue-button group`}
               >
-                <LuArrowDownToLine aria-hidden="true" className="size-4" />
+                <LuArrowDownToLine
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-y-1 group-focus-visible:translate-y-1 motion-reduce:transform-none"
+                />
                 {downloadLabel}
               </a>
             </div>

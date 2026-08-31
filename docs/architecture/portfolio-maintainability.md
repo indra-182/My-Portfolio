@@ -15,15 +15,18 @@ localized Writing heading immediately, marks the section busy, reserves its fina
 exposes no fake article or error state. Once the feed resolves, the fallback is replaced by either the
 ready or unavailable state.
 
-## Existing-surface refinement contract
+## Experience and Project interface
 
 The proof sequence ends with Writing and then the shared Footer. There is no standalone Contact
 section and no `#contact` navigation target. Hero keeps the direct email and CV actions; Footer keeps
-Blog, GitHub, LinkedIn, and email links. Shared values continue to come from `siteConfig`.
+Blog, GitHub, LinkedIn, and email links.
 
-The project navigation label is visibly `Experiences` in both locales. This copy change does not
-rename `navigation.caseStudies`, `CaseStudiesSection`, `#case-studies`, or its anchors. Stable
-implementation identifiers do not follow presentation copy unless a broken reference requires it.
+`src/components/sections/experiences/experiences-section.tsx` renders the `Experience > Project`
+domain interface. An Experience is an employment role, company, period, and responsibility record
+containing ordered Projects. Exactly one Project is featured; the remaining Projects use native
+`<details>` disclosures.
+
+Navigation uses the localized `Experiences` label and the `#experiences` anchor in both locales.
 
 ## External blog seam
 
@@ -33,9 +36,9 @@ implementation identifiers do not follow presentation copy unless a broken refer
 - latest-post feed endpoint
 - article URL
 
-`src/lib/latest-posts.ts` owns transport, timeout, revalidation, and feed validation. Callers must not
-construct blog paths or know the feed endpoint. The blog is single-language, so recovery links always
-use the blog home URL and never append the portfolio locale.
+`src/lib/latest-posts.ts` owns transport, timeout, revalidation, feed validation, and the three-post
+adapter limit. Callers must not construct blog paths or know the feed endpoint. The blog is
+single-language, so recovery links always use the blog home URL and never append the portfolio locale.
 
 Change recipe for a blog route:
 
@@ -61,9 +64,11 @@ Localized copy is keyed by stable experience and project IDs:
 - project summary, problem, ownership, delivery, and outcome
 - capabilities
 
-`PortfolioFactsSchema`, `PortfolioTranslationsSchema`, and `PortfolioContentSchema` reject missing,
-unexpected, duplicated, or invalid records when the module loads. Assembly has no English fallback,
-silent omission, or positional join. `portfolioByLocale` exposes the already validated assembled content.
+`PortfolioFactsSchema`, `PortfolioTranslationsSchema`, and `PortfolioContentSchema` define the
+validation contract and reject missing, unexpected, duplicated, or invalid records when explicitly
+parsed. The static portfolio module relies on TypeScript's typed assignments and explicit exact-key
+checks during assembly; `portfolioByLocale` exposes content after those checks, not a module-load Zod
+parse. Assembly has no English fallback, silent omission, or positional join.
 
 Exactly one project is explicitly featured. Every testimonial has an explicit `collaborator` or
 `mentoring` category. Presentation modules must use those fields rather than array position.
@@ -99,16 +104,16 @@ Change recipe for a locale:
 3. Add complete portfolio translations keyed by all canonical IDs.
 4. Verify route, metadata, Open Graph, sitemap, locale switcher, and recovery behavior.
 
-Do not add dynamic loaders or a locale plugin system while catalogs remain small static modules.
-
 ## Browser interaction seam
 
-`src/components/site-interactions.tsx` remains the single non-React browser interaction boundary. It
-owns theme persistence, scroll-to-top behavior, active navigation, and mobile dialog behavior.
+`src/components/shell/site-interactions.tsx` remains the single non-React browser interaction
+boundary. It owns theme persistence, scroll-to-top behavior, active navigation, and mobile dialog
+behavior.
 
-`src/components/site-interaction-contract.ts` owns the `data-site-interaction` marker values used by
-both JSX and the raw script. Styling classes are not behavioral hooks. New browser behavior must reuse
-this seam unless it requires React state that cannot be expressed safely with native DOM behavior.
+`src/components/shell/site-interaction-contract.ts` owns the `data-site-interaction` marker values
+used by both JSX and the raw script. Styling classes are not behavioral hooks. New browser behavior
+must reuse this seam unless it requires React state that cannot be expressed safely with native DOM
+behavior.
 
 Change recipe for an interaction:
 
@@ -140,9 +145,10 @@ An owner stylesheet may remain only for rules that would become less legible as 
 - the 900px Hero breakpoint where it expresses the portrait-stage contract
 - reduced-motion overrides and global browser behavior
 
-Retained owner styles stay beside their feature as `shell.css`, `hero.css`,
-`proof-case-studies.css`, `testimonials.css`, or `writing.css`. Remove any selector, import, and owner
-file left without a retained rule. `contact.css` has no owner after the Contact section is removed.
+Retained owner styles stay beside their feature: `src/components/shell/shell.css`,
+`src/components/sections/hero/hero.css`, `src/components/sections/experiences/experiences.css`, and
+`src/components/sections/writing/writing.css`. Remove any selector, import, or owner file left
+without a retained rule. Global tokens and foundation remain in `src/styles/`.
 Among retained files, import order follows the visual sequence after foundation. Do not consolidate
 unrelated exceptions into a generic stylesheet, add CSS Modules or CSS-in-JS, or add a styling
 dependency.
@@ -150,19 +156,13 @@ dependency.
 ## Verification contract
 
 Permanent changes must use the narrowest relevant contract checks, then pass the canonical
-`pnpm run verify` gate.
+`pnpm run verify` gate. `DESIGN.md` is the authority for visual, motion, accessibility, and
+responsive behavior.
 
-For existing-surface styling changes, capture the current worktree before editing and compare a
-bounded after-state at 375, 768, 1024, and 1440px for `/id` and `/en`, in dark and light themes.
-Review keyboard order, visible focus, reduced motion, and horizontal overflow. Perceptual parity is
-strict: identity, hierarchy, geometry, color, typography, and state feedback remain unchanged.
-Subpixel rasterization differences are acceptable. For this refinement, the only intended visual
-deltas are removal of the Contact section, the Footer moving directly after Writing, and the visible
-label changing from `Case Studies` to `Experiences`.
+For owner-folder, route, or feed changes, verify the affected TypeScript and contract tests, then
+run the canonical gate. For existing-surface styling changes, compare bounded captures at 375, 768,
+1024, and 1440px for `/id` and `/en`, in dark and light themes. Review keyboard order, visible focus,
+reduced motion, and horizontal overflow.
 
-Automated browser checks must assert both locale routes, both themes, all four viewport widths,
-keyboard and focus behavior, reduced-motion behavior, no `#contact` section or navigation, no
-user-visible exact `Case Studies` text, a working Footer email link, and no horizontal overflow.
-
-Writing integration changes must additionally prove that delayed feed work does not prevent critical
-portfolio content from rendering and that an unavailable feed leaves the rest of the portfolio usable.
+Writing integration changes must prove that delayed feed work does not prevent critical portfolio
+content from rendering and that an unavailable feed leaves the rest of the portfolio usable.

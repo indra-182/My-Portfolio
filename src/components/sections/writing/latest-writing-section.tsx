@@ -3,17 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { blog } from "@/lib/blog";
 import type { Locale } from "@/i18n/config";
-import type { LatestFeedResult } from "@/types/latest-post";
+import type { Dictionary } from "@/i18n/dictionaries";
+import type { LatestFeedResult } from "@/lib/latest-posts";
 
-export type LatestWritingCopy = {
-  heading: string;
-  visitBlog: string;
-  unavailable: string;
-  asideEyebrow: string;
-  asideHeading: string;
-  asideDescription: string;
-  readingTime: string;
-};
+type LatestWritingCopy = Dictionary["writing"];
 
 function formatDate(value: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-US", {
@@ -31,29 +24,31 @@ export function LatestWritingSection({
   result: LatestFeedResult;
   copy: LatestWritingCopy;
 }) {
-  const visiblePosts = result.status === "ready" ? result.posts.slice(0, 3) : [];
+  const visiblePosts = result.status === "ready" ? result.posts : [];
 
   return (
     <section id="writing" className="cue-section" aria-labelledby="writing-title">
       <div className="content-shell">
         <div className="cue-section-heading">
-          <div>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2
-                id="writing-title"
-                className="max-w-[18ch] !text-[clamp(2rem,4vw,3.75rem)] leading-[1.02] font-bold tracking-[-0.028em]"
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2
+              id="writing-title"
+              className="max-w-[18ch] !text-[clamp(2rem,4vw,3.75rem)] leading-[1.02] font-bold tracking-[-0.028em]"
+            >
+              {copy.heading}
+            </h2>
+            {result.status === "ready" ? (
+              <a
+                href={blog.homeUrl}
+                className={`${buttonVariants({ variant: "outline" })} cue-button group`}
               >
-                {copy.heading}
-              </h2>
-              {result.status === "ready" ? (
-                <a
-                  href={blog.homeUrl}
-                  className={`${buttonVariants({ variant: "outline" })} cue-button`}
-                >
-                  {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
-                </a>
-              ) : null}
-            </div>
+                {copy.visitBlog}{" "}
+                <LuArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 motion-reduce:transform-none"
+                />
+              </a>
+            ) : null}
           </div>
         </div>
 
@@ -65,9 +60,7 @@ export function LatestWritingSection({
                 className="writing-card group flex min-h-68 flex-col bg-background p-[clamp(1.25rem,3vw,2rem)] transition-colors duration-[var(--motion-fast)] ease-[ease]"
               >
                 <div className="flex items-center justify-between gap-4 font-mono text-[0.63rem] text-muted-foreground">
-                  <Badge variant="outline" className="border-border font-mono text-[0.63rem]">
-                    {post.topics[0]}
-                  </Badge>
+                  <Badge className="border-border font-mono text-[0.63rem]">{post.topics[0]}</Badge>
                   <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
                 </div>
                 <h3 className="mt-[0.65rem] max-w-[23ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.05] font-[750] tracking-[-0.035em]">
@@ -113,8 +106,12 @@ export function LatestWritingSection({
             <p className="max-w-2xl text-[1.05rem] leading-[1.6] text-muted-foreground">
               {copy.unavailable}
             </p>
-            <a href={blog.homeUrl} className={`${buttonVariants({ size: "lg" })} cue-button`}>
-              {copy.visitBlog} <LuArrowUpRight aria-hidden="true" className="size-4" />
+            <a href={blog.homeUrl} className={`${buttonVariants({ size: "lg" })} cue-button group`}>
+              {copy.visitBlog}{" "}
+              <LuArrowUpRight
+                aria-hidden="true"
+                className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 motion-reduce:transform-none"
+              />
             </a>
           </div>
         )}

@@ -1,7 +1,7 @@
 {
   "navigation": {
     "capabilities": "Capabilities",
-    "caseStudies": "Experiences",
+    "experiences": "Experiences",
     "content": "Content",
     "primaryLabel": "Primary navigation",
     "portfolio": "Portfolio",
@@ -29,8 +29,8 @@
   },
   "portfolio": {
     "capabilitiesHeading": "Clarity for workflows that matter.",
-    "caseStudiesHeading": "Selected experience across complex product flows.",
-    "caseStudiesDescription": "I connect product problems, frontend decisions, and the verification evidence available for each project.",
+    "experiencesHeading": "Selected experience across complex product flows.",
+    "experiencesDescription": "I connect product problems, frontend decisions, and the verification evidence available for each project.",
     "featuredLabel": "Featured workflow",
     "secondaryLabel": "More workflows",
     "problemLabel": "Problem",

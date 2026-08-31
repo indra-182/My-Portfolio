@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { LatestFeedResult } from "@/types/latest-post";
 import { blog } from "@/lib/blog";
 
 const latestPostSchema = z.object({
@@ -10,6 +9,10 @@ const latestPostSchema = z.object({
   topics: z.array(z.string().min(1)).min(1),
   readingTimeMinutes: z.number().int().positive(),
 });
+type LatestPostSummary = z.infer<typeof latestPostSchema>;
+
+export type LatestFeedResult =
+  { status: "ready"; posts: LatestPostSummary[] } | { status: "unavailable" };
 
 const latestPostFeedSchema = z.object({
   version: z.literal(1),
@@ -35,7 +38,7 @@ export async function getLatestPosts(): Promise<LatestFeedResult> {
 
     return {
       status: "ready",
-      posts: feed.posts,
+      posts: feed.posts.slice(0, latestPostsLimit),
     };
   } catch {
     return { status: "unavailable" };

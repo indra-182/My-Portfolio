@@ -1,6 +1,6 @@
 import { LuMoon, LuSun } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
-import { SITE_INTERACTION } from "@/components/site-interaction-contract";
+import { SITE_INTERACTION } from "@/components/shell/site-interaction-contract";
 
 export function ThemeToggle({ label }: { label: string }) {
   return (

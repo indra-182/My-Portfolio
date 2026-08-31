@@ -1,12 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { blogUrl } from "./blog-url";
 import { siteConfig } from "./site-config";
 
 describe("site configuration", () => {
   test("uses safe defaults and exposes the public contract", () => {
     expect(siteConfig.portfolioUrl).toBe("https://portfolio-indradev.vercel.app");
-    expect(siteConfig.blogUrl).toBe("https://blog-indra.vercel.app");
-    expect(blogUrl).toBe("https://blog-indra.vercel.app");
     expect(siteConfig.email).toBe("mahadiindra2@gmail.com");
     expect(siteConfig.linkedinUrl).toBe("https://www.linkedin.com/in/mahadiindra182");
     expect(siteConfig.githubUrl).toBe("https://github.com/indra-182");

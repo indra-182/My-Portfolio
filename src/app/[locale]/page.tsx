@@ -1,8 +1,11 @@
 import { portfolioByLocale } from "@/content/portfolio";
 import { CapabilitiesSection } from "@/components/sections/capabilities-section";
-import { CaseStudiesSection } from "@/components/sections/case-studies-section";
-import { HeroSection } from "@/components/sections/hero-section";
-import { LatestWriting, LatestWritingLoading } from "@/components/sections/latest-writing-section";
+import { ExperiencesSection } from "@/components/sections/experiences/experiences-section";
+import { HeroSection } from "@/components/sections/hero/hero-section";
+import {
+  LatestWriting,
+  LatestWritingLoading,
+} from "@/components/sections/writing/latest-writing-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { Suspense } from "react";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -48,30 +51,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         capabilities={portfolio.capabilities}
         heading={dictionary.portfolio.capabilitiesHeading}
       />
-      <CaseStudiesSection
-        experiences={portfolio.experiences}
-        heading={dictionary.portfolio.caseStudiesHeading}
-        description={dictionary.portfolio.caseStudiesDescription}
-        labels={{
-          problem: dictionary.portfolio.problemLabel,
-          ownership: dictionary.portfolio.ownershipLabel,
-          delivery: dictionary.portfolio.deliveryLabel,
-          outcome: dictionary.portfolio.outcomeLabel,
-        }}
-        technologiesLabel={dictionary.portfolio.technologies}
-        roleLabel={dictionary.portfolio.role}
-        periodLabel={dictionary.portfolio.period}
-        featuredLabel={dictionary.portfolio.featuredLabel}
-        secondaryLabel={dictionary.portfolio.secondaryLabel}
-        openDetails={dictionary.portfolio.openDetails}
-        closeDetails={dictionary.portfolio.closeDetails}
-      />
-      <TestimonialsSection
-        testimonials={portfolio.testimonials}
-        heading={dictionary.testimonials.heading}
-        collaboratorLabel={dictionary.testimonials.collaboratorLabel}
-        mentoringLabel={dictionary.testimonials.mentoringLabel}
-      />
+      <ExperiencesSection experiences={portfolio.experiences} copy={dictionary.portfolio} />
+      <TestimonialsSection testimonials={portfolio.testimonials} copy={dictionary.testimonials} />
       <Suspense fallback={<LatestWritingLoading copy={dictionary.writing} />}>
         <LatestWriting locale={locale} copy={dictionary.writing} result={latestPosts} />
       </Suspense>

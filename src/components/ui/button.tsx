@@ -6,13 +6,11 @@ const buttonBase =
 const buttonVariantClasses = {
   default: "bg-primary text-primary-foreground hover:bg-primary/85",
   outline: "border-border bg-background hover:bg-muted hover:text-foreground",
-  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
   ghost: "hover:bg-muted hover:text-foreground",
 } as const;
 
 const buttonSizeClasses = {
   default: "min-h-11",
-  sm: "min-h-9 px-3 text-xs",
   lg: "min-h-12 px-5",
   icon: "size-11 p-0",
 } as const;
@@ -21,24 +19,18 @@ type ButtonVariant = keyof typeof buttonVariantClasses;
 type ButtonSize = keyof typeof buttonSizeClasses;
 
 export function buttonVariants({
-  variant,
-  size,
+  variant = "default",
+  size = "default",
 }: {
-  variant?: ButtonVariant | null;
-  size?: ButtonSize | null;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
 } = {}) {
-  return [
-    buttonBase,
-    variant === null ? "" : buttonVariantClasses[variant ?? "default"],
-    size === null ? "" : buttonSizeClasses[size ?? "default"],
-  ]
-    .filter(Boolean)
-    .join(" ");
+  return [buttonBase, buttonVariantClasses[variant], buttonSizeClasses[size]].join(" ");
 }
 
-export type ButtonProps = React.ComponentProps<"button"> & {
-  variant?: ButtonVariant | null;
-  size?: ButtonSize | null;
+type ButtonProps = React.ComponentProps<"button"> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
 };
 
 export function Button({
@@ -50,7 +42,6 @@ export function Button({
   return (
     <button
       {...props}
-      data-slot="button"
       className={[buttonVariants({ variant, size }), className].filter(Boolean).join(" ")}
     />
   );

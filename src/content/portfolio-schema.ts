@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { locales } from "@/i18n/config";
 
-export const LocaleSchema = z.enum(locales);
+const LocaleSchema = z.enum(locales);
 
 const LocationSchema = z
   .object({
@@ -81,7 +81,7 @@ const ExperienceFactsSchema = z
   })
   .strict();
 
-const TestimonialFactsSchema = z
+const TestimonialSchema = z
   .object({
     author: z.string().min(1),
     role: z.string().min(1),
@@ -97,7 +97,7 @@ export const PortfolioFactsSchema = z
     profile: ProfileFactsSchema,
     projects: z.array(ProjectFactsSchema).min(1),
     experiences: z.array(ExperienceFactsSchema).min(1),
-    testimonials: z.array(TestimonialFactsSchema),
+    testimonials: z.array(TestimonialSchema),
   })
   .strict()
   .superRefine((facts, context) => {
@@ -142,56 +142,17 @@ export const PortfolioFactsSchema = z
     }
   });
 
-const ProjectSchema = z
-  .object({
-    id: z.string().min(1),
-    title: z.string().min(1),
-    summary: z.string().min(1),
-    problem: z.string().min(1),
-    ownership: z.string().min(1),
-    delivery: z.string().min(1),
-    outcome: z.string().min(1),
-    technologies: z.array(z.string().min(1)).min(1),
-    featured: z.boolean(),
-  })
-  .strict();
+const ProjectSchema = ProjectFactsSchema.extend(ProjectCopySchema.shape);
 
-const ExperienceSchema = z
-  .object({
-    id: z.string().min(1),
-    company: z.string().min(1),
-    role: z.string().min(1),
-    period: z.string().min(1),
-    responsibilities: z.array(z.string().min(1)).min(1),
-    projects: z.array(ProjectSchema).min(1),
-  })
-  .strict();
-
-const TestimonialSchema = z
-  .object({
-    author: z.string().min(1),
-    role: z.string().min(1),
-    organization: z.string().min(1),
-    quote: z.string().min(1),
-    approved: z.literal(true),
-    category: z.enum(["collaborator", "mentoring"]),
-  })
-  .strict();
+const ExperienceSchema = ExperienceFactsSchema.omit({ projectIds: true }).extend({
+  ...ExperienceCopySchema.omit({ projects: true }).shape,
+  projects: z.array(ProjectSchema).min(1),
+});
 
 export const PortfolioContentSchema = z
   .object({
     locale: LocaleSchema,
-    profile: z
-      .object({
-        name: z.string().min(1),
-        role: z.string().min(1),
-        location: LocationSchema,
-        headline: z.string().min(1),
-        valueProposition: z.string().min(1),
-        imageSrc: z.string().min(1),
-        imageAlt: z.string().min(1),
-      })
-      .strict(),
+    profile: ProfileFactsSchema.extend(ProfileCopySchema.shape),
     capabilities: z.array(CapabilitySchema).length(3),
     experiences: z.array(ExperienceSchema).min(1),
     testimonials: z.array(TestimonialSchema),
@@ -218,7 +179,7 @@ export const PortfolioContentSchema = z
   });
 
 export type Project = z.infer<typeof ProjectSchema>;
-export type Experience = z.infer<typeof ExperienceSchema>;
+
 export type Testimonial = z.infer<typeof TestimonialSchema>;
 export type PortfolioContent = z.infer<typeof PortfolioContentSchema>;
 export type PortfolioFacts = z.infer<typeof PortfolioFactsSchema>;

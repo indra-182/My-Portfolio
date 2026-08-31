@@ -125,11 +125,11 @@ components:
     backgroundColor: "{colors.background-dark}"
     textColor: "{colors.foreground-dark}"
     height: "4.75rem"
-  case-study-featured:
+  project-featured:
     backgroundColor: "{colors.surface-strong-dark}"
     textColor: "{colors.foreground-dark}"
     padding: "clamp(1.35rem, 3vw, 2.5rem)"
-  case-study-disclosure:
+  project-disclosure:
     backgroundColor: "transparent"
     textColor: "{colors.foreground-dark}"
     padding: "0.9rem 0"
@@ -221,14 +221,16 @@ The review matrix covers 375, 768, 1024, and 1440px. The final native captures i
 
 ## Elevation & Depth
 
-Cue Horizon uses tonal layering more than elevation. Depth comes from the hero gradients, the fixed cobalt horizon, the rose lower wash, thin structural borders, and surface changes between the background, stage surface, and strong stage surface. Shadows are reserved for the portrait frame and featured case study so the stage remains flat elsewhere.
+Cue Horizon uses tonal layering more than elevation. Depth comes from the hero gradients, the fixed cobalt horizon, the rose lower wash, thin structural borders, and surface changes between the background, stage surface, and strong stage surface. Shadows are reserved for the portrait frame and featured Project so the stage remains flat elsewhere.
 
-Motion uses `--motion-fast: 180ms` for control and link state transitions and `--motion-enter: 480ms` for the hero-copy rise. The authored focal moment is the featured Petron workflow cue: its four segments draw from left to right as the featured case enters the viewport, moving through rose, rose-cobalt, cobalt, and white-day. A native CSS view timeline drives the sequence without JavaScript or an observer; unsupported browsers keep the complete static cue. Secondary disclosure borders and action labels transition on open, and writing cards transition color and move their outbound arrow by at most `0.25rem`. Under `prefers-reduced-motion: reduce`, both motion tokens become `0ms`, smooth scrolling becomes `auto`, the hero and workflow-cue entrances are removed, and the writing arrow remains static.
+Motion follows a cue-progression thesis. `--motion-fast: 180ms` remains the control and link transition; `--motion-enter: 480ms` drives the hero-copy rise; `--motion-cue: 700ms` with `--ease-cue: cubic-bezier(0.16, 1, 0.3, 1)` drives supporting section-heading and rail entrances. In browsers supporting `animation-timeline: view()`, each `.cue-section` owns `--cue-section`; the heading and its full-width bottom rail use `entry 8% entry 36%`, with the heading rising from `opacity: 0.78` and `translateY(0.5rem)` while the rail draws from `scaleX(0)` to `scaleX(1)`. The unsupported-browser base is already complete and visible.
+
+Petron remains the only focal multi-segment sequence. Its four workflow segments use `--featured-project`, `--motion-cue`, and `--ease-cue`, with ranges `entry 10% entry 35%`, `entry 25% entry 50%`, `entry 40% entry 65%`, and `entry 55% entry 80%`. Cards and list rows stay static. Theme icons cross-fade and rotate in one grid cell; the mobile dialog and backdrop animate only while opening; disclosure action labels move down `0.25rem` only while open; Hero and Writing outbound arrows move up/right at most `0.25rem`, and the CV arrow moves down at most `0.25rem`. Native close, Escape, link navigation, and focus restoration remain immediate.
 
 ### Shadow Vocabulary
 
 - **Portrait side-light:** `0.6rem 0.6rem 1.5rem color-mix(in srgb, var(--cue-rose) 38%, transparent)`, used to make the formal portrait read as a lit object on the stage.
-- **Featured case horizon:** `0.65rem 0.65rem 2rem color-mix(in srgb, var(--cue-cobalt) 34%, transparent)`, used to distinguish the primary evidence surface from the disclosure list.
+- **Featured Project horizon:** `0.65rem 0.65rem 2rem color-mix(in srgb, var(--cue-cobalt) 34%, transparent)`, used to distinguish the primary evidence surface from the disclosure list.
 
 ### Named Rules
 
@@ -258,7 +260,7 @@ The three capability records remain localized and factual:
 - **English:** `Keep data boundaries explicit` with `I structure components and data flow so validation, state changes, and ownership remain predictable.`
 - **English:** `Verify the journey end to end` with `I connect implementation with browser testing and cross-functional feedback before changes ship.`
 
-The visible project-navigation labels are `Pengalaman` on Indonesian and `Experiences` on English. This is a copy contract only. The `navigation.caseStudies` dictionary key, `CaseStudiesSection` symbol, `#case-studies` DOM ID, and matching anchor remain stable implementation identifiers.
+The visible project-navigation labels are `Pengalaman` on Indonesian and `Experiences` on English. The implementation uses the `navigation.experiences` dictionary key, `ExperiencesSection` symbol, `#experiences` DOM ID, and matching anchors.
 
 Navigation labels, disclosure state, testimonial hierarchy, and writing fallback labels remain dictionary-backed in `/id` and `/en`. The supplied company, role, period, project records, technologies, testimonials, portrait, CV, and external links remain unchanged.
 
@@ -284,7 +286,7 @@ Navigation labels, disclosure state, testimonial hierarchy, and writing fallback
 
 ### Navigation
 
-- **Desktop header:** A sticky `4.75rem` header uses the wordmark on the left, section links in the center, and locale and theme controls on the right. Navigation targets `#capabilities`, `#case-studies`, and `#writing`, visibly labeled `Kapabilitas` / `Capabilities`, `Pengalaman` / `Experiences`, and `Konten` / `Content` on Indonesian / English.
+- **Desktop header:** A sticky `4.75rem` header uses the wordmark on the left, section links in the center, and locale and theme controls on the right. Navigation targets `#capabilities`, `#experiences`, and `#writing`, visibly labeled `Kapabilitas` / `Capabilities`, `Pengalaman` / `Experiences`, and `Konten` / `Content` on Indonesian / English.
 - **Mobile navigation:** Below `768px`, a menu trigger opens a native modal `<dialog>` as a right-side drawer. The drawer uses `background: var(--popover)`, has its own wordmark, description, close control, and stacked links. Links close the dialog, Escape follows native dialog behavior, and the close event returns focus to the trigger.
 - **Footer:** The footer repeats the wordmark and description, then exposes blog, GitHub, LinkedIn, and email links with existing brand or Lucide icons. Its metadata row contains the supplied rights and location copy.
 
@@ -298,10 +300,10 @@ The hero ends with deliberate lower padding before the proof sequence. The seque
 - The portrait is eager, dimensioned at `380x480`, meaningfully visible, and carries the supplied alternative text. Decorative icons and cue lines are hidden from assistive technology.
 - Shell controls keep 44px targets, focus-visible rings remain visible, and the mobile menu is a native dialog controlled by the single `SiteInteractions` boundary.
 - Theme starts dark. The interaction script reads the `theme` local-storage key, applies light only when its value is `light`, and writes the next choice when the toggle is used. Missing or invalid storage falls back to dark.
-- Secondary case studies use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
+- Secondary Projects use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
 - The writing feed is optional and streams behind its own Suspense boundary. While pending, the localized Writing heading remains visible in an `aria-busy` section with stable reserved space and no fake article, error copy, or interactive link. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without delaying the rest of the portfolio or footer.
 - All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.
-- Reduced motion removes the hero and workflow-cue entrances, removes the writing-arrow displacement, and disables smooth scrolling while leaving all content and state feedback available immediately.
+- Reduced motion sets `--motion-cue`, `--motion-enter`, and `--motion-fast` to `0ms`, completes Hero, section heading and rail, Petron, dialog, disclosure-label, theme-icon, and action-icon motion, and disables smooth scrolling while leaving open/close text, color state, feedback, and all content available immediately.
 
 ### Visual Parity Contract
 
@@ -315,7 +317,7 @@ The Tailwind CSS v4 migration is an implementation change, not a visual redesign
 - **Do** use the semantic tokens from `src/styles/design-tokens.css` instead of theme-specific values in application components.
 - **Do** keep the portrait eager, dimensioned, and visible in the first viewport, with its supplied alternative text.
 - **Do** keep the hero proposition and both email and CV actions visible with the headline in the first viewport. Do not add an eyebrow above the heading.
-- **Do** use native disclosure behavior for secondary case studies. Let the browser own open and close state.
+- **Do** use native disclosure behavior for secondary Projects. Let the browser own open and close state.
 - **Do** retain the email, CV, LinkedIn, blog, GitHub, locale, and theme paths that are already supplied. The footer email link remains available after the standalone Contact section is removed.
 - **Do** keep all user-facing labels localized in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.
 - **Do** preserve the skip link, visible focus, semantic landmarks, keyboard order, 44px targets, and reduced-motion behavior.

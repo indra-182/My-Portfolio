@@ -1,12 +1,9 @@
-import { blogUrl } from "@/lib/blog-url";
-
 import { z } from "zod";
 
 const noTrailingSlash = (url: string) => url.replace(/\/$/, "");
 
 const siteConfigSchema = z.object({
   portfolioUrl: z.string().url().transform(noTrailingSlash),
-  blogUrl: z.string().url().transform(noTrailingSlash),
   email: z.string().email(),
   linkedinUrl: z.string().url().transform(noTrailingSlash),
   githubUrl: z.string().url().transform(noTrailingSlash),
@@ -15,7 +12,6 @@ const siteConfigSchema = z.object({
 
 export const siteConfig = siteConfigSchema.parse({
   portfolioUrl: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? "https://portfolio-indradev.vercel.app/",
-  blogUrl,
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "mahadiindra2@gmail.com",
   linkedinUrl:
     process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/in/mahadiindra182/",

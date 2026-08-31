@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { portfolioByLocale } from "@/content/portfolio";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { SiteInteractions } from "@/components/site-interactions";
+import { SiteFooter } from "@/components/shell/site-footer";
+import { SiteHeader } from "@/components/shell/site-header";
+import { SiteInteractions } from "@/components/shell/site-interactions";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, locales } from "@/i18n/config";
 import { requireLocale } from "@/i18n/route-locale";
@@ -61,7 +61,7 @@ export default async function LocaleLayout({
   const portfolio = portfolioByLocale[locale];
   const navItems = [
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
-    { label: dictionary.navigation.caseStudies, href: `/${locale}#case-studies` },
+    { label: dictionary.navigation.experiences, href: `/${locale}#experiences` },
     { label: dictionary.navigation.content, href: `/${locale}#writing` },
   ];
 
@@ -98,15 +98,7 @@ export default async function LocaleLayout({
             email={siteConfig.email}
             linkedinUrl={siteConfig.linkedinUrl}
             identity={portfolio.profile}
-            labels={{
-              navigationLabel: dictionary.footer.navigationLabel,
-              description: dictionary.footer.description,
-              blog: dictionary.footer.blog,
-              github: dictionary.footer.github,
-              linkedin: dictionary.footer.linkedin,
-              email: dictionary.footer.email,
-              rights: dictionary.footer.rights,
-            }}
+            copy={dictionary.footer}
           />
         </div>
       </body>

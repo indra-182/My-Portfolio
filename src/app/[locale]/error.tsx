@@ -1,9 +1,9 @@
 "use client";
 
-import enJson from "@/i18n/messages/en.json";
-import idJson from "@/i18n/messages/id.json";
 import { usePathname } from "next/navigation";
-import { blogUrl } from "@/lib/blog-url";
+import { getRecoveryLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { blog } from "@/lib/blog";
 
 export default function Error({
   reset,
@@ -11,7 +11,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const copy = usePathname().split("/")[1] === "en" ? enJson.errors : idJson.errors;
+  const locale = getRecoveryLocale(usePathname().split("/")[1]);
+  const copy = getDictionary(locale).errors;
 
   return (
     <section className="content-shell flex min-h-[50vh] flex-col justify-center py-20">
@@ -25,14 +26,14 @@ export default function Error({
       <div className="mt-8 flex flex-wrap gap-3">
         <button
           type="button"
-          onClick={() => reset()}
+          onClick={reset}
           className="inline-flex min-h-11 items-center rounded-md bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.retry}
         </button>
         <a
           className="inline-flex min-h-11 items-center rounded-md border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
-          href={blogUrl}
+          href={blog.homeUrl}
         >
           {copy.blog}
         </a>
