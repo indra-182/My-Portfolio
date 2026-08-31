@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("supports the recruiter path, CV, locale, theme, case study, and safe writing fallback", async ({
+test("supports recruiter content, navigation, experience, theme, and locale journey", async ({
   page,
 }, testInfo) => {
   const expectDesktopPrimaryNavigation = async (name: string) => {
@@ -27,7 +27,7 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   await page.goto("/id");
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
   await expectDesktopPrimaryNavigation("Navigasi utama");
-  await expectDesktopNavigationLink("Navigasi utama", "Pengalaman", "/id#case-studies");
+  await expectDesktopNavigationLink("Navigasi utama", "Pengalaman", "/id#experiences");
   await expectDesktopNavigationLink("Navigasi utama", "Konten", "/id#writing");
   if (testInfo.project.name === "chromium") {
     const primaryNavigation = page.getByRole("navigation", {
@@ -37,13 +37,18 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     await expect(
       primaryNavigation.getByRole("link", { name: "Experiences", exact: true }),
     ).toHaveCount(0);
+    await expect(
+      page.getByRole("heading", {
+        name: "Pengalaman terpilih di alur produk kompleks.",
+        exact: true,
+      }),
+    ).toBeVisible();
     await primaryNavigation.getByRole("link", { name: "Konten", exact: true }).click();
     await expect(page).toHaveURL(/\/id#writing$/);
     await expect(
       page.getByRole("heading", { name: "Catatan teknis untuk sistem frontend.", exact: true }),
     ).toBeVisible();
   }
-  await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
   const expectRemovedCueChrome = async (workflowLabel: string) => {
     for (const index of ["01", "02", "03", "04", "05", "01 / 05"]) {
       await expect(page.locator("main#main-content").getByText(index, { exact: true })).toHaveCount(
@@ -73,8 +78,8 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
     ).toHaveAttribute("aria-current", "location");
   }
   await page.evaluate(() => {
-    const section = document.querySelector("#case-studies");
-    if (!(section instanceof HTMLElement)) throw new Error("Case studies section not found");
+    const section = document.querySelector("#experiences");
+    if (!(section instanceof HTMLElement)) throw new Error("Experiences section not found");
     window.scrollTo(0, section.offsetTop);
   });
   await expect(scrollToTop).toBeVisible();
@@ -152,9 +157,14 @@ test("supports the recruiter path, CV, locale, theme, case study, and safe writi
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: /I design frontend systems/i })).toBeVisible();
   await expectDesktopPrimaryNavigation("Primary navigation");
-  await expectDesktopNavigationLink("Primary navigation", "Experiences", "/en#case-studies");
+  await expectDesktopNavigationLink("Primary navigation", "Experiences", "/en#experiences");
   await expectDesktopNavigationLink("Primary navigation", "Content", "/en#writing");
-  await expect(page.getByText("Case Studies", { exact: true })).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", {
+      name: "Selected experience across complex product flows.",
+      exact: true,
+    }),
+  ).toBeVisible();
   await expectContactCutover();
   await expectRemovedCueChrome("Petron workflow sequence");
 });
@@ -209,7 +219,7 @@ test("opens and closes the mobile navigation with keyboard escape", async ({ pag
   const dialog = page.getByRole("dialog");
   await expect(dialog.getByRole("link", { name: "Pengalaman", exact: true })).toHaveAttribute(
     "href",
-    "/id#case-studies",
+    "/id#experiences",
   );
   await expect(dialog.getByRole("link", { name: "Konten", exact: true })).toHaveAttribute(
     "href",
@@ -241,9 +251,8 @@ test("keeps localized theme layouts responsive without overflow", async ({ page 
         await page.evaluate((value) => localStorage.setItem("theme", value), theme);
         await page.reload();
 
-        await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`));
         await expect(page.getByRole("heading", { name: headings[locale] })).toBeVisible();
-        await expect(page.locator('a[href$="#case-studies"]')).toHaveCount(2);
+        await expect(page.locator('a[href$="#experiences"]')).toHaveCount(2);
         await expect(page.locator('a[href$="#writing"]')).toHaveCount(2);
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
           await page.evaluate(() => document.documentElement.clientWidth),

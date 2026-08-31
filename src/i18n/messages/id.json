@@ -1,7 +1,7 @@
 {
   "navigation": {
     "capabilities": "Kapabilitas",
-    "caseStudies": "Pengalaman",
+    "experiences": "Pengalaman",
     "content": "Konten",
     "primaryLabel": "Navigasi utama",
     "portfolio": "Portofolio",
@@ -29,8 +29,8 @@
   },
   "portfolio": {
     "capabilitiesHeading": "Membuat workflow penting terasa jelas.",
-    "caseStudiesHeading": "Pengalaman terpilih di alur produk kompleks.",
-    "caseStudiesDescription": "Saya menghubungkan masalah produk, keputusan frontend, dan bukti validasi yang tersedia.",
+    "experiencesHeading": "Pengalaman terpilih di alur produk kompleks.",
+    "experiencesDescription": "Saya menghubungkan masalah produk, keputusan frontend, dan bukti validasi yang tersedia.",
     "featuredLabel": "Workflow unggulan",
     "secondaryLabel": "Workflow lain",
     "problemLabel": "Masalah",

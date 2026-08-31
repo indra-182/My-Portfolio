@@ -27,7 +27,7 @@ Recruiters scan the portfolio across desktop and mobile, in Indonesian or Englis
 - Preserve `/id` as the default locale route and `/en` as the English route.
 - Preserve the dark-first theme and persisted light-theme choice.
 - Preserve semantic landmarks, skip navigation, keyboard access, visible focus, readable content, reduced-motion behavior, and no horizontal overflow.
-- Keep server components as the default and retain `src/components/site-interactions.tsx` as the centralized browser-interaction boundary.
+- Keep server components as the default and retain `src/components/shell/site-interactions.tsx` as the centralized browser-interaction boundary.
 - Keep the validated optional writing feed recoverable: feed failure must leave the portfolio usable.
 - Do not add unsupported claims, metrics, credentials, client claims, or testimonials.
 - Do not add production dependencies.
@@ -45,7 +45,7 @@ Recruiters scan the portfolio across desktop and mobile, in Indonesian or Englis
 - `src/lib/latest-posts.ts` provides an optional validated technical-writing feed with an unavailable fallback.
 - `public/images/mahadi-indra.webp` provides the formal portrait asset.
 - `public/documents/mahadi-indra-cv.pdf` provides the CV download.
-- `src/lib/site-config.ts` provides the portfolio, blog, email, LinkedIn, GitHub, and CV configuration boundaries.
+- `src/lib/blog.ts` provides normalized blog URLs; `src/lib/site-config.ts` provides portfolio, contact, profile, and CV configuration boundaries.
 
 ## Product Principles
 

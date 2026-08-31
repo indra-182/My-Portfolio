@@ -1,5 +1,5 @@
 @layer utilities {
-  .case-study-featured {
+  .project-featured {
     view-timeline: --featured-project block;
     box-shadow: 0.65rem 0.65rem 2rem color-mix(in srgb, var(--cue-cobalt) 34%, transparent);
   }
@@ -24,7 +24,7 @@
   @supports (animation-timeline: view()) {
     .workflow-cue-line span {
       transform-origin: left;
-      animation: workflow-cue-draw 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: workflow-cue-draw var(--motion-cue) var(--ease-cue) both;
       animation-timeline: --featured-project;
     }
 
@@ -45,35 +45,38 @@
     }
   }
 
-  .case-study-technologies [data-slot="badge"] {
-    border-color: color-mix(in srgb, var(--cue-day) 35%, transparent);
-  }
-
-  .case-study-disclosure summary::-webkit-details-marker {
+  .project-disclosure summary::-webkit-details-marker {
     display: none;
   }
 
-  .case-study-summary-close {
+  .project-summary-close {
     display: none;
   }
 
-  .case-study-disclosure[open] {
+  .project-disclosure[open] {
     border-color: var(--cue-rose);
   }
 
-  .case-study-disclosure[open] .case-study-summary-open {
+  .project-disclosure[open] .project-summary-open {
     display: none;
   }
 
-  .case-study-disclosure[open] .case-study-summary-close {
+  .project-disclosure[open] .project-summary-close {
     display: inline;
   }
 
-  .case-study-disclosure[open] .case-study-summary-action {
-    color: var(--foreground);
+  .project-summary-action {
+    transition:
+      color var(--motion-fast) ease,
+      transform var(--motion-fast) var(--ease-cue);
   }
 
-  .case-study-disclosure[open] .case-study-details {
+  .project-disclosure[open] .project-summary-action {
+    color: var(--foreground);
+    transform: translateY(0.25rem);
+  }
+
+  .project-disclosure[open] .project-details {
     margin: 0 0 1.5rem;
   }
 }

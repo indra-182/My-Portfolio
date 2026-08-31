@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/", destination: "/id", permanent: false }];
   },
-  experimental: {
-    inlineCss: true,
-  },
 };
 
 export default nextConfig;

@@ -2,7 +2,7 @@ import {
   SITE_INTERACTION,
   SITE_INTERACTION_ATTRIBUTE,
   type SiteInteraction,
-} from "@/components/site-interaction-contract";
+} from "@/components/shell/site-interaction-contract";
 
 const selectorFor = (interaction: SiteInteraction) =>
   `[${SITE_INTERACTION_ATTRIBUTE}='${interaction}']`;
@@ -117,9 +117,9 @@ const siteInteractions = String.raw`
   };
 
   if (document.readyState === "complete") {
-    setTimeout(start, 0);
+    start();
   } else {
-    window.addEventListener("load", () => setTimeout(start, 0), { once: true });
+    window.addEventListener("load", start, { once: true });
   }
 })();
 `;

@@ -1,4 +1,5 @@
 import type { Testimonial } from "@/content/portfolio-schema";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 function TestimonialGroup({ label, testimonials }: { label: string; testimonials: Testimonial[] }) {
   if (testimonials.length === 0) return null;
@@ -27,14 +28,10 @@ function TestimonialGroup({ label, testimonials }: { label: string; testimonials
 
 export function TestimonialsSection({
   testimonials,
-  heading,
-  collaboratorLabel,
-  mentoringLabel,
+  copy,
 }: {
   testimonials: Testimonial[];
-  heading: string;
-  collaboratorLabel: string;
-  mentoringLabel: string;
+  copy: Dictionary["testimonials"];
 }) {
   if (testimonials.length === 0) return null;
 
@@ -42,17 +39,17 @@ export function TestimonialsSection({
     <section className="cue-section cue-section-muted" aria-labelledby="testimonials-title">
       <div className="content-shell">
         <div className="cue-section-heading">
-          <h2 id="testimonials-title">{heading}</h2>
+          <h2 id="testimonials-title">{copy.heading}</h2>
         </div>
         <div className="mt-8 grid gap-12">
           <TestimonialGroup
-            label={collaboratorLabel}
+            label={copy.collaboratorLabel}
             testimonials={testimonials.filter(
               (testimonial) => testimonial.category === "collaborator",
             )}
           />
           <TestimonialGroup
-            label={mentoringLabel}
+            label={copy.mentoringLabel}
             testimonials={testimonials.filter(
               (testimonial) => testimonial.category === "mentoring",
             )}

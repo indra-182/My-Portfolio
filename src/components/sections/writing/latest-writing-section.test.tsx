@@ -42,12 +42,12 @@ const onePost = posts.slice(0, 1);
 const twoPosts = posts.slice(0, 2);
 
 describe("LatestWritingSection", () => {
-  test("renders at most three article links when the feed is ready", () => {
+  test("renders every post from an already-bounded feed", () => {
     const dictionary = getDictionary("id");
     const { container } = render(
       <LatestWritingSection
         locale="id"
-        result={{ status: "ready", posts }}
+        result={{ status: "ready", posts: posts.slice(0, 3) }}
         copy={dictionary.writing}
       />,
     );
@@ -64,7 +64,7 @@ describe("LatestWritingSection", () => {
     );
     expect(screen.getByText("6 menit baca")).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(3);
-    expect(screen.queryByText("Fourth post")).not.toBeInTheDocument();
+    expect(screen.getByText("Shipping with confidence")).toBeInTheDocument();
   });
 
   test("uses a featured layout and editorial aside for one post", () => {

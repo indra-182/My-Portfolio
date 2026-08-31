@@ -1,5 +1,3 @@
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -14,8 +12,6 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-sm: var(--radius-sm);
@@ -46,18 +42,6 @@
 
   button:disabled {
     @apply cursor-not-allowed;
-  }
-
-  [data-theme-icon="dark"] {
-    display: none;
-  }
-
-  .dark [data-theme-icon="light"] {
-    display: none;
-  }
-
-  .dark [data-theme-icon="dark"] {
-    display: block;
   }
 
   ::selection {
@@ -99,10 +83,37 @@
   }
 
   .cue-section-heading {
-    display: grid;
-    gap: 1.25rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--border);
+  }
+
+  @supports (animation-timeline: view()) {
+    .cue-section {
+      view-timeline: --cue-section block;
+    }
+
+    .cue-section-heading {
+      position: relative;
+      border-bottom-color: transparent;
+      animation: cue-section-enter var(--motion-cue) var(--ease-cue) both;
+      animation-timeline: --cue-section;
+      animation-range: entry 8% entry 36%;
+    }
+
+    .cue-section-heading::after {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 1px;
+      background: var(--border);
+      content: "";
+      transform: scaleX(1);
+      transform-origin: left;
+      animation: cue-rail-draw var(--motion-cue) var(--ease-cue) both;
+      animation-timeline: --cue-section;
+      animation-range: entry 8% entry 36%;
+    }
   }
 
   .cue-section-heading h2 {
@@ -115,7 +126,7 @@
   }
 
   .animate-cue-rise {
-    animation: cue-rise var(--motion-enter) cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: cue-rise var(--motion-enter) var(--ease-cue) both;
   }
 }
 
@@ -131,6 +142,28 @@
   }
 }
 
+@keyframes cue-section-enter {
+  from {
+    opacity: 0.78;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cue-rail-draw {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @media (min-width: 640px) {
   .content-shell {
     width: min(calc(100% - 3rem), var(--content-max));
@@ -143,7 +176,18 @@
   }
 
   .animate-cue-rise,
+  .cue-section-heading {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cue-section-heading::after {
+    transform: scaleX(1);
+  }
+
   .workflow-cue-line span {
     animation: none;
+    transform: none;
   }
 }

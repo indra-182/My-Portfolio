@@ -1,8 +1,8 @@
 import { LuMenu, LuX } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
-import { SITE_INTERACTION } from "@/components/site-interaction-contract";
+import { SITE_INTERACTION } from "@/components/shell/site-interaction-contract";
 
-export type MobileNavigationItem = { label: string; href: string };
+type MobileNavigationItem = { label: string; href: string };
 
 export function MobileNavigation({
   items,
@@ -62,7 +62,7 @@ export function MobileNavigation({
               href={item.href}
               className="min-h-14 border-b border-border py-4 text-[1.1rem] font-bold text-foreground no-underline hover:text-[var(--cue-rose)] focus-visible:text-[var(--cue-rose)]"
             >
-              <span>{item.label}</span>
+              {item.label}
             </a>
           ))}
         </nav>
