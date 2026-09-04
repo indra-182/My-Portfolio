@@ -3,7 +3,7 @@ import { blog } from "@/lib/blog";
 
 const latestPostSchema = z.object({
   title: z.string().min(1),
-  slug: z.string().min(1),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   description: z.string().min(1),
   publishedAt: z.string().datetime({ offset: true }),
   topics: z.array(z.string().min(1)).min(1),
@@ -14,11 +14,26 @@ type LatestPostSummary = z.infer<typeof latestPostSchema>;
 export type LatestFeedResult =
   { status: "ready"; posts: LatestPostSummary[] } | { status: "unavailable" };
 
-const latestPostFeedSchema = z.object({
-  version: z.literal(1),
-  generatedAt: z.string().datetime({ offset: true }),
-  posts: z.array(latestPostSchema),
-});
+const latestPostFeedSchema = z
+  .object({
+    version: z.literal(1),
+    generatedAt: z.string().datetime({ offset: true }),
+    posts: z.array(latestPostSchema),
+  })
+  .superRefine((feed, context) => {
+    const slugs = new Set<string>();
+
+    feed.posts.forEach((post, index) => {
+      if (slugs.has(post.slug)) {
+        context.addIssue({
+          code: "custom",
+          path: ["posts", index, "slug"],
+          message: "Post slugs must be unique.",
+        });
+      }
+      slugs.add(post.slug);
+    });
+  });
 
 const latestPostsLimit = 3;
 const latestPostsRevalidateSeconds = 3600;

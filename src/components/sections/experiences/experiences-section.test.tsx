@@ -52,4 +52,25 @@ describe("ExperiencesSection", () => {
       expect(within(details).getByText(technology)).toBeVisible();
     }
   });
+
+  test("keeps an experience without the portfolio's featured project usable", () => {
+    const [primaryExperience] = portfolioByLocale.en.experiences;
+    const secondaryExperience = {
+      ...primaryExperience,
+      id: "secondary-experience",
+      company: "Secondary Company",
+      role: "Secondary role",
+      projects: primaryExperience.projects.map((project) => ({ ...project, featured: false })),
+    };
+
+    const { container } = render(
+      <ExperiencesSection
+        experiences={[primaryExperience, secondaryExperience]}
+        copy={getDictionary("en").portfolio}
+      />,
+    );
+
+    expect(screen.getByRole("heading", { name: "Role:Secondary role" })).toBeVisible();
+    expect(container.querySelectorAll("details")).toHaveLength(9);
+  });
 });

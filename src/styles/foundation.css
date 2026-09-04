@@ -26,6 +26,11 @@
   html {
     @apply scroll-smooth font-sans;
     background: var(--background);
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
   }
 
   body {
@@ -74,6 +79,7 @@
 
   .cue-section {
     position: relative;
+    scroll-margin-top: calc(4.75rem + 1rem);
     padding-block: clamp(4.5rem, 9vw, 8rem);
     border-top: 1px solid var(--border);
   }

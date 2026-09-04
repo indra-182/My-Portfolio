@@ -144,10 +144,18 @@ test("supports recruiter content, navigation, experience, theme, and locale jour
   await page.getByRole("button", { name: "Ganti tema warna" }).click();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
   await expect(page.locator("html")).toHaveClass(/light/);
+  await expect(page.getByRole("button", { name: "Ganti tema warna" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
   await page.reload();
   await expect(page.locator("html")).not.toHaveClass(/dark/);
   await page.getByRole("button", { name: "Ganti tema warna" }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
+  await expect(page.getByRole("button", { name: "Ganti tema warna" })).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
 
   await page
     .getByRole("banner")
@@ -273,4 +281,14 @@ test("keeps the hero photo visible in the initial desktop viewport", async ({ pa
   expect(imageBox).not.toBeNull();
   expect(imageBox?.y).toBeGreaterThanOrEqual(0);
   expect((imageBox?.y ?? 0) + (imageBox?.height ?? 0)).toBeLessThanOrEqual(720);
+});
+
+test("renders branded recovery for unmatched routes", async ({ page }) => {
+  await page.goto("/missing/nested-route");
+
+  await expect(page.getByRole("heading", { name: "Halaman tidak ditemukan" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Kembali ke beranda" })).toHaveAttribute(
+    "href",
+    "/id",
+  );
 });
