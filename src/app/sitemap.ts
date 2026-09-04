@@ -5,7 +5,6 @@ import { siteConfig } from "@/lib/site-config";
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.map((locale) => ({
     url: `${siteConfig.portfolioUrl}/${locale}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 1,
     alternates: {

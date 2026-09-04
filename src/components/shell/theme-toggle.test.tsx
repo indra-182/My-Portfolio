@@ -11,5 +11,6 @@ test("renders an accessible theme control without a React client boundary", () =
 
   expect(toggle).toHaveAttribute("title", dictionary.theme.label);
   expect(toggle).toHaveAttribute("data-site-interaction", SITE_INTERACTION.themeToggle);
+  expect(toggle).toHaveAttribute("aria-pressed", "false");
   expect(toggle.querySelectorAll('svg[aria-hidden="true"]')).toHaveLength(2);
 });

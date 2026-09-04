@@ -25,6 +25,14 @@ const siteInteractions = String.raw`
   const applyTheme = (theme) => {
     root.classList.toggle("dark", theme === "dark");
     root.classList.toggle("light", theme === "light");
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor instanceof HTMLMetaElement) {
+      themeColor.content = getComputedStyle(root).getPropertyValue("--background").trim();
+    }
+    const themeToggle = document.querySelector("${selectors.themeToggle}");
+    if (themeToggle instanceof HTMLButtonElement) {
+      themeToggle.setAttribute("aria-pressed", String(theme === "light"));
+    }
   };
 
   try {
@@ -72,8 +80,17 @@ const siteInteractions = String.raw`
         }
       });
     };
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-    window.addEventListener("resize", updateScrollState);
+    let scrollFrame = 0;
+    const scheduleScrollState = () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = 0;
+        updateScrollState();
+      });
+    };
+
+    window.addEventListener("scroll", scheduleScrollState, { passive: true });
+    window.addEventListener("resize", scheduleScrollState);
 
     document.addEventListener("click", (event) => {
       const target = event.target;
@@ -107,19 +124,36 @@ const siteInteractions = String.raw`
         return;
       }
 
-      openButton.addEventListener("click", () => dialog.showModal());
+      openButton.addEventListener("click", () => {
+        dialog.showModal();
+        openButton.setAttribute("aria-expanded", "true");
+      });
       closeButton?.addEventListener("click", () => dialog.close());
       dialog.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => dialog.close());
       });
-      dialog.addEventListener("close", () => openButton.focus());
+      dialog.addEventListener("close", () => {
+        openButton.setAttribute("aria-expanded", "false");
+        openButton.focus();
+      });
     });
+
+    const initializeCurrentState = () => {
+      applyTheme(root.classList.contains("light") ? "light" : "dark");
+      scheduleScrollState();
+    };
+
+    if (document.readyState === "complete") {
+      initializeCurrentState();
+    } else {
+      window.addEventListener("load", initializeCurrentState, { once: true });
+    }
   };
 
-  if (document.readyState === "complete") {
-    start();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
   } else {
-    window.addEventListener("load", start, { once: true });
+    start();
   }
 })();
 `;

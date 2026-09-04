@@ -93,10 +93,14 @@ describe("site shell", () => {
       "data-site-interaction",
       SITE_INTERACTION.scrollToTop,
     );
-    expect(screen.getByRole("button", { name: dictionary.mobileNavigation.open })).toHaveAttribute(
+    const mobileNavigationTrigger = screen.getByRole("button", {
+      name: dictionary.mobileNavigation.open,
+    });
+    expect(mobileNavigationTrigger).toHaveAttribute(
       "data-site-interaction",
       SITE_INTERACTION.mobileNavigationOpen,
     );
+    expect(mobileNavigationTrigger).toHaveAttribute("aria-expanded", "false");
     expect(
       screen.getByRole("button", { name: dictionary.mobileNavigation.close, hidden: true }),
     ).toHaveAttribute("data-site-interaction", SITE_INTERACTION.mobileNavigationClose);

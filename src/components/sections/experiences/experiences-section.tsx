@@ -17,16 +17,16 @@ function ProjectDetails({ project, copy }: ProjectDetailsProps) {
 
   return (
     <div className="project-details mt-8 border-t border-border pt-6">
-      <div className="grid gap-6 sm:grid-cols-2">
+      <dl className="grid gap-6 sm:grid-cols-2">
         {fields.map(([label, value]) => (
           <div key={label} className="border-l border-border pl-4">
-            <p className="cue-kicker">{label}</p>
-            <p className="mt-[0.65rem] text-[0.92rem] leading-[1.65] text-muted-foreground">
+            <dt className="cue-kicker">{label}</dt>
+            <dd className="mt-[0.65rem] text-[0.92rem] leading-[1.65] text-muted-foreground">
               {value}
-            </p>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
       <div className="project-technologies mt-8 border-t border-border pt-4">
         <p className="cue-kicker">{copy.technologies}</p>
         <ul aria-label={copy.technologies} className="mt-3 flex list-none flex-wrap gap-2">
@@ -63,7 +63,7 @@ export function ExperiencesSection({
         </div>
 
         {experiences.map((experience) => {
-          const featuredProject = experience.projects.find((project) => project.featured)!;
+          const featuredProject = experience.projects.find((project) => project.featured);
           const secondaryProjects = experience.projects.filter((project) => !project.featured);
 
           return (
@@ -88,25 +88,27 @@ export function ExperiencesSection({
               </ul>
 
               <div className="grid gap-12">
-                <article className="project-featured border border-border bg-surface-strong p-[clamp(1.35rem,3vw,2.5rem)]">
-                  <p className="cue-kicker">{copy.featuredLabel}</p>
-                  <h3 className="mt-[0.7rem] max-w-[20ch] text-[clamp(1.8rem,3.2vw,3rem)] leading-none font-bold tracking-[-0.028em]">
-                    {featuredProject.title}
-                  </h3>
-                  <p className="mt-[0.9rem] max-w-2xl leading-[1.6] text-muted-foreground">
-                    {featuredProject.summary}
-                  </p>
-                  <div
-                    className="workflow-cue-line mt-8 grid grid-cols-[1.4fr_1fr_0.7fr_0.35fr] gap-[0.3rem]"
-                    aria-hidden="true"
-                  >
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <ProjectDetails project={featuredProject} copy={copy} />
-                </article>
+                {featuredProject ? (
+                  <article className="project-featured border border-border bg-surface-strong p-[clamp(1.35rem,3vw,2.5rem)]">
+                    <p className="cue-kicker">{copy.featuredLabel}</p>
+                    <h3 className="mt-[0.7rem] max-w-[20ch] text-[clamp(1.8rem,3.2vw,3rem)] leading-none font-bold tracking-[-0.028em]">
+                      {featuredProject.title}
+                    </h3>
+                    <p className="mt-[0.9rem] max-w-2xl leading-[1.6] text-muted-foreground">
+                      {featuredProject.summary}
+                    </p>
+                    <div
+                      className="workflow-cue-line mt-8 grid grid-cols-[1.4fr_1fr_0.7fr_0.35fr] gap-[0.3rem]"
+                      aria-hidden="true"
+                    >
+                      <span />
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                    <ProjectDetails project={featuredProject} copy={copy} />
+                  </article>
+                ) : null}
                 <div>
                   <p className="cue-kicker pb-[0.85rem]">{copy.secondaryLabel}</p>
                   {secondaryProjects.map((project) => (

@@ -9,6 +9,8 @@ export function ThemeToggle({ label }: { label: string }) {
       variant="ghost"
       size="icon"
       aria-label={label}
+      aria-pressed="false"
+      suppressHydrationWarning
       title={label}
       data-site-interaction={SITE_INTERACTION.themeToggle}
       className="site-control"

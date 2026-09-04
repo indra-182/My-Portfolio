@@ -28,6 +28,7 @@ export function MobileNavigation({
         aria-label={openLabel}
         aria-haspopup="dialog"
         aria-controls={id}
+        aria-expanded="false"
         data-site-interaction={SITE_INTERACTION.mobileNavigationOpen}
         className="md:hidden"
       >
@@ -36,7 +37,7 @@ export function MobileNavigation({
       <dialog
         id={id}
         aria-labelledby={`${id}-title`}
-        className="mobile-navigation-dialog fixed inset-y-0 right-0 left-auto m-0 hidden h-full w-[min(23rem,calc(100%-1rem))] max-w-full flex-col gap-6 border-0 border-l border-border bg-[var(--popover)] p-5 text-foreground"
+        className="mobile-navigation-dialog fixed inset-y-0 right-0 left-auto m-0 hidden h-full w-[min(23rem,calc(100%-1rem))] max-w-full flex-col gap-6 overscroll-contain border-0 border-l border-border bg-[var(--popover)] p-5 text-foreground"
       >
         <div className="grid gap-[0.65rem] border-b border-border pb-5">
           <div id={`${id}-title`} className="site-wordmark">

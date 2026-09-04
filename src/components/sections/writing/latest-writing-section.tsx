@@ -59,9 +59,13 @@ export function LatestWritingSection({
                 key={post.slug}
                 className="writing-card group flex min-h-68 flex-col bg-background p-[clamp(1.25rem,3vw,2rem)] transition-colors duration-[var(--motion-fast)] ease-[ease]"
               >
-                <div className="flex items-center justify-between gap-4 font-mono text-[0.63rem] text-muted-foreground">
-                  <Badge className="border-border font-mono text-[0.63rem]">{post.topics[0]}</Badge>
-                  <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
+                <div className="flex min-w-0 items-center justify-between gap-4 font-mono text-[0.63rem] text-muted-foreground">
+                  <Badge className="min-w-0 truncate border-border font-mono text-[0.63rem]">
+                    {post.topics[0]}
+                  </Badge>
+                  <time className="shrink-0" dateTime={post.publishedAt}>
+                    {formatDate(post.publishedAt, locale)}
+                  </time>
                 </div>
                 <h3 className="mt-[0.65rem] max-w-[23ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.05] font-[750] tracking-[-0.035em]">
                   <a

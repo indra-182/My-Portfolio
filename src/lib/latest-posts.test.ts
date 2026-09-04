@@ -79,6 +79,26 @@ describe("getLatestPosts", () => {
     });
   });
 
+  test("returns the unavailable fallback for duplicate or unsafe post slugs", async () => {
+    const duplicateSlugFeed = structuredClone(feed);
+    duplicateSlugFeed.posts[1].slug = duplicateSlugFeed.posts[0].slug;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: true, json: async () => duplicateSlugFeed }),
+    );
+
+    await expect(getLatestPosts()).resolves.toEqual({ status: "unavailable" });
+
+    const unsafeSlugFeed = structuredClone(feed);
+    unsafeSlugFeed.posts[0].slug = "../admin";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: true, json: async () => unsafeSlugFeed }),
+    );
+
+    await expect(getLatestPosts()).resolves.toEqual({ status: "unavailable" });
+  });
+
   test("returns the unavailable fallback when the blog API exceeds its deadline", async () => {
     const controller = new AbortController();
     const timeoutSpy = vi.spyOn(AbortSignal, "timeout").mockReturnValue(controller.signal);
