@@ -13,7 +13,7 @@ export function ThemeToggle({ label }: { label: string }) {
       suppressHydrationWarning
       title={label}
       data-site-interaction={SITE_INTERACTION.themeToggle}
-      className="site-control"
+      className="site-control theme-control"
     >
       <LuSun aria-hidden="true" data-theme-icon="light" className="size-4" />
       <LuMoon aria-hidden="true" data-theme-icon="dark" className="size-4" />

@@ -270,6 +270,50 @@ test("keeps localized theme layouts responsive without overflow", async ({ page 
   }
 });
 
+test("keeps header utility controls visually aligned", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Header geometry runs in Chromium only");
+
+  const viewports = [
+    { width: 375, height: 812 },
+    { width: 768, height: 1024 },
+    { width: 1024, height: 768 },
+    { width: 1440, height: 900 },
+  ];
+
+  for (const locale of ["id", "en"] as const) {
+    for (const theme of ["dark", "light"] as const) {
+      for (const viewport of viewports) {
+        await page.setViewportSize(viewport);
+        await page.goto(`/${locale}`);
+        await page.evaluate((value) => localStorage.setItem("theme", value), theme);
+        await page.reload();
+
+        const alignment = await page.locator(".site-control").evaluateAll((controls) => {
+          const [localeControl, themeControl] = controls;
+          const localeLabel = localeControl?.querySelector("span");
+          const themeIcon = Array.from(
+            themeControl?.querySelectorAll("[data-theme-icon]") ?? [],
+          ).find((element) => Number(getComputedStyle(element).opacity) > 0.5);
+
+          if (!localeControl || !themeControl || !localeLabel || !themeIcon) {
+            return null;
+          }
+
+          const localeLabelBox = localeLabel.getBoundingClientRect();
+          const themeIconBox = themeIcon.getBoundingClientRect();
+          const localeLabelCenter = localeLabelBox.top + localeLabelBox.height / 2;
+          const themeIconCenter = themeIconBox.top + themeIconBox.height / 2;
+
+          return Math.abs(localeLabelCenter - themeIconCenter);
+        });
+
+        expect(alignment).not.toBeNull();
+        expect(alignment).toBeLessThanOrEqual(1);
+      }
+    }
+  }
+});
+
 test("keeps the hero photo visible in the initial desktop viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/id");
