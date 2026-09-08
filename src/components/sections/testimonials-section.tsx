@@ -6,7 +6,7 @@ function TestimonialGroup({ label, testimonials }: { label: string; testimonials
 
   return (
     <div className="grid gap-4">
-      <p className="cue-kicker">{label}</p>
+      <p className="atlas-kicker">{label}</p>
       <div className="grid gap-px bg-border sm:grid-cols-2">
         {testimonials.map((testimonial) => (
           <figure key={testimonial.author} className="bg-surface p-[clamp(1.35rem,3vw,2.5rem)]">
@@ -36,9 +36,13 @@ export function TestimonialsSection({
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="cue-section cue-section-muted" aria-labelledby="testimonials-title">
+    <section
+      id="testimonials"
+      className="atlas-section atlas-section-muted"
+      aria-labelledby="testimonials-title"
+    >
       <div className="content-shell">
-        <div className="cue-section-heading">
+        <div className="atlas-section-heading">
           <h2 id="testimonials-title">{copy.heading}</h2>
         </div>
         <div className="mt-8 grid gap-12">

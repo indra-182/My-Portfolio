@@ -61,7 +61,7 @@ export function MobileNavigation({
             <a
               key={item.href}
               href={item.href}
-              className="min-h-14 border-b border-border py-4 text-[1.1rem] font-bold text-foreground no-underline hover:text-[var(--cue-rose)] focus-visible:text-[var(--cue-rose)]"
+              className="min-h-14 border-b border-border py-4 text-[1.1rem] font-bold text-foreground no-underline hover:text-[var(--accent-strong)] focus-visible:text-[var(--accent-strong)]"
             >
               {item.label}
             </a>

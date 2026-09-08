@@ -1,4 +1,12 @@
 @layer utilities {
+  .atlas-legacy-anchor {
+    position: absolute;
+    top: -5.75rem;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
   .scroll-to-top {
     visibility: hidden;
     pointer-events: none;
@@ -12,27 +20,34 @@
     transform: translateY(0);
     opacity: 1;
   }
+
   .site-header {
     border-bottom: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
     background: color-mix(in srgb, var(--background) 94%, transparent);
+    backdrop-filter: blur(14px);
   }
+
   .site-wordmark {
     display: inline-flex;
     min-height: 2.75rem;
     align-items: center;
     flex: none;
     color: var(--foreground);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
     font-weight: 800;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
     line-height: 1;
     text-decoration: none;
-    text-transform: uppercase;
+    font-variation-settings:
+      "CASL" 0.1,
+      "MONO" 0.35,
+      "slnt" 0,
+      "wght" 800;
   }
 
   .site-wordmark span {
-    color: var(--cue-rose);
+    color: var(--accent-strong);
   }
 
   .site-control {
@@ -46,13 +61,18 @@
     border-radius: 0;
     background: transparent;
     color: var(--muted-foreground);
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    font-variation-settings:
+      "CASL" 0,
+      "MONO" 1,
+      "slnt" 0,
+      "wght" 650;
     transition:
-      color var(--motion-fast) ease,
-      border-color var(--motion-fast) ease;
+      color var(--motion-feedback) ease,
+      border-color var(--motion-feedback) ease;
   }
 
   .theme-control {
@@ -65,8 +85,8 @@
     opacity: 0;
     transform: rotate(-90deg) scale(0.75);
     transition:
-      opacity var(--motion-fast) ease,
-      transform var(--motion-fast) var(--ease-cue);
+      opacity var(--motion-state) ease,
+      transform var(--motion-state) var(--motion-ease);
   }
 
   .theme-control [data-theme-icon="light"] {
@@ -86,28 +106,29 @@
 
   .site-control:hover,
   .site-control:focus-visible {
-    border-bottom-color: var(--cue-rose);
+    border-bottom-color: var(--accent-strong);
     background: transparent;
     color: var(--foreground);
   }
 
   .site-nav-link.is-active,
   .site-nav-link[aria-current="location"] {
-    border-color: var(--cue-rose);
+    border-color: var(--accent-strong);
     color: var(--foreground);
   }
+
   .mobile-navigation-dialog[open] {
     display: flex;
     opacity: 1;
     transform: translateX(0);
     transition:
-      opacity var(--motion-fast) ease,
-      transform var(--motion-fast) var(--ease-cue);
+      opacity var(--motion-state) ease,
+      transform var(--motion-state) var(--motion-ease);
   }
 
   .mobile-navigation-dialog[open]::backdrop {
-    background: color-mix(in srgb, var(--cue-night) 68%, transparent);
-    transition: background-color var(--motion-fast) ease;
+    background: color-mix(in srgb, var(--atlas-night-water) 72%, transparent);
+    transition: background-color var(--motion-state) ease;
   }
 
   @starting-style {

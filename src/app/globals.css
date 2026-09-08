@@ -1,7 +1,8 @@
 @import "../styles/design-tokens.css";
+@import "../styles/fonts.css";
 @import "tailwindcss";
 @import "../styles/foundation.css";
 @import "../components/shell/shell.css";
 @import "../components/sections/hero/hero.css";
-@import "../components/sections/experiences/experiences.css";
+@import "../components/sections/projects/projects.css";
 @import "../components/sections/writing/writing.css";

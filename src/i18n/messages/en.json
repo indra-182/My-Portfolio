@@ -1,8 +1,9 @@
 {
   "navigation": {
+    "projects": "Projects",
     "capabilities": "Capabilities",
-    "experiences": "Experiences",
-    "content": "Content",
+    "testimonials": "Testimonials",
+    "writing": "Writing",
     "primaryLabel": "Primary navigation",
     "portfolio": "Portfolio",
     "downloadCv": "Download CV",
@@ -29,10 +30,10 @@
   },
   "portfolio": {
     "capabilitiesHeading": "Clarity for workflows that matter.",
-    "experiencesHeading": "Selected experience across complex product flows.",
-    "experiencesDescription": "I connect product problems, frontend decisions, and the verification evidence available for each project.",
-    "featuredLabel": "Featured workflow",
-    "secondaryLabel": "More workflows",
+    "projectsHeading": "Projects that map complex product flows.",
+    "projectsDescription": "I connect product problems, frontend decisions, and the verification evidence available for each project.",
+    "featuredLabel": "Featured project",
+    "secondaryLabel": "More projects",
     "problemLabel": "Problem",
     "ownershipLabel": "Ownership",
     "deliveryLabel": "Delivery",

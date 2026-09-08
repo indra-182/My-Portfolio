@@ -1,7 +1,7 @@
 @layer utilities {
-  .writing-card:hover,
-  .writing-card:focus-within {
-    background: color-mix(in srgb, var(--background) 82%, var(--cue-cobalt));
+  .atlas-writing-card:hover,
+  .atlas-writing-card:focus-within {
+    background: color-mix(in srgb, var(--background) 86%, var(--atlas-route-blue));
   }
 
   .writing-grid[data-count="1"] {
@@ -16,9 +16,9 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .writing-aside .cue-kicker,
-  .writing-aside > p:last-child {
-    color: color-mix(in srgb, var(--cue-day) 78%, transparent);
+  .atlas-writing-aside .atlas-kicker,
+  .atlas-writing-aside > p:last-child {
+    color: color-mix(in srgb, var(--atlas-survey-paper) 80%, transparent);
   }
 }
 

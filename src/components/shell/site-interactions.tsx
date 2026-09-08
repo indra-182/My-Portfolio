@@ -22,6 +22,11 @@ const siteInteractions = String.raw`
   const root = document.documentElement;
   let storedTheme = null;
 
+  const getInitialTheme = () => {
+    if (storedTheme === "light" || storedTheme === "dark") return storedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  };
+
   const applyTheme = (theme) => {
     root.classList.toggle("dark", theme === "dark");
     root.classList.toggle("light", theme === "light");
@@ -39,7 +44,7 @@ const siteInteractions = String.raw`
     storedTheme = localStorage.getItem("theme");
   } catch {}
 
-  applyTheme(storedTheme === "light" ? "light" : "dark");
+  applyTheme(getInitialTheme());
 
   const start = () => {
     const scrollToTopButton = document.querySelector("${selectors.scrollToTop}");

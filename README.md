@@ -26,7 +26,7 @@ pnpm run verify
 - CV download: `public/documents/mahadi-indra-cv.pdf`
 - Theme tokens: `src/styles/design-tokens.css`
 
-The site supports Indonesian and English routes, plus Light and Dark theme choices. The first visit defaults to Dark, and the selected theme persists locally. Four approved testimonials are included in the localized portfolio content. Public project copy is limited to supplied CV facts.
+The site supports Indonesian and English routes, plus Light and Dark theme choices. The first visit follows the system color scheme, and an explicit choice persists locally. Four approved testimonials are included in the localized portfolio content. Public project copy is limited to supplied CV facts. Decision Atlas is the visual direction.
 
 ## Environment
 
