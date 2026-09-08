@@ -55,7 +55,7 @@ export function SiteFooter({
                 title={label}
                 className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.65rem] tracking-[0.06em] text-muted-foreground no-underline uppercase hover:text-foreground focus-visible:text-foreground"
               >
-                <Icon aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
+                <Icon aria-hidden="true" className="size-4 text-[var(--atlas-signal-orange)]" />
                 {label}
               </a>
             ))}

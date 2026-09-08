@@ -1,333 +1,167 @@
 ---
 name: INDRA.DEV
-description: Cue Horizon visual system for a recruiter portfolio that makes complex frontend workflow ownership legible.
+description: Decision Atlas visual system for making complex frontend decisions legible.
 colors:
-  background-dark: "#08090d"
-  foreground-dark: "#f4f1e9"
-  surface-dark: "#11131a"
-  surface-strong-dark: "#191d27"
-  muted-dark: "#a9adba"
-  border-dark: "#343a4a"
-  accent-dark: "#f29ab0"
-  accent-foreground-dark: "#130a0e"
-  destructive-dark: "#f38b8b"
-  focus-dark: "#91b9f3"
-  primary-dark: "#f4f1e9"
-  primary-foreground-dark: "#08090d"
-  cobalt: "#173b72"
-  cue-day: "#f4f1e9"
-  background-light: "#f4f1e9"
-  foreground-light: "#08090d"
-  surface-light: "#e9e5de"
-  surface-strong-light: "#ddd9d2"
-  muted-light: "#5d6069"
-  border-light: "#c5c3c0"
-  accent-light: "#8f304e"
-  accent-foreground-light: "#fff8f7"
-  primary-light: "#173b72"
-  primary-foreground-light: "#f4f1e9"
-  destructive-light: "#b4232d"
-  focus-light: "#173b72"
-  popover-light: "#fffdf8"
-  popover-dark: "#191d27"
+  night-water: "#07161D"
+  survey-paper: "#EDF1F2"
+  deep-ink: "#12242C"
+  map-fog: "#B8C6CB"
+  route-blue: "#2E5BFF"
+  signal-orange: "#FF6A3D"
 typography:
-  display:
-    fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "clamp(2.7rem, 5.3vw, 4.5rem)"
-    fontWeight: 700
-    lineHeight: 0.98
-    letterSpacing: "-0.028em"
-  headline:
-    fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "clamp(2rem, 4vw, 4rem)"
-    fontWeight: 700
-    lineHeight: 1.02
-    letterSpacing: "-0.028em"
-  title:
-    fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "clamp(1.4rem, 2.5vw, 2.25rem)"
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: "-0.028em"
-  context:
-    fontSize: "clamp(1.5rem, 3vw, 2.5rem)"
-  feature:
-    fontSize: "clamp(1.8rem, 3.2vw, 3rem)"
-  writing:
-    fontSize: "clamp(2rem, 4vw, 3.75rem)"
-  mobile:
-    fontSize: "clamp(2.3rem, 10vw, 3rem)"
-  body:
-    fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 400
-    lineHeight: 1.65
-  label:
-    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
-    fontSize: "0.65rem"
-    fontWeight: 700
-    lineHeight: 1.4
-    letterSpacing: "0.16em"
-  scale:
-    micro-display: "0.78rem"
-    compact-body: "0.85rem"
-    action-label: "1.1rem"
-    compact-heading: "0.9rem"
-    medium-label: "0.72rem"
-    context-heading-min: "1.5rem"
-    context-body: "0.92rem"
-    feature-heading-min: "1.8rem"
-    disclosure-heading: "1.2rem"
-    testimonial-min: "1.15rem"
-    writing-heading-min: "2rem"
-    writing-card-heading-min: "1.35rem"
-    writing-body: "0.86rem"
-    writing-aside-heading-min: "1.55rem"
-    fallback-body: "1.05rem"
-    desktop-heading-min: "2.8rem"
-    mobile-heading-min: "2.3rem"
-rounded:
-  sm: "0.15rem"
-  md: "0.3rem"
-  pill: "999px"
-spacing:
-  control-height: "2.75rem"
-  button-large-height: "3rem"
-  shell-mobile-gutter: "1rem"
-  shell-wide-gutter: "1.5rem"
-  section-block: "clamp(4.5rem, 9vw, 8rem)"
-  content-max: "76rem"
-components:
-  button-primary:
-    backgroundColor: "{colors.primary-dark}"
-    textColor: "{colors.primary-foreground-dark}"
-    rounded: "{rounded.sm}"
-    padding: "0 1.25rem"
-    height: "3rem"
-  button-outline:
-    backgroundColor: "{colors.background-dark}"
-    textColor: "{colors.foreground-dark}"
-    rounded: "{rounded.sm}"
-    padding: "0 1.25rem"
-    height: "3rem"
-  badge-outline:
-    backgroundColor: "transparent"
-    textColor: "{colors.foreground-dark}"
-    rounded: "{rounded.pill}"
-    padding: "0.25rem 0.625rem"
-  button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.muted-dark}"
-    rounded: "{rounded.sm}"
-    padding: "0 0.75rem"
-    height: "2.75rem"
-  site-navigation:
-    backgroundColor: "{colors.background-dark}"
-    textColor: "{colors.foreground-dark}"
-    height: "4.75rem"
-  project-featured:
-    backgroundColor: "{colors.surface-strong-dark}"
-    textColor: "{colors.foreground-dark}"
-    padding: "clamp(1.35rem, 3vw, 2.5rem)"
-  project-disclosure:
-    backgroundColor: "transparent"
-    textColor: "{colors.foreground-dark}"
-    padding: "0.9rem 0"
+  display: "Recursive Variable, clamp(3rem, 8vw, 7.5rem), 760, 0.92"
+  section: "Recursive Variable, clamp(2rem, 4.5vw, 4.25rem), 760, 0.98"
+  title: "Recursive Variable, clamp(1.4rem, 2.5vw, 2.25rem), 720, 1.04"
+  body: "Recursive Variable, 1rem, 450, 1.65"
+  prose: "Recursive Variable, clamp(1.05rem, 1.5vw, 1.15rem), 450, 1.75"
+  metadata: "Recursive Variable with MONO axis, 0.72rem, 650, 1.4"
+motion:
+  feedback: "160ms"
+  state: "260ms"
+  entrance: "520ms"
+  path: "900ms"
+  easing: "cubic-bezier(0.16, 1, 0.3, 1)"
 ---
 
-# Design System: INDRA.DEV
+# Decision Atlas design system
 
-## Overview
+## Intent
 
-**Creative North Star: "Cue Horizon"**
+Decision Atlas treats a recruiter visit as a map of decisions. The portfolio starts with a
+high-contrast claim, then traces one supplied project from problem through delivery to outcome.
+The featured Petron path is the memorable element. Everything around it stays quiet, factual, and
+easy to scan.
 
-Cue Horizon treats a portfolio visit like a controlled stage cue. The recruiter enters a near-black cyclorama, finds a cobalt horizon and a rose transition, then follows tabular labels through the supplied work. The physical scene is stagecraft dawn: a matte stage floor, a tightly controlled luminance range, thin structural lines, and deliberate breathing room between the hero and the proof sequence.
+The portfolio remains INDRA.DEV. Decision Atlas is the visual and interaction direction, not a new
+product name. It is a family with two rhythms: the portfolio is expressive and persuasive, while
+the separate blog is calm and reading-first.
 
-The page is an Experience surface. The work leads, while the direct email action remains visible in the first viewport and the footer preserves a direct email path at the close. On desktop, the first viewport visibly contains the headline, proposition, email action, CV action, and formal portrait. On mobile and tablet, the hero is compact and ends after the location cue, without the portrait stage. The hero begins with the headline itself and ends with deliberate lower padding before Capabilities. There is no eyebrow above the heading. Cue Horizon is not a generic developer template, a fintech dashboard, or a cosmetic continuation of the previous Authority Editorial world. It is a code-led system committed in the layout contract with seed `6dea048c`.
+## Palette
 
-The emitted direction contract records this thesis: "Cue Horizon stages complex workflow ownership as visible cues, refusing generic developer-template chrome and cosmetic editorial polish." Its own-world line is "Near-black cyclorama, cobalt horizon, rose transition, white-day focus, cue tape, matte stage floor, tabular cue labels, and controlled luminance." Its story moves from the workflow-specialist claim to the featured Petron project, through the remaining evidence, and finally to email. The desktop first viewport is "Night field into a cobalt horizon; headline and email action left; formal portrait under side-light right; clear breathing room into the proof sequence." The mobile and tablet first viewport is "Headline and email action over the cobalt horizon, ending at the location cue without the portrait stage." The form is "Stagecraft cyclorama dawn, assigned direction, seed 6dea048c, code-led." The finish line is unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+The six shared values are semantic and available in both scenes:
 
-**Key Characteristics:**
+- Night Water `#07161D` is the dark canvas.
+- Survey Paper `#EDF1F2` is the light canvas and the primary light text.
+- Deep Ink `#12242C` is the dark surface and the light text value.
+- Map Fog `#B8C6CB` is supporting text and quiet structure on the dark scene.
+- Route Blue `#2E5BFF` marks the mapped route, primary action, and focus ring.
+- Signal Orange `#FF6A3D` marks a cue, active state, or actionable edge.
 
-- Dark-first stage scene with a persistent white-day light counterpart.
-- Bold system sans headlines balanced by tabular monospace cues.
-- Cobalt horizon and rose transition used as directional signals, not decoration.
-- Thin borders, rectangular surfaces, and restrained state motion.
-- A featured Petron project, native disclosures, and a direct footer contact path.
+Dark mode uses Night Water and Survey Paper. Light mode uses Survey Paper and Deep Ink. Section
+surfaces are made with a six percent foreground mix instead of introducing extra brand colors.
+Orange or blue never carries state meaning by itself. A state also changes text, border, shape, or
+native disclosure affordance.
 
-## Colors
+## Type
 
-The palette is a two-theme role system. The root values are the dark scene, and `.light` remaps the same semantic roles for a white-day scene. The frontmatter records the literal values from `src/styles/design-tokens.css`.
+Recursive Variable is self-hosted for display, interface, and metadata. Its `CASL`, `MONO`, and
+`wght` axes create the map instrument signature without changing the size or line breaks of the
+content. Metadata uses `MONO` for orientation, not as a decorative all-caps label.
 
-### Primary
+The shared role names are `--font-ui`, `--font-prose`, and `--font-mono`; the portfolio maps all
+three to its local Recursive family.
 
-- **White-day action** (`--primary` in dark mode): The light action face and strongest dark-theme text. It carries the main email action and high-priority type.
-- **Cobalt day action** (`--primary` in light mode): The dark action face against the light scene. It keeps the primary control legible without introducing a new hue.
+Literata Variable is reserved for Blog prose in the sibling repository. The portfolio only uses
+Recursive. Both families are retained locally with their OFL notices when a repo ships them.
 
-### Secondary
+All content is left aligned. Reading measures stop at `72ch`; line length is never used as a
+decorative full-width texture. The core scale is:
 
-- **Cobalt horizon** (`--cue-cobalt`): The fixed directional field behind the hero gradient, writing aside, and featured-project cue line. It remains cobalt in both themes.
-- **Focus blue** (`--focus-ring`): A high-visibility keyboard focus role.
+- display: `clamp(3rem, 8vw, 7.5rem)`
+- section: `clamp(2rem, 4.5vw, 4.25rem)`
+- title: `clamp(1.4rem, 2.5vw, 2.25rem)`
+- body: `1rem / 1.65`
+- prose: `clamp(1.05rem, 1.5vw, 1.15rem) / 1.75`
 
-### Tertiary
+## Layout story
 
-- **Rose transition** (`--cue-rose`): The compact signal for kickers, borders, arrows, active states, and the lower hero wash.
-- **Destructive signal** (`--destructive`): Reserved for destructive or error messaging.
+```text
+Header: INDRA.DEV                 Projects  Capabilities  Testimonials  Writing  ID  theme
 
-### Neutral
+Hero:   Decision Atlas             portrait on desktop
+        large factual claim
+        proposition + Email + CV
+        location / compact portrait on mobile
 
-- **Night field** (`--background` and `--cue-night`): The dark canvas. In light mode the same semantic role becomes the white-day field.
-- **White-day cue value** (`--cue-day`): `#f4f1e9` is the stage value used by featured proof, writing aside, and other white-day signal surfaces.
-- **Stage surface** (`--surface`): The muted section field for capabilities, testimonials, and the footer.
-- **Strong stage surface** (`--surface-strong`): The featured case, feed fallback, and bounded overlay surface.
-- **Muted cue text** (`--muted-foreground`): Supporting copy, metadata, dates, and quiet controls.
-- **Structural line** (`--border`): Thin section rules, disclosure rules, field rails, and control outlines.
-- **Popover day** (`--popover` in light mode): The light overlay surface used by the mobile dialog. Dark mode uses the strong stage surface.
+Path:   Petron Philippines Corporate Dashboard
+        route rail                 problem
+                                  ownership
+                                  delivery
+                                  outcome
 
-### Named Rules
+Proof:  Capabilities              Projects
+        Testimonials               Writing
+```
 
-**The Controlled Luminance Rule.** Rose marks a cue or state, cobalt establishes a horizon, and neutral values carry the reading load. Do not turn every surface into an accent field.
+The sequence is Hero, featured Petron path, Capabilities, other Projects, Testimonials, Writing,
+then Footer. The Projects section owns the visible `#projects` anchor. A small non-visual
+`#experiences` compatibility target remains at the same section boundary for existing bookmarks.
 
-**The Two-Scene Rule.** Dark and light are the same Cue Horizon world. Light mode is a white-day stage, not a separate brand palette.
+At 1024px and above the Petron route rail is sticky while the four supplied evidence fields pass
+beside it. At smaller widths the same four fields are complete inline in document order. There is
+no scroll lock, scroll hijacking, custom cursor, WebGL, or route transition.
 
-## Typography
+On desktop, the rail line, marker, and four nodes follow the featured path shell's scroll progress;
+the inline layout remains static. Reduced motion renders the completed route directly.
 
-**Display and Body Font:** The system sans stack from `--font-sans`, with `ui-sans-serif`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, and `Segoe UI` fallbacks.
-**Label/Mono Font:** The system monospace stack from `--font-mono`, with `ui-monospace`, `SFMono-Regular`, Menlo, Monaco, Consolas, and `monospace` fallbacks.
+The formal portrait stays in the desktop hero. On mobile it becomes a compact stage after the
+intro and actions and before the featured path. The portrait, CV, external links, project facts,
+and approved testimonials are unchanged.
 
-**Character:** The sans stack is immediate, dense, and dependable without a render-blocking font request. Monospace labels behave like production cue readouts: compact, tabular, uppercase where the interface needs a clear signal, and never allowed to compete with the headline.
+## Geometry and depth
 
-### Hierarchy
+Lines and nodes represent only a relationship, progress, heading, or real state. The Petron rail is
+a 2.5D CSS layer with a route line and four numbered nodes because those nodes are a real sequence.
+Hero layers react subtly to the pointer while retaining the native cursor. The route has no
+semantic content and is hidden from assistive technology.
 
-- **Display** (`700`, `clamp(2.7rem, 5.3vw, 4.5rem)`, `0.98` line-height, `-0.028em` tracking): The hero headline. At `min-width: 900px` it uses the final desktop scale `clamp(2.8rem, 3.8vw, 4rem)`; at `max-width: 639px` it uses `clamp(2.3rem, 10vw, 3rem)` with normal word wrapping via `overflow-wrap: normal` and `word-break: normal`.
-- **Headline** (`700`, `clamp(2rem, 4vw, 4rem)`, `1.02` line-height, `-0.028em` tracking): Section headings. The writing heading uses `clamp(2rem, 4vw, 3.75rem)`.
-- **Title** (`700`, `clamp(1.4rem, 2.5vw, 2.25rem)`, `1.08` line-height, `-0.028em` tracking): Capability titles and supporting evidence subheads.
-- **Body** (`400`, `1rem`, `1.65` line-height): Propositions, descriptions, field evidence, responsibilities, testimonials, and fallback copy. Component-specific measures stay between roughly 38rem and 42rem rather than stretching across the stage.
-- **Label** (`700`, `0.65rem`, `1.4` line-height, `0.16em` tracking): Kickers, metadata, role and period labels, and control labels. Labels use uppercase when the interface needs a clear signal.
+Surfaces are mostly flat. Depth comes from the route rail, a thin border, and a restrained orange
+offset behind the portrait. Rounded pills are reserved for technology badges. The featured project
+and sections use rectangular boundaries.
 
-### Named Rules
+## Motion grammar
 
-**The Headline-Then-Cue Rule.** Let the sans headline state the claim first. Use monospace only to orient, label, or timestamp the work.
+The only runtime is the local `motion` package. A single `LazyMotion` and `MotionConfig` boundary
+is mounted in the locale layout. Client islands are limited to hero layers/signature, Petron path
+nodes, menu behavior, theme feedback, active navigation, and back-to-top behavior. Composition,
+data, SEO, and content remain server-first.
 
-## Layout
+- Feedback such as theme and icon acknowledgement: `160ms`.
+- Disclosure and layout state: `260ms`.
+- Hero entrance: `520ms`.
+- Petron route progression: `900ms`, easing `[0.16, 1, 0.3, 1]`.
+- Layout morphs use a spring with stiffness `260`, damping `28`, and mass `0.8`.
 
-The page is a full-width stage with a centered `.content-shell`. At the base width it uses `width: min(calc(100% - 2rem), var(--content-max))`, giving 1rem gutters. At `min-width: 640px` it uses `width: min(calc(100% - 3rem), var(--content-max))`, giving 1.5rem gutters. The maximum content width is `--content-max: 76rem`. Sections use `padding-block: clamp(4.5rem, 9vw, 8rem)` and thin structural top rules.
+There is one authored entrance sequence, the hero, and one authored relationship sequence, the
+Petron path. Cards and paragraphs do not slide in independently. There are no route transitions.
 
-The header is sticky with a compact wordmark and controls. The hero is copy-only below 900px, ending after the location cue, then becomes a left-copy and right-portrait grid at `min-width: 900px`. The portrait stage gets a 2rem top offset and a right alignment on wide screens. The hero ends with deliberate lower padding before Capabilities.
+With `prefers-reduced-motion: reduce`, the final state is rendered directly. Path drawing, pointer
+parallax, perspective, smooth scrolling, and non-essential transforms are removed. Opacity,
+content order, keyboard flow, and native state feedback remain available.
 
-At `min-width: 640px`, the shell uses wider gutters, case evidence fields and testimonials use two columns, and disclosure actions sit beside their copy. At `max-width: 639px`, disclosure summaries stack the localized action below the project copy and writing becomes one column. At `min-width: 768px`, full site navigation and horizontal footer links replace the mobile navigation trigger layout.
+## Navigation and state
 
-The review matrix covers 375, 768, 1024, and 1440px. The final native captures include desktop and mobile light and dark scenes, tablet, laptop, both locale variants, and reduced motion. All layouts remain usable in Indonesian and English without horizontal overflow.
+Visible navigation is localized as `Proyek / Projects`, `Kapabilitas / Capabilities`,
+`Testimoni / Testimonials`, and `Tulisan / Writing`. All four links use real section anchors.
+The site keeps the skip link, native dialog drawer, Escape behavior, focus restoration, visible
+focus, 44px targets, local theme persistence, and the optional feed fallback.
 
-## Elevation & Depth
+Secondary projects use native `<details>`. The browser owns the disclosure state; the action text,
+border, and icon are additional state cues. The writing feed remains a bounded, recoverable server
+boundary and never hides the rest of the portfolio while it loads.
 
-Cue Horizon uses tonal layering more than elevation. Depth comes from the hero gradients, the fixed cobalt horizon, the rose lower wash, thin structural borders, and surface changes between the background, stage surface, and strong stage surface. Shadows are reserved for the portrait frame and featured Project so the stage remains flat elsewhere.
+## Accessibility and responsive review
 
-Motion follows a cue-progression thesis. `--motion-fast: 180ms` remains the control and link transition; `--motion-enter: 480ms` drives the hero-copy rise; `--motion-cue: 700ms` with `--ease-cue: cubic-bezier(0.16, 1, 0.3, 1)` drives supporting section-heading and rail entrances. In browsers supporting `animation-timeline: view()`, each `.cue-section` owns `--cue-section`; the heading and its full-width bottom rail use `entry 8% entry 36%`, with the heading rising from `opacity: 0.78` and `translateY(0.5rem)` while the rail draws from `scaleX(0)` to `scaleX(1)`. The unsupported-browser base is already complete and visible.
+Review at 375, 768, 1024, and 1440px in both themes and both locales. Check keyboard-only order,
+skip-link focus, dialog focus return, reduced motion, feed failure, and no horizontal overflow.
+Snapshots wait for fonts and either finish or disable motion deterministically. There must be no
+content hidden before hydration and no layout shift caused by font or animation.
 
-Petron remains the only focal multi-segment sequence. Its four workflow segments use `--featured-project`, `--motion-cue`, and `--ease-cue`, with ranges `entry 10% entry 35%`, `entry 25% entry 50%`, `entry 40% entry 65%`, and `entry 55% entry 80%`. Cards and list rows stay static. Theme icons cross-fade and rotate in one grid cell; the mobile dialog and backdrop animate only while opening; disclosure action labels move down `0.25rem` only while open; Hero and Writing outbound arrows move up/right at most `0.25rem`, and the CV arrow moves down at most `0.25rem`. Native close, Escape, link navigation, and focus restoration remain immediate.
+## Do and do not
 
-### Shadow Vocabulary
+Do use the six semantic values, the Recursive axes, the supplied facts, native HTML states, and
+the route relationship. Do keep all labels in both dictionaries.
 
-- **Portrait side-light:** `0.6rem 0.6rem 1.5rem color-mix(in srgb, var(--cue-rose) 38%, transparent)`, used to make the formal portrait read as a lit object on the stage.
-- **Featured Project horizon:** `0.65rem 0.65rem 2rem color-mix(in srgb, var(--cue-cobalt) 34%, transparent)`, used to distinguish the primary evidence surface from the disclosure list.
-
-### Named Rules
-
-**The Flat Stage Rule.** Surfaces are flat at rest. A colored offset shadow is a signature cue for the portrait and featured proof, not a default card treatment.
-
-## Shapes
-
-The form language is rectangular and precise. Small controls and bounded cue surfaces use `--radius-sm: 0.15rem`; the shared primitive also exposes `--radius-md: 0.3rem`. Badges are the only recurring pill silhouette at `999px`. Thin borders define stage edges, section divisions, field rails, disclosure rows, and overlay boundaries. The featured case, writing cards, and footer remain rectangular rather than becoming floating rounded cards.
-
-The shell wordmark, locale switcher, theme toggle, mobile trigger, site links, and skip link preserve exact 44px (`2.75rem`) interaction targets. The shared icon button is `2.75rem` square. Writing title links and blog action links use `min-height: 2.75rem` targets. The mobile navigation links use a `3.5rem` minimum row. Icons sit inside those targets and never carry interaction meaning without an accessible label.
-
-### Localized Content Contract
-
-The final localized copy is factual and shared across both themes. The hero leads with these exact strings:
-
-- **Indonesian headline:** `Saya merancang frontend untuk workflow finansial yang tidak boleh membingungkan pengguna.`
-- **Indonesian proposition:** `Dari registrasi korporat sampai transaksi investasi, saya mengubah state, validasi, dan keputusan yang rumit menjadi alur yang jelas, tangguh, dan dapat diuji.`
-- **English headline:** `I design frontend systems for financial workflows that cannot afford to confuse users.`
-- **English proposition:** `From corporate onboarding to investment transactions, I turn complex states, validation, and decisions into clear, resilient, testable flows.`
-
-The three capability records remain localized and factual:
-
-- **Indonesian:** `Menjernihkan alur yang rumit` with `Saya memecah workflow multi-langkah menjadi state, keputusan, dan feedback yang dapat dipahami pengguna.`
-- **Indonesian:** `Menjaga batas data tetap eksplisit` with `Saya menyusun komponen dan data flow agar validasi, perubahan state, dan tanggung jawab setiap bagian tetap dapat diprediksi.`
-- **Indonesian:** `Memvalidasi perjalanan end-to-end` with `Saya menghubungkan implementasi dengan pengujian browser dan feedback lintas fungsi sebelum perubahan dirilis.`
-- **English:** `Clarify complex flows` with `I break multi-step workflows into states, decisions, and feedback that users can understand.`
-- **English:** `Keep data boundaries explicit` with `I structure components and data flow so validation, state changes, and ownership remain predictable.`
-- **English:** `Verify the journey end to end` with `I connect implementation with browser testing and cross-functional feedback before changes ship.`
-
-The visible project-navigation labels are `Pengalaman` on Indonesian and `Experiences` on English. The implementation uses the `navigation.experiences` dictionary key, `ExperiencesSection` symbol, `#experiences` DOM ID, and matching anchors.
-
-Navigation labels, disclosure state, testimonial hierarchy, and writing fallback labels remain dictionary-backed in `/id` and `/en`. The supplied company, role, period, project records, technologies, testimonials, portrait, CV, and external links remain unchanged.
-
-### Buttons
-
-- **Character:** Tactile, high-contrast stage controls with restrained color transitions.
-- **Primary:** The semantic `primary` and `primary-foreground` roles, `3rem` large-action token, horizontal padding `1.25rem`, and tight `0.15rem` stage radius. The hero email action uses this variant.
-- **Outline:** A background-matched control with a structural border. Hover shifts toward `--muted` and restores foreground contrast. The hero CV action uses this variant.
-- **Ghost:** A quiet control for language switching and other low-priority shell actions. It uses a `2.75rem` minimum height.
-- **Hover / Focus:** Button transitions use `--motion-fast`. Locale and theme controls keep a transparent bottom border, muted resting color, foreground hover color, and rose hover/focus-visible border without a filled hover surface. Focus-visible uses the ring token and a visible ring. Hover changes color or border and does not change layout.
-
-### Badges
-
-- **Style:** Technology and writing-topic badges use the outline variant with `0.25rem 0.625rem` padding, `1px` border, monospace labels, and the `999px` pill radius.
-- **State:** Badges identify a technology or topic. They are not filters and do not become interactive controls.
-
-### Cards / Containers
-
-- **Featured case:** The first project is a strong stage surface with `clamp(1.35rem, 3vw, 2.5rem)` internal padding, a thin border, a four-part non-numeric cue line, all four evidence fields, and technologies. Its visible heading is Petron Philippines Corporate Dashboard. The cue line is the single authored focal moment: its four segments draw sequentially during viewport entry and remain complete at rest.
-- **Disclosure rows:** The remaining four projects are native `<details>` elements. Summaries expose title, one-line summary, and localized open or close text. Details are closed initially and reveal Problem, Ownership, Delivery, Outcome, and Technologies when opened. Border and action-label color transitions acknowledge the native state change without animating the disclosed content.
-- **Testimonials:** Collaborator and mentoring quotes sit in a one-pixel separated grid on the muted stage surface. The first two supplied testimonials are delivery proof; the remaining two are mentoring proof. An empty approved testimonial array renders no section.
-- **Writing:** A ready feed renders up to three localized posts. One post adds a cobalt aside. Writing title links and blog action links use `min-height: 2.75rem` targets. Cards transition color and move the outbound arrow by at most `0.25rem` on hover or keyboard focus. An unavailable or invalid feed renders a bordered strong-surface fallback with an actionable technical blog link and leaves the rest of the portfolio usable.
-
-### Navigation
-
-- **Desktop header:** A sticky `4.75rem` header uses the wordmark on the left, section links in the center, and locale and theme controls on the right. Navigation targets `#capabilities`, `#experiences`, and `#writing`, visibly labeled `Kapabilitas` / `Capabilities`, `Pengalaman` / `Experiences`, and `Konten` / `Content` on Indonesian / English.
-- **Mobile navigation:** Below `768px`, a menu trigger opens a native modal `<dialog>` as a right-side drawer. The drawer uses `background: var(--popover)`, has its own wordmark, description, close control, and stacked links. Links close the dialog, Escape follows native dialog behavior, and the close event returns focus to the trigger.
-- **Footer:** The footer repeats the wordmark and description, then exposes blog, GitHub, LinkedIn, and email links with existing brand or Lucide icons. Its metadata row contains the supplied rights and location copy.
-
-### Proof Sequence and Alignment
-
-The hero ends with deliberate lower padding before the proof sequence. The sequence remains Hero -> Capabilities -> Projects -> Testimonials -> Writing, followed by the Footer. Section headings, capability content, and disclosure rows align directly to the content shell without decorative sequencing columns. Capabilities keep semantic `<ol>` order without visible numbers. The featured Petron project retains its non-numeric cue line.
-
-### Accessibility, State, and Fallback
-
-- The header exposes a skip link to `#main-content`; the main element is focusable for skip-link behavior. Sections use labeled semantic landmarks, capabilities use semantic ordered lists, and testimonials use figures, blockquotes, and captions.
-- The portrait is eager, dimensioned at `380x480`, meaningfully visible, and carries the supplied alternative text. Decorative icons and cue lines are hidden from assistive technology.
-- Shell controls keep 44px targets, focus-visible rings remain visible, and the mobile menu is a native dialog controlled by the single `SiteInteractions` boundary.
-- Theme starts dark. The interaction script reads the `theme` local-storage key, applies light only when its value is `light`, and writes the next choice when the toggle is used. Missing or invalid storage falls back to dark.
-- Secondary Projects use native `<details>` and start closed. The browser owns disclosure state, and opening a row reveals all four evidence fields and technologies.
-- The writing feed is optional and streams behind its own Suspense boundary. While pending, the localized Writing heading remains visible in an `aria-busy` section with stable reserved space and no fake article, error copy, or interactive link. A ready response renders up to three localized posts. A timeout, invalid payload, or non-OK response renders the localized actionable blog fallback without delaying the rest of the portfolio or footer.
-- All user-facing labels live in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.
-- Reduced motion sets `--motion-cue`, `--motion-enter`, and `--motion-fast` to `0ms`, completes Hero, section heading and rail, Petron, dialog, disclosure-label, theme-icon, and action-icon motion, and disables smooth scrolling while leaving open/close text, color state, feedback, and all content available immediately.
-
-### Visual Parity Contract
-
-The Tailwind CSS v4 migration is an implementation change, not a visual redesign. Strict perceptual parity is required across `/id` and `/en`, dark and light themes, 375, 768, 1024, and 1440px viewports, keyboard focus, and reduced motion. The only accepted visual deltas are the third localized content link, `Experiences` becoming `Pengalaman` only on `/id`, and the audited Indonesian copy corrections. Layout, colors, spacing, interaction, theme, breakpoint, and accessibility expectations remain unchanged. Subpixel text rasterization differences are not design changes.
-
-## Do's and Don'ts
-
-### Do:
-
-- **Do** keep Cue Horizon legible through the near-black or white-day scene, cobalt horizon, rose cues, and structural lines.
-- **Do** use the semantic tokens from `src/styles/design-tokens.css` instead of theme-specific values in application components.
-- **Do** keep the portrait eager, dimensioned, and visible in the first viewport, with its supplied alternative text.
-- **Do** keep the hero proposition and both email and CV actions visible with the headline in the first viewport. Do not add an eyebrow above the heading.
-- **Do** use native disclosure behavior for secondary Projects. Let the browser own open and close state.
-- **Do** retain the email, CV, LinkedIn, blog, GitHub, locale, and theme paths that are already supplied. The footer email link remains available after the standalone Contact section is removed.
-- **Do** keep all user-facing labels localized in the `/id` and `/en` dictionaries, including navigation, disclosure state, testimonial hierarchy, footer actions, and fallback copy.
-- **Do** preserve the skip link, visible focus, semantic landmarks, keyboard order, 44px targets, and reduced-motion behavior.
-
-### Don't:
-
-- **Don't** restore the Authority Editorial treatment, cream-serif broadsheet styling, scattered blue accents, glass panels, generic fintech dashboard motifs, or a generic developer-template shell.
-- **Don't** add gradients, shadows, rounded cards, decorative imagery, animated cursors, parallax, scroll-jacking, or 3D outside the defined Cue Horizon roles.
-- **Don't** use rose or cobalt as a substitute for readable body text or as the only way to communicate state.
-- **Don't** replace native `<details>` with a client-side accordion or add a provider, global state, or a second browser-interaction boundary.
-- **Don't** add unsupported metrics, client outcomes, endorsements, availability claims, or product facts to make the visual story sound stronger.
-- **Don't** introduce a new production dependency or an external font request.
-- **Don't** use em dash punctuation in copy, comments, or documentation.
+Do not add metrics, client claims, endorsements, imagery, or testimonials. Do not turn every
+section into a card, use accent color as the only state signal, or reintroduce the retired visual
+language.

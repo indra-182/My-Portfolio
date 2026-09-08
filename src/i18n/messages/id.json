@@ -1,8 +1,9 @@
 {
   "navigation": {
+    "projects": "Proyek",
     "capabilities": "Kapabilitas",
-    "experiences": "Pengalaman",
-    "content": "Konten",
+    "testimonials": "Testimoni",
+    "writing": "Tulisan",
     "primaryLabel": "Navigasi utama",
     "portfolio": "Portofolio",
     "downloadCv": "Unduh CV",
@@ -29,10 +30,10 @@
   },
   "portfolio": {
     "capabilitiesHeading": "Membuat workflow penting terasa jelas.",
-    "experiencesHeading": "Pengalaman terpilih di alur produk kompleks.",
-    "experiencesDescription": "Saya menghubungkan masalah produk, keputusan frontend, dan bukti validasi yang tersedia.",
-    "featuredLabel": "Workflow unggulan",
-    "secondaryLabel": "Workflow lain",
+    "projectsHeading": "Proyek yang memetakan alur produk kompleks.",
+    "projectsDescription": "Saya menghubungkan masalah produk, keputusan frontend, dan bukti validasi yang tersedia untuk setiap proyek.",
+    "featuredLabel": "Proyek unggulan",
+    "secondaryLabel": "Proyek lain",
     "problemLabel": "Masalah",
     "ownershipLabel": "Kepemilikan",
     "deliveryLabel": "Pelaksanaan",

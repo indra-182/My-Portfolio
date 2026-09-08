@@ -37,7 +37,7 @@ export function SiteHeader({
     >
       <a
         href="#main-content"
-        className="fixed top-3 left-3 z-60 -translate-y-[200%] bg-[var(--cue-day)] px-4 py-3 font-bold text-[var(--cue-night)] focus-visible:translate-y-0 focus-visible:ring-2 focus-visible:ring-ring"
+        className="fixed top-3 left-3 z-60 -translate-y-[200%] bg-[var(--atlas-survey-paper)] px-4 py-3 font-bold text-[var(--atlas-deep-ink)] focus-visible:translate-y-0 focus-visible:ring-2 focus-visible:ring-ring"
       >
         {labels.skipToContent}
       </a>
@@ -50,7 +50,7 @@ export function SiteHeader({
             <a
               key={item.href}
               href={item.href}
-              className="site-nav-link inline-flex min-h-11 items-center border-b border-transparent px-[0.7rem] py-[0.8rem] font-mono text-[0.66rem] tracking-[0.09em] text-muted-foreground no-underline uppercase transition-[color,border-color] duration-[var(--motion-fast)] ease-[ease] hover:border-[var(--cue-rose)] hover:text-foreground focus-visible:border-[var(--cue-rose)] focus-visible:text-foreground"
+              className="site-nav-link inline-flex min-h-11 items-center border-b border-transparent px-[0.7rem] py-[0.8rem] atlas-meta text-muted-foreground no-underline transition-[color,border-color] duration-[var(--motion-feedback)] ease-[ease] hover:border-[var(--accent-strong)] hover:text-foreground focus-visible:border-[var(--accent-strong)] focus-visible:text-foreground"
               data-site-interaction={SITE_INTERACTION.activeNavLink}
               suppressHydrationWarning
             >
@@ -82,7 +82,7 @@ export function SiteHeader({
           title={labels.scrollToTop}
           data-site-interaction={SITE_INTERACTION.scrollToTop}
           suppressHydrationWarning
-          className="scroll-to-top fixed right-[max(1rem,calc((100vw-var(--content-max))/2))] bottom-4 z-25 transition-[opacity,visibility,transform] duration-[var(--motion-fast)] ease-[ease]"
+          className="scroll-to-top fixed right-[max(1rem,calc((100vw-var(--content-max))/2))] bottom-4 z-25 transition-[opacity,visibility,transform] duration-[var(--motion-feedback)] ease-[ease]"
         >
           <LuArrowUp aria-hidden="true" className="size-4" />
         </Button>

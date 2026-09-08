@@ -6,6 +6,19 @@ import "./globals.css";
 const locale = defaultLocale;
 const dictionary = getDictionary(locale);
 
+const themeBootstrap = String.raw`(() => {
+  const root = document.documentElement;
+  let theme = null;
+  try {
+    theme = localStorage.getItem("theme");
+  } catch {}
+  if (theme !== "light" && theme !== "dark") {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  root.classList.toggle("dark", theme === "dark");
+  root.classList.toggle("light", theme === "light");
+})();`;
+
 export const metadata: Metadata = {
   title: dictionary.errors.notFoundTitle,
   description: dictionary.errors.notFoundDescription,
@@ -13,7 +26,10 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+      </head>
       <body className="min-h-screen">
         <main
           id="main-content"
@@ -28,7 +44,7 @@ export default function GlobalNotFound() {
           </p>
           <a
             href={`/${locale}`}
-            className="mt-8 inline-flex min-h-11 w-fit items-center rounded-sm bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+            className="atlas-button mt-8 inline-flex min-h-11 items-center bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           >
             {dictionary.actions.backHome}
           </a>

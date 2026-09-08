@@ -11,7 +11,7 @@
 - `src/app/[locale]/page.tsx` is the server composition root. It validates the route segment with `isLocale`, loads the typed dictionary and statically assembled portfolio content with exact-key checks, fetches optional latest posts, and passes narrow data and copy props to section components.
 - `getDictionary` loads statically imported JSON catalogs whose locale structures and keys are parity-checked.
 - `getLatestPosts` validates the remote feed and returns the `LatestFeedResult` discriminated union, either `ready` or `unavailable`, so a feed failure leaves the portfolio usable.
-- Server components are the default. `src/components/shell/site-interactions.tsx` is the deliberate centralized browser-interaction boundary, using `data-*` hooks and native DOM APIs. Add a client component only when an interaction cannot fit that existing pattern. Do not introduce React providers, global state, or dependency-injection abstractions unless a requested feature creates a demonstrated need.
+- Server components are the default. `src/components/shell/site-interactions.tsx` is the deliberate centralized browser-interaction boundary, using `data-*` hooks and native DOM APIs. The local Motion provider is a deliberate exception for focused hero and path islands. Add a client component only when an interaction cannot fit an existing pattern. Do not introduce global state or dependency-injection abstractions.
 
 ## Key Directories
 
@@ -48,7 +48,7 @@
 ## Runtime/Tooling Preferences
 
 - Use the manifest-declared `pnpm@10.15.0`. The repository does not pin an exact Node version: there is no `engines` field or Node version file. Next.js 16 requires Node 20.9 or newer, and package compatibility governs the actual runtime.
-- The stack is Next.js 16.3, React 19, strict TypeScript, Tailwind CSS v4 with PostCSS, local UI primitives, Zod, Vitest, and Playwright.
+- The stack is Next.js 16.3, React 19, strict TypeScript, Tailwind CSS v4 with PostCSS, local UI primitives, Motion, Zod, Vitest, and Playwright.
 - Use `.env.example`, `src/lib/blog.ts`, and `src/lib/site-config.ts` for environment configuration. All existing variables are public `NEXT_PUBLIC_*` values. Keep credentials out of the repository.
 - For non-obvious Next.js behavior, read the matching installed guide in `node_modules/next/dist/docs/` before implementing it.
 
@@ -58,14 +58,14 @@
 - Keep domain terminology aligned with `CONTEXT.md`. Portfolio facts belong in `src/content/portfolio.ts`, schemas and types in `src/content/portfolio-schema.ts`, and UI strings in both `src/i18n/messages/en.json` and `src/i18n/messages/id.json`. Every content or message change must preserve Indonesian and English structure and key parity.
 - Validate data once at ingress with Zod. Reuse narrow schema-derived types such as `PortfolioContent["profile"]`. Model recoverable async failures as discriminated result states, following `LatestFeedResult`, rather than leaking unvalidated data or throwing optional-feed failures through the page.
 - Pass dependencies and data explicitly through server composition and props. No DI container or global client state is used. Keep async work at route and server boundaries; components remain pure and server-compatible unless browser state is required.
-- Use semantic design tokens and classes from `src/styles/design-tokens.css`, local primitives in `src/components/ui/`, `react-icons/lu` or `react-icons/fa` patterns, and the `content-shell` layout utility. See `DESIGN.md` for the complete Cue Horizon, responsive, motion, state, localization, and accessibility contract.
+- Use semantic Decision Atlas tokens and classes from `src/styles/design-tokens.css`, local primitives in `src/components/ui/`, `react-icons/lu` or `react-icons/fa` patterns, and the `content-shell` layout utility. See `DESIGN.md` for the complete responsive, motion, state, localization, and accessibility contract.
 - Preserve semantic landmarks, heading order, skip navigation, visible focus, useful alternative text, keyboard access, 44px targets, reduced-motion behavior, light and dark themes, and no horizontal overflow. Do not use em dash punctuation.
 - GitHub Issues are canonical for issues and specs. `docs/agents/issue-tracker.md` contains exact `gh` operations, and `docs/agents/triage-labels.md` defines `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`.
 
 ## Testing & QA
 
 - Vitest/jsdom unit and component tests live as colocated `*.test.ts` or `*.test.tsx` files under `src/`. Use `src/test/setup.ts`, semantic Testing Library queries, table-driven `id` and `en` coverage, and isolated `fetch` stubs restored after each test.
-- Playwright specs live under `e2e/*.spec.ts` and run against the real dev server. The configured projects are Desktop Chrome and Pixel 5, with traces retained on failure. Use axe checks for both locales and cover recruiter-critical flows such as locale switching, dark-first theme persistence, mobile navigation, links, and feed fallback.
+- Playwright specs live under `e2e/*.spec.ts` and run against the real dev server. The configured projects are Desktop Chrome and Pixel 5, with traces retained on failure. Use axe checks for both locales and cover recruiter-critical flows such as locale switching, system-theme persistence, mobile navigation, links, and feed fallback.
 - Run the narrowest relevant checks first and `pnpm run verify` for shared or route-level changes. For UI or layout changes, verify at 375, 768, 1024, and 1440px in both locales and themes, with keyboard behavior, reduced motion, and the affected Playwright flow. No CI workflow is configured in this repository.
 
 <!-- BEGIN:nextjs-agent-rules -->

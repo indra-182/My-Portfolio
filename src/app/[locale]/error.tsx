@@ -27,12 +27,12 @@ export default function Error({
         <button
           type="button"
           onClick={reset}
-          className="inline-flex min-h-11 items-center rounded-sm bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          className="atlas-button inline-flex min-h-11 items-center bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {copy.retry}
         </button>
         <a
-          className="inline-flex min-h-11 items-center rounded-sm border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          className="atlas-button inline-flex min-h-11 items-center border border-border px-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           href={blog.homeUrl}
         >
           {copy.blog}

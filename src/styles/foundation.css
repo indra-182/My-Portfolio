@@ -6,14 +6,15 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-ui);
+  --font-mono: "Recursive", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
 }
@@ -24,9 +25,10 @@
   }
 
   html {
-    @apply scroll-smooth font-sans;
     background: var(--background);
+    color: var(--foreground);
     color-scheme: dark;
+    font-family: var(--font-ui);
   }
 
   html.light {
@@ -35,6 +37,14 @@
 
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
+    font-size: 1rem;
+    font-weight: 450;
+    line-height: 1.65;
+    font-variation-settings:
+      "CASL" 0.15,
+      "MONO" 0,
+      "slnt" 0,
+      "wght" 450;
   }
 
   a {
@@ -50,7 +60,8 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--cue-rose) 28%, transparent);
+    background: color-mix(in srgb, var(--atlas-route-blue) 32%, transparent);
+    color: var(--foreground);
   }
 }
 
@@ -60,83 +71,72 @@
     margin-inline: auto;
   }
 
-  .cue-kicker {
-    color: var(--cue-rose);
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+  .atlas-kicker,
+  .atlas-meta {
+    color: var(--accent-strong);
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.1em;
     line-height: 1.4;
     text-transform: uppercase;
+    font-variation-settings:
+      "CASL" 0,
+      "MONO" 1,
+      "slnt" 0,
+      "wght" 650;
   }
 
-  .cue-button {
+  .atlas-button {
     min-height: 2.75rem;
     border-radius: var(--radius-sm);
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
   }
 
-  .cue-section {
+  .atlas-section {
     position: relative;
-    scroll-margin-top: calc(4.75rem + 1rem);
-    padding-block: clamp(4.5rem, 9vw, 8rem);
+    scroll-margin-top: 5.75rem;
+    padding-block: clamp(4rem, 8vw, 7.5rem);
     border-top: 1px solid var(--border);
   }
 
-  .cue-section-muted {
+  .atlas-section-muted {
     background: var(--surface);
   }
 
-  .cue-section-heading {
+  .atlas-section-heading {
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--border);
   }
 
-  @supports (animation-timeline: view()) {
-    .cue-section {
-      view-timeline: --cue-section block;
-    }
-
-    .cue-section-heading {
-      position: relative;
-      border-bottom-color: transparent;
-      animation: cue-section-enter var(--motion-cue) var(--ease-cue) both;
-      animation-timeline: --cue-section;
-      animation-range: entry 8% entry 36%;
-    }
-
-    .cue-section-heading::after {
-      position: absolute;
-      right: 0;
-      bottom: -1px;
-      left: 0;
-      height: 1px;
-      background: var(--border);
-      content: "";
-      transform: scaleX(1);
-      transform-origin: left;
-      animation: cue-rail-draw var(--motion-cue) var(--ease-cue) both;
-      animation-timeline: --cue-section;
-      animation-range: entry 8% entry 36%;
-    }
-  }
-
-  .cue-section-heading h2 {
+  .atlas-section-heading h2 {
     max-width: 18ch;
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(2rem, 4.5vw, 4.25rem);
     font-weight: 700;
-    letter-spacing: -0.028em;
-    line-height: 1.02;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
     text-wrap: balance;
+    font-variation-settings:
+      "CASL" 0.25,
+      "MONO" 0,
+      "slnt" 0,
+      "wght" 760;
   }
 
-  .animate-cue-rise {
-    animation: cue-rise var(--motion-enter) var(--ease-cue) both;
+  .atlas-entrance {
+    animation: atlas-rise var(--motion-entrance) var(--motion-ease) both;
+  }
+
+  .atlas-prose {
+    max-width: var(--prose-max);
+    font-family: var(--font-prose);
+    font-size: clamp(1.05rem, 1.5vw, 1.15rem);
+    line-height: 1.75;
   }
 }
 
-@keyframes cue-rise {
+@keyframes atlas-rise {
   from {
     opacity: 0;
     transform: translateY(0.75rem);
@@ -145,28 +145,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes cue-section-enter {
-  from {
-    opacity: 0.78;
-    transform: translateY(0.5rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes cue-rail-draw {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
   }
 }
 
@@ -181,19 +159,16 @@
     scroll-behavior: auto;
   }
 
-  .animate-cue-rise,
-  .cue-section-heading {
+  .atlas-entrance,
+  .atlas-section-heading {
     animation: none;
     opacity: 1;
     transform: none;
   }
 
-  .cue-section-heading::after {
-    transform: scaleX(1);
-  }
-
-  .workflow-cue-line span {
-    animation: none;
-    transform: none;
+  [data-atlas-motion] {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

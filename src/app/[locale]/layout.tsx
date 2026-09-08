@@ -3,6 +3,7 @@ import { portfolioByLocale } from "@/content/portfolio";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { SiteInteractions } from "@/components/shell/site-interactions";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, locales } from "@/i18n/config";
 import { requireLocale } from "@/i18n/route-locale";
@@ -12,7 +13,7 @@ import "../globals.css";
 
 type LocaleParams = { locale: string };
 export const viewport: Viewport = {
-  themeColor: "#08090d",
+  themeColor: "#07161d",
 };
 
 export function generateStaticParams() {
@@ -77,51 +78,54 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
   const portfolio = portfolioByLocale[locale];
   const navItems = [
+    { label: dictionary.navigation.projects, href: `/${locale}#projects` },
     { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
-    { label: dictionary.navigation.experiences, href: `/${locale}#experiences` },
-    { label: dictionary.navigation.content, href: `/${locale}#writing` },
+    { label: dictionary.navigation.testimonials, href: `/${locale}#testimonials` },
+    { label: dictionary.navigation.writing, href: `/${locale}#writing` },
   ];
 
   return (
-    <html lang={locale} className="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <SiteInteractions />
       </head>
       <body className="min-h-screen">
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader
-            locale={locale}
-            navItems={navItems}
-            labels={{
-              skipToContent: dictionary.actions.skipToContent,
-              primaryNav: dictionary.navigation.primaryLabel,
-              themeToggle: dictionary.theme.label,
-              scrollToTop: dictionary.actions.scrollToTop,
-              switchLanguage: dictionary.actions.switchLanguage,
-              languageNames: dictionary.actions.languageNames,
-              mobileNavDescription: dictionary.mobileNavigation.description,
-              mobileNavLabel: dictionary.mobileNavigation.navLabel,
-              openMenu: dictionary.mobileNavigation.open,
-              closeMenu: dictionary.mobileNavigation.close,
-            }}
-          />
-          <main
-            id="main-content"
-            tabIndex={-1}
-            className="flex-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-          >
-            {children}
-          </main>
-          <SiteFooter
-            locale={locale}
-            blogUrl={blog.homeUrl}
-            githubUrl={siteConfig.githubUrl}
-            email={siteConfig.email}
-            linkedinUrl={siteConfig.linkedinUrl}
-            identity={portfolio.profile}
-            copy={dictionary.footer}
-          />
-        </div>
+        <MotionProvider>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader
+              locale={locale}
+              navItems={navItems}
+              labels={{
+                skipToContent: dictionary.actions.skipToContent,
+                primaryNav: dictionary.navigation.primaryLabel,
+                themeToggle: dictionary.theme.label,
+                scrollToTop: dictionary.actions.scrollToTop,
+                switchLanguage: dictionary.actions.switchLanguage,
+                languageNames: dictionary.actions.languageNames,
+                mobileNavDescription: dictionary.mobileNavigation.description,
+                mobileNavLabel: dictionary.mobileNavigation.navLabel,
+                openMenu: dictionary.mobileNavigation.open,
+                closeMenu: dictionary.mobileNavigation.close,
+              }}
+            />
+            <main
+              id="main-content"
+              tabIndex={-1}
+              className="flex-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+            >
+              {children}
+            </main>
+            <SiteFooter
+              locale={locale}
+              blogUrl={blog.homeUrl}
+              githubUrl={siteConfig.githubUrl}
+              email={siteConfig.email}
+              linkedinUrl={siteConfig.linkedinUrl}
+              identity={portfolio.profile}
+              copy={dictionary.footer}
+            />
+          </div>
+        </MotionProvider>
       </body>
     </html>
   );

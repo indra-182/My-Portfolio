@@ -16,7 +16,7 @@ export default function NotFound() {
       </p>
       <a
         href={`/${locale}`}
-        className="mt-8 inline-flex min-h-11 w-fit items-center rounded-sm bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+        className="atlas-button mt-8 inline-flex min-h-11 w-fit items-center bg-accent px-4 font-semibold text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
       >
         {dictionary.actions.backHome}
       </a>

@@ -44,7 +44,7 @@ describe("HeroSection", () => {
     expect(image).toHaveAttribute("decoding", "async");
     expect(image).toHaveAttribute("width", "380");
     expect(image).toHaveAttribute("height", "480");
-    expect(screen.getByText(profile.role.toUpperCase())).toBeVisible();
+    expect(screen.getByText(profile.role)).toBeVisible();
     expect(screen.queryByText(profile.name)).not.toBeInTheDocument();
     expect(screen.queryByText(/Petron workflow\s+sequence/i)).not.toBeInTheDocument();
   });

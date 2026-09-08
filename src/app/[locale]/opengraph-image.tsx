@@ -14,8 +14,8 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
   return new ImageResponse(
     <div
       style={{
-        background: "#08090D",
-        color: "#F4F1E9",
+        background: "#07161D",
+        color: "#EDF1F2",
         display: "flex",
         flexDirection: "column",
         height: "100%",
@@ -26,7 +26,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
     >
       <div
         style={{
-          color: "#91B9F3",
+          color: "#FF6A3D",
           display: "flex",
           fontSize: 28,
           fontWeight: 700,
@@ -36,17 +36,17 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
         INDRA.DEV
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-        <div style={{ color: "#A9ADBA", display: "flex", fontSize: 24 }}>
+        <div style={{ color: "#B8C6CB", display: "flex", fontSize: 24 }}>
           {portfolio.profile.role}
         </div>
         <div style={{ display: "flex", fontSize: 64, fontWeight: 700, letterSpacing: "-0.04em" }}>
           {portfolio.profile.name}
         </div>
-        <div style={{ color: "#A9ADBA", display: "flex", fontSize: 26, maxWidth: 900 }}>
+        <div style={{ color: "#B8C6CB", display: "flex", fontSize: 26, maxWidth: 900 }}>
           {portfolio.profile.valueProposition}
         </div>
       </div>
-      <div style={{ color: "#91B9F3", display: "flex", fontSize: 22 }}>
+      <div style={{ color: "#2E5BFF", display: "flex", fontSize: 22 }}>
         {locale.toUpperCase()} · {portfolio.profile.location.locality},{" "}
         {portfolio.profile.location.countryName}
       </div>

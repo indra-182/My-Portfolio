@@ -51,9 +51,10 @@ describe("site shell", () => {
       <SiteHeader
         locale={locale}
         navItems={[
+          { label: dictionary.navigation.projects, href: `/${locale}#projects` },
           { label: dictionary.navigation.capabilities, href: `/${locale}#capabilities` },
-          { label: dictionary.navigation.experiences, href: `/${locale}#experiences` },
-          { label: dictionary.navigation.content, href: `/${locale}#writing` },
+          { label: dictionary.navigation.testimonials, href: `/${locale}#testimonials` },
+          { label: dictionary.navigation.writing, href: `/${locale}#writing` },
         ]}
         labels={{
           skipToContent: dictionary.actions.skipToContent,
@@ -84,10 +85,13 @@ describe("site shell", () => {
       within(primaryNavigation).getByRole("link", { name: dictionary.navigation.capabilities }),
     ).toHaveAttribute("href", `/${locale}#capabilities`);
     expect(
-      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.experiences }),
-    ).toHaveAttribute("href", `/${locale}#experiences`);
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.projects }),
+    ).toHaveAttribute("href", `/${locale}#projects`);
     expect(
-      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.content }),
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.testimonials }),
+    ).toHaveAttribute("href", `/${locale}#testimonials`);
+    expect(
+      within(primaryNavigation).getByRole("link", { name: dictionary.navigation.writing }),
     ).toHaveAttribute("href", `/${locale}#writing`);
     expect(screen.getByRole("button", { name: dictionary.actions.scrollToTop })).toHaveAttribute(
       "data-site-interaction",

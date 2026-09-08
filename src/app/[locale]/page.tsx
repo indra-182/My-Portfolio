@@ -1,7 +1,8 @@
 import { portfolioByLocale } from "@/content/portfolio";
 import { CapabilitiesSection } from "@/components/sections/capabilities-section";
-import { ExperiencesSection } from "@/components/sections/experiences/experiences-section";
 import { HeroSection } from "@/components/sections/hero/hero-section";
+import { FeaturedProjectPath } from "@/components/sections/projects/featured-project-path";
+import { ProjectsSection } from "@/components/sections/projects/projects-section";
 import {
   LatestWriting,
   LatestWritingLoading,
@@ -19,6 +20,13 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const locale = requireLocale(value);
   const portfolio = portfolioByLocale[locale];
   const dictionary = getDictionary(locale);
+  const featuredProject = portfolio.experiences
+    .flatMap((experience) => experience.projects)
+    .find((project) => project.featured);
+
+  if (!featuredProject) {
+    throw new Error("Portfolio must provide a featured project.");
+  }
 
   const personJsonLd = {
     "@context": "https://schema.org",
@@ -47,11 +55,12 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         downloadLabel={dictionary.navigation.downloadCv}
         cvHref={siteConfig.cvHref}
       />
+      <FeaturedProjectPath project={featuredProject} copy={dictionary.portfolio} />
       <CapabilitiesSection
         capabilities={portfolio.capabilities}
         heading={dictionary.portfolio.capabilitiesHeading}
       />
-      <ExperiencesSection experiences={portfolio.experiences} copy={dictionary.portfolio} />
+      <ProjectsSection experiences={portfolio.experiences} copy={dictionary.portfolio} />
       <TestimonialsSection testimonials={portfolio.testimonials} copy={dictionary.testimonials} />
       <Suspense fallback={<LatestWritingLoading copy={dictionary.writing} />}>
         <LatestWriting locale={locale} copy={dictionary.writing} result={latestPosts} />

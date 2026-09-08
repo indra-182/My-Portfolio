@@ -2,6 +2,7 @@
 import { LuArrowDownToLine, LuArrowUpRight, LuMapPin } from "react-icons/lu";
 import { buttonVariants } from "@/components/ui/button";
 import type { PortfolioContent } from "@/content/portfolio-schema";
+import { AtlasHeroMotion, AtlasSignature } from "./hero-motion";
 
 export function HeroSection({
   profile,
@@ -18,55 +19,55 @@ export function HeroSection({
 }) {
   return (
     <section
-      className="cue-hero relative isolate overflow-hidden pt-[clamp(3.5rem,9vw,8rem)] pb-[clamp(4.5rem,9vw,8rem)] max-sm:min-h-svh max-sm:pb-12"
+      className="atlas-hero relative isolate overflow-hidden pt-[clamp(3.5rem,9vw,8rem)] pb-[clamp(4.5rem,9vw,8rem)] max-sm:pb-12"
       aria-labelledby="hero-title"
+      data-brand="decision-atlas"
     >
+      <AtlasHeroMotion />
       <div className="content-shell">
-        <div className="cue-hero-grid relative z-[1] grid gap-14">
-          <div className="cue-hero-copy animate-cue-rise max-w-[52rem]">
+        <div className="atlas-hero-grid relative z-[1] grid gap-14">
+          <div className="atlas-hero-copy atlas-entrance max-w-[52rem]">
             <h1
               id="hero-title"
-              className="mt-0 max-w-[16ch] text-[clamp(2.7rem,5.3vw,4.5rem)] leading-[0.98] font-bold tracking-[-0.028em] text-balance max-sm:max-w-none max-sm:text-[clamp(2.3rem,10vw,3rem)] max-sm:[overflow-wrap:normal] max-sm:[word-break:normal]"
+              className="mt-4 max-w-[16ch] text-[clamp(3rem,8vw,7.5rem)] leading-[0.92] font-bold tracking-[-0.045em] text-balance max-sm:max-w-none max-sm:text-[clamp(3rem,12vw,4.5rem)] max-sm:[overflow-wrap:normal] max-sm:[word-break:normal]"
             >
-              {profile.headline}
+              <AtlasSignature text={profile.headline} />
             </h1>
-            <p className="mt-6 max-w-2xl text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.6] text-muted-foreground">
-              {profile.valueProposition}
-            </p>
+            <p className="atlas-prose mt-7 text-muted-foreground">{profile.valueProposition}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${email}`}
-                className={`${buttonVariants({ size: "lg" })} cue-button group`}
+                className={`${buttonVariants({ size: "lg" })} atlas-button group`}
               >
                 {emailLabel}
                 <LuArrowUpRight
                   aria-hidden="true"
-                  className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 motion-reduce:transform-none"
+                  className="size-4 transition-transform duration-[var(--motion-feedback)] ease-[var(--motion-ease)] group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 motion-reduce:transform-none"
                 />
               </a>
               <a
                 href={cvHref}
                 download
-                className={`${buttonVariants({ variant: "outline", size: "lg" })} cue-button group`}
+                className={`${buttonVariants({ variant: "outline", size: "lg" })} atlas-button group`}
               >
                 <LuArrowDownToLine
                   aria-hidden="true"
-                  className="size-4 transition-transform duration-[var(--motion-fast)] ease-[var(--ease-cue)] group-hover:translate-y-1 group-focus-visible:translate-y-1 motion-reduce:transform-none"
+                  className="size-4 transition-transform duration-[var(--motion-feedback)] ease-[var(--motion-ease)] group-hover:translate-y-1 group-focus-visible:translate-y-1 motion-reduce:transform-none"
                 />
                 {downloadLabel}
               </a>
             </div>
-            <p className="mt-6 inline-flex items-center gap-2 font-mono text-[0.72rem] tracking-[0.08em] text-muted-foreground uppercase">
-              <LuMapPin aria-hidden="true" className="size-4 text-[var(--cue-rose)]" />
+            <p className="atlas-meta mt-6 inline-flex items-center gap-2 text-muted-foreground">
+              <LuMapPin aria-hidden="true" className="size-4 text-[var(--atlas-signal-orange)]" />
               {profile.location.locality}, {profile.location.countryName}
             </p>
           </div>
-          <div className="cue-hero-stage max-w-96 flex-col items-start justify-end mx-auto">
-            <p className="cue-stage-label self-stretch border-b pb-3 text-right font-mono text-[0.62rem] tracking-[0.12em] text-muted-foreground">
-              {profile.role.toUpperCase()}
+          <div className="atlas-hero-stage max-w-96 flex-col items-start justify-end mx-auto">
+            <p className="atlas-stage-label self-stretch border-b pb-3 atlas-meta text-muted-foreground">
+              {profile.role}
             </p>
-            <div className="cue-portrait-frame relative mt-4 ml-auto w-[min(100%,19rem)] bg-surface-strong">
-              <div className="cue-portrait-light" aria-hidden="true" />
+            <div className="atlas-portrait-frame relative mt-4 ml-auto w-[min(100%,19rem)] bg-surface-strong">
+              <div className="atlas-portrait-light" aria-hidden="true" />
               <img
                 src={profile.imageSrc}
                 alt={profile.imageAlt}

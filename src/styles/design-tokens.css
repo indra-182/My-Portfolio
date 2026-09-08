@@ -1,58 +1,74 @@
+/* Decision Atlas foundation. Keep the palette in semantic roles so both scenes
+   stay legible when a user changes theme. */
 :root {
-  --background: #08090d;
-  --foreground: #f4f1e9;
-  --surface: #11131a;
-  --surface-strong: #191d27;
-  --muted-foreground: #a9adba;
-  --border: #343a4a;
-  --accent: #f29ab0;
-  --accent-foreground: #130a0e;
-  --destructive: #f38b8b;
-  --focus-ring: #91b9f3;
-  --popover: var(--surface-strong);
-  --primary: #f4f1e9;
-  --primary-foreground: #08090d;
+  --atlas-night-water: #07161d;
+  --atlas-survey-paper: #edf1f2;
+  --atlas-deep-ink: #12242c;
+  --atlas-map-fog: #b8c6cb;
+  --atlas-route-blue: #2e5bff;
+  --atlas-signal-orange: #ff6a3d;
+
+  --background: var(--atlas-night-water);
+  --foreground: var(--atlas-survey-paper);
+  --surface: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  --surface-strong: var(--atlas-deep-ink);
+  --muted-foreground: var(--atlas-map-fog);
+  --border: color-mix(in srgb, var(--foreground) 22%, transparent);
+  --accent: var(--atlas-route-blue);
+  --accent-strong: var(--atlas-signal-orange);
+  --accent-foreground: var(--atlas-night-water);
+  --destructive: #ff927b;
+  --focus-ring: var(--atlas-route-blue);
+  --popover: var(--atlas-deep-ink);
+  --primary: var(--atlas-route-blue);
+  --primary-foreground: var(--atlas-survey-paper);
   --muted: var(--surface);
   --ring: var(--focus-ring);
-  --cue-night: #08090d;
-  --cue-cobalt: #173b72;
-  --cue-rose: #f29ab0;
-  --cue-day: #f4f1e9;
-  --radius-sm: 0.15rem;
-  --radius-md: 0.3rem;
-  --motion-fast: 180ms;
-  --motion-enter: 480ms;
-  --motion-cue: 700ms;
-  --ease-cue: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font-ui: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-prose: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Recursive", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius-sm: 0.2rem;
+  --radius-md: 0.35rem;
+  --radius-pill: 999px;
   --content-max: 76rem;
+  --prose-max: 72ch;
+
+  --motion-feedback: 160ms;
+  --motion-state: 260ms;
+  --motion-entrance: 520ms;
+  --motion-path: 900ms;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-spring-stiffness: 260;
+  --motion-spring-damping: 28;
+  --motion-spring-mass: 0.8;
 }
 
 .light {
-  --background: #f4f1e9;
-  --foreground: #08090d;
-  --surface: #e9e5de;
-  --surface-strong: #ddd9d2;
-  --muted-foreground: #5d6069;
-  --border: #c5c3c0;
-  --accent: #8f304e;
-  --accent-foreground: #fff8f7;
-  --destructive: #b4232d;
-  --focus-ring: #173b72;
-  --popover: #fffdf8;
-  --primary: #173b72;
-  --primary-foreground: #f4f1e9;
+  --background: var(--atlas-survey-paper);
+  --foreground: var(--atlas-deep-ink);
+  --surface: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  --surface-strong: color-mix(in srgb, var(--foreground) 10%, var(--background));
+  --muted-foreground: color-mix(in srgb, var(--atlas-deep-ink) 68%, var(--background));
+  --border: color-mix(in srgb, var(--atlas-deep-ink) 24%, transparent);
+  --accent: var(--atlas-route-blue);
+  --accent-strong: #9d321c;
+  --accent-foreground: var(--atlas-night-water);
+  --destructive: #b43f2c;
+  --focus-ring: var(--atlas-route-blue);
+  --popover: var(--atlas-survey-paper);
+  --primary: var(--atlas-route-blue);
+  --primary-foreground: var(--atlas-survey-paper);
   --muted: var(--surface);
   --ring: var(--focus-ring);
-  --cue-night: #f4f1e9;
-  --cue-cobalt: #173b72;
-  --cue-rose: #8f304e;
-  --cue-day: #f4f1e9;
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --motion-fast: 0ms;
-    --motion-enter: 0ms;
-    --motion-cue: 0ms;
+    --motion-feedback: 0ms;
+    --motion-state: 0ms;
+    --motion-entrance: 0ms;
+    --motion-path: 0ms;
   }
 }
