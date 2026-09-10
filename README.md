@@ -25,6 +25,11 @@ pnpm run verify
 - Profile image: `public/images/mahadi-indra.webp`
 - CV download: `public/documents/mahadi-indra-cv.pdf`
 - Theme tokens: `src/styles/design-tokens.css`
+- Recursive webfonts: `public/fonts/Recursive-Variable.woff2` and
+  `public/fonts/Recursive-Variable-extended.woff2`
+
+The Recursive assets split common Latin and punctuation from extended characters. Both retain the
+`MONO`, `CASL`, and `wght` variation axes, while only the smaller common face is preloaded.
 
 The site supports Indonesian and English routes, plus Light and Dark theme choices. The first visit follows the system color scheme, and an explicit choice persists locally. Four approved testimonials are included in the localized portfolio content. Public project copy is limited to supplied CV facts. Decision Atlas is the visual direction.
 

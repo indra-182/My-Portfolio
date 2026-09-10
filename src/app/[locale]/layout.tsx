@@ -87,6 +87,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          href="/fonts/Recursive-Variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <SiteInteractions />
       </head>
       <body className="min-h-screen">
