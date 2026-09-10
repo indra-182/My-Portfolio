@@ -14,7 +14,9 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --font-sans: var(--font-ui);
-  --font-mono: "Recursive", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono:
+    "Recursive", "Recursive Extended", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
 }

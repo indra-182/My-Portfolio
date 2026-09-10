@@ -25,9 +25,11 @@
   --muted: var(--surface);
   --ring: var(--focus-ring);
 
-  --font-ui: "Recursive", ui-sans-serif, system-ui, sans-serif;
-  --font-prose: "Recursive", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Recursive", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-ui: "Recursive", "Recursive Extended", ui-sans-serif, system-ui, sans-serif;
+  --font-prose: "Recursive", "Recursive Extended", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "Recursive", "Recursive Extended", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 
   --radius-sm: 0.2rem;
   --radius-md: 0.35rem;

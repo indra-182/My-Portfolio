@@ -4,6 +4,21 @@
   font-style: normal;
   font-weight: 300 1000;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+2000-206F, U+20A0-20CF;
+  font-variation-settings:
+    "CASL" 0,
+    "MONO" 0,
+    "slnt" 0,
+    "wght" 450;
+}
+
+@font-face {
+  font-family: "Recursive Extended";
+  src: url("/fonts/Recursive-Variable-extended.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 1000;
+  font-display: swap;
+  unicode-range: U+0100-1FFF, U+2070-209F, U+20D0-FFFF, U+10000-10FFFF;
   font-variation-settings:
     "CASL" 0,
     "MONO" 0,

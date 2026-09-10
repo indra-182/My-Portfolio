@@ -86,6 +86,32 @@ test("does not expose the internal visual direction in rendered UI or metadata",
   }
 });
 
+test("keeps extended font coverage off the initial rendering path", async ({ page }) => {
+  const fontRequests: string[] = [];
+  page.on("requestfinished", (request) => {
+    if (request.resourceType() === "font") {
+      fontRequests.push(new URL(request.url()).pathname);
+    }
+  });
+
+  await page.goto("/id");
+  await page.evaluate(() => document.fonts.ready);
+  expect(fontRequests).toEqual(["/fonts/Recursive-Variable.woff2"]);
+
+  const fontFamily = await page.evaluate(async () => {
+    const extendedCharacter = document.createElement("span");
+    extendedCharacter.textContent = "Ā";
+    document.body.append(extendedCharacter);
+    const family = getComputedStyle(extendedCharacter).fontFamily;
+    extendedCharacter.getBoundingClientRect();
+    await document.fonts.ready;
+    return family;
+  });
+
+  expect(fontFamily).toContain("Recursive Extended");
+  await expect.poll(() => fontRequests).toContain("/fonts/Recursive-Variable-extended.woff2");
+});
+
 test("follows the system theme on first visit", async ({ browser }) => {
   for (const [colorScheme, expectedClass] of [
     ["light", "light"],
