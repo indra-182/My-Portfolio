@@ -1,6 +1,16 @@
 @layer utilities {
   .atlas-hero {
+    --background: var(--atlas-night-water);
+    --foreground: var(--atlas-survey-paper);
+    --surface: color-mix(in srgb, var(--foreground) 6%, var(--background));
+    --surface-strong: var(--atlas-deep-ink);
+    --muted-foreground: var(--atlas-map-fog);
+    --border: color-mix(in srgb, var(--foreground) 22%, transparent);
+    --accent-strong: var(--atlas-signal-orange);
+    --muted: var(--surface);
+
     min-height: min(46rem, calc(100svh - 4.75rem));
+    color: var(--foreground);
     background:
       radial-gradient(
         ellipse at 78% 38%,
