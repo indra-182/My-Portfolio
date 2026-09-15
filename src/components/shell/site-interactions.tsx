@@ -49,12 +49,23 @@ const siteInteractions = String.raw`
   const start = () => {
     const scrollToTopButton = document.querySelector("${selectors.scrollToTop}");
     const header = document.querySelector("${selectors.header}");
+    const getSectionForHash = (hash) => {
+      if (!hash) return null;
+      return (
+        [...document.querySelectorAll(hash)].find(
+          (candidate) =>
+            candidate instanceof HTMLElement &&
+            candidate.isConnected &&
+            candidate.getAttribute("aria-busy") !== "true",
+        ) ?? null
+      );
+    };
     const navLinks = [...document.querySelectorAll("${selectors.activeNavLink}[href*='#']")].map(
       (link) => {
         const hash = new URL(link.href, window.location.href).hash;
         return {
           link,
-          section: hash ? document.querySelector(hash) : null,
+          hash,
         };
       },
     );
@@ -64,9 +75,15 @@ const siteInteractions = String.raw`
       const isVisible = window.scrollY >= scrollThreshold;
       const activationLine = (header?.getBoundingClientRect().height ?? 0) + 64;
       let activeLink = null;
+      let activeSectionTop = Number.NEGATIVE_INFINITY;
 
-      navLinks.forEach(({ section, link }) => {
-        if (section instanceof HTMLElement && section.getBoundingClientRect().top <= activationLine) {
+      navLinks.forEach(({ hash, link }) => {
+        const section = getSectionForHash(hash);
+        if (!(section instanceof HTMLElement) || !section.isConnected) return;
+
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop <= activationLine && sectionTop > activeSectionTop) {
+          activeSectionTop = sectionTop;
           activeLink = link;
         }
       });

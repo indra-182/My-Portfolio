@@ -71,6 +71,56 @@ test("supports recruiter content, navigation, theme, and locale", async ({ page 
   ).toBeVisible();
 });
 
+test("keeps the active navigation underline aligned with the selected section", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Primary navigation is hidden on mobile");
+
+  for (const [locale, navigationLabel, labels] of [
+    ["id", "Navigasi utama", ["Proyek", "Kapabilitas", "Testimoni", "Tulisan"]],
+    ["en", "Primary navigation", ["Projects", "Capabilities", "Testimonials", "Writing"]],
+  ] as const) {
+    await page.goto(`/${locale}`);
+    await expect(page.locator("section#writing:not([aria-busy='true'])")).toHaveCount(1);
+    await page.evaluate(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      window.dispatchEvent(new Event("scroll"));
+    });
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) => {
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+        }),
+    );
+
+    const navigation = page.getByRole("navigation", { name: navigationLabel, exact: true });
+    const sectionIds = ["projects", "capabilities", "testimonials", "writing"] as const;
+    const sections = labels.map((label, index) => [label, sectionIds[index]] as const);
+
+    for (const [label] of sections) {
+      await expect(navigation.getByRole("link", { name: label, exact: true })).not.toHaveAttribute(
+        "aria-current",
+        "location",
+      );
+    }
+
+    for (const [label, id] of sections) {
+      const selectedLink = navigation.getByRole("link", { name: label, exact: true });
+      await selectedLink.click();
+      await expect(page).toHaveURL(new RegExp(`/${locale}#${id}$`));
+      await page.evaluate(() => window.dispatchEvent(new Event("scroll")));
+      await expect(selectedLink).toHaveAttribute("aria-current", "location");
+
+      for (const [otherLabel] of sections) {
+        if (otherLabel === label) continue;
+        await expect(
+          navigation.getByRole("link", { name: otherLabel, exact: true }),
+        ).not.toHaveAttribute("aria-current", "location");
+      }
+    }
+  }
+});
+
 test("does not expose the internal visual direction in rendered UI or metadata", async ({
   page,
 }) => {
