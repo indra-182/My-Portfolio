@@ -1,14 +1,26 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-for (const locale of ["id", "en"]) {
-  test(`${locale} has no serious or critical accessibility violations`, async ({ page }) => {
-    await page.goto(`/${locale}`);
-    const results = await new AxeBuilder({ page }).analyze();
-    expect(
-      results.violations.filter((item) => ["serious", "critical"].includes(item.impact ?? "")),
-    ).toEqual([]);
-  });
+for (const locale of ["id", "en"] as const) {
+  for (const theme of ["light", "dark"] as const) {
+    test(`${locale} ${theme} has no accessibility violations`, async ({ page }, testInfo) => {
+      await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
+      await page.goto(`/${locale}`);
+      await expect(page.locator("html")).toHaveClass(new RegExp(theme));
+
+      const results = await new AxeBuilder({ page }).analyze();
+      expect(results.violations).toEqual([]);
+
+      if (testInfo.project.name === "mobile") {
+        await page
+          .getByRole("button", { name: locale === "id" ? /buka menu/i : /open menu/i })
+          .click();
+        await expect(page.getByRole("dialog")).toBeVisible();
+        const dialogResults = await new AxeBuilder({ page }).analyze();
+        expect(dialogResults.violations).toEqual([]);
+      }
+    });
+  }
 }
 
 test("skip link moves keyboard focus to the main landmark", async ({ page }) => {

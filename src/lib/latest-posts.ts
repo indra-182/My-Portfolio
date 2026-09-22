@@ -40,9 +40,8 @@ const latestPostsRevalidateSeconds = 3600;
 const latestPostsTimeoutMs = 2000;
 
 export async function getLatestPosts(): Promise<LatestFeedResult> {
-  const endpoint = blog.latestPostsUrl(latestPostsLimit);
-
   try {
+    const endpoint = blog.latestPostsUrl(latestPostsLimit);
     const response = await fetch(endpoint, {
       next: { revalidate: latestPostsRevalidateSeconds },
       signal: AbortSignal.timeout(latestPostsTimeoutMs),

@@ -99,3 +99,25 @@ The remaining approximately 3.0 s local LCP is above the 2.5 s good threshold, s
 should not be described as guaranteeing a particular deployed score. A post-deployment
 Lighthouse run is needed because CDN delivery, browser version, and run variance affect the
 result.
+
+## Post-deployment measurement, 23 September 2026
+
+Three Lighthouse 13.5.0 mobile performance runs against the deployed `/id` page used Headless
+Chrome 151 and the default simulated settings. The deployed page requested the 146,135-byte
+common Recursive font and did not request the extended face during initial rendering.
+
+| Run | Score |      FCP |      LCP |    TBT |      CLS |
+| --- | ----: | -------: | -------: | -----: | -------: |
+| 1   |    89 | 1,539 ms | 2,957 ms | 236 ms | 0.000002 |
+| 2   |    93 |   985 ms | 2,713 ms | 216 ms |        0 |
+| 3   |    96 |   963 ms | 2,711 ms |  66 ms |        0 |
+
+Median LCP was 2,713 ms, still above the 2,500 ms target. The detected LCP element varied:
+the hero heading in run 1 and the portrait-stage label in runs 2 and 3. This variation means the
+remaining delay should not be attributed to a single element from these runs alone.
+
+For a controlled font check, a local production build scored 93, 94, and 94 with LCP between
+3,157 and 3,163 ms. A fourth run of that same local build with the common font request blocked
+scored 96 with 2,659 ms LCP. Blocking the font changes the design and is only diagnostic. The
+local and deployed results have different delivery paths and should not be compared as a direct
+before-and-after measurement.
