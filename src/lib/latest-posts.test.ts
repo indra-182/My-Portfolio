@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { getLatestPosts } from "./latest-posts";
+import { blog } from "./blog";
 
 const feed = {
   version: 1,
@@ -77,6 +78,14 @@ describe("getLatestPosts", () => {
     await expect(getLatestPosts()).resolves.toEqual({
       status: "unavailable",
     });
+  });
+
+  test("returns the unavailable fallback when the feed URL cannot be built", async () => {
+    vi.spyOn(blog, "latestPostsUrl").mockImplementation(() => {
+      throw new TypeError("Invalid blog URL");
+    });
+
+    await expect(getLatestPosts()).resolves.toEqual({ status: "unavailable" });
   });
 
   test("returns the unavailable fallback for duplicate or unsafe post slugs", async () => {

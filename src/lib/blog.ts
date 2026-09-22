@@ -1,7 +1,27 @@
-const homeUrl = (process.env.NEXT_PUBLIC_BLOG_URL ?? "https://blog-indra.vercel.app/").replace(
-  /\/$/,
-  "",
-);
+const defaultBlogUrl = "https://blog-indra.vercel.app";
+
+export function normalizeBlogUrl(value: string): string | null {
+  try {
+    const url = new URL(value);
+    if (
+      !["https:", "http:"].includes(url.protocol) ||
+      url.username ||
+      url.password ||
+      url.pathname !== "/" ||
+      url.search ||
+      url.hash
+    ) {
+      return null;
+    }
+
+    return url.origin;
+  } catch {
+    return null;
+  }
+}
+
+const homeUrl =
+  normalizeBlogUrl(process.env.NEXT_PUBLIC_BLOG_URL ?? defaultBlogUrl) ?? defaultBlogUrl;
 const baseUrl = `${homeUrl}/`;
 
 export const blog = {
